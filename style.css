@@ -165,7 +165,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   letter-spacing: -0.02em;
 }
 .header-nav {
-  display: flex; align-items: center; gap: 0.25rem;
+  display: flex; align-items: center; justify-content: center; flex: 1; gap: 2.5rem;
 }
 .header-nav a {
   padding: 0.5rem 1.1rem; 
