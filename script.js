@@ -96,32 +96,107 @@ function initCopyable() {
 }
 
 // ===== SEARCH FILTER =====
+// All symbols organized by category for search results
+const SYMBOL_CATEGORIES = [
+  { name: 'Heart Symbols', icon: '❤️', href: 'symbols/heart.html', symbols: ['❤','♥','🧡','💛','💚','💙','💜','🖤','🤍','🤎','💗','💓','💞','💕','💝','❣','💔','❤️‍🔥','💟','♡','🫀','♥️','💖','💘','💑','🫶','❤️‍🩹','🩷','🩶','🩵'] },
+  { name: 'Star Symbols', icon: '⭐', href: 'symbols/star.html', symbols: ['★','☆','✦','✧','✨','⭐','🌟','💫','⚡','✵','✶','✷','✸','✹','✺','✻','✼','❋','✽','✾','✿','❀','❁','✱','✲','✳','❇','❈','❊','✙'] },
+  { name: 'Arrow Symbols', icon: '→', href: 'symbols/arrow.html', symbols: ['→','←','↑','↓','↔','↕','➜','➡','⬅','⬆','⬇','⟶','⟵','➤','➢','➣','➥','➦','⇒','⇐','⇑','⇓','⇔','⇕','↩','↪','↰','↱','⤴','⤵'] },
+  { name: 'Flower Symbols', icon: '🌸', href: 'symbols/flower.html', symbols: ['🌸','🌺','🌻','🌹','🌷','💐','🌼','🪷','🏵','✿','❀','❁','✾','✽','⚘','꧁','☸','❃','✤','✥','✦','꣸','⁂','※','⊛','⊕','⊗','⊘','⊙','⊚'] },
+  { name: 'Check Marks', icon: '✓', href: 'symbols/checkmark.html', symbols: ['✓','✔','☑','✅','❎','☐','☒','✗','✘','❌','✖','✕','⊠','⊡','⊟','⊞','☓','✙','✚','✛','✜','✝','✞','✟','☩','☨','☧','☦','⛊','⛉'] },
+  { name: 'Music Symbols', icon: '♪', href: 'symbols/music.html', symbols: ['♪','♫','♬','♭','♮','♯','𝅗𝅥','𝅘𝅥𝅮','𝅘𝅥𝅯','𝅘𝅥𝅰','𝅘𝅥𝅱','𝅘𝅥𝅲','🎵','🎶','🎼','🎤','🎧','🎹','🎸','🎺','🎻','🥁','🪘','🎷','🪗','🪕','🎙','🎚','🎛','📻','🔊'] },
+  { name: 'Currency Symbols', icon: '💰', href: 'symbols/currency.html', symbols: ['$','€','£','¥','₹','₿','¢','₩','₪','₫','฿','₱','₦','₡','₲','₵','₸','₼','₾','₺','₻','₽','₿','㎖','＄','￠','￡','￥','￦','元'] },
+  { name: 'Math Symbols', icon: '∑', href: 'symbols/math.html', symbols: ['∑','∫','√','∞','≈','≠','≤','≥','±','×','÷','∂','∇','∀','∃','∈','∉','⊂','⊃','∩','∪','∅','∧','∨','⊕','⊗','⊥','∥','∡','∟'] },
+  { name: 'Crown & Diamond', icon: '👑', href: 'symbols/crown.html', symbols: ['👑','💎','♛','♕','♚','♔','🏆','🎖','🥇','🥈','🥉','🏅','🎗','💍','💠','🔷','🔹','◇','◆','⬥','⬦','♦','♦️','🃏','🎴','🀄','🎰','🎲','🎯'] },
+  { name: 'Weather Symbols', icon: '🌤', href: 'symbols/weather.html', symbols: ['☀','🌤','⛅','🌥','☁','🌦','🌧','⛈','🌩','🌨','❄','🌪','🌫','🌬','🌀','🌈','🌂','☂','☔','⛱','⚡','🌊','🌋','⛰','🏔','🗻','🌁','🌃','🌆','🌇'] },
+  { name: 'Zodiac Signs', icon: '♈', href: 'symbols/zodiac.html', symbols: ['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓','⛎','🔯','✡','☯','☮','✝','☪','🕉','⚛','🛐','🔱','⚜','🏵','🎌','🎏','🎐','🪬','🧿'] },
+  { name: 'Aesthetic Symbols', icon: '✧', href: 'symbols/aesthetic.html', symbols: ['✧','·','°','•','○','●','◉','◎','◌','◍','◐','◑','◒','◓','◔','◕','◖','◗','◘','◙','◚','◛','◜','◝','◞','◟','◠','◡','◢','◣'] },
+  { name: 'Hand Symbols', icon: '✌️', href: 'symbols/hand.html', symbols: ['👋','🤚','🖐','✋','🖖','👌','🤌','🤏','✌','🤞','🤟','🤘','🤙','👈','👉','👆','🖕','👇','☝','👍','👎','✊','👊','🤛','🤜','🤝','🙌','👐','🤲','🙏'] },
+  { name: 'Smiley Faces', icon: '😊', href: 'symbols/emoji-faces.html', symbols: ['😀','😁','😂','🤣','😃','😄','😅','😆','😉','😊','😋','😎','😍','🤩','😘','😗','😙','😚','🙂','🤗','🤭','🤫','🤔','🤐','🤨','😐','😑','😶','😏','😒'] },
+];
+
 function initSearch() {
   const searchBox = document.getElementById('searchBox');
   if (!searchBox) return;
 
+  // Find the main content area sections to show/hide during search
+  const mainContent = document.querySelector('.main-content');
+  if (!mainContent) return;
+
+  // Create a dedicated search results container
+  let searchResultsContainer = document.getElementById('searchResults');
+  if (!searchResultsContainer) {
+    searchResultsContainer = document.createElement('div');
+    searchResultsContainer.id = 'searchResults';
+    searchResultsContainer.style.display = 'none';
+    // Insert right after the hero section
+    const hero = mainContent.querySelector('.hero');
+    if (hero) hero.after(searchResultsContainer);
+    else mainContent.prepend(searchResultsContainer);
+  }
+
+  // Collect all existing page sections to hide during search
+  const allSections = () => mainContent.querySelectorAll(':scope > *:not(#searchResults):not(.hero)');
+
   searchBox.addEventListener('input', (e) => {
     const query = e.target.value.toLowerCase().trim();
-    
-    // Filter category cards
-    document.querySelectorAll('.category-card').forEach(card => {
-      const name = card.querySelector('.category-name')?.textContent.toLowerCase() || '';
-      card.style.display = name.includes(query) || !query ? '' : 'none';
+
+    if (!query) {
+      // Restore normal view
+      searchResultsContainer.style.display = 'none';
+      allSections().forEach(el => el.style.display = '');
+      return;
+    }
+
+    // Hide normal page content, show search results
+    allSections().forEach(el => el.style.display = 'none');
+    searchResultsContainer.style.display = '';
+
+    // Find matching categories (by name or individual symbol text)
+    const matched = SYMBOL_CATEGORIES.filter(cat =>
+      cat.name.toLowerCase().includes(query) ||
+      cat.symbols.some(s => s.toLowerCase().includes(query))
+    );
+
+    if (matched.length === 0) {
+      searchResultsContainer.innerHTML = `
+        <div style="text-align:center;padding:60px 20px;color:#9ca3af;">
+          <div style="font-size:3rem;margin-bottom:12px;">🔍</div>
+          <p style="font-size:1.1rem;font-weight:600;">No results for "<em>${query}</em>"</p>
+          <p style="font-size:0.9rem;margin-top:6px;">Try searching: heart, star, arrow, flower…</p>
+        </div>`;
+      return;
+    }
+
+    let html = `<p style="font-size:0.85rem;color:#9ca3af;margin-bottom:20px;">
+      ${matched.length} categor${matched.length === 1 ? 'y' : 'ies'} found for "<strong>${query}</strong>"
+    </p>`;
+
+    matched.forEach(cat => {
+      // Filter symbols that match the query (or show all if category name matched)
+      const categoryNameMatch = cat.name.toLowerCase().includes(query);
+      const visibleSymbols = categoryNameMatch
+        ? cat.symbols
+        : cat.symbols.filter(s => s.toLowerCase().includes(query));
+
+      html += `
+        <div class="section-title" style="margin-top:20px;">
+          <span class="icon">${cat.icon}</span>
+          <a href="${cat.href}" style="color:inherit;hover:color:#c2185b;">${cat.name}</a>
+          <span class="line"></span>
+          <a href="${cat.href}" style="font-size:0.78rem;color:#c2185b;font-weight:500;white-space:nowrap;">View all →</a>
+        </div>
+        <div class="symbol-grid" style="margin-bottom:24px;">
+          ${visibleSymbols.map(s => `
+            <div class="symbol-item" onclick="copyToClipboard('${s.replace(/'/g,"\\'")}'); this.classList.add('copied'); setTimeout(()=>this.classList.remove('copied'),800);">
+              ${s}
+            </div>`).join('')}
+        </div>`;
     });
 
-    // Filter symbol items
-    document.querySelectorAll('.symbol-item').forEach(item => {
-      if (!query) { item.style.display = ''; return; }
-      item.style.display = '';
-    });
-
-    // Filter combo items
-    document.querySelectorAll('.combo-item').forEach(item => {
-      const text = item.textContent.toLowerCase();
-      item.style.display = text.includes(query) || !query ? '' : 'none';
-    });
+    searchResultsContainer.innerHTML = html;
   });
 }
+
 
 // ===== FONT GENERATOR =====
 const fontMaps = {
@@ -199,7 +274,7 @@ const specialFonts = {
   'Sparkles': (text) => '✨ ' + text + ' ✨',
   'Stars': (text) => '★彡 ' + text + ' 彡★',
   'Hearts': (text) => '♡ ' + [...text].join(' ') + ' ♡',
-  'Brackets Fancy': (text) => '『' + text + '』',
+  'Brackets Text': (text) => '『' + text + '』',
   'Gothic Frame': (text) => '꧁༺ ' + text + ' ༻꧂',
 };
 
@@ -262,7 +337,7 @@ function initFontGenerator() {
     { prefix: '🔮 ', suffix: ' 🔮' }
   ];
 
-  const baseFonts = ['Monospace', 'Double-Struck', 'Italic', 'Script', 'Sans-Serif', 'Circled'];
+  const baseFonts = Object.keys(fontMaps);
 
   function render() {
     const text = input.value || 'Hello World';
