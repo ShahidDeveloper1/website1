@@ -1,3 +1,26 @@
+# FancySymbols Robots.txt
+# https://fancysymbols.com
+
 User-agent: *
 Allow: /
+Disallow: /node_modules/
+Disallow: /dist/
+Disallow: /.vscode/
+Disallow: /*.cjs$
+Disallow: /*.js$
+Allow: /script.js
+Allow: /cute-fonts.js
+Allow: /aesthetic-fonts.js
+
+# Sitemaps
 Sitemap: https://fancysymbols.com/sitemap.xml
+
+# Crawl-delay for polite bots
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: DotBot
+Disallow: /
