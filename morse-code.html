@@ -195,6 +195,14 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
           Vibrate
         </button>
+        <button class="ctrl-btn" id="btnConfigure" onclick="document.querySelector('.morse-sliders').scrollIntoView({behavior:'smooth'})">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          Configure
+        </button>
+        <button class="ctrl-btn" id="btnSaveAudio" onclick="saveAudio()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Save Audio
+        </button>
         <button class="ctrl-btn" id="btnCopy" onclick="copyOutput()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
           Copy
@@ -417,6 +425,107 @@
       copyOutput();
       if (window.showToast) showToast('Link copied! Share it with friends.');
     }
+  }
+
+  function saveAudio() {
+    const text = document.getElementById('morseOutput').value;
+    if (!text) {
+      if(window.showToast) showToast('No Morse code to save!');
+      return;
+    }
+    
+    const speed = parseInt(document.getElementById('speedSlider').value);
+    const freq = parseInt(document.getElementById('pitchSlider').value);
+    const dotLen = 1.2 / speed; 
+    
+    let time = 0;
+    for(let i=0; i<text.length; i++) {
+      const c = text[i];
+      if(c === '.') time += dotLen;
+      else if(c === '-') time += 3 * dotLen;
+      else if(c === ' ') time += 2 * dotLen;
+      else if(c === '/') time += 6 * dotLen;
+      
+      if(c === '.' || c === '-') time += dotLen;
+    }
+    if(time === 0) return;
+    
+    const btn = document.getElementById('btnSaveAudio');
+    const oldHtml = btn.innerHTML;
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Saving...';
+    
+    const OfflineCtx = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+    const ctx = new OfflineCtx(1, Math.ceil(44100 * time), 44100);
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    
+    osc.type = 'sine';
+    osc.frequency.value = freq;
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    gain.gain.value = 0;
+    osc.start(0);
+    
+    let t = 0;
+    for(let i=0; i<text.length; i++) {
+      const c = text[i];
+      if(c === '.') {
+        gain.gain.setValueAtTime(1, t);
+        t += dotLen;
+        gain.gain.setValueAtTime(0, t);
+        t += dotLen;
+      } else if(c === '-') {
+        gain.gain.setValueAtTime(1, t);
+        t += 3 * dotLen;
+        gain.gain.setValueAtTime(0, t);
+        t += dotLen;
+      } else if(c === ' ') {
+        t += 2 * dotLen;
+      } else if(c === '/') {
+        t += 6 * dotLen;
+      }
+    }
+    
+    ctx.startRendering().then(buffer => {
+      const wav = audioBufferToWav(buffer);
+      const blob = new Blob([new DataView(wav)], { type: 'audio/wav' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'morse-code.wav';
+      a.click();
+      URL.revokeObjectURL(url);
+      btn.innerHTML = oldHtml;
+      if(window.showToast) showToast('Audio saved successfully!');
+    }).catch(e => {
+      console.error(e);
+      btn.innerHTML = oldHtml;
+      if(window.showToast) showToast('Error saving audio');
+    });
+  }
+
+  function audioBufferToWav(buffer) {
+    let numOfChan = buffer.numberOfChannels,
+        length = buffer.length * numOfChan * 2 + 44,
+        bufferArray = new ArrayBuffer(length),
+        view = new DataView(bufferArray),
+        channels = [], i, sample, offset = 0, pos = 0;
+    function setUint16(data) { view.setUint16(pos, data, true); pos += 2; }
+    function setUint32(data) { view.setUint32(pos, data, true); pos += 4; }
+    setUint32(0x46464952); setUint32(length - 8); setUint32(0x45564157);
+    setUint32(0x20746d66); setUint32(16); setUint16(1); setUint16(numOfChan);
+    setUint32(buffer.sampleRate); setUint32(buffer.sampleRate * 2 * numOfChan);
+    setUint16(numOfChan * 2); setUint16(16); setUint32(0x61746164); setUint32(length - pos - 4);
+    for(i=0; i<buffer.numberOfChannels; i++) channels.push(buffer.getChannelData(i));
+    while(pos < length) {
+      for(i=0; i<numOfChan; i++) {
+        sample = Math.max(-1, Math.min(1, channels[i][offset]));
+        sample = (0.5 + sample < 0 ? sample * 32768 : sample * 32767)|0;
+        view.setInt16(pos, sample, true); pos += 2;
+      }
+      offset++;
+    }
+    return bufferArray;
   }
 
   // ===== PLAY SINGLE CHARACTER =====
