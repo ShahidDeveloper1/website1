@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aesthetic Font Generator Copy and Paste Text </title>
+  <meta name="description"
+    content="Copy and paste aesthetic font generator for your bio, social posts, and messages. Unique collection of text symbols.">
+  <link rel='canonical' href='https://fancysymbols.com/aesthetic-fonts.html'>
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fancysymbols.com/aesthetic-fonts.html">
+  <meta property="og:title" content="Aesthetic Fonts Generator">
+  <meta property="og:description"
+    content="Copy and paste aesthetic font generator instantly. Perfect for Instagram, TikTok, and gaming.">
+  <meta property="og:image" content="https://fancysymbols.com/og-image.png">
+
+  <!-- Preconnect and Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <meta name="theme-color" content="#0d9488">
+  <link rel="stylesheet" href="/style.css?v=5.2">
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <style>
+    /* Aesthetic Fonts Specific Layout */
+    .aesthetic-page {
+      background-color: #eaf5f5;
+      /* Light blue/mint as per images */
+    }
+
+    .aesthetic-header h1 {
+      font-family: 'Merriweather', serif;
+      color: #5a5a5a;
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .aesthetic-section-title {
+      font-family: 'Merriweather', serif;
+      color: #5a5a5a;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem 0;
+    }
+
+    .aesthetic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1rem;
+    }
+
+    .aesthetic-pill {
+      background: #ffffff;
+      border-radius: 50px;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+      transition: all 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .aesthetic-pill:hover {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .aesthetic-pill:active {
+      transform: translateY(0);
+    }
+
+    .aesthetic-pill-left {
+      font-size: 0.65rem;
+      color: #999;
+      font-style: italic;
+      min-width: 50px;
+      text-align: center;
+    }
+
+    .aesthetic-pill-center {
+      flex-grow: 1;
+      text-align: center;
+      font-size: 1.1rem;
+      color: #333;
+      padding: 0 1rem;
+      overflow-wrap: break-word;
+      word-break: break-all;
+    }
+
+    .aesthetic-pill-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-width: 70px;
+      justify-content: flex-end;
+    }
+
+    .aesthetic-icon {
+      font-size: 1rem;
+      color: #555;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.2rem;
+      border-radius: 50%;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    .aesthetic-icon:hover {
+      opacity: 1;
+      background: #f0f0f0;
+    }
+
+    .copy-toast {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .aesthetic-pill.copied .copy-toast {
+      opacity: 1;
+      transform: translate(-50%, -60%);
+    }
+
+    .aesthetic-input-container {
+      margin-bottom: 2rem;
+    }
+
+    .aesthetic-input {
+      width: 100%;
+      padding: 1.25rem 2rem;
+      border-radius: 50px;
+      border: 2px solid #ddd;
+      font-size: 1.25rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .aesthetic-input:focus {
+      outline: none;
+      border-color: #0d9488;
+      box-shadow: 0 4px 20px rgba(13, 148, 136, 0.15);
+    }
+
+    @media (max-width: 600px) {
+      .aesthetic-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body class="aesthetic-page">
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <img src="/favicon.png" alt="TextSymbols Logo" class="logo-img">
+        <span class="logo-text">TextSymbols</span>
+      </a>
+      <nav class="header-nav">
+        <a href="/">Home</a>
+        <a href="/all-symbols.html">All Symbols</a>
+        <a href="/preppy-fonts.html">Preppy Font Generator</a>
+        <a href="/cute-fonts.html">Cute Fonts</a>
+        <a href="/aesthetic-fonts.html" class="active">Aesthetic Fonts</a>
+        <a href="/lenny-face.html" class="nav-cta">Lenny Faces</a>
+      </nav>
+      <button class="menu-toggle" id="menuToggle">☰</button>
+    </div>
+  </header>
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <div class="page-wrapper">
+    <main class="main-content">
+      <div class="aesthetic-header">
+        <h1>Aesthetic Fonts Generator</h1>
+      </div>
+      <div class="aesthetic-input-container">
+        <input type="text" class="aesthetic-input" id="aestheticInput" value="hellow" autofocus>
+      </div>
+
+      <div id="aestheticResults"></div>
+    </main>
+  </div>
+  <footer class="footer"></footer>
+
+  <script src="/aesthetic-fonts.js?v=5.2"></script>
+  <script src="/script.js?v=5.2"></script>
+</body>
+
+</html>

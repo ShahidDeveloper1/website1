@@ -3,10 +3,9 @@ const path = require('path');
 
 const DOMAIN = "https://fancysymbols.com";
 
-// Core pages that MUST stay in the root
 const CORE_ROOT_PAGES = [
     'index.html', 'all-symbols.html', 'cute-fonts.html', 
-    'preppy-fonts.html', 'lenny-face.html'
+    'preppy-fonts.html', 'aesthetic-fonts.html', 'lenny-face.html'
 ];
 
 function getHeader() {
@@ -21,6 +20,7 @@ function getHeader() {
       <a href="/all-symbols.html">All Symbols</a>
       <a href="/preppy-fonts.html"><span class="link-icon">🎀</span> Preppy Font Generator</a>
       <a href="/cute-fonts.html">Cute Fonts</a>
+      <a href="/aesthetic-fonts.html">Aesthetic Fonts</a>
       <a href="/lenny-face.html" class="nav-cta">Lenny Faces</a>
     </nav>
     <button class="menu-toggle" id="menuToggle">☰</button>
@@ -43,7 +43,8 @@ function getFooter() {
         <h4 class="footer-col-title">Text Tools</h4>
         <ul class="footer-links-list">
           <li><a href="/all-symbols.html">All Symbols</a></li>
-          <li><a href="/font-generator.html">Preppy Font Generator</a></li>
+          <li><a href="/preppy-fonts.html">Preppy Font Generator</a></li>
+          <li><a href="/aesthetic-fonts.html">Aesthetic Fonts</a></li>
           <li><a href="/cute-fonts.html">Cute Fonts</a></li>
           <li><a href="/lenny-face.html">Lenny Faces</a></li>
         </ul>

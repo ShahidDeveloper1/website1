@@ -528,10 +528,12 @@ function initFontGenerator() {
     const text = input.value || 'Hello World';
     results.innerHTML = fonts.map(f => {
       const converted = f.f(text);
+      const displayHtml = converted.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      const safeEscape = converted.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '&quot;');
       return `
-        <div class="font-result-item" onclick="copyToClipboard('${converted.replace(/'/g, "\\'")}')">
+        <div class="font-result-item" onclick="copyToClipboard('${safeEscape}')">
           <span class="font-style-name">${f.name}</span>
-          <span class="font-preview">${converted}</span>
+          <span class="font-preview">${displayHtml}</span>
           <span class="font-copy-btn">Copy</span>
         </div>
       `;
