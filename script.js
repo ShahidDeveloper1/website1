@@ -225,6 +225,8 @@ function renderSidebar() {
     <div class="sidebar-links">
       <a href="${root}index.html"><span class="link-icon">🏠</span> Home</a>
       <a href="${root}all-symbols.html"><span class="link-icon">🚀</span> All Symbols</a>
+      <a href="${root}cute-fonts.html"><span class="link-icon">🌸</span> Cute Fonts</a>
+      <a href="${root}aesthetic-fonts.html"><span class="link-icon">✨</span> Aesthetic Fonts</a>
       <a href="${root}preppy-fonts.html"><span class="link-icon">🎀</span> Preppy Font Generator</a>
       <a href="${root}lenny-face.html"><span class="link-icon">( ͡° ͜ʖ ͡°)</span> Lenny Faces</a>
     </div>
