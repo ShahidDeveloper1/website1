@@ -1,5 +1,4 @@
-/* ===== IMPORTS ===== */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+/* ===== FONTS loaded via <link> preconnect in HTML for better performance ===== */
 
 /* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar { width: 8px; }
@@ -335,6 +334,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   gap: 0.875rem; 
   margin-bottom: 3rem;
   padding: 0.5rem;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
 }
 .symbol-item {
   display: flex; 
@@ -914,19 +915,32 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: #64748b;
 }
 
-.footer-socials {
+.page-up-btn {
   display: flex;
-  gap: 1.5rem;
-}
-
-.footer-social-icon {
-  font-size: 1.25rem;
-  color: #64748b;
-  transition: color 0.2s;
-}
-
-.footer-social-icon:hover {
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1.2rem;
+  background: #ffffff;
+  border: 1px solid rgba(13, 148, 136, 0.15);
+  border-radius: 999px;
   color: #0d9488;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.05);
+}
+
+.page-up-btn:hover {
+  transform: translateY(-3px);
+  background: #0d9488;
+  color: #ffffff;
+  border-color: #0d9488;
+  box-shadow: 0 8px 20px rgba(13, 148, 136, 0.2);
+}
+
+.page-up-icon {
+  font-size: 1.1rem;
 }
 
 @media (max-width: 768px) {

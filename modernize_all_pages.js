@@ -6,7 +6,7 @@ const DOMAIN = "https://fancysymbols.com";
 // Core pages that MUST stay in the root
 const CORE_ROOT_PAGES = [
     'index.html', 'all-symbols.html', 'cute-fonts.html', 
-    'font-generator.html', 'lenny-face.html'
+    'preppy-fonts.html', 'lenny-face.html'
 ];
 
 function getHeader() {
@@ -19,7 +19,7 @@ function getHeader() {
     <nav class="header-nav">
       <a href="/index.html">Home</a>
       <a href="/all-symbols.html">All Symbols</a>
-      <a href="/font-generator.html">Preppy Font Generator</a>
+      <a href="/preppy-fonts.html"><span class="link-icon">🎀</span> Preppy Font Generator</a>
       <a href="/cute-fonts.html">Cute Fonts</a>
       <a href="/lenny-face.html" class="nav-cta">Lenny Faces</a>
     </nav>
@@ -80,7 +80,7 @@ function getFooter() {
   </div>
   <div id="clipboard-bar"></div>
 </footer>
-<script src="/script.js?v=4.5"></script>`;
+<script src="/script.js?v=5.1"></script>`;
 }
 
 // List of all symbol pages to help fix broken relative links
@@ -132,7 +132,10 @@ function modernizePage(filepath) {
   <meta name="twitter:description" content="One-click copy for ${titleText.toLowerCase()} and aesthetic text decorations.">
   <meta name="twitter:image" content="${DOMAIN}/og-image.png">
 
-  <link rel="stylesheet" href="/style.css?v=5.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css?v=5.1">
   <link rel="icon" type="image/png" href="/favicon.png">`;
 
     // 1. Inject Head
