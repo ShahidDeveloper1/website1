@@ -123,11 +123,27 @@
     <div class="morse-app">
       <!-- Input + Sliders Row -->
       <div class="morse-io">
-        <div class="morse-panel-left">
-          <label class="morse-label" id="labelInput">Input:</label>
-          <textarea class="morse-textarea" id="morseInput" placeholder="Type text or Morse code using '.', '-' or '_', using a space between letters and '/' between words." autofocus></textarea>
+        <!-- Left Panel: Input + Output -->
+        <div class="morse-panel-left" style="display:flex; flex-direction:column; gap:0.5rem;">
+          <div>
+            <label class="morse-label" id="labelInput">Input:</label>
+            <textarea class="morse-textarea" id="morseInput" placeholder="Type text or Morse code using '.', '-' or '_', using a space between letters and '/' between words." autofocus></textarea>
+          </div>
+          
+          <div class="swap-row" style="margin: 0.25rem 0;">
+            <button class="swap-btn" onclick="swapMode()" title="Swap direction">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="7 3 7 21"/><polyline points="3 7 7 3 11 7"/><polyline points="17 21 17 3"/><polyline points="13 17 17 21 21 17"/></svg>
+            </button>
+          </div>
+
+          <div>
+            <label class="morse-label" id="labelOutput">Output:</label>
+            <textarea class="morse-textarea" id="morseOutput" placeholder="The translated message appears here with '#' indicating an untranslatable character." readonly></textarea>
+          </div>
         </div>
-        <div class="morse-sliders">
+
+        <!-- Right Panel: Sliders -->
+        <div class="morse-sliders" style="align-items: center; justify-content: center;">
           <div class="slider-group">
             <span class="slider-title">Speed</span>
             <span class="slider-val" id="speedVal">20</span>
@@ -144,20 +160,7 @@
             <input type="range" class="v-slider" id="volumeSlider" min="0" max="100" value="80">
           </div>
         </div>
-      </div>
-
-      <!-- Swap Button -->
-      <div class="swap-row">
-        <button class="swap-btn" onclick="swapMode()" title="Swap direction">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="7 3 7 21"/><polyline points="3 7 7 3 11 7"/><polyline points="17 21 17 3"/><polyline points="13 17 17 21 21 17"/></svg>
-        </button>
-      </div>
-
-      <!-- Output -->
-      <div>
-        <label class="morse-label" id="labelOutput">Output:</label>
-        <textarea class="morse-textarea" id="morseOutput" placeholder="The translated message appears here with '#' indicating an untranslatable character." readonly></textarea>
-      </div>
+      </div> <!-- End morse-io -->
 
       <!-- Control Buttons -->
       <div class="morse-controls">
