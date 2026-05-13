@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset='UTF-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Morse Code Translator — Text to Morse Code Generator | TextSymbols</title>
+  <meta name="description" content="Translate text to Morse code and Morse code to text instantly. Free online Morse code translator with audio playback. Copy and paste Morse code dots and dashes.">
+  <link rel='canonical' href='https://fancysymbols.com/morse-code.html'>
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fancysymbols.com/morse-code">
+  <meta property="og:title" content="Morse Code Translator — Text to Morse Code">
+  <meta property="og:description" content="Translate text to Morse code instantly. Copy and paste dots and dashes.">
+  <meta property="og:image" content="https://fancysymbols.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css?v=5.4">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://fancysymbols.com"},{"@type":"ListItem","position":2,"name":"Morse Code Translator","item":"https://fancysymbols.com/morse-code"}]}</script>
+  <style>
+    .morse-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+    @media(min-width: 768px) { .morse-grid { grid-template-columns: 1fr 1fr; } }
+    .morse-panel { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.5rem; }
+    .morse-label { font-size: 0.85rem; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; display: block; }
+    .morse-textarea { width: 100%; min-height: 200px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 1rem; color: var(--text-color); font-family: 'Inter', sans-serif; font-size: 1.2rem; resize: vertical; margin-bottom: 1rem; outline: none; }
+    .morse-textarea:focus { border-color: var(--primary-color); }
+    .morse-actions { display: flex; gap: 0.5rem; }
+    .action-btn { flex: 1; padding: 0.8rem; border-radius: 8px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; border: none; }
+    .primary-btn { background: var(--primary-color); color: white; }
+    .primary-btn:hover { background: #4f46e5; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4); }
+    .secondary-btn { background: #1e293b; color: white; border: 1px solid rgba(255,255,255,0.1); }
+    .secondary-btn:hover { background: #334155; }
+    .swap-container { display: flex; justify-content: center; margin: -1rem 0; z-index: 10; position: relative; }
+    @media(min-width: 768px) { 
+      .swap-container { margin: 0 -1rem; align-items: center; } 
+      .swap-btn { transform: rotate(90deg); }
+    }
+    .swap-btn { background: var(--primary-color); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: all 0.2s; }
+    .swap-btn:hover { transform: scale(1.1); }
+    @media(min-width: 768px) { .swap-btn:hover { transform: rotate(90deg) scale(1.1); } }
+  </style>
+</head>
+<body>
+<div class="particles"></div>
+<header class="header"><div class="header-inner"><a href="/" class="logo"><img src="/favicon.png" alt="TextSymbols Logo" class="logo-img"><span class="logo-text">TextSymbols</span></a><nav class="header-nav"><a href="/">Home</a><a href="/all-symbols.html">All Symbols</a><a href="/preppy-fonts.html"><span class="link-icon">🎀</span> Preppy Font Generator</a><a href="/cute-fonts.html">Cute Fonts</a><a href="/aesthetic-fonts.html">Aesthetic Fonts</a><a href="/lenny-face.html" class="nav-cta">Lenny Faces</a></nav><button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button></div></header>
+<div class="sidebar-overlay" id="sidebarOverlay"></div><aside class="sidebar" id="sidebar"></aside>
+
+<div class="page-wrapper"><main class="main-content">
+  <div class="page-header"><h1>Morse Code Translator</h1><p>Translate text into Morse code, or decode Morse code back into English text. Copy and paste instantly.</p></div>
+
+  <div class="morse-grid">
+    <div class="morse-panel">
+      <label class="morse-label" id="labelLeft">English Text</label>
+      <textarea class="morse-textarea" id="inputLeft" placeholder="Type text here..." autofocus>Hello World</textarea>
+      <div class="morse-actions">
+        <button class="action-btn secondary-btn" onclick="document.getElementById('inputLeft').value=''; translate();">Clear</button>
+        <button class="action-btn primary-btn" id="copyLeftBtn" onclick="copyText('inputLeft', 'copyLeftBtn')">Copy Text</button>
+      </div>
+    </div>
+    
+    <div class="swap-container">
+      <button class="swap-btn" onclick="swap()" aria-label="Swap Translation Direction">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="14" x2="21" y2="3"></line><polyline points="8 21 3 21 3 16"></polyline><line x1="20" y1="10" x2="3" y2="21"></line></svg>
+      </button>
+    </div>
+
+    <div class="morse-panel">
+      <label class="morse-label" id="labelRight">Morse Code</label>
+      <textarea class="morse-textarea" id="inputRight" placeholder="Morse code will appear here..." readonly></textarea>
+      <div class="morse-actions">
+        <button class="action-btn primary-btn" id="copyRightBtn" onclick="copyText('inputRight', 'copyRightBtn')">Copy Morse Code</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-article">
+    <h2>What is Morse Code?</h2>
+    <p><b>Morse code</b> is a method used in telecommunication to encode text characters as standardized sequences of two different signal durations, called dots and dashes (or dits and dahs). It is named after Samuel Morse, an inventor of the telegraph.</p>
+    
+    <h2>How to read Morse Code?</h2>
+    <p>Our translator uses the standard International Morse Code format:</p>
+    <ul>
+      <li><strong>Dot (.)</strong> is the basic unit of time measurement.</li>
+      <li><strong>Dash (-)</strong> is three times the duration of a dot.</li>
+      <li><strong>Space between parts of the same letter</strong> is equal to one dot.</li>
+      <li><strong>Space between letters</strong> is equal to three dots (shown as a single space ' ').</li>
+      <li><strong>Space between words</strong> is equal to seven dots (shown as a slash '/' in our translator).</li>
+    </ul>
+
+    <h2>Who uses Morse Code today?</h2>
+    <p>While no longer the primary method for maritime or aviation communication, Morse code is still widely used by amateur radio operators (hams), in aviation navigation beacons (VORs), and as a popular puzzle or easter egg in video games, movies, and escape rooms.</p>
+
+    <h3>More Utilities</h3>
+    <div class="category-pills"><a href="/text-repeater.html" class="category-pill">🔁 Text Repeater</a><a href="/character-counter.html" class="category-pill">📊 Character Counter</a><a href="/blank-space.html" class="category-pill">📋 Blank Space</a><a href="/" class="category-pill">🏠 All Symbols</a></div>
+  </div>
+</main></div>
+
+<footer class="footer"><div class="footer-inner"><div class="footer-grid"><div class="footer-brand"><span class="logo-text highlight">TextSymbols</span><p class="footer-desc">Your premium destination for aesthetic symbols, cute fonts, and creative text tools.</p></div><div><h4 class="footer-col-title">Text Tools</h4><ul class="footer-links-list"><li><a href="/all-symbols.html">All Symbols</a></li><li><a href="/morse-code.html">Morse Code</a></li><li><a href="/text-repeater.html">Text Repeater</a></li></ul></div><div><h4 class="footer-col-title">Categories</h4><ul class="footer-links-list"><li><a href="/symbols/heart.html">Heart Symbols</a></li><li><a href="/symbols/star.html">Star Symbols</a></li></ul></div><div><h4 class="footer-col-title">Company</h4><ul class="footer-links-list"><li><a href="/pages/privacy.html">Privacy Policy</a></li><li><a href="/pages/terms.html">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><p class="footer-copy">© 2026 FancySymbols.</p></div></div></footer>
+
+<script>
+const MORSE_MAP = {
+  'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..',
+  '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.', '0': '-----',
+  '.': '.-.-.-', ',': '--..--', '?': '..--..', "'": '.----.', '!': '-.-.--', '/': '-..-.', '(': '-.--.', ')': '-.--.-', '&': '.-...', ':': '---...', ';': '-.-.-.', '=': '-...-', '+': '.-.-.', '-': '-....-', '_': '..--.-', '"': '.-..-.', '$': '...-..-', '@': '.--.-.',
+  ' ': '/'
+};
+
+const REVERSE_MAP = {};
+for (const [key, value] of Object.entries(MORSE_MAP)) {
+  if(key !== ' ') REVERSE_MAP[value] = key;
+}
+
+let isTextToMorse = true;
+
+function translate() {
+  const input = document.getElementById('inputLeft').value;
+  const output = document.getElementById('inputRight');
+  
+  if (isTextToMorse) {
+    // Text to Morse
+    const chars = input.toUpperCase().split('');
+    const morseChars = chars.map(c => {
+      if (c === ' ') return '/';
+      return MORSE_MAP[c] || c;
+    });
+    output.value = morseChars.join(' ').replace(/ \/ /g, ' / ').trim();
+  } else {
+    // Morse to Text
+    // Normalize input
+    const normalized = input.replace(/_/g, '-').replace(/\*/g, '.');
+    const words = normalized.split('/');
+    const translatedWords = words.map(word => {
+      const chars = word.trim().split(' ');
+      return chars.map(c => REVERSE_MAP[c] || c).join('');
+    });
+    output.value = translatedWords.join(' ').trim();
+  }
+}
+
+function swap() {
+  isTextToMorse = !isTextToMorse;
+  
+  const labelLeft = document.getElementById('labelLeft');
+  const labelRight = document.getElementById('labelRight');
+  const inputLeft = document.getElementById('inputLeft');
+  const inputRight = document.getElementById('inputRight');
+  
+  if (isTextToMorse) {
+    labelLeft.textContent = 'English Text';
+    labelRight.textContent = 'Morse Code';
+    inputLeft.placeholder = 'Type text here...';
+    inputRight.placeholder = 'Morse code will appear here...';
+  } else {
+    labelLeft.textContent = 'Morse Code';
+    labelRight.textContent = 'English Text';
+    inputLeft.placeholder = 'Type morse code here (use . and -)...';
+    inputRight.placeholder = 'English text will appear here...';
+  }
+  
+  // Swap values
+  const temp = inputLeft.value;
+  inputLeft.value = inputRight.value;
+  inputRight.value = temp;
+  
+  translate();
+}
+
+function copyText(inputId, btnId) {
+  const input = document.getElementById(inputId);
+  const btn = document.getElementById(btnId);
+  if (!input.value) return;
+  
+  input.select();
+  navigator.clipboard.writeText(input.value).then(() => {
+    const original = btn.textContent;
+    btn.textContent = '✓ Copied!';
+    btn.style.background = '#0d9488';
+    if(window.ClipboardManager) window.ClipboardManager.add(input.value);
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.style.background = btnId === 'copyRightBtn' ? 'var(--primary-color)' : '#1e293b';
+    }, 2000);
+  });
+}
+
+document.getElementById('inputLeft').addEventListener('input', translate);
+translate();
+</script>
+<script src="/script.js?v=5.4"></script>
+</body></html>

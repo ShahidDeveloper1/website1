@@ -228,7 +228,18 @@ function renderSidebar() {
       <a href="${root}cute-fonts.html"><span class="link-icon">🌸</span> Cute Fonts</a>
       <a href="${root}aesthetic-fonts.html"><span class="link-icon">✨</span> Aesthetic Fonts</a>
       <a href="${root}preppy-fonts.html"><span class="link-icon">🎀</span> Preppy Font Generator</a>
+      <a href="${root}font-generator.html"><span class="link-icon">𝕱</span> Fancy Text Generator</a>
       <a href="${root}lenny-face.html"><span class="link-icon">( ͡° ͜ʖ ͡°)</span> Lenny Faces</a>
+    </div>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-title">SYMBOLS FOR</div>
+    <div class="sidebar-links">
+      <a href="${root}instagram-symbols.html"><span class="link-icon">📸</span> Instagram Symbols</a>
+      <a href="${root}discord-symbols.html"><span class="link-icon">🎮</span> Discord Symbols</a>
+      <a href="${root}tiktok-symbols.html"><span class="link-icon">🎵</span> TikTok Symbols</a>
+      <a href="${root}roblox-symbols.html"><span class="link-icon">🎲</span> Roblox Symbols</a>
     </div>
   </div>
 
@@ -244,6 +255,11 @@ function renderSidebar() {
       <a href="${root}blank-space.html"><span class="link-icon">📋</span> Blank Space</a>
       <a href="${root}bullet-point.html"><span class="link-icon">•</span> Bullet Points</a>
       <a href="${root}free-fire-name.html"><span class="link-icon">🔥</span> Free Fire Names</a>
+      <a href="${root}zalgo-text.html"><span class="link-icon">Z̷</span> Zalgo Text</a>
+      <a href="${root}text-repeater.html"><span class="link-icon">🔁</span> Text Repeater</a>
+      <a href="${root}small-text.html"><span class="link-icon">ᵗ</span> Small Text</a>
+      <a href="${root}bold-text.html"><span class="link-icon">𝗕</span> Bold Text</a>
+      <a href="${root}morse-code.html"><span class="link-icon">·-</span> Morse Code</a>
     </div>
   </div>
   

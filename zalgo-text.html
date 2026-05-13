@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset='UTF-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zalgo Text Generator — G̷l̶i̷t̶c̷h̶ ̶T̷e̶x̷t̷ Maker | TextSymbols</title>
+  <meta name="description" content="Generate Zalgo text and glitch text instantly. Create creepy, cursed, and demonic text with our free Zalgo generator. Copy and paste for Discord, YouTube, and gaming.">
+  <link rel='canonical' href='https://fancysymbols.com/zalgo-text.html'>
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fancysymbols.com/zalgo-text">
+  <meta property="og:title" content="Zalgo Text Generator — Glitch Text Maker">
+  <meta property="og:description" content="Generate creepy, cursed Zalgo text instantly. Copy and paste anywhere.">
+  <meta property="og:image" content="https://fancysymbols.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Zalgo Text Generator">
+  <meta name="twitter:description" content="Generate glitchy Zalgo text instantly. Copy and paste.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css?v=5.4">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://fancysymbols.com"},{"@type":"ListItem","position":2,"name":"Zalgo Text Generator","item":"https://fancysymbols.com/zalgo-text"}]}</script>
+  <style>
+    .zalgo-controls { display: flex; gap: 1rem; margin-bottom: 1rem; align-items: center; flex-wrap: wrap; background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px; }
+    .zalgo-slider-container { flex: 1; min-width: 200px; }
+    .zalgo-slider-label { display: flex; justify-content: space-between; font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.5rem; }
+    .zalgo-slider { width: 100%; cursor: pointer; accent-color: var(--primary-color); }
+    .zalgo-output-area { position: relative; }
+    .zalgo-output { width: 100%; min-height: 250px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 2rem; color: var(--text-color); font-family: 'Inter', sans-serif; font-size: 1.5rem; resize: vertical; outline: none; overflow: hidden; line-height: 1.5; word-wrap: break-word; }
+    .zalgo-copy-btn { position: absolute; bottom: 1rem; right: 1rem; padding: 0.6rem 1.2rem; background: var(--primary-color); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+    .zalgo-copy-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4); }
+  </style>
+</head>
+<body>
+<div class="particles"></div>
+<header class="header"><div class="header-inner"><a href="/" class="logo"><img src="/favicon.png" alt="TextSymbols Logo" class="logo-img"><span class="logo-text">TextSymbols</span></a><nav class="header-nav"><a href="/">Home</a><a href="/all-symbols.html">All Symbols</a><a href="/preppy-fonts.html"><span class="link-icon">🎀</span> Preppy Font Generator</a><a href="/cute-fonts.html">Cute Fonts</a><a href="/aesthetic-fonts.html">Aesthetic Fonts</a><a href="/lenny-face.html" class="nav-cta">Lenny Faces</a></nav><button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button></div></header>
+<div class="sidebar-overlay" id="sidebarOverlay"></div><aside class="sidebar" id="sidebar"></aside>
+
+<div class="page-wrapper"><main class="main-content">
+  <div class="page-header"><h1>Z̷a̶l̷g̶o̶ Text Generator</h1><p>Generate creepy, glitchy, and cursed text instantly. Adjust the craziness level and copy-paste anywhere.</p></div>
+
+  <div class="font-gen-container">
+    <input type="text" class="font-input" id="zalgoInput" placeholder="Type normal text here..." value="HE COMES" autofocus>
+    
+    <div class="zalgo-controls">
+      <div class="zalgo-slider-container">
+        <div class="zalgo-slider-label"><span>Craziness Level</span><span id="levelValue">Normal</span></div>
+        <input type="range" id="craziness" class="zalgo-slider" min="1" max="3" value="2">
+      </div>
+      <div style="display: flex; gap: 1rem;">
+        <label><input type="checkbox" id="goUp" checked> Up</label>
+        <label><input type="checkbox" id="goMid" checked> Middle</label>
+        <label><input type="checkbox" id="goDown" checked> Down</label>
+      </div>
+    </div>
+
+    <div class="zalgo-output-area">
+      <div class="zalgo-output" id="zalgoOutput"></div>
+      <button class="zalgo-copy-btn" id="copyZalgoBtn">Copy Zalgo Text</button>
+    </div>
+  </div>
+
+  <div class="content-article">
+    <h2>What is Zalgo Text?</h2>
+    <p><b>Zalgo text is a form of digital art or "glitch text" created by adding excessive Unicode combining characters to regular letters.</b> These combining characters (like accents and diacritics) are meant to modify the letter they follow. By stacking dozens of them on a single letter, the text appears to bleed upwards and downwards, creating a creepy, chaotic, "demonic" or corrupted appearance.</p>
+    
+    <h2>Where to use Glitch Text?</h2>
+    <p>Zalgo text is incredibly popular in internet culture, often used to simulate a glitch in the system or convey a creepy atmosphere. It works great for:</p>
+    <ul>
+      <li><strong>Discord:</strong> Use it in server names, channel topics, or messages to surprise your friends.</li>
+      <li><strong>Gaming Usernames:</strong> Stand out in games that support Unicode characters.</li>
+      <li><strong>Social Media:</strong> Add a glitchy aesthetic to your YouTube titles, Twitter posts, or Instagram bio.</li>
+      <li><strong>Creepypasta:</strong> The style originated with the "Zalgo" internet meme, making it perfect for scary stories.</li>
+    </ul>
+
+    <h2>Will it break my app?</h2>
+    <p>Sometimes! Because Zalgo text stacks so many characters in a small space, some older apps or websites might struggle to render it correctly, causing lag or weird formatting. Most modern platforms (like Discord, Twitter, and major browsers) handle it just fine, but use maximum craziness with caution!</p>
+
+    <h3>More Text Tools</h3>
+    <div class="category-pills"><a href="/aesthetic-fonts.html" class="category-pill">✨ Aesthetic Fonts</a><a href="/username-generator.html" class="category-pill">✧ Username Gen</a><a href="/strikethrough-text.html" class="category-pill">━ Strikethrough</a><a href="/" class="category-pill">🏠 All Symbols</a></div>
+  </div>
+</main></div>
+
+<footer class="footer"><div class="footer-inner"><div class="footer-grid"><div class="footer-brand"><span class="logo-text highlight">TextSymbols</span><p class="footer-desc">Your premium destination for aesthetic symbols, cute fonts, and creative text tools.</p></div><div><h4 class="footer-col-title">Text Tools</h4><ul class="footer-links-list"><li><a href="/all-symbols.html">All Symbols</a></li><li><a href="/zalgo-text.html">Zalgo Text</a></li><li><a href="/aesthetic-fonts.html">Aesthetic Fonts</a></li><li><a href="/character-counter.html">Character Counter</a></li></ul></div><div><h4 class="footer-col-title">Categories</h4><ul class="footer-links-list"><li><a href="/symbols/heart.html">Heart Symbols</a></li><li><a href="/symbols/star.html">Star Symbols</a></li></ul></div><div><h4 class="footer-col-title">Company</h4><ul class="footer-links-list"><li><a href="/pages/privacy.html">Privacy Policy</a></li><li><a href="/pages/terms.html">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><p class="footer-copy">© 2026 FancySymbols.</p></div></div></footer>
+
+<script>
+const ZALGO_UP = ['\u030D','\u030E','\u0304','\u0305','\u033F','\u0311','\u0306','\u0310','\u0352','\u0351','\u030B','\u030F','\u0312','\u0313','\u0314','\u030C','\u0311','\u0300','\u0301','\u0302','\u0303','\u0304','\u0308','\u030A','\u0328','\u031A','\u0338','\u0334','\u0342','\u0343','\u0344','\u0346','\u034A','\u034B','\u034C','\u0350','\u0351','\u0352','\u0357','\u0358','\u035B','\u035C','\u035D','\u035E','\u035F','\u0360','\u0361','\u0362','\u0363','\u0364','\u0365','\u0366','\u0367','\u0368','\u0369','\u036A','\u036B','\u036C','\u036D','\u036E','\u036F'];
+const ZALGO_DOWN = ['\u0316','\u0317','\u0318','\u0319','\u031C','\u031D','\u031E','\u031F','\u0320','\u0324','\u0325','\u0326','\u0329','\u032A','\u032B','\u032C','\u032D','\u032E','\u032F','\u0330','\u0331','\u0332','\u0333','\u0339','\u033A','\u033B','\u033C','\u0345','\u0347','\u0348','\u0349','\u034D','\u034E','\u0353','\u0354','\u0355','\u0356','\u0359','\u035A','\u0321','\u0322','\u0327','\u0328','\u0334','\u0335','\u0336','\u0337','\u0338'];
+const ZALGO_MID = ['\u0315','\u031B','\u0340','\u0341','\u0358','\u0321','\u0322','\u0327','\u0328','\u0334','\u0335','\u0336','\u0337','\u0338','\u0339','\u033A','\u033B','\u033C'];
+
+function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+function zalgofy(text) {
+  const level = parseInt(document.getElementById('craziness').value);
+  const up = document.getElementById('goUp').checked;
+  const mid = document.getElementById('goMid').checked;
+  const down = document.getElementById('goDown').checked;
+
+  let maxUp = level === 1 ? 4 : level === 2 ? 8 : 16;
+  let maxMid = level === 1 ? 2 : level === 2 ? 4 : 8;
+  let maxDown = level === 1 ? 4 : level === 2 ? 8 : 16;
+
+  let result = '';
+  for (let i = 0; i < text.length; i++) {
+    result += text[i];
+    if (up) {
+      const numUp = Math.floor(Math.random() * maxUp);
+      for (let j = 0; j < numUp; j++) result += rand(ZALGO_UP);
+    }
+    if (mid) {
+      const numMid = Math.floor(Math.random() * maxMid);
+      for (let j = 0; j < numMid; j++) result += rand(ZALGO_MID);
+    }
+    if (down) {
+      const numDown = Math.floor(Math.random() * maxDown);
+      for (let j = 0; j < numDown; j++) result += rand(ZALGO_DOWN);
+    }
+  }
+  return result;
+}
+
+function update() {
+  const input = document.getElementById('zalgoInput').value || 'HE COMES';
+  const level = document.getElementById('craziness').value;
+  document.getElementById('levelValue').textContent = level === '1' ? 'Light' : level === '2' ? 'Normal' : 'Maximum';
+  document.getElementById('zalgoOutput').textContent = zalgofy(input);
+}
+
+document.getElementById('zalgoInput').addEventListener('input', update);
+document.getElementById('craziness').addEventListener('input', update);
+document.getElementById('goUp').addEventListener('change', update);
+document.getElementById('goMid').addEventListener('change', update);
+document.getElementById('goDown').addEventListener('change', update);
+
+document.getElementById('copyZalgoBtn').addEventListener('click', () => {
+  const text = document.getElementById('zalgoOutput').textContent;
+  const btn = document.getElementById('copyZalgoBtn');
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.style.background = '#0d9488';
+    if(window.ClipboardManager) window.ClipboardManager.add(text);
+    setTimeout(() => {
+      btn.textContent = 'Copy Zalgo Text';
+      btn.style.background = '';
+    }, 2000);
+  });
+});
+
+update();
+</script>
+<script src="/script.js?v=5.4"></script>
+</body></html>

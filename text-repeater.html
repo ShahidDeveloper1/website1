@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset='UTF-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Repeater — Repeat Text 10,000 Times | TextSymbols</title>
+  <meta name="description" content="Free text repeater tool. Repeat words, emojis, or messages up to 100,000 times instantly. Copy and paste the repeated text for WhatsApp, Discord, or gaming.">
+  <link rel='canonical' href='https://fancysymbols.com/text-repeater.html'>
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fancysymbols.com/text-repeater">
+  <meta property="og:title" content="Text Repeater — Repeat Words Instantly">
+  <meta property="og:description" content="Repeat text up to 100,000 times in milliseconds. Copy and paste repeated text.">
+  <meta property="og:image" content="https://fancysymbols.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css?v=5.4">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://fancysymbols.com"},{"@type":"ListItem","position":2,"name":"Text Repeater","item":"https://fancysymbols.com/text-repeater"}]}</script>
+  <style>
+    .repeater-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+    @media(min-width: 768px) { .repeater-grid { grid-template-columns: 1fr 1fr; } }
+    .repeater-panel { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.5rem; }
+    .repeater-input { width: 100%; min-height: 120px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 1rem; color: var(--text-color); font-family: 'Inter', sans-serif; resize: vertical; margin-bottom: 1rem; outline: none; }
+    .repeater-output { width: 100%; min-height: 300px; background: rgba(0,0,0,0.3); border: 1px solid var(--primary-color); border-radius: 8px; padding: 1rem; color: var(--text-color); font-family: 'Inter', sans-serif; resize: vertical; outline: none; }
+    .repeater-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .control-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .control-label { font-size: 0.85rem; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; }
+    .number-input { background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.8rem; border-radius: 8px; width: 100%; font-size: 1rem; }
+    .checkbox-label { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; color: #cbd5e1; user-select: none; }
+    .checkbox-label input { width: 18px; height: 18px; cursor: pointer; }
+    .action-btn { width: 100%; padding: 1rem; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; border: none; }
+    .generate-btn { background: var(--primary-color); color: white; margin-bottom: 1rem; }
+    .generate-btn:hover { background: #4f46e5; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4); }
+    .copy-btn { background: #1e293b; color: white; border: 1px solid rgba(255,255,255,0.1); }
+    .copy-btn:hover { background: #334155; }
+    .stats { font-size: 0.85rem; color: #94a3b8; text-align: right; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+<div class="particles"></div>
+<header class="header"><div class="header-inner"><a href="/" class="logo"><img src="/favicon.png" alt="TextSymbols Logo" class="logo-img"><span class="logo-text">TextSymbols</span></a><nav class="header-nav"><a href="/">Home</a><a href="/all-symbols.html">All Symbols</a><a href="/preppy-fonts.html"><span class="link-icon">🎀</span> Preppy Font Generator</a><a href="/cute-fonts.html">Cute Fonts</a><a href="/aesthetic-fonts.html">Aesthetic Fonts</a><a href="/lenny-face.html" class="nav-cta">Lenny Faces</a></nav><button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button></div></header>
+<div class="sidebar-overlay" id="sidebarOverlay"></div><aside class="sidebar" id="sidebar"></aside>
+
+<div class="page-wrapper"><main class="main-content">
+  <div class="page-header"><h1>Text Repeater</h1><p>Repeat a word, phrase, or emoji up to 100,000 times instantly. Perfect for WhatsApp, Discord, or sending long messages.</p></div>
+
+  <div class="repeater-grid">
+    <div class="repeater-panel">
+      <textarea class="repeater-input" id="sourceText" placeholder="Enter text to repeat...">I love you 💖</textarea>
+      
+      <div class="repeater-controls">
+        <div class="control-group">
+          <label class="control-label">Number of Repetitions</label>
+          <input type="number" class="number-input" id="repCount" min="1" max="100000" value="100">
+        </div>
+        <div class="control-group">
+          <label class="control-label">Separator</label>
+          <input type="text" class="number-input" id="separator" placeholder="e.g. space, comma" value=" ">
+        </div>
+      </div>
+      
+      <div class="control-group" style="margin-bottom: 1.5rem;">
+        <label class="checkbox-label">
+          <input type="checkbox" id="addNewline"> Add New Line after each repetition
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" id="addIndex"> Add Index Number (1., 2., 3.)
+        </label>
+      </div>
+
+      <button class="action-btn generate-btn" id="generateBtn" onclick="generate()">Repeat Text 🚀</button>
+      <button class="action-btn copy-btn" id="copyBtn" onclick="copyOutput()">Copy Results</button>
+    </div>
+
+    <div class="repeater-panel">
+      <textarea class="repeater-output" id="outputArea" readonly placeholder="Your repeated text will appear here..."></textarea>
+      <div class="stats" id="statsArea">Characters: 0</div>
+    </div>
+  </div>
+
+  <div class="content-article">
+    <h2>What is a Text Repeater?</h2>
+    <p>A <b>Text Repeater</b> is an online utility that allows you to multiply a specific string of text, word, or emoji as many times as you want. Instead of manually copying and pasting multiple times, you can simply type your message once, set the repetition count (e.g., 100, 10,000, or even 100,000 times), and generate a massive wall of text in milliseconds.</p>
+    
+    <h2>How to Use This Tool</h2>
+    <ul>
+      <li><strong>Type your message:</strong> It can be a single word, a sentence, or a string of emojis (like "I'm sorry", "Happy Birthday 🎂", or just "a").</li>
+      <li><strong>Set the limit:</strong> Enter how many times you want it repeated. Our tool handles up to 100,000 repetitions without crashing your browser.</li>
+      <li><strong>Choose format:</strong> You can add a space, comma, or any other separator between repetitions. You can also force each repetition onto a new line, or add numbers (1. 2. 3.) to make a numbered list.</li>
+      <li><strong>Copy and send:</strong> Click the copy button and paste it into WhatsApp, Discord, iMessage, or Instagram.</li>
+    </ul>
+
+    <h3>More Utility Tools</h3>
+    <div class="category-pills"><a href="/character-counter.html" class="category-pill">📊 Character Counter</a><a href="/blank-space.html" class="category-pill">📋 Blank Space</a><a href="/zalgo-text.html" class="category-pill">G̷l̶i̷t̶c̷h̶ Text</a><a href="/" class="category-pill">🏠 All Symbols</a></div>
+  </div>
+</main></div>
+
+<footer class="footer"><div class="footer-inner"><div class="footer-grid"><div class="footer-brand"><span class="logo-text highlight">TextSymbols</span><p class="footer-desc">Your premium destination for aesthetic symbols, cute fonts, and creative text tools.</p></div><div><h4 class="footer-col-title">Text Tools</h4><ul class="footer-links-list"><li><a href="/all-symbols.html">All Symbols</a></li><li><a href="/text-repeater.html">Text Repeater</a></li><li><a href="/character-counter.html">Character Counter</a></li></ul></div><div><h4 class="footer-col-title">Categories</h4><ul class="footer-links-list"><li><a href="/symbols/heart.html">Heart Symbols</a></li><li><a href="/symbols/star.html">Star Symbols</a></li></ul></div><div><h4 class="footer-col-title">Company</h4><ul class="footer-links-list"><li><a href="/pages/privacy.html">Privacy Policy</a></li><li><a href="/pages/terms.html">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><p class="footer-copy">© 2026 FancySymbols.</p></div></div></footer>
+
+<script>
+function generate() {
+  const text = document.getElementById('sourceText').value;
+  let count = parseInt(document.getElementById('repCount').value) || 1;
+  const separator = document.getElementById('separator').value || '';
+  const addNewline = document.getElementById('addNewline').checked;
+  const addIndex = document.getElementById('addIndex').checked;
+  const btn = document.getElementById('generateBtn');
+
+  if (!text) {
+    document.getElementById('outputArea').value = 'Please enter text to repeat.';
+    return;
+  }
+
+  if (count > 100000) count = 100000;
+  if (count < 1) count = 1;
+
+  btn.textContent = 'Generating...';
+  
+  // Use setTimeout to allow UI to update before heavy processing
+  setTimeout(() => {
+    let result = [];
+    const sep = addNewline ? separator + '\n' : separator;
+    
+    for (let i = 0; i < count; i++) {
+      let item = text;
+      if (addIndex) item = `${i + 1}. ${item}`;
+      result.push(item);
+    }
+    
+    const finalStr = result.join(sep);
+    document.getElementById('outputArea').value = finalStr;
+    document.getElementById('statsArea').textContent = `Characters: ${finalStr.length.toLocaleString()}`;
+    btn.textContent = 'Repeat Text 🚀';
+  }, 10);
+}
+
+function copyOutput() {
+  const output = document.getElementById('outputArea');
+  const btn = document.getElementById('copyBtn');
+  if (!output.value) return;
+  
+  output.select();
+  navigator.clipboard.writeText(output.value).then(() => {
+    const original = btn.textContent;
+    btn.textContent = '✓ Copied!';
+    btn.style.background = '#0d9488';
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.style.background = '#1e293b';
+    }, 2000);
+  });
+}
+
+// Generate initially
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(generate, 100);
+});
+</script>
+<script src="/script.js?v=5.4"></script>
+</body></html>

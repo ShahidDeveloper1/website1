@@ -1,106 +1,177 @@
 const fs = require('fs');
 const path = require('path');
 
-const symbolsDir = path.join(__dirname, 'symbols');
+const DOMAIN = 'https://fancysymbols.com';
 
-const gridHtml = `
-  <!-- CATEGORY NAVIGATION -->
-  <div class="section-title">Browse More Symbols <span class="line"></span></div>
-  <div class="quick-links-grid">
-    <a href="/symbols/heart.html" class="quick-link-btn" title="Heart Symbols"><span>❤️</span> Heart</a>
-    <a href="/symbols/checkmark.html" class="quick-link-btn" title="Check Mark Symbols"><span>✔️</span> Check Mark</a>
-    <a href="/symbols/animal.html" class="quick-link-btn" title="Animal Symbols"><span>🐾</span> Animal</a>
-    <a href="/symbols/star.html" class="quick-link-btn" title="Star Symbols"><span>⭐</span> Star</a>
-    <a href="/symbols/sun.html" class="quick-link-btn" title="Sun Symbols"><span>☀</span> Sun</a>
-    <a href="/symbols/moon.html" class="quick-link-btn" title="Moon Symbols"><span>☾</span> Moon</a>
-    <a href="/symbols/music.html" class="quick-link-btn" title="Music Symbols"><span>🎵</span> Music</a>
-    <a href="/symbols/cross.html" class="quick-link-btn" title="Cross Symbols"><span>✝</span> Cross</a>
-    <a href="/symbols/zodiac.html" class="quick-link-btn" title="Zodiac Symbols"><span>♈</span> Zodiac</a>
-    <a href="/symbols/numbers.html" class="quick-link-btn" title="Number Symbols"><span>①</span> Numbers</a>
-    <a href="/symbols/arrow.html" class="quick-link-btn" title="Arrow Symbols"><span>⇨</span> Arrow</a>
-    <a href="/symbols/uparrow.html" class="quick-link-btn" title="Up Arrow Symbols"><span>↑</span> Up Arrow</a>
-    <a href="/symbols/downarrow.html" class="quick-link-btn" title="Down Arrow Symbols"><span>↓</span> Down Arrow</a>
-    <a href="/symbols/flower.html" class="quick-link-btn" title="Flower Symbols"><span>✿</span> Flower</a>
-    <a href="/symbols/gender.html" class="quick-link-btn" title="Gender Symbols"><span>⚥</span> Gender</a>
-    <a href="/symbols/infinity.html" class="quick-link-btn" title="Infinity Symbols"><span>∞</span> Infinity</a>
-    <a href="/symbols/medical.html" class="quick-link-btn" title="Medical Symbols"><span>⚕</span> Medical</a>
-    <a href="/symbols/currency.html" class="quick-link-btn" title="Currency Symbols"><span>$</span> Currency</a>
-    <a href="/symbols/chess.html" class="quick-link-btn" title="Chess Symbols"><span>♚</span> Chess</a>
-    <a href="/symbols/weather.html" class="quick-link-btn" title="Weather Symbols"><span>☀</span> Weather</a>
-    <a href="/symbols/bracket.html" class="quick-link-btn" title="Bracket Symbols"><span>【</span> Bracket</a>
-    <a href="/symbols/religion.html" class="quick-link-btn" title="Religion Symbols"><span>✝</span> Religion</a>
-    <a href="/symbols/copyright.html" class="quick-link-btn" title="Copyright & Legal Symbols"><span>©</span> Copyright</a>
-    <a href="/symbols/unit.html" class="quick-link-btn" title="Unit Symbols"><span>℃</span> Unit</a>
-    <a href="/symbols/card.html" class="quick-link-btn" title="Card Symbols"><span>♠</span> Card Symbol</a>
-    <a href="/symbols/dice.html" class="quick-link-btn" title="Dice Symbols"><span>🎲</span> Dice</a>
-    <a href="/symbols/transport.html" class="quick-link-btn" title="Transport Symbols"><span>🚗</span> Transport</a>
-    <a href="/symbols/office.html" class="quick-link-btn" title="Office Symbols"><span>💼</span> Office</a>
-    <a href="/symbols/award.html" class="quick-link-btn" title="Award Symbols"><span>🏆</span> Trophy Medals</a>
-    <a href="/symbols/lock.html" class="quick-link-btn" title="Lock & Key Symbols"><span>🔒</span> Lock and Key</a>
-    <a href="/symbols/warning.html" class="quick-link-btn" title="Warning Symbols"><span>⚠️</span> Warning</a>
-    <a href="/symbols/writing.html" class="quick-link-btn" title="Writing Symbols"><span>✍️</span> Writing</a>
-    <a href="/symbols/weapon.html" class="quick-link-btn" title="Weapon Symbols"><span>⚔️</span> Weapon</a>
-    <a href="/symbols/roman.html" class="quick-link-btn" title="Roman Numerals"><span>Ⅳ</span> Roman Numerals</a>
-    <a href="/symbols/greek.html" class="quick-link-btn" title="Greek Symbols"><span>Ω</span> Greek Alphabet</a>
-    <a href="/symbols/emoji-faces.html" class="quick-link-btn" title="Smiley Faces"><span>🥰</span> Smiley Face</a>
-    <a href="/symbols/fraction.html" class="quick-link-btn" title="Fraction Symbols"><span>½</span> Fraction</a>
-    <a href="/symbols/comparison.html" class="quick-link-btn" title="Comparison Symbols"><span>≥</span> Comparison</a>
-    <a href="/symbols/line.html" class="quick-link-btn" title="Line Symbols"><span>│</span> Line</a>
-    <a href="/symbols/circle.html" class="quick-link-btn" title="Circle Symbols"><span>○</span> Circle</a>
-    <a href="/symbols/triangle.html" class="quick-link-btn" title="Triangle Symbols"><span>▲</span> Triangle</a>
-    <a href="/symbols/square.html" class="quick-link-btn" title="Square Symbols"><span>⬛</span> Square</a>
-    <a href="/symbols/rectangle.html" class="quick-link-btn" title="Rectangle Symbols"><span>█</span> Rectangle</a>
-    <a href="/symbols/corner.html" class="quick-link-btn" title="Corner Symbols"><span>╚</span> Corner</a>
-    <a href="/symbols/punctuation.html" class="quick-link-btn" title="Punctuation Marks"><span>!</span> Punctuation</a>
-    <a href="/symbols/chinese.html" class="quick-link-btn" title="Chinese Symbols"><span>愛</span> Chinese</a>
-    <a href="/symbols/japanese.html" class="quick-link-btn" title="Japanese Symbols"><span>あ</span> Japanese</a>
-    <a href="/symbols/korean.html" class="quick-link-btn" title="Korean Symbols"><span>ㅿ</span> Korean</a>
-    <a href="/symbols/hand.html" class="quick-link-btn" title="Hand Symbols"><span>✌️</span> Hand</a>
-    <a href="/symbols/bubble.html" class="quick-link-btn" title="Bubble Text"><span>ⓐ</span> Bubble Text</a>
-    <a href="/symbols/cursive.html" class="quick-link-btn" title="Cursive Font"><span>𝒜</span> Cursive Letter</a>
-    <a href="/symbols/upside-down.html" class="quick-link-btn" title="Upside Down Text"><span>ʇ</span> Upside Down</a>
-    <a href="/symbols/old-english.html" class="quick-link-btn" title="Old English Font"><span>𝔄</span> Old English</a>
-    <a href="/symbols/house.html" class="quick-link-btn" title="House Symbols"><span>🏠</span> House</a>
-    <a href="/symbols/crown.html" class="quick-link-btn" title="Crown Symbols"><span>👑</span> Crown</a>
-    <a href="/symbols/diamond.html" class="quick-link-btn" title="Diamond Symbols"><span>◆</span> Diamond</a>
-    <a href="/symbols/quotation.html" class="quick-link-btn" title="Quotation Symbols"><span>❝</span> Quotation Mark</a>
-    <a href="/symbols/crypto.html" class="quick-link-btn" title="Crypto Symbols"><span>₿</span> Cryptocurrency</a>
-    <a href="/symbols/loading.html" class="quick-link-btn" title="Loading Symbols"><span>▓</span> Loading</a>
-    <a href="/symbols/wave.html" class="quick-link-btn" title="Wave Symbols"><span>〰</span> Wave</a>
-    <a href="/symbols/divider.html" class="quick-link-btn" title="Divider Symbols"><span>┊</span> Divider</a>
-    <a href="/symbols/border.html" class="quick-link-btn" title="Border Symbols"><span>╔</span> Border</a>
-    <a href="/symbols/sparkle.html" class="quick-link-btn" title="Sparkle Symbols"><span>✨</span> Sparkle</a>
-    <a href="/symbols/aesthetic.html" class="quick-link-btn" title="Aesthetic Symbols"><span>✧</span> Aesthetic</a>
-    <a href="/symbols/dot.html" class="quick-link-btn" title="Dot Symbols"><span>•</span> Dot</a>
-    <a href="/symbols/german.html" class="quick-link-btn" title="German Symbols"><span>ß</span> German</a>
-  </div>`;
+// Platform-specific symbol packs — high-volume, low-competition keywords
+const PLATFORMS = [
+  {
+    slug: 'instagram-symbols',
+    title: 'Symbols for Instagram Bio — Copy Paste Aesthetic Symbols ✦',
+    h1: 'Instagram Bio Symbols ✦',
+    desc: 'Copy and paste the best symbols for your Instagram bio, captions & stories. Aesthetic, cute, and trendy Unicode symbols that make your profile stand out.',
+    keyword: 'instagram symbols',
+    intro: 'Make your Instagram profile pop with these hand-picked symbols. From aesthetic sparkles to cute hearts and trendy arrows — copy any symbol with one click and paste it directly into your Instagram bio, captions, or story text.',
+    categories: [
+      { name: 'Aesthetic', symbols: ['✦', '✧', '⋆', '✨', '⊹', '˚', '·', '⭒', '₊', '˚', '𖦹', '⟡', '✹', '✶', '❋', '❊', '❃', '❂', '❁', '✿'] },
+      { name: 'Hearts', symbols: ['♡', '♥', '❤', '❥', '❣', '💕', '💞', '💓', '💗', '💖', '💘', '💝', '💟', '❤️‍🔥', '❤️‍🩹', 'ღ', '❦', '❧', '☙', '♡'] },
+      { name: 'Stars', symbols: ['⭐', '★', '☆', '✦', '✧', '⋆', '✶', '✴', '✹', '✨', '✡', '❂', '⭑', '⭒', '✪', '✯', '✰', '✵', '✷', '✸'] },
+      { name: 'Arrows', symbols: ['→', '←', '↑', '↓', '↗', '↘', '➜', '➤', '➥', '➦', '⇢', '⇥', '⟶', '⟹', '►', '▸', '◂', '◃', '⊳', '⊲'] },
+      { name: 'Dividers', symbols: ['┊', '┆', '║', '│', '┃', '╎', '╏', '┇', '┋', '╸', '─', '━', '═', '⸻', '—', '–', '·', '⋯', '…', '~'] },
+      { name: 'Flowers', symbols: ['✿', '❀', '✾', '❁', '❃', '❋', '✽', '❊', '⚘', '⊹', '🌸', '🌺', '🌻', '🌷', '🌹', '💐', '🌼', '🏵️', '🌾', '🌿'] },
+      { name: 'Sparkles & Magic', symbols: ['✨', '⭐', '🌟', '💫', '✧', '⊹', '˚', '·', '₊', '⭒', '✹', '✶', '❋', '❊', '⟡', '𖦹', '☽', '☾', '✩', '✰'] },
+      { name: 'Brackets & Frames', symbols: ['【', '】', '「', '」', '『', '』', '〖', '〗', '〘', '〙', '⟨', '⟩', '⟪', '⟫', '⦗', '⦘', '⌈', '⌉', '⌊', '⌋'] }
+    ]
+  },
+  {
+    slug: 'discord-symbols',
+    title: 'Discord Symbols — Copy Paste Special Characters & Text Art',
+    h1: 'Discord Symbols & Characters',
+    desc: 'Copy paste special symbols, text art, and fancy characters for Discord usernames, bios, channel names, and messages. Works everywhere in Discord.',
+    keyword: 'discord symbols',
+    intro: 'Level up your Discord presence with these special Unicode symbols. Perfect for usernames, server channel names, role dividers, and messages. Every symbol works in Discord without any bots or mods.',
+    categories: [
+      { name: 'Username Decorations', symbols: ['꧁', '꧂', '☬', '✞', '☠', '⚔', '卍', '☯', '♛', '♕', '❖', '✠', '☦', '⚜', '♚', '♜', '♝', '♞', '♟', '⚒'] },
+      { name: 'Channel Dividers', symbols: ['┊', '╏', '│', '║', '┃', '·', '⋮', '⋯', '━', '─', '═', '▬', '▭', '▮', '▯', '◈', '◆', '◇', '◉', '◎'] },
+      { name: 'Status Symbols', symbols: ['◉', '◎', '●', '○', '◌', '◯', '◕', '◔', '◑', '◐', '▣', '▢', '◧', '◨', '◩', '◪', '◫', '⬡', '⬢', '⬣'] },
+      { name: 'Reactions', symbols: ['(╯°□°)╯', '¯\\_(ツ)_/¯', '( ͡° ͜ʖ ͡°)', '(☞ﾟ∀ﾟ)☞', 'ᕙ(⇀‸↼‶)ᕗ', '(ᵔᴥᵔ)', 'ʕ•ᴥ•ʔ', '(✿◠‿◠)', 'OwO', 'UwU'] },
+      { name: 'Gaming', symbols: ['⚔️', '🛡️', '🗡️', '🏹', '🎮', '🕹️', '🎯', '🏆', '🥇', '🥈', '💎', '🔮', '⚡', '🔥', '💀', '☠', '👑', '🃏', '♠', '♣'] },
+      { name: 'Aesthetic', symbols: ['✧', '⊹', '₊', '˚', '·', '⭒', '⟡', '☽', '☾', '✦', '⋆', '✶', '❋', '𖦹', '✹', '❃', '❂', '❁', '✿', '✾'] }
+    ]
+  },
+  {
+    slug: 'tiktok-symbols',
+    title: 'TikTok Symbols — Aesthetic Copy Paste for Bio & Captions ✨',
+    h1: 'TikTok Bio Symbols ✨',
+    desc: 'Copy paste trendy symbols for your TikTok bio, username, and captions. Aesthetic, cute, and viral Unicode symbols that work on TikTok.',
+    keyword: 'tiktok symbols',
+    intro: 'Make your TikTok bio go viral with these trending symbols. From aesthetic sparkles to cute hearts — every symbol copies with one click and pastes directly into TikTok. TikTok allows up to 80 characters in bios, so pick your favorites!',
+    categories: [
+      { name: 'Trending', symbols: ['✦', '✧', '⋆', '✨', '⊹', '˚', '₊', '⭒', '·', '⟡', '𖦹', '☽', '☾', '✩', '✰', '✶', '❋', '✹', '❃', '❊'] },
+      { name: 'Cute', symbols: ['♡', '♥', '❤', '🌸', '🌺', '🧸', '🎀', '🩰', '🦋', '🌈', '🍓', '🍒', '🍰', '🧁', '🍭', '🍬', '🎂', '🍪', '🌷', '💐'] },
+      { name: 'Dark Aesthetic', symbols: ['☠', '💀', '🖤', '⛓', '🥀', '🔪', '🩸', '🕷', '🕸', '⚰', '🌑', '🌒', '🌘', '🦇', '👁', '🗝', '⚱', '🕯', '☾', '✞'] },
+      { name: 'Bio Dividers', symbols: ['·', '•', '┊', '│', '║', '|', '⋆', '✧', '★', '☆', '◦', '○', '●', '◉', '◎', '⊹', '✦', '⊰', '⊱', '~'] },
+      { name: 'Vibes', symbols: ['🧿', '🪬', '✨', '🌊', '🌅', '🌄', '🏖', '🌴', '🌙', '🔮', '🧘', '🌿', '🍃', '🦢', '🕊', '🪷', '🫧', '☁️', '🌸', '💫'] }
+    ]
+  },
+  {
+    slug: 'roblox-symbols',
+    title: 'Roblox Symbols — Cool & Stylish Characters for Display Names ✰',
+    h1: 'Roblox Symbols & Characters ✰',
+    desc: 'Copy paste cool symbols that work in Roblox display names, chat, and bios. Tested & verified to work in Roblox 2026.',
+    keyword: 'roblox symbols',
+    intro: 'Find the best symbols that actually work in Roblox! Not all Unicode characters are supported by Roblox — we\'ve tested every symbol below and confirmed they display correctly in display names, chat, and experience descriptions.',
+    categories: [
+      { name: 'Verified Working', symbols: ['☆', '★', '✦', '✧', '♡', '♥', '→', '←', '↑', '↓', '✓', '✗', '●', '○', '◆', '◇', '■', '□', '▲', '▼'] },
+      { name: 'Cool Names', symbols: ['꧁', '꧂', '☬', '⚔', '☯', '♛', '♕', '❖', '✠', '⚜', '★', '✰', '✩', '☠', '⚡', '♠', '♣', '♥', '♦', '✪'] },
+      { name: 'Arrows', symbols: ['→', '←', '↑', '↓', '➜', '➤', '⟶', '⟹', '►', '▸', '◂', '◃', '⊳', '⊲', '↗', '↘', '↙', '↖', '⇢', '⇥'] },
+      { name: 'Math & Technical', symbols: ['∞', '≠', '≈', '±', '÷', '×', '√', '∑', '∆', 'π', '°', '¹', '²', '³', '⁴', '⁵', '½', '¼', '¾', '%'] }
+    ]
+  }
+];
 
-const files = fs.readdirSync(symbolsDir).filter(f => f.endsWith('.html'));
+function generatePage(platform) {
+  const symbolGrid = platform.categories.map(cat => `
+    <div style="margin-bottom:2rem;">
+      <h2 style="font-size:1.3rem; font-weight:700; margin-bottom:0.75rem; color:#0f172a;">${cat.name}</h2>
+      <div class="symbol-grid">
+        ${cat.symbols.map(s => `<div class="symbol-item" onclick="copyToClipboard('${s.replace(/'/g, "\\'")}', event)">${s}</div>`).join('\n        ')}
+      </div>
+    </div>
+  `).join('\n');
 
-let updatedCount = 0;
+  const faqItems = [
+    { q: `How do I copy ${platform.keyword}?`, a: `Simply click on any symbol above and it will be automatically copied to your clipboard. Then paste it wherever you want using Ctrl+V (or Cmd+V on Mac).` },
+    { q: `Do these symbols work on ${platform.keyword.split(' ')[0]}?`, a: `Yes! All symbols on this page have been tested and verified to work on ${platform.keyword.split(' ')[0]}. They are standard Unicode characters supported by modern platforms.` },
+    { q: `Are these symbols free to use?`, a: `Absolutely! All symbols are part of the Unicode standard and are completely free to use anywhere, with no attribution required.` },
+    { q: `Can I use multiple symbols together?`, a: `Yes! You can combine any symbols together to create unique looks. Use our clipboard bar at the bottom to collect multiple symbols before copying them all at once.` }
+  ];
 
-files.forEach(file => {
-    const filePath = path.join(symbolsDir, file);
-    let content = fs.readFileSync(filePath, 'utf8');
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqItems.map(f => ({
+      "@type": "Question",
+      "name": f.q,
+      "acceptedAnswer": { "@type": "Answer", "text": f.a }
+    }))
+  };
 
-    // 1. Remove any existing category grids / quick links grids to avoid duplicates
-    // We match the "CATEGORY NAVIGATION" comment or "Browse More Symbols" section and the following grid.
-    content = content.replace(/<!-- CATEGORY NAVIGATION -->\s*/g, '');
-    content = content.replace(/<div class="section-title">Browse More Symbols\s*<span class="line"><\/span><\/div>\s*<div class="quick-links-grid">[\s\S]*?<\/div>\s*/gi, '');
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset='UTF-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${platform.title}</title>
+  <meta name="description" content="${platform.desc}">
+  <meta name="keywords" content="${platform.keyword}, copy paste symbols, special characters, unicode symbols">
+  <link rel="canonical" href="${DOMAIN}/${platform.slug}">
+  <meta property="og:title" content="${platform.title}">
+  <meta property="og:description" content="${platform.desc}">
+  <meta property="og:url" content="${DOMAIN}/${platform.slug}">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=5.4">
+  <script type="application/ld+json">${JSON.stringify(faqSchema)}</script>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo"><img src="favicon.png" alt="FancySymbols" width="32" height="32"> FancySymbols</a>
+      <nav class="header-nav">
+        <a href="index.html">Home</a>
+        <a href="all-symbols.html">All Symbols</a>
+        <a href="aesthetic-fonts.html">Aesthetic</a>
+        <a href="cute-fonts.html">Cute</a>
+        <a href="lenny-face.html" class="cta-btn">Lenny Faces</a>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+      </button>
+    </div>
+  </header>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    // 2. Inject the new grid right before the <div class="content-article">
-    if (content.includes('<div class="content-article">')) {
-        content = content.replace(
-            /(<\/div>\s*)(<div class="content-article">)/, 
-            '$1' + gridHtml + '\n$2'
-        );
-    } else {
-        // Fallback: insert right before </main>
-        content = content.replace('</main>', gridHtml + '\n</main>');
-    }
+  <main class="main-content" style="padding-top: 6rem;">
+    <section class="hero" style="text-align:center; padding: 2rem 1rem;">
+      <h1 style="font-size:2.2rem; font-weight:800; margin-bottom:0.5rem;">${platform.h1}</h1>
+      <p style="color:#64748b; max-width:600px; margin:0 auto 1.5rem;">${platform.intro}</p>
+    </section>
 
-    fs.writeFileSync(filePath, content, 'utf8');
-    updatedCount++;
+    <div style="max-width:800px; margin:0 auto; padding:0 1rem;">
+      ${symbolGrid}
+    </div>
+
+    <section style="max-width:700px; margin:3rem auto; padding:0 1rem;">
+      <h2 style="font-size:1.5rem; font-weight:700; margin-bottom:1rem;">Frequently Asked Questions</h2>
+      ${faqItems.map(f => `
+      <div class="faq-item">
+        <div class="faq-q">${f.q}</div>
+        <div class="faq-a">${f.a}</div>
+      </div>`).join('\n')}
+    </section>
+
+    <footer class="footer">
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 FancySymbols.</p>
+      </div>
+    </footer>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js?v=5.4"></script>
+</body>
+</html>`;
+}
+
+// Generate all platform pages
+PLATFORMS.forEach(platform => {
+  const filePath = path.join(__dirname, `${platform.slug}.html`);
+  fs.writeFileSync(filePath, generatePage(platform));
+  console.log(`✅ Generated: ${platform.slug}.html`);
 });
 
-console.log(`Successfully injected category grid into ${updatedCount} symbol pages.`);
+console.log(`\n🎯 Total platform pages generated: ${PLATFORMS.length}`);
