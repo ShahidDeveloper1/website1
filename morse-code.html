@@ -73,6 +73,8 @@
     .ctrl-btn.active { background: #6366f1; color: #fff; border-color: #6366f1; }
     .ctrl-btn.active:hover { background: #4f46e5; }
     .ctrl-btn.playing { background: #059669; color: #fff; border-color: #059669; }
+    .ctrl-btn.on { background: #059669; color: #fff; border-color: #059669; box-shadow: 0 0 12px rgba(5,150,105,0.35); }
+    .ctrl-btn.on:hover { background: #047857; }
 
     /* Light flash overlay */
     .flash-overlay {
@@ -175,9 +177,9 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
           Repeat
         </button>
-        <button class="ctrl-btn active" id="btnSound" onclick="toggleSound()">
+        <button class="ctrl-btn on" id="btnSound" onclick="toggleSound()">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 010 7.07" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-          Sound
+          Sound ON
         </button>
         <button class="ctrl-btn" id="btnLight" onclick="toggleLight()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -379,7 +381,14 @@
 
   // ===== TOGGLES =====
   function toggleRepeat() { repeatOn = !repeatOn; document.getElementById('btnRepeat').classList.toggle('active', repeatOn); }
-  function toggleSound() { soundOn = !soundOn; document.getElementById('btnSound').classList.toggle('active', soundOn); }
+  function toggleSound() {
+    soundOn = !soundOn;
+    const btn = document.getElementById('btnSound');
+    btn.classList.toggle('on', soundOn);
+    btn.innerHTML = soundOn
+      ? '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 010 7.07" fill="none" stroke="currentColor" stroke-width="2"/></svg>Sound ON'
+      : '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" stroke="currentColor" stroke-width="2"/><line x1="17" y1="9" x2="23" y2="15" stroke="currentColor" stroke-width="2"/></svg>Sound OFF';
+  }
   function toggleLight() { lightOn = !lightOn; document.getElementById('btnLight').classList.toggle('active', lightOn); }
   function toggleVibrate() { vibrateOn = !vibrateOn; document.getElementById('btnVibrate').classList.toggle('active', vibrateOn); }
 
