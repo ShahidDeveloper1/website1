@@ -1,5 +1,6 @@
 // ===== FANCY SYMBOLS - MAIN SCRIPT =====
 
+
 // ===== CLIPBOARD BAR MANAGER =====
 const ClipboardManager = {
   symbols: [],
@@ -24,7 +25,8 @@ const ClipboardManager = {
   },
 
   add(symbol) {
-    if (symbol.length > 5) return; // Only add single symbols or short emojis, not full sentences
+    if (!symbol || symbol.length > 500) return;
+    console.log('Adding symbol:', symbol);
     this.symbols.push(symbol);
     this.render();
     this.show();
@@ -39,28 +41,47 @@ const ClipboardManager = {
   copyAll() {
     if (this.symbols.length === 0) return;
     const allText = this.symbols.join('');
-    // Use the native global copy but bypass adding to clipboard manager
-    navigator.clipboard.writeText(allText).then(() => {
-      showToast('✓ Copied ' + this.symbols.length + ' symbols!');
-    }).catch(() => {
+    console.log('Copying all symbols:', allText);
+
+    const performCopy = (text) => {
       const ta = document.createElement('textarea');
-      ta.value = allText;
+      ta.value = text;
       ta.style.position = 'fixed';
       ta.style.opacity = '0';
+      ta.style.left = '-9999px';
+      ta.style.top = '-9999px';
       document.body.appendChild(ta);
       ta.select();
-      document.execCommand('copy');
+      try {
+        document.execCommand('copy');
+        showToast('✓ Copied ' + this.symbols.length + ' symbols!');
+      } catch (err) {
+        console.error('Fallback copy failed:', err);
+      }
       document.body.removeChild(ta);
-      showToast('✓ Copied ' + this.symbols.length + ' symbols!');
-    });
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(allText).then(() => {
+        showToast('✓ Copied ' + this.symbols.length + ' symbols!');
+      }).catch(err => {
+        console.warn('Navigator clipboard failed, using fallback:', err);
+        performCopy(allText);
+      });
+    } else {
+      performCopy(allText);
+    }
   },
 
   render() {
     if (!this.containerEl) return;
-    this.containerEl.innerHTML = this.symbols.map(sym => 
-      `<div class="clipboard-symbol-item">${sym}</div>`
-    ).join('');
-    // Scroll to end
+    this.containerEl.innerHTML = '';
+    this.symbols.forEach(sym => {
+      const item = document.createElement('div');
+      item.className = 'clipboard-symbol-item';
+      item.textContent = sym;
+      this.containerEl.appendChild(item);
+    });
     this.containerEl.scrollLeft = this.containerEl.scrollWidth;
   },
 
@@ -75,10 +96,23 @@ const ClipboardManager = {
 function copyToClipboard(text) {
   ClipboardManager.add(text); // Track in clipboard bar
   
-  navigator.clipboard.writeText(text).then(() => {
-    showToast('✓ Copied to clipboard!');
-  }).catch(() => {
-    // Fallback
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast('✓ Copied to clipboard!');
+    }).catch(() => {
+      // Fallback
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('✓ Copied to clipboard!');
+    });
+  } else {
+    // Fallback if navigator.clipboard is not available
     const ta = document.createElement('textarea');
     ta.value = text;
     ta.style.position = 'fixed';
@@ -88,7 +122,7 @@ function copyToClipboard(text) {
     document.execCommand('copy');
     document.body.removeChild(ta);
     showToast('✓ Copied to clipboard!');
-  });
+  }
 }
 
 // ===== TOAST NOTIFICATIONS =====
@@ -229,7 +263,7 @@ function initCopyable() {
   // Symbol items
   document.querySelectorAll('.symbol-item').forEach(item => {
     item.addEventListener('click', () => {
-      copyToClipboard(item.textContent.trim());
+      copyToClipboard(item.textContent);
       item.classList.add('copied');
       setTimeout(() => item.classList.remove('copied'), 800);
     });
@@ -238,7 +272,7 @@ function initCopyable() {
   // Combo items
   document.querySelectorAll('.combo-item').forEach(item => {
     item.addEventListener('click', () => {
-      const text = item.querySelector('.combo-text')?.textContent.trim() || item.textContent.trim();
+      const text = item.querySelector('.combo-text')?.textContent || item.textContent;
       copyToClipboard(text);
     });
   });
