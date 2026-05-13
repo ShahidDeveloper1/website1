@@ -231,6 +231,21 @@ function renderSidebar() {
       <a href="${root}lenny-face.html"><span class="link-icon">( ͡° ͜ʖ ͡°)</span> Lenny Faces</a>
     </div>
   </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-title">TEXT TOOLS</div>
+    <div class="sidebar-links">
+      <a href="${root}bio-generator.html"><span class="link-icon">📝</span> Bio Generator</a>
+      <a href="${root}username-generator.html"><span class="link-icon">✧</span> Username Generator</a>
+      <a href="${root}character-counter.html"><span class="link-icon">📊</span> Character Counter</a>
+      <a href="${root}strikethrough-text.html"><span class="link-icon">━</span> Strikethrough Text</a>
+      <a href="${root}emoticons.html"><span class="link-icon">😊</span> Emoticons & Kaomoji</a>
+      <a href="${root}invisible-character.html"><span class="link-icon">👻</span> Invisible Character</a>
+      <a href="${root}blank-space.html"><span class="link-icon">📋</span> Blank Space</a>
+      <a href="${root}bullet-point.html"><span class="link-icon">•</span> Bullet Points</a>
+      <a href="${root}free-fire-name.html"><span class="link-icon">🔥</span> Free Fire Names</a>
+    </div>
+  </div>
   
   <div class="sidebar-section">
     <div class="sidebar-title">TRENDING NOW</div>
