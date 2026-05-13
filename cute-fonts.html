@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset='UTF-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌸 Cute Fonts Symbols Copy and Paste ✨ - TextSymbols</title>
+  <meta name="description" content="Copy and paste 🌸 cute fonts symbols copy and paste ✨ for your bio, social posts, and messages. Huge collection of aesthetic and cool text symbols. One-click copy!">
+  <link rel='canonical' href='https://fancysymbols.com/cute-fonts.html'>
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fancysymbols.com/cute-fonts.html">
+  <meta property="og:title" content="🌸 Cute Fonts Symbols Copy and Paste ✨">
+  <meta property="og:description" content="Copy and paste 🌸 cute fonts symbols copy and paste ✨ instantly. Perfect for Instagram, TikTok, and gaming.">
+  <meta property="og:image" content="https://fancysymbols.com/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://fancysymbols.com/cute-fonts.html">
+  <meta name="twitter:title" content="🌸 Cute Fonts Symbols Copy and Paste ✨">
+  <meta name="twitter:description" content="One-click copy for 🌸 cute fonts symbols copy and paste ✨ and aesthetic text decorations.">
+  <meta name="twitter:image" content="https://fancysymbols.com/og-image.png">
+
+  <link rel="stylesheet" href="/style.css">
+  <link rel="icon" type="image/png" href="/favicon.png">
+</head>
+<body>
+<div class="particles"></div>
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <img src="/favicon.png" alt="TextSymbols Logo" class="logo-img">
+      <span class="logo-text">TextSymbols</span>
+    </a>
+    <nav class="header-nav">
+      <a href="/">Home</a>
+      <a href="/all-symbols.html">All Symbols</a>
+      <a href="/font-generator.html">Preppy Font Generator</a>
+      <a href="/cute-fonts.html">Cute Fonts</a>
+      <a href="/lenny-face.html" class="nav-cta">Lenny Faces</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+  </div>
+</header>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="sidebar" id="sidebar"></aside>
+
+</div>
+
+
+
+<div class="page-wrapper">
+  <main class="main-content">
+    <a href="/" class="back-link">← Back to Home</a>
+    <div class="page-header">
+      <h1>🌸 Cute Fonts Symbols Copy and Paste ✨</h1>
+      <p>Type your text below and get cute aesthetic font styles instantly. Click to copy!</p>
+    </div>
+    <div class="font-gen-container">
+      <div class="font-input-area">
+        <input type="text" class="font-input" id="fontInput" placeholder="Type your text here..." value="Cute Fonts" autofocus>
+      </div>
+      
+      <div id="fontsContainer">
+        <!-- JS will inject categories and cards here -->
+      </div>
+    </div>
+
+    <!-- Initialization Script -->
+    <script src="cute-fonts.js?v=2.0"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const fontInput = document.getElementById('fontInput');
+        const fontsContainer = document.getElementById('fontsContainer');
+        
+        let favorites = JSON.parse(localStorage.getItem('fontFavorites') || '[]');
+
+        function escapeHTML(str) {
+          const p = document.createElement('p');
+          p.textContent = str;
+          return p.innerHTML;
+        }
+
+        function renderAll() {
+          const text = fontInput.value || "Cute Fonts";
+          const data = window.CuteFonts.generate(text);
+          let html = '';
+
+          // Handle Favorites First
+          const allStyles = window.CuteFonts.categories.flatMap(c => c.styles);
+          let favList = allStyles.filter(s => favorites.includes(s.id));
+
+          if (favList.length > 0) {
+            html += `
+              <section class="font-section" id="fav-section">
+                <h2 class="font-category-title">Favorite Fonts</h2>
+                <div class="font-grid">
+                  ${favList.map(s => renderCard(s, text)).join('')}
+                </div>
+              </section>
+            `;
+          }
+
+          // Handle All Other Categories
+          window.CuteFonts.categories.forEach(cat => {
+            if (cat.name === "Favorite Fonts") return;
+            const catStyles = cat.styles.map(s => ({
+                ...s,
+                text: s.transform(text)
+            }));
+            
+            html += `
+              <section class="font-section">
+                <h2 class="font-category-title">${cat.name}</h2>
+                <div class="font-grid">
+                  ${catStyles.map(s => renderCard(s, text, true)).join('')}
+                </div>
+              </section>
+            `;
+          });
+
+          fontsContainer.innerHTML = html;
+        }
+
+        function renderCard(style, text, useComputed = false) {
+          const isFav = favorites.includes(style.id);
+          const rawText = useComputed ? style.text : (window.CuteFonts.categories.flatMap(c => c.styles).find(s => s.id === style.id).transform(text));
+          const escapedText = escapeHTML(rawText);
+          
+          return `
+            <div class="font-card" onclick="copyCardText(this, '${rawText.replace(/'/g, "\\'").replace(/"/g, '&quot;')}')">
+              <div class="font-card-header">
+                <span class="font-card-label">${style.name}</span>
+                <div class="font-card-actions">
+                  <button class="font-card-btn fav-btn ${isFav ? 'active' : ''}" 
+                          onclick="event.stopPropagation(); toggleFavorite('${style.id}')">
+                    ${isFav ? '❤️' : '♡'}
+                  </button>
+                  <button class="font-card-btn copy-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="font-card-preview">${escapedText}</div>
+              <div class="copy-feedback">Copied!</div>
+            </div>
+          `;
+        }
+
+        window.toggleFavorite = (id) => {
+          if (favorites.includes(id)) {
+            favorites = favorites.filter(f => f !== id);
+          } else {
+            favorites.push(id);
+          }
+          localStorage.setItem('fontFavorites', JSON.stringify(favorites));
+          renderAll();
+        };
+
+        window.copyCardText = (el, text) => {
+          navigator.clipboard.writeText(text).then(() => {
+            el.classList.add('copied');
+            setTimeout(() => el.classList.remove('copied'), 1500);
+            
+            if (window.showToast) window.showToast('Font Copied!');
+          });
+        };
+
+        fontInput.addEventListener('input', renderAll);
+        renderAll();
+      });
+    </script>
+  </main>
+</div>
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo-text highlight">TextSymbols</span>
+        <p class="footer-desc">Your premium destination for aesthetic symbols, cute fonts, and creative text tools. Elevate your digital presence with ease.</p>
+      </div>
+      
+      <div>
+        <h4 class="footer-col-title">Text Tools</h4>
+        <ul class="footer-links-list">
+          <li><a href="/all-symbols.html">All Symbols</a></li>
+          <li><a href="/font-generator.html">Preppy Font Generator</a></li>
+          <li><a href="/cute-fonts.html">Cute Fonts</a></li>
+          <li><a href="/lenny-face.html">Lenny Faces</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-col-title">Categories</h4>
+        <ul class="footer-links-list">
+          <li><a href="/symbols/heart.html">Heart Symbols</a></li>
+          <li><a href="/symbols/star.html">Star Symbols</a></li>
+          <li><a href="/symbols/flower.html">Flower Symbols</a></li>
+          <li><a href="/symbols/aesthetic.html">Aesthetic Symbols</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-col-title">Company</h4>
+        <ul class="footer-links-list">
+          <li><a href="/pages/privacy.html">Privacy Policy</a></li>
+          <li><a href="/pages/terms.html">Terms of Service</a></li>
+          <li><a href="/pages/contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 FancySymbols. Created with ❤️ for creators.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social-icon">𝕏</a>
+        <a href="#" class="footer-social-icon">📸</a>
+        <a href="#" class="footer-social-icon">🎵</a>
+      </div>
+    </div>
+  </div>
+  <div id="clipboard-bar"></div>
+</footer>
+<script src="/script.js?v=4.5"></script>
+</body>
+</html>

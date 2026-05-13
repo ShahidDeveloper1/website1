@@ -1,4 +1,5 @@
 // ===== FANCY SYMBOLS - MAIN SCRIPT =====
+document.documentElement.classList.add('js-ready');
 
 
 // ===== CLIPBOARD BAR MANAGER =====
@@ -8,9 +9,15 @@ const ClipboardManager = {
   containerEl: null,
 
   init() {
-    this.barEl = document.createElement('div');
-    this.barEl.id = 'clipboard-bar';
-    this.barEl.innerHTML = `
+    this.bar = document.getElementById('clipboard-bar');
+    if (!this.bar) {
+      this.bar = document.createElement('div');
+      this.bar.id = 'clipboard-bar';
+      document.body.appendChild(this.bar);
+    }
+    
+    this.barEl = this.bar; 
+    this.bar.innerHTML = `
       <div class="clipboard-content">
         <span class="clipboard-title">Copied</span>
         <div class="clipboard-symbols" id="clipboard-symbols-container"></div>
@@ -20,13 +27,11 @@ const ClipboardManager = {
         <button class="clipboard-btn clipboard-copy-btn" onclick="ClipboardManager.copyAll()">Copy All</button>
       </div>
     `;
-    document.body.appendChild(this.barEl);
     this.containerEl = document.getElementById('clipboard-symbols-container');
   },
 
   add(symbol) {
     if (!symbol || symbol.length > 500) return;
-    console.log('Adding symbol:', symbol);
     this.symbols.push(symbol);
     this.render();
     this.show();
@@ -41,33 +46,22 @@ const ClipboardManager = {
   copyAll() {
     if (this.symbols.length === 0) return;
     const allText = this.symbols.join('');
-    console.log('Copying all symbols:', allText);
-
     const performCopy = (text) => {
       const ta = document.createElement('textarea');
       ta.value = text;
       ta.style.position = 'fixed';
       ta.style.opacity = '0';
-      ta.style.left = '-9999px';
-      ta.style.top = '-9999px';
       document.body.appendChild(ta);
       ta.select();
-      try {
-        document.execCommand('copy');
-        showToast('✓ Copied ' + this.symbols.length + ' symbols!');
-      } catch (err) {
-        console.error('Fallback copy failed:', err);
-      }
+      document.execCommand('copy');
+      showToast('✓ Copied ' + this.symbols.length + ' symbols!');
       document.body.removeChild(ta);
     };
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(allText).then(() => {
         showToast('✓ Copied ' + this.symbols.length + ' symbols!');
-      }).catch(err => {
-        console.warn('Navigator clipboard failed, using fallback:', err);
-        performCopy(allText);
-      });
+      }).catch(() => performCopy(allText));
     } else {
       performCopy(allText);
     }
@@ -92,39 +86,6 @@ const ClipboardManager = {
   }
 };
 
-// ===== COPY TO CLIPBOARD =====
-function copyToClipboard(text) {
-  ClipboardManager.add(text); // Track in clipboard bar
-  
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(text).then(() => {
-      showToast('✓ Copied to clipboard!');
-    }).catch(() => {
-      // Fallback
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-      showToast('✓ Copied to clipboard!');
-    });
-  } else {
-    // Fallback if navigator.clipboard is not available
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.position = 'fixed';
-    ta.style.opacity = '0';
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand('copy');
-    document.body.removeChild(ta);
-    showToast('✓ Copied to clipboard!');
-  }
-}
-
 // ===== TOAST NOTIFICATIONS =====
 let toastTimeout;
 function showToast(message) {
@@ -143,16 +104,124 @@ function showToast(message) {
   }, 1800);
 }
 
-// ===== SIDEBAR TOGGLE =====
+// ===== COPY TO CLIPBOARD =====
+function copyToClipboard(text, event) {
+  ClipboardManager.add(text);
+  
+  // Luxury Burst Effect
+  if (event) {
+    const burst = document.createElement('div');
+    burst.className = 'burst';
+    burst.style.left = `${event.pageX}px`;
+    burst.style.top = `${event.pageY}px`;
+    document.body.appendChild(burst);
+    setTimeout(() => burst.remove(), 600);
+  }
+  
+  const performCopy = (val) => {
+    const ta = document.createElement('textarea');
+    ta.value = val;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('✓ Copied to clipboard!');
+  };
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast('✓ Copied to clipboard!');
+    }).catch(() => performCopy(text));
+  } else {
+    performCopy(text);
+  }
+}
+
+// ===== SIDEBAR NAVIGATION =====
 function renderSidebar() {
   const sidebar = document.getElementById('sidebar');
   if (!sidebar) return;
-  const isSubdir = window.location.pathname.includes('/pages/');
+  const isSubdir = window.location.pathname.includes('/pages/') || window.location.pathname.includes('/symbols/');
   const root = isSubdir ? '../' : '';
+
+  const categories = [
+    { n: 'Aesthetic', f: 'aesthetic', i: '✧' },
+    { n: 'Animal', f: 'animal', i: '🐾' },
+    { n: 'Arrow', f: 'arrow', i: '➶' },
+    { n: 'Award', f: 'award', i: '🏆' },
+    { n: 'Border', f: 'border', i: '╔' },
+    { n: 'Bracket', f: 'bracket', i: '【' },
+    { n: 'Bubble', f: 'bubble', i: 'ⓐ' },
+    { n: 'Card', f: 'card', i: '♠' },
+    { n: 'Check Mark', f: 'checkmark', i: '✔️' },
+    { n: 'Chess', f: 'chess', i: '♚' },
+    { n: 'Chinese', f: 'chinese', i: '愛' },
+    { n: 'Circle', f: 'circle', i: '○' },
+    { n: 'Comparison', f: 'comparison', i: '≥' },
+    { n: 'Copyright', f: 'copyright', i: '©' },
+    { n: 'Corner', f: 'corner', i: '╚' },
+    { n: 'Cross', f: 'cross', i: '✝' },
+    { n: 'Crown', f: 'crown', i: '👑' },
+    { n: 'Crypto', f: 'crypto', i: '₿' },
+    { n: 'Currency', f: 'currency', i: '$' },
+    { n: 'Cursive', f: 'cursive', i: '𝒜' },
+    { n: 'Diamond', f: 'diamond', i: '◆' },
+    { n: 'Dice', f: 'dice', i: '🎲' },
+    { n: 'Divider', f: 'divider', i: '┊' },
+    { n: 'Dot', f: 'dot', i: '•' },
+    { n: 'Down Arrow', f: 'downarrow', i: '↓' },
+    { n: 'Smiley Face', f: 'emoji-faces', i: '🥰' },
+    { n: 'Flower', f: 'flower', i: '✿' },
+    { n: 'Fraction', f: 'fraction', i: '½' },
+    { n: 'Gender', f: 'gender', i: '⚥' },
+    { n: 'German', f: 'german', i: 'ß' },
+    { n: 'Greek', f: 'greek', i: 'Ω' },
+    { n: 'Hand', f: 'hand', i: '✌️' },
+    { n: 'Heart', f: 'heart', i: '❤️' },
+    { n: 'House', f: 'house', i: '🏠' },
+    { n: 'Infinity', f: 'infinity', i: '∞' },
+    { n: 'Japanese', f: 'japanese', i: 'あ' },
+    { n: 'Korean', f: 'korean', i: 'ㅿ' },
+    { n: 'Line', f: 'line', i: '│' },
+    { n: 'Loading', f: 'loading', i: '▓' },
+    { n: 'Lock', f: 'lock', i: '🔒' },
+    { n: 'Math', f: 'math', i: '∑' },
+    { n: 'Medical', f: 'medical', i: '⚕' },
+    { n: 'Moon', f: 'moon', i: '☾' },
+    { n: 'Music', f: 'music', i: '🎵' },
+    { n: 'Numbers', f: 'numbers', i: '①' },
+    { n: 'Office', f: 'office', i: '💼' },
+    { n: 'Old English', f: 'old-english', i: '𝔄' },
+    { n: 'Punctuation', f: 'punctuation', i: '!' },
+    { n: 'Quotation', f: 'quotation', i: '❝' },
+    { n: 'Rectangle', f: 'rectangle', i: '█' },
+    { n: 'Religion', f: 'religion', i: '✝' },
+    { n: 'Roman Numerals', f: 'roman', i: 'Ⅳ' },
+    { n: 'Sparkle', f: 'sparkle', i: '✨' },
+    { n: 'Square', f: 'square', i: '⬛' },
+    { n: 'Star', f: 'star', i: '⭐' },
+    { n: 'Sun', f: 'sun', i: '☀' },
+    { n: 'Transport', f: 'transport', i: '🚗' },
+    { n: 'Triangle', f: 'triangle', i: '▲' },
+    { n: 'Unit', f: 'unit', i: '℃' },
+    { n: 'Up Arrow', f: 'uparrow', i: '↑' },
+    { n: 'Upside Down', f: 'upside-down', i: 'ʇ' },
+    { n: 'Warning', f: 'warning', i: '⚠️' },
+    { n: 'Wave', f: 'wave', i: '〰' },
+    { n: 'Weapon', f: 'weapon', i: '⚔️' },
+    { n: 'Weather', f: 'weather', i: '🌤' },
+    { n: 'Writing', f: 'writing', i: '✍️' },
+    { n: 'Zodiac', f: 'zodiac', i: '♈' }
+  ];
+
+  const popularSet = new Set(['heart', 'star', 'aesthetic', 'hand', 'arrow', 'zodiac', 'currency', 'math', 'emoji-faces']);
+  const populars = categories.filter(c => popularSet.has(c.f));
 
   sidebar.innerHTML = `
   <div class="sidebar-section">
-    <div class="sidebar-title">MAIN</div>
+    <div class="sidebar-title">NAVIGATION</div>
     <div class="sidebar-links">
       <a href="${root}index.html"><span class="link-icon">🏠</span> Home</a>
       <a href="${root}all-symbols.html"><span class="link-icon">🚀</span> All Symbols</a>
@@ -160,75 +229,27 @@ function renderSidebar() {
       <a href="${root}lenny-face.html"><span class="link-icon">( ͡° ͜ʖ ͡°)</span> Lenny Faces</a>
     </div>
   </div>
+  
   <div class="sidebar-section">
-    <div class="sidebar-title">POPULAR SYMBOLS</div>
+    <div class="sidebar-title">TRENDING NOW</div>
     <div class="sidebar-links">
-      <a href="${root}symbols/heart.html"><span class="link-icon">❤️</span> Heart</a>
-      <a href="${root}symbols/checkmark.html"><span class="link-icon">✔️</span> Check Mark</a>
-      <a href="${root}symbols/animal.html"><span class="link-icon">🐾</span> Animal Symbols</a>
-      <a href="${root}symbols/star.html"><span class="link-icon">⭐</span> Star</a>
-      <a href="${root}symbols/sun.html"><span class="link-icon">☀</span> Sun</a>
-      <a href="${root}symbols/moon.html"><span class="link-icon">☾</span> Moon</a>
-      <a href="${root}symbols/music.html"><span class="link-icon">🎵</span> Music</a>
-      <a href="${root}symbols/cross.html"><span class="link-icon">✝</span> Cross</a>
-      <a href="${root}symbols/zodiac.html"><span class="link-icon">♈</span> Zodiac</a>
-      <a href="${root}symbols/numbers.html"><span class="link-icon">①</span> Numbers</a>
-      <a href="${root}symbols/arrow.html"><span class="link-icon">➶</span> Arrow</a>
-      <a href="${root}symbols/uparrow.html"><span class="link-icon">↑</span> Up Arrow</a>
-      <a href="${root}symbols/downarrow.html"><span class="link-icon">↓</span> Down Arrow</a>
-      <a href="${root}symbols/flower.html"><span class="link-icon">✿</span> Flower</a>
-      <a href="${root}symbols/gender.html"><span class="link-icon">⚥</span> Gender</a>
-      <a href="${root}symbols/infinity.html"><span class="link-icon">∞</span> Infinity</a>
-      <a href="${root}symbols/medical.html"><span class="link-icon">⚕</span> Medical</a>
-      <a href="${root}symbols/currency.html"><span class="link-icon">$</span> Currency</a>
-      <a href="${root}symbols/chess.html"><span class="link-icon">♚</span> Chess</a>
-      <a href="${root}symbols/weather.html"><span class="link-icon">🌤</span> Weather</a>
-      <a href="${root}symbols/bracket.html"><span class="link-icon">【</span> Bracket</a>
-      <a href="${root}symbols/religion.html"><span class="link-icon">✝</span> Religion</a>
-      <a href="${root}symbols/copyright.html"><span class="link-icon">©</span> Copyright</a>
-      <a href="${root}symbols/unit.html"><span class="link-icon">℃</span> Unit</a>
-      <a href="${root}symbols/card.html"><span class="link-icon">♠</span> Card</a>
-      <a href="${root}symbols/dice.html"><span class="link-icon">🎲</span> Dice</a>
-      <a href="${root}symbols/transport.html"><span class="link-icon">🚗</span> Transport</a>
-      <a href="${root}symbols/office.html"><span class="link-icon">💼</span> Office</a>
-      <a href="${root}symbols/award.html"><span class="link-icon">🏆</span> Award</a>
-      <a href="${root}symbols/lock.html"><span class="link-icon">🔒</span> Lock</a>
-      <a href="${root}symbols/warning.html"><span class="link-icon">⚠️</span> Warning</a>
-      <a href="${root}symbols/writing.html"><span class="link-icon">✍️</span> Writing</a>
-      <a href="${root}symbols/weapon.html"><span class="link-icon">⚔️</span> Weapon</a>
-      <a href="${root}symbols/roman.html"><span class="link-icon">Ⅳ</span> Roman Numerals</a>
-      <a href="${root}symbols/greek.html"><span class="link-icon">Ω</span> Greek</a>
-      <a href="${root}symbols/emoji-faces.html"><span class="link-icon">🥰</span> Smiley Face</a>
-      <a href="${root}symbols/fraction.html"><span class="link-icon">½</span> Fraction</a>
-      <a href="${root}symbols/comparison.html"><span class="link-icon">≥</span> Comparison</a>
-      <a href="${root}symbols/line.html"><span class="link-icon">│</span> Line</a>
-      <a href="${root}symbols/circle.html"><span class="link-icon">○</span> Circle</a>
-      <a href="${root}symbols/triangle.html"><span class="link-icon">▲</span> Triangle</a>
-      <a href="${root}symbols/square.html"><span class="link-icon">⬛</span> Square</a>
-      <a href="${root}symbols/rectangle.html"><span class="link-icon">█</span> Rectangle</a>
-      <a href="${root}symbols/corner.html"><span class="link-icon">╚</span> Corner</a>
-      <a href="${root}symbols/punctuation.html"><span class="link-icon">!</span> Punctuation</a>
-      <a href="${root}symbols/chinese.html"><span class="link-icon">愛</span> Chinese</a>
-      <a href="${root}symbols/japanese.html"><span class="link-icon">あ</span> Japanese</a>
-      <a href="${root}symbols/korean.html"><span class="link-icon">ㅿ</span> Korean</a>
-      <a href="${root}symbols/hand.html"><span class="link-icon">✌️</span> Hand</a>
-      <a href="${root}symbols/bubble.html"><span class="link-icon">ⓐ</span> Bubble Text</a>
-      <a href="${root}symbols/cursive.html"><span class="link-icon">𝒜</span> Cursive</a>
-      <a href="${root}symbols/upside-down.html"><span class="link-icon">ʇ</span> Upside Down</a>
-      <a href="${root}symbols/old-english.html"><span class="link-icon">𝔄</span> Old English</a>
-      <a href="${root}symbols/house.html"><span class="link-icon">🏠</span> House</a>
-      <a href="${root}symbols/crown.html"><span class="link-icon">👑</span> Crown</a>
-      <a href="${root}symbols/diamond.html"><span class="link-icon">◆</span> Diamond</a>
-      <a href="${root}symbols/quotation.html"><span class="link-icon">❝</span> Quotation</a>
-      <a href="${root}symbols/crypto.html"><span class="link-icon">₿</span> Crypto</a>
-      <a href="${root}symbols/loading.html"><span class="link-icon">▓</span> Loading</a>
-      <a href="${root}symbols/wave.html"><span class="link-icon">〰</span> Wave</a>
-      <a href="${root}symbols/divider.html"><span class="link-icon">┊</span> Divider</a>
-      <a href="${root}symbols/border.html"><span class="link-icon">╔</span> Border</a>
-      <a href="${root}symbols/sparkle.html"><span class="link-icon">✨</span> Sparkle</a>
-      <a href="${root}symbols/aesthetic.html"><span class="link-icon">✧</span> Aesthetic</a>
-      <a href="${root}symbols/dot.html"><span class="link-icon">•</span> Dot</a>
-      <a href="${root}symbols/german.html"><span class="link-icon">ß</span> German Symbols</a>
+      ${populars.map(c => `<a href="${root}symbols/${c.f}.html"><span class="link-icon">${c.i}</span> ${c.n}</a>`).join('')}
+    </div>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-title">ALL CATEGORIES</div>
+    <div class="sidebar-links">
+      ${categories.map(c => `<a href="${root}symbols/${c.f}.html"><span class="link-icon">${c.i}</span> ${c.n}</a>`).join('')}
+    </div>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-title">SITE INFO</div>
+    <div class="sidebar-links">
+      <a href="${root}pages/privacy.html"><span class="link-icon">🛡️</span> Privacy Policy</a>
+      <a href="${root}pages/terms.html"><span class="link-icon">📄</span> Terms of Service</a>
+      <a href="${root}pages/contact.html"><span class="link-icon">✉️</span> Contact Us</a>
     </div>
   </div>
   `;
@@ -236,10 +257,19 @@ function renderSidebar() {
 
 function initSidebar() {
   renderSidebar();
-
   const toggle = document.getElementById('menuToggle');
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('sidebarOverlay');
+  
+  // Highlight active link
+  const currentPath = window.location.pathname;
+  const links = document.querySelectorAll('.sidebar-links a');
+  links.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === currentPath || (href === '/index.html' && currentPath === '/') || (currentPath.includes(href) && href !== '/')) {
+      link.classList.add('active');
+    }
+  });
 
   if (toggle) {
     toggle.addEventListener('click', () => {
@@ -247,617 +277,156 @@ function initSidebar() {
       overlay.classList.toggle('show');
     });
   }
-  if (overlay) {
-    overlay.addEventListener('click', () => {
-      sidebar.classList.remove('open');
-      overlay.classList.remove('show');
-    });
-  }
 }
 
-// ===== CLICK-TO-COPY EVENTS =====
+// ===== CLICK-TO-COPY LOGIC =====
 function initCopyable() {
-  // Symbol items
-  document.querySelectorAll('.symbol-item').forEach(item => {
-    item.addEventListener('click', () => {
-      copyToClipboard(item.textContent);
-      item.classList.add('copied');
-      setTimeout(() => item.classList.remove('copied'), 800);
-    });
-  });
-
-  // Combo items
-  document.querySelectorAll('.combo-item').forEach(item => {
-    item.addEventListener('click', () => {
-      const text = item.querySelector('.combo-text')?.textContent || item.textContent;
-      copyToClipboard(text);
-    });
-  });
-
-  // Lenny items
-  document.querySelectorAll('.lenny-item').forEach(item => {
-    item.addEventListener('click', () => {
-      copyToClipboard(item.textContent.trim());
-      item.classList.add('copied');
-      setTimeout(() => item.classList.remove('copied'), 800);
-    });
-  });
-
-  // Flag items — copy the country name on click
-  document.querySelectorAll('.flag-item').forEach(item => {
-    item.addEventListener('click', () => {
-      const name = item.querySelector('.flag-name')?.textContent.trim() || 'Flag';
-      copyToClipboard(name);
-      item.classList.add('copied');
-      setTimeout(() => item.classList.remove('copied'), 800);
-    });
+  document.addEventListener('click', (e) => {
+    const target = e.target.closest('.symbol-item, .lenny-item, .combo-item');
+    if (!target) return;
+    
+    let text = target.textContent.trim();
+    if (target.classList.contains('combo-item')) {
+      text = target.querySelector('.combo-text')?.textContent.trim() || text;
+    }
+    
+    copyToClipboard(text, e);
+    target.classList.add('copied');
+    setTimeout(() => target.classList.remove('copied'), 800);
   });
 }
 
 // ===== SEARCH FILTER =====
-// All symbols organized by category for search results
-const SYMBOL_CATEGORIES = [
-  { name: 'Heart Symbols', icon: '❤️', href: 'symbols/heart.html', symbols: ['❤','♥','🧡','💛','💚','💙','💜','🖤','🤍','🤎','💗','💓','💞','💕','💝','❣','💔','❤️‍🔥','💟','♡','🫀','♥️','💖','💘','💑','🫶','❤️‍🩹','🩷','🩶','🩵'] },
-  { name: 'Star Symbols', icon: '⭐', href: 'symbols/star.html', symbols: ['★','☆','✦','✧','✨','⭐','🌟','💫','⚡','✵','✶','✷','✸','✹','✺','✻','✼','❋','✽','✾','✿','❀','❁','✱','✲','✳','❇','❈','❊','✙'] },
-  { name: 'Arrow Symbols', icon: '→', href: 'symbols/arrow.html', symbols: ['→','←','↑','↓','↔','↕','➜','➡','⬅','⬆','⬇','⟶','⟵','➤','➢','➣','➥','➦','⇒','⇐','⇑','⇓','⇔','⇕','↩','↪','↰','↱','⤴','⤵'] },
-  { name: 'Flower Symbols', icon: '🌸', href: 'symbols/flower.html', symbols: ['🌸','🌺','🌻','🌹','🌷','💐','🌼','🪷','🏵','✿','❀','❁','✾','✽','⚘','꧁','☸','❃','✤','✥','✦','꣸','⁂','※','⊛','⊕','⊗','⊘','⊙','⊚'] },
-  { name: 'Check Marks', icon: '✓', href: 'symbols/checkmark.html', symbols: ['✓','✔','☑','✅','❎','☐','☒','✗','✘','❌','✖','✕','⊠','⊡','⊟','⊞','☓','✙','✚','✛','✜','✝','✞','✟','☩','☨','☧','☦','⛊','⛉'] },
-  { name: 'Music Symbols', icon: '♪', href: 'symbols/music.html', symbols: ['♪','♫','♬','♭','♮','♯','𝅗𝅥','𝅘𝅥𝅮','𝅘𝅥𝅯','𝅘𝅥𝅰','𝅘𝅥𝅱','𝅘𝅥𝅲','🎵','🎶','🎼','🎤','🎧','🎹','🎸','🎺','🎻','🥁','🪘','🎷','🪗','🪕','🎙','🎚','🎛','📻','🔊'] },
-  { name: 'Currency Symbols', icon: '💰', href: 'symbols/currency.html', symbols: ['$','€','£','¥','₹','₿','¢','₩','₪','₫','฿','₱','₦','₡','₲','₵','₸','₼','₾','₺','₻','₽','₿','㎖','＄','￠','￡','￥','￦','元'] },
-  { name: 'Math Symbols', icon: '∑', href: 'symbols/math.html', symbols: ['∑','∫','√','∞','≈','≠','≤','≥','±','×','÷','∂','∇','∀','∃','∈','∉','⊂','⊃','∩','∪','∅','∧','∨','⊕','⊗','⊥','∥','∡','∟'] },
-  { name: 'Crown & Diamond', icon: '👑', href: 'symbols/crown.html', symbols: ['👑','💎','♛','♕','♚','♔','🏆','🎖','🥇','🥈','🥉','🏅','🎗','💍','💠','🔷','🔹','◇','◆','⬥','⬦','♦','♦️','🃏','🎴','🀄','🎰','🎲','🎯'] },
-  { name: 'Weather Symbols', icon: '🌤', href: 'symbols/weather.html', symbols: ['☀','🌤','⛅','🌥','☁','🌦','🌧','⛈','🌩','🌨','❄','🌪','🌫','🌬','🌀','🌈','🌂','☂','☔','⛱','⚡','🌊','🌋','⛰','🏔','🗻','🌁','🌃','🌆','🌇'] },
-  { name: 'Zodiac Signs', icon: '♈', href: 'symbols/zodiac.html', symbols: ['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓','⛎','🔯','✡','☯','☮','✝','☪','🕉','⚛','🛐','🔱','⚜','🏵','🎌','🎏','🎐','🪬','🧿'] },
-  { name: 'Aesthetic Symbols', icon: '✧', href: 'symbols/aesthetic.html', symbols: ['✧','·','°','•','○','●','◉','◎','◌','◍','◐','◑','◒','◓','◔','◕','◖','◗','◘','◙','◚','◛','◜','◝','◞','◟','◠','◡','◢','◣'] },
-  { name: 'Hand Symbols', icon: '✌️', href: 'symbols/hand.html', symbols: ['👋','🤚','🖐','✋','🖖','👌','🤌','🤏','✌','🤞','🤟','🤘','🤙','👈','👉','👆','🖕','👇','☝','👍','👎','✊','👊','🤛','🤜','🤝','🙌','👐','🤲','🙏'] },
-  { name: 'Smiley Faces', icon: '😊', href: 'symbols/emoji-faces.html', symbols: ['😀','😁','😂','🤣','😃','😄','😅','😆','😉','😊','😋','😎','😍','🤩','😘','😗','😙','😚','🙂','🤗','🤭','🤫','🤔','🤐','🤨','😐','😑','😶','😏','😒'] },
-  { name: 'Square Symbols', icon: '⬛', href: 'symbols/square.html', symbols: ['■','□','▢','▣','⬚','⧠','▪','▫','▬','█','⊞','⊟','⊠','⊡','❏','❐','❑','❒','◧','','◨','◩','◪','◫','▱','▰','░','▒','▓','▤','▥','▦','▧','▨','▩'] },
-  { name: "Dot Symbols", icon: "•", href: "symbols/dot.html", symbols: ["•","·","∙","⋅","●","○","◉","◎","⊙","⊚","°","º","…","⋮","⋯","∴","∵","∷","⚫","⚪","🔴","🔵","🟠","🟡","🟢","🟣","🟤","💠","⁝","⁞"] },
-  { name: "Circle Symbols", icon: "○", href: "symbols/circle.html", symbols: ["○","●","◯","◉","◎","⊙","⊚","⊛","◌","◍","◐","◑","◒","◓","◔","◕","◖","◗","⊕","⊖","⊗","⊘","①","②","③","④","⑤","⑥","⑦","⑧"] },
-  { name: "Loading Symbols", icon: "▓", href: "symbols/loading.html", symbols: ["█","▓","▒","░","▰","▱","■","□","▪","▫","◼","◻","◾","◽","⬛","⬜","⌛","⏳","🔄","↻","↺","⟳"] },
-  { name: "Wave Symbols", icon: "〰", href: "symbols/wave.html", symbols: ["~","〰","﹏","🌊","≈","≋","≌","∽","∾","∿","≀","≁","≂","≃","≄","≅"] },
-  { name: "Bracket Symbols", icon: "【", href: "symbols/bracket.html", symbols: ["『","』","「","」","【","】","〔","〕","︵","︶","︷","︸","︹","︺","︻","︼","︽","︾","︿","﹀","﹁","﹂","﹃","﹄","(",")","<",">","{","}","〘","〙","〚","〛","〖","〗","«","»","《","》","〈","〉","❨","❩","❪","❫","❬","❭","❮","❯","❰","❱","❲","❳","❴","❵"] },
-  { name: "Divider Symbols", icon: "┊", href: "symbols/divider.html", symbols: ["┊","┋","┆","┇","│","┃","─","━","╭","╮","╰","╯","═","║","╔","╗","╚","╝","╌","╍","┈","┉","┄","┅","⋆","〰","➶","｡","˚","☁","✧","૪","➵","✩","◛","❁","۪","ུ","ཻ","͎","♡","⁺"] },
-  { name: "Border Symbols", icon: "╔", href: "symbols/border.html", symbols: ["┌","┐","└","┘","┏","┓","┗","┛","╔","╗","╚","╝","╭","╮","╰","╯","├","┤","┬","┴","┼","┣","┫","┳","┻","╋","╠","╣","╦","╩","╬","═","║","━","┃","─","│"] },
-  { name: "Sparkle Symbols", icon: "✨", href: "symbols/sparkle.html", symbols: ["✨","❇","❈","❅","❆","❄","⋆","✦","✧","✵","✶","✷","✸","✹","✺","✻","✼","✽","✾","✿","❀","❁","❂","❃","✣","✤","✥","🌟","💫","☄","ﾟ","｡","*"] },
-  { name: "Aesthetic Symbols", icon: "✧", href: "symbols/aesthetic.html", symbols: ["✧","✦","⋆","˚","·","⁺","✩","☽","☾","☯","☮","✿","❀","ꕤ","ꕥ","𖧷","𖤐","᯽","⚘","✾","❃","❋","✺","✻","✼","❊","☘","༄","༅","༆","꒰","꒱","꒦","꒷","ᵎ","⌇","ˊ","ˋ","˗","˖","ılı","lıllılı","■","□","▶︎","◁◁","𝚰𝚰","▷▷","↻","▓"] },
-  { name: "Crypto Symbols", icon: "₿", href: "symbols/crypto.html", symbols: ["₿","Ξ","₮","₳","✕","◎","●","Ð","◈","Ł","Ƀ","O","∞","ξ","ɱ","ꜩ","ɨ","ɛ","M","ⓩ","Ӿ","Ʀ","§","¤","₣","₢","₰","₱","฿","₡","₥","₦","₧","₨","₩","₪","₫"] },
-  { name: "Quotation Symbols", icon: "❝", href: "symbols/quotation.html", symbols: ["«","‹","»","›","„","“","‟","”","❝","❞","❮","❯","〝","〞","〟","＂","″","‚","‘","‛","’","❜","❛","\"","'",".","-","—","_","=","•","▸","·","··","…","?","¿",";",":","!","¡","#","%","&","*",",","@","、","。","≈","^","ˇ","´","`","˔","˕","˖","˗","˘","˙","˚","˛","~","˝","ˠ","l","~","❗️","❓","❌"] },
-  { name: "Diamond Symbols", icon: "◆", href: "symbols/diamond.html", symbols: ["⋄","◆","◇","◈","◊","♦","⟐","⬦","⧫","⬙","⬘","⬗","⬖","◧","◨","◩","◪","❖","✧","✦","⯁","⯂","⯃","⯄","💎","💍","💠","🔸","🔹","🔶","🔷","💮"] },
-  { name: "House Symbols", icon: "🏠", href: "symbols/house.html", symbols: ["⌂","🏠","🏘️","🏚️","🏡","🛖","🏰","🏯","⛺","🏢","🏣","🏤","🏥","🏦","🏨","🏩","🏪","🏫","🏬","🏭","🏛️","⛪","🕌","🕍","🛕","🕋","⛩️","🏙️","🏗️"] },
-  { name: "Old English Font", icon: "𝔄", href: "symbols/old-english.html", symbols: ["𝔄","𝔅","ℭ","𝔇","𝔈","𝔉","𝔊","ℌ","ℑ","𝔍","𝔎","𝔏","𝔐","𝔑","𝔒","𝔓","𝔔","ℜ","𝔖","𝔗","𝔘","𝔙","𝔚","𝔛","𝔜","ℨ","𝔞","𝔟","𝔠","𝔡","𝔢","𝔣","𝔤","𝔥","𝔦","𝔧","𝔨","𝔩","𝔪","𝔫","𝔬","𝔭","𝔮","𝔯","𝔰","𝔱","𝔲","𝔳","𝔴","𝔵","𝔶","𝔷"] },
-  { name: "Upside Down Text", icon: "ʇ", href: "symbols/upside-down.html", symbols: ["∀","𐐒","Ɔ","ᗡ","Ǝ","Ⅎ","⅁","H","I","ſ","⋊","˥","W","N","O","Ԁ","Ὁ","ᴚ","S","⊥","∩","Ʌ","M","X","⅄","Z","ɐ","q","ɔ","p","ǝ","ɟ","ƃ","ɥ","ᴉ","ɾ","ʞ","l","ɯ","u","o","d","b","ɹ","s","ʇ","n","ʌ","ʍ","x","ʎ","z"] },
-  { name: "Cursive Font", icon: "𝒜", href: "symbols/cursive.html", symbols: ["𝒜","ℬ","𝒞","𝒟","ℰ","ℱ","𝒢","ℋ","ℐ","𝒥","𝒦","ℒ","ℳ","𝒩","𝒪","𝒫","𝒬","ℛ","𝒮","𝒯","𝒰","𝒱","𝒲","𝒳","𝒴","𝒵","𝒶","𝒷","𝒸","𝒹","ℯ","𝒻","ℊ","𝒽","𝒾","𝒿","𝓀","𝓁","𝓂","𝓃","ℴ","𝓅","𝓆","𝓇","𝓈","𝓉","𝓊","𝓋","𝓌","𝓍","𝓎","𝓏"] },
-  { name: "Bubble Text", icon: "ⓐ", href: "symbols/bubble.html", symbols: ["🅐","🅑","🅒","🅓","🅔","🅕","🅖","🅗","🅘","🅙","🅚","🅛","🅜","🅝","🅞","🅟","🅠","🅡","🅢","🅣","🅤","🅥","🅦","🅧","🅨","🅩","Ⓐ","Ⓑ","Ⓒ","Ⓓ","Ⓔ","Ⓕ","Ⓖ","Ⓗ","Ⓘ","Ⓙ","Ⓚ","Ⓛ","Ⓜ","Ⓝ","Ⓞ","Ⓟ","Ⓠ","Ⓡ","Ⓢ","Ⓣ","Ⓤ","Ⓥ","Ⓦ","Ⓧ","Ⓨ","Ⓩ","ⓐ","ⓑ","ⓒ","ⓓ","ⓔ","ⓕ","ⓖ","ⓗ","ⓘ","ⓙ","ⓚ","ⓛ","ⓜ","ⓝ","ⓞ","ⓟ","ⓠ","ⓡ","ⓢ","ⓣ","ⓤ","ⓥ","ⓦ","ⓧ","ⓨ","ⓩ"] },
-  { name: "Korean Symbols", icon: "ㅿ", href: "symbols/korean.html", symbols: ["ㄱ","ㄲ","ㄳ","ㄴ","ㄵ","ㄶ","ㄷ","ㄸ","ㄹ","ㄺ","ㄻ","ㄼ","ㄽ","ㄾ","ㄿ","ㅀ","ㅁ","ㅂ","ㅃ","ㅄ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ","ㅏ","ㅐ","ㅑ","ㅒ","ㅓ","ㅔ","ㅕ","ㅖ","ㅗ","ㅘ","ㅙ","ㅚ","ㅛ","ㅜ","ㅝ","ㅞ","ㅟ","ㅠ","ㅡ","ㅢ","ㅣ","ㅿ","ㆁ","ㆆ","ㆀ","ㅸ","ㆄ"] },
-  { name: "Japanese Symbols", icon: "あ", href: "symbols/japanese.html", symbols: ["あ","ぁ","い","ぃ","う","ぅ","え","ぇ","お","ぉ","か","が","き","ぎ","く","ぐ","け","げ","こ","ご","さ","ざ","し","じ","す","ず","せ","ぜ","そ","ぞ","た","だ","ち","ぢ","つ","っ","づ","て","で","と","ど","な","に","ぬ","ね","の","は","ば","ぱ","ひ","び","ぴ","ふ","ぶ","ぷ","へ","べ","ぺ","ほ","ぼ","ぽ","ま","み","む","め","も","や","ゃ","ゆ","ゅ","よ","ょ","ら","り","る","れ","ろ","わ","ゎ","ゐ","ゑ","を","ん","ゔ","ゕ","ゖ","゛","゜","ゝ","ゞ","ゟ","ア","ァ","イ","ィ","ウ","ゥ","エ","ェ","オ","ォ","カ","ガ","キ","ギ","ク","グ","ケ","ゲ","コ","ゴ","サ","ザ","シ","ジ","ス","ズ","セ","ゼ","ソ","ゾ","タ","ダ","チ","ヂ","ツ","ッ","ヅ","テ","デ","ト","ド","ナ","ニ","ヌ","ネ","ノ","ハ","バ","パ","ヒ","ビ","ピ","フ","ブ","プ","ヘ","ベ","ペ","ホ","ボ","ポ","マ","ミ","ム","メ","モ","ヤ","ャ","ユ","ュ","ヨ","ョ","ラ","リ","ル","レ","ロ","ワ","ヮ","ヰ","ヱ","ヲ","ン","ヴ","ヵ","ヶ","・","ー","ヽ","ヾ","ヿ"] },
-  { name: "Chinese Symbols", icon: "愛", href: "symbols/chinese.html", symbols: ["愛","㊊","㊋","㊌","㊍","㊎","㊏","㊐","㊑","㊒","㊓","㊔","㊕","㊖","㊗","㊘","㊙","㊚","㊛","㊜","㊝","㊞","㊟","㊠","㊡","㊢","㊣","㊤","㊥","㊦","㊧","㊨","㊩","㊪","㊫","㊬","㊭","福","運","和","平","美","命","力","心","夢","光","神","星","花","鳥","風","月","金","木","水","火","土","天","空","海","冬"] },
-  { name: "German Symbols", icon: "ß", href: "symbols/german.html", symbols: ["Ä","ä","Ö","ö","Ü","ü","ß","ẞ","„","“","‚","‘","«","»","‹","›","€","§"] },
-  { name: "Punctuation Marks", icon: "!", href: "symbols/punctuation.html", symbols: ["«","‹","»","›","„","“","”","\"",",","❝","❞","❮","❯","〝","〞","〟","〃","'","‛","‘","’","❜",".","-","–","—","=","•","▸","‥","...","·","′","″","‴","‵","?","ʕ","∧","∨","^","ˇ","⁻","´","\\",":","⍩",")","(","₊","₋","+","◡","∘","،","~","ɣ","|","¿",";","!","#","%","&","*","@","、","。","≈","❗","❓","❌"] },
-  { name: "Corner Symbols", icon: "╚", href: "symbols/corner.html", symbols: ["┌","┐","└","┘","╭","╮","╰","╯","┍","┎","┏","┑","┒","┓","┕","┖","┗","┙","┚","┛","╔","╗","╚","╝","╒","╓","╕","╖","╘","╙","╛","╜","═","║","╞","╟","╠","╡","╢","╣","╤","╥","╦","╧","╨","╩","╪","╫","╬","├","┝","┞","┟","┠","┡","┢","┣","┤","┥","┦","┧","┨","┩","┪","┫","┬","┭","┮","┯","┰","┱","┲","┳","┴","┵","┶","┷","┸","┹","┺","┻","┼","┽","┾","┿","╀","╁","╂","╃","╄","╅","╆","╇","╈","╉","╊","╋"] },
-  { name: "Rectangle Symbols", icon: "█", href: "symbols/rectangle.html", symbols: [" ","▂","▃","▄","▅","▆","▇","█","▉","▊","▋","▌","▍","▎","▏","▐","▔","▕","░","▒","▓","▖","▗","▘","▙","▚","▛","▜","▝","▞","▟","▬","▭","▮","▯","▰","▱"] },
-  { name: "Square Symbols", icon: "■", href: "symbols/square.html", symbols: ["■","□","▢","▣","⬚","⧠","▪","▫","⬝","◼","◻","◾","◽","⬛","⬜","❑","❒","🔳","🔲","▬","█","⊞","⊟","⊠","⊡","回","⎔","⌑","⛾","⛋","▤","▥","▦","▧","▨","▩","◧","◨","◩","◪","◫","◰","◱","◲","◳","◴","◵","◶","◷","░","▒","▓","🟥","🟦","🟧","🟨","🟩","🟪","🟫"] },
-  { name: "Triangle Symbols", icon: "▲", href: "symbols/triangle.html", symbols: ["▲","△","▼","▽","▶","▷","◀","◁","▴","▵","▾","▿","▸","▹","◂","◃","◄","∇","⊿","◬","◭","◮","◿","◺","◢","◣","◥","◤","⍋","⍒","⍿","⎊","🔺","🔻","🔼","🔽","⏪","⏩","📐","⚠️","⃤"] },
-  { name: "Line Symbols", icon: "│", href: "symbols/line.html", symbols: ["|","│","┃","║","┆","┇","┊","┋","╎","╏","╵","╷","╹","╻","⎸","⎹","-","─","━","═","_","¯","╴","╶","╸","╺","╼","╾","┄","┅","┈","┉","╌","╍","≡","☰","☱","☲","☳","☴","☵","☶","☷","/","\\","╱","╲","⧹","⧸","⟋","⟍","~","〰","﹏","﹌","﹋","◡","◠","╭","╮","╯","╰","✕","╳"] },
-  { name: "Circle Symbols", icon: "○", href: "symbols/circle.html", symbols: ["○","◌","☮","◍","●","◐","◑","◒","◓","◔","◕","◖","◗","◉","◚","◛","◜","◝","◞","◟","◠","◡","◯","◴","◵","◶","◷","⊙","◦","✪","❂","❍","⚲","ⵁ","◎","⍥","⍜","⍟","⍠","⍡","⍢","⍣","⍤","🔴","🟠","🟡","🟢","🔵","🟣","🟤","⚫","⚪","🔘","⭕","⊕","⊖","⊗","⊘","∅","⊚","⊛","⊜","⊝","⦸","⦹","⦺","⦻","∘","∙","①","②","③","④","⑤","⑥","⑦","⑧","⑨","⑩","Ⓐ","Ⓑ","Ⓒ","Ⓓ","Ⓔ","Ⓕ","Ⓖ","Ⓗ","Ⓘ","Ⓙ","Ⓚ","Ⓛ","Ⓜ","Ⓝ","Ⓞ","Ⓟ","Ⓠ","Ⓡ","Ⓢ","Ⓣ"] },
-  { name: "Comparison Symbols", icon: "≥", href: "symbols/comparison.html", symbols: [">","<","≥","≤","≧","≦","≨","≩","≮","≯","≰","≱","⋚","⋛","≪","≫","⋘","⋙","⪡","⪢","⪦","⪧","⪨","⪩","⪪","⪫","⪬","⪭","⪮","⪯","⪰","⪱","=","≠","≈","≉","≃","≄","≅","≇","≊","≋","∾","∿","≂","≆","≌","≍","≎","≏","≚","≛","≡","≢","≐","≑","≒","≓","≔","≕","≖","≗","≘","≙","≜","≝","≞","≟","⊜"] },
-  { name: "Fraction Symbols", icon: "½", href: "symbols/fraction.html", symbols: ["¼","½","¾","⅐","⅑","⅒","⅓","⅔","⅕","⅖","⅗","⅘","⅙","⅚","⅛","⅜","⅝","⅞","⅟","⁄","↉"] },
-  { name: "Greek Symbols", icon: "Ω", href: "symbols/greek.html", symbols: ["Α","Β","Γ","Δ","Ε","Ζ","Η","Θ","Ι","Κ","Λ","Μ","Ν","Ξ","Ο","Π","Ρ","Σ","Τ","Υ","Φ","Χ","Ψ","Ω","α","β","γ","δ","ε","ζ","η","θ","ι","κ","λ","μ","ν","ξ","ο","π","ρ","σ","ς","τ","υ","φ","χ","ψ","ω"] },
-  { name: "Roman Numerals", icon: "Ⅳ", href: "symbols/roman.html", symbols: ["Ⅰ","Ⅱ","Ⅲ","Ⅳ","Ⅴ","Ⅵ","Ⅶ","Ⅷ","Ⅸ","Ⅹ","Ⅺ","Ⅻ","Ⅼ","Ⅽ","Ⅾ","Ⅿ","ⅰ","ⅱ","ⅲ","ⅳ","ⅴ","ⅵ","ⅶ","ⅷ","ⅸ","ⅹ","ⅺ","ⅻ","ⅼ","ⅽ","ⅾ","ⅿ","ↀ","ↁ","ↂ","Ↄ","ↄ","ↅ","ↆ","ↇ","ↈ"] },
-  { name: "Weapon Symbols", icon: "⚔️", href: "symbols/weapon.html", symbols: ["⚔️","🗡️","🏹","🛡️","🔱","💣","🧨","🔫","💥","🔥","🔪","🍴","✂️","🧷","⛓️","☠️","💀","☣️","☢️","⚠️"] },
-  { name: "Writing Symbols", icon: "✍️", href: "symbols/writing.html", symbols: ["⊙","✏️","✎","✐","✑","✒️","🖋️","🖊️","🖌️","🖍️","✍️","📝","📋","🗒️","📅"] },
-  { name: "Warning Symbols", icon: "⚠️", href: "symbols/warning.html", symbols: ["⚠","⚠️","☢","☢️","☣","☣️","🚸","🚫","🔞","📵","🚳","🚭","🚯","🚱","🚷","⛔"] },
-  { name: "Lock & Key Symbols", icon: "🔒", href: "symbols/lock.html", symbols: ["🔒","🔓","🔏","🔐","🔑","🗝️"] },
-  { name: "Award Symbols", icon: "🏆", href: "symbols/award.html", symbols: ["🏆","🏅","🥇","🥈","🥉","🎖️"] },
-  { name: "Office Symbols", icon: "💼", href: "symbols/office.html", symbols: ["⌚","⌛","⌕","☎","☏","✆","⌨","💻","🖥️","📠","📟","📴","✁","✂","✃","✄","✍️","✏️","✎","✐","✑","✒️","📋","📌","📍","📎","📏","💼","📁","📂","📅","📆","📇","📈","📉","📊","📝","📃","📜","📄","📰","📑","📓","📕","📖","📗","📘","📙","📚","📔","📒","🔖","✉","📧","📨","📩","📤","📥","📦","📫","📪","📮"] },
-  { name: "Transport Symbols", icon: "🚗", href: "symbols/transport.html", symbols: ["🚂","🚃","🚄","🚅","🚆","🚇","🚈","🚉","🚊","🚌","🚍","🚎","🚐","🚑","🚒","🚓","🚔","🚕","🚗","🚘","🚙","🏎️","🚚","🚛","🚜","🏍️","🛵","🦽","🦼"] },
-  { name: "Dice Symbols", icon: "🎲", href: "symbols/dice.html", symbols: ["⚀","⚁","⚂","⚃","⚄","⚅","🎲"] },
-  { name: "Card Symbols", icon: "♠", href: "symbols/card.html", symbols: ["♤","♠","♧","♣","♡","♥","♢","♦","⚀","⚁","⚂","⚃","⚄","⚅","🎲"] },
-  { name: "Unit Symbols", icon: "℃", href: "symbols/unit.html", symbols: ["°","℃","℉","ϟ","㎎","㎏","㎜","㎝","㎞","㎡","㏄","KM","㏑","㏒","㏕","lb","㎐","Ω","㏐","psi","㏅","Φ","dz"] },
-  { name: "Copyright & Legal Symbols", icon: "©", href: "symbols/copyright.html", symbols: ["©","®","™","℠","℗","§","¶","℡","‱","‰","№","℀","℁","℅","℆","A/S","☊","☎","☏","⌨","✁","✂","✃","✄","⌕","✇","✈","✉","✎","✏","✐","✑","✒","✌️","☝️","☞","☛","☟","☜","☚","✍️"] },
-  { name: "Religion Symbols", icon: "✝", href: "symbols/religion.html", symbols: ["☸","✚","✛","✜","✝","ॐ","✞","✟","†","☥","☪","☩","☦","☨","☧","♁","♆","☬","✡","ﷲ"] },
-  { name: "Bracket Symbols", icon: "【", href: "symbols/bracket.html", symbols: ["{","}","(",")","[","]","<",">","「","」","『","』","【","】","〔","〕","〖","〗","〘","〙","〚","〛","《","》","⟨","⟩","«","»","‹","›","︵","︶","︷","︸","︹","︺","︻","︼","︽","︾","︿","﹀","﹁","﹂","﹃","﹄","﹉","﹊","﹋","﹌","﹍","﹎","﹏","〰","〃","〆","々","〄","〇","〓","〡","〢","〣","〤","〥","〦","〧","〨","〩","〝","〞","〟","〾","㊣","〒"] },
-  { name: "Weather Symbols", icon: "☀", href: "symbols/weather.html", symbols: ["☉","☼","☀","❅","❆","❄","ϟ","☁","༄","☇","☈","♨","☂","☄","〰","⛅","🌦","🌧","⛈","🌩","🌪","🌫","🌤","🌨","⚡","🌀","💨","🌬","🌡","💧","🌊","🔥","🥶","☔","🌂","🌈","☃","⛄","⛷","🏂","⛰","🌌","🏙"] },
-  { name: "Chess Symbols", icon: "♚", href: "symbols/chess.html", symbols: ["♔","♕","♖","♗","♘","♙","♚","♛","♜","♝","♞","♟","👑","🤴","👸","♤","♠","♧","♣","♡","♥","♢","♦"] },
-  { name: "Currency Symbols", icon: "$", href: "symbols/currency.html", symbols: ["$","€","£","¥","₩","₹","₽","₺","฿","₱","¢","¤","֏","؋","৳","៛","₡","₢","₣","₤","₦","₪","₫","₭","₮","₲","₴","₵","₸","₼","₾","₿","Ξ","Ł","Rs","Rp","kr","Ft","zł","R$","C$","HK$","د.إ","﷼"] },
-  { name: "Medical Symbols", icon: "⚕", href: "symbols/medical.html", symbols: ["💉","👩‍⚕️","👨‍⚕️","🥼","🏥","🩺","💊","⛑","☣","♀","♂","⚕","🤰","🤱","🦠","🦴","🧪","🧫","🧬","🧴"] },
-  { name: "Infinity Symbols", icon: "∞", href: "symbols/infinity.html", symbols: ["∞","♾","⧜","⧝","⧞","⧟","∝","ꚙ","Ꚙ","⚭","⚯","⚮"] },
-  { name: "Gender Symbols", icon: "⚥", href: "symbols/gender.html", symbols: ["♀","♂","⚲","⚢","⚣","⚤","⚥","⚦","⚧","⚨","⚩","👩","👨","🧑","👭","👬","👫"] },
-  { name: "Down Arrow Symbols", icon: "↓", href: "symbols/downarrow.html", symbols: ["↓","⬇","⇩","⏬","🔽","👇","↧","⇊","⇟","↘","↙","⇘","⇙","⤡","⤢","↕","⇕","⇅","⥯","⥮","↵","↳","↴","⤵","↯","↲","↶","↷","⇃","⇂","⤓","⤋","⤈","⥥","⥧"] },
-  { name: "Up Arrow Symbols", icon: "↑", href: "symbols/uparrow.html", symbols: ["↑","⬆","⇧","⇑","⇡","↟","↥","⇈","🔼","👆","↗","↖","⇗","⇖","↕","⇕","⇅","⥯","⥮","↰","↱","⤴","⤊","⤉","⥣","⥦","⇪"] },
-  { name: "Arrow Symbols", icon: "➶", href: "symbols/arrow.html", symbols: ["←","↑","→","↓","↔","↕","↖","↗","↘","↙","↚","↛","↜","↝","↞","↟","↠","↡","↢","↣","↤","↥","↦","↧","↨","↩","↪","↫","↬","↭","↮","↯","↰","↱","↲","↳","↴","↵","↶","↷","↸","↹","↺","↻","↼","↽","↾","↿","⇀","⇁","⇂","⇃","⇄","⇅","⇆","⇇","⇈","⇉","⇊","⇋","⇌","⇍","⇎","⇏","⇐","⇑","⇒","⇓","⇔","⇕","⇖","⇗","⇘","⇙","⇚","⇛","⇜","⇝","⇞","⇟","⇠","⇡","⇢","⇣","⇤","⇥","⇦","⇧","⇨","⇩","⇪","⇫","⇬","⇭","⇮","⇯","➲","➳","➴","➵","➶","➷","➸","➹","➺","➻","➼","➽","🏹","💘","💌","🔙","🔚","🔛","🔜","🔝"] },
-  { name: "Number Symbols", icon: "①", href: "symbols/numbers.html", symbols: ["Ⅰ","Ⅱ","Ⅲ","Ⅳ","Ⅴ","Ⅵ","Ⅶ","Ⅷ","Ⅸ","Ⅹ","Ⅺ","Ⅻ","Ⅼ","Ⅽ","Ⅾ","Ⅿ","ⅰ","ⅱ","ⅲ","ⅳ","ⅴ","ⅵ","ⅶ","ⅷ","ⅸ","ⅹ","ⅺ","ⅻ","ⅼ","ⅽ","ⅾ","ⅿ","ↀ","ↁ","ↂ","⓪","①","②","③","④","⑤","⑥","⑦","⑧","⑨","⑩","⑪","⑫","⑬","⑭","⑮","⑯","⑰","⑱","⑲","⑳","⓿","❶","❷","❸","❹","❺","❻","❼","❽","❾","❿","⓫","⓬","⓭","⓮","⓯","⓰","⓱","⓲","⓳","⓴","⑴","⑵","⑶","⑷","⑸","⑹","⑺","⑻","⑼","⑽","⒈","⒉","⒊","⒋","⒌","⒍","⒎","⒏","⒐","⒑","⁰","¹","²","³","⁴","⁵","⁶","⁷","⁸","⁹","₀","₁","₂","₃","₄","₅","₆","₇","₈","₉","½","⅓","⅔","¼","¾","⅕","⅖","⅗","⅘","⅙","⅚","⅛","⅜","⅝","⅞"] },
-  { name: "Zodiac Symbols", icon: "♈", href: "symbols/zodiac.html", symbols: ["♈","♉","♊","♋","♌","♍","♎","♏","♐","♑","♒","♓","☿","♀","⊕","♁","♂","♃","♄","♅","♆","♇","⚳","☄","☉","☼","☀","☽","☾","🌑","🌒","🌓","🌔","🌕","🌖","🌗","🌘","🌙","🌛","🌜","🌝","🌞","⭐","🌟","✨"] },
-  { name: "Cross Symbols", icon: "✝", href: "symbols/cross.html", symbols: ["+","✛","✜","†","✞","✟","✝","☥","✙","☦","☨","☩","♁","☒","⁜","✠","✕","❎","❌","✖","✗","✘","×","χ","𝒳","⨉","±","∓"] },
-  { name: "Music Symbols", icon: "♫", href: "symbols/music.html", symbols: ["♩","♪","♫","♬","♭","♮","♯","𝄞","🄢","🄡","🄪","🄫","🎵","🎶","🎼","🔊","🔉","🔈","🔇","📯","🔔","🔕","🎹","🎻","🎷","🎸","🎺","🥁","🎤","🎙","🎧","📻","🎚","🎛","📼","🪕"] },
-  { name: "Moon Symbols", icon: "☾", href: "symbols/moon.html", symbols: ["🌑","🌒","🌓","🌔","🌕","🌖","🌗","🌘","🌙","🌚","🌝","🌛","🌜","☾","☽","☪","⭐","🌟","✨","☄","🌠","🌌","💫"] },
-  { name: "Sun Symbols", icon: "☀", href: "symbols/sun.html", symbols: ["☀","☼","🌞","☀️","🌤","⛅","🌥","🌦","🔆","🔅","🎇","❂","🌣","🌅","🌄","🌇","🌆","🏜","🏖","⛱"] },
-  { name: "Animal Symbols", icon: "🐾", href: "symbols/animal.html", symbols: ["🐵","🐒","🦍","🦧","🐶","🐕","🦮","🐕‍🦺","🐩","🐺","🦊","🦝","🐱","🐈","🐈‍⬛","🦁","🐯","🐅","🐆","🐴","🐎","🦄","🦓","🦌","🦬","🐮","🐂","🐃","🐄","🐷","🐖","🐗","🐽","🐏","🐑","🐐","🐪","🐫","🦙","🦒","🐘","🦣","🦏","🦛","🐭","🐁","🐀","🐹","🐰","🐇","🐿️","🦫","🦔","🦇","🐻","🐻‍❄️","🐨","🐼","🦥","🦦","🦨","🦘","🦡","🐾","💩","🦃","🐔","🐓","🐣","🐤","🐥","🐦","🐧","🕊️","🦅","🦆","🦢","🦉","🦤","🪶","🦩","🦚","🦜","🐊","🐢","🦎","🐍","🐉","🐲","🦕","🦖","🐳","🐋","🐬","🦭","🐟","🐠","🐡","🦈","🐙","🐚","🪸","🪼","🐌","🦋","🐛","🐜","🐝","🪲","🐞","🦗","🪳","🕷️","🕸️","🦂","🦟","🪰","🪱","🦠","𓃒","𓃓","𓃔","𓃕","𓃖","𓃗","𓃘","𓃙","𓃚","𓃛","𓃜","𓃝","𓃞","𓃟","𓃠","𓃡","𓃢","𓃣","𓃤","𓃥","𓃦","𓃧","𓃨","𓃩","𓃪","𓃫","𓃬","𓃭","𓃮","𓃯","𓃰","𓃱","𓃲","𓃳","𓃴","𓃵","𓃶","𓃷","𓃸","𓃹","𓃺","𓃻","𓃼","𓃽","𓃾","𓃿","𓅀","𓅁","𓅂","𓅃","𓅄","𓅅","𓅆","𓅇","𓅈","𓅉","𓅊","𓅋","𓅌","𓅍","𓅎","𓅏","𓅐","𓅑","𓅒","𓅓","𓅔","𓅕","𓅖","𓅗","𓅘","𓅙","𓅚","𓅛","𓅜","𓅝","𓅞","𓅟","𓅠","𓅡","𓅢","𓅣","𓅤","𓅥","𓅦","𓅧","𓅨","𓅩","𓅪","𓅫","𓅬","𓅭","𓅮","𓅯","𓅰","𓅱","𓅲","𓅳","𓅴","𓅵","𓅶","𓅷","𓅸","𓅹","𓅺","𓅻","𓅼","𓅽","𓅾","𓅿","𓆀","𓆁","𓆂","𓆃","𓆄","𓆅","𓆆","𓆇","𓆈","𓆉","𓆊","𓆋","𓆌","𓆍","𓆎","𓆏","𓆐","𓆑","𓆒","𓆓","𓆔","𓆕","𓆖","𓆗","𓆘","𓆙","𓆚","𓆛","𓆜","𓆝","𓆞","𓆟","𓆠","𓆡","𓆢","𓆣","𓆤","𓆥","𓆦","𓆧","𓆨"] }
-];
+// ===== SMART GLOBAL SEARCH =====
+const SYMBOL_SEARCH_INDEX = {
+  "heart": ["❤️", "♡", "♥", "❣", "💕", "💞", "💓", "💗", "💖", "💘", "💝", "💟", "💌", "❤️‍🔥", "❤️‍🩹", "❥", "ღ", "❦", "❧", "☙"],
+  "star": ["⭐", "★", "☆", "✦", "✧", "⋆", "✶", "✴", "✹", "✨", "✡", "❂", "🌌", "🌃"],
+  "music": ["🎵", "🎶", "♪", "♫", "🎼", "🎹", "🎸", "🎻", "🎺", "🎷", "🎧", "📻"],
+  "currency": ["$", "€", "£", "¥", "₿", "₹", "₱", "₩", "₫", "₭", "₮", "₯", "₰", "₱", "₲", "₳", "₴", "₵", "₶", "₷", "₸", "₽", "₻", "₼", "₾", "₿"],
+  "weather": ["☀", "☁", "🌧️", "⛈️", "❄️", "🌪️", "🌊", "🌈", "🌡️", "🌙", "☾", "✹"],
+  "animal": ["🐾", "🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐻‍❄️", "🐨", "🐯", "🦁", "🐮", "🐷", "🐸", "🐵", "🐧", "🐦", "🐤", "🦆", "🦅", "🦉", "🦇", "🐺", "🐗", "🐴", "🦄", "🐝", "🪱", "🐛", "🦋", "🐌", "🐞", "🐜", "🪰", "🪲", "🪳", "🦟", "🦗", "🕷️", "🕸️", "🦂", "🐢", "🐍", "🦎", "🦖", "🦕", "🐙", "🦑", "🦐", "🦞", "🦀", "🐡", "🐠", "🐟", "🐬", "🐳", "🐋", "🦈", "🐊", "🐅", "🐆", "🦓", "🦍", "🦧", "🐘", "🦛", "🦏", "🐪", "🐫", "🦒", "🦘", "🦬", "🐃", "🐄", "🐎", "🐖", "🐏", "🐑", "🐐", "🦌", "🐕", "🐩", "🦮", "🐕‍🦺", "🐈", "🐈‍⬛", "🐓", "🦃", "🦚", "🦜", "🦢", "🦩", "🕊️", "🐇", "🦝", "🦨", " badger", "🦦", "🦥", "🐁", "🐀", "🐿️", "🦔"],
+  "check": ["✔️", "✅", "☑", "✓", "✗", "✘", "✕", "✖", "✔"],
+  "arrow": ["→", "←", "↑", "↓", "↔", "↕", "↖", "↗", "↘", "↙", "↚", "↛", "↜", "↝", "↞", "↟", "↠", "↡", "↢", "↣", "↤", "↥", "↦", "↧", "↨", "↩", "↪", "↫", "↬", "↭", "↮", "↯", "↰", "↱", "↲", "↳", "↴", "↵", "↶", "↷", "↸", "↹", "↺", "↻", "↼", "↽", "↾", "↿", "⇀", "⇁", "⇂", "⇃", "⇄", "⇅", "⇆", "⇇", "⇈", "⇉", "⇊", "⇋", "⇌", "⇍", "⇎", "⇏", "⇐", "⇑", "⇒", "⇓", "⇔", "⇕", "⇖", "⇗", "⇘", "⇙", "⇚", "⇛", "⇜", "⇝", "⇞", "⇟", "⇠", "⇡", "⇢", "⇣", "⇤", "⇥", "⇦", "⇧", "⇨", "⇩", "⇪", "⇫", "⇬", "⇭", "⇮", "⇯", "⇰", "⇱", "⇲", "⇳", "⇴", "⇵", "⇶", "⇷", "⇸", "⇹", "⇺", "⇻", "⇼", "⇽", "⇾", "⇿"],
+  "math": ["+", "-", "×", "÷", "=", "≠", "≈", "∞", "√", "∑", "∆", "∏", "±", "≤", "≥", "∂", "∫", "¬", "∧", "∨", "∩", "∪", "⊂", "⊃", "⊆", "⊇", "∈", "∉", "∋", "∌", "∝", "∟", "∠", "∡", "∢", "∣", "∦", "∥", "∳", "∴", "∵", "∶", "∷", "∸", "∹", "∺", "∻", "∼", "∽", "≀", "≁", "≂", "≃", "≄", "≅", "≆", "≇", "≈", "≉", "≊", "≋", "≌", "≍", "≎", "≏", "≐", "≑", "≒", "≓", "≔", "≕", "≖", "≗", "≘", "≙", "≚", "≛", "≜", "≝", "≞", "≟", "≡", "≢", "≣", "≮", "≯", "≰", "≱", "≲", "≳", "≴", "≵", "≶", "≷", "≸", "≹", "≺", "≻", "≼", "≽", "≾", "≿", "⊀", "⊁", "⊂", "⊃", "⊄", "⊅", "⊆", "⊇", "⊈", "⊉", "⊊", "⊋", "⊌", "⊍", "⊎", "⊏", "⊐", "⊑", "⊒", "⊓", "⊔", "⊕", "⊖", "⊗", "⊘", "⊙", "⊚", "⊛", "⊜", "⊝", "⊞", "⊟", "⊠", "⊡", "⊢", "⊣", "⊤", "⊥", "⊦", "⊧", "⊨", "⊩", "⊪", "⊫", "⊬", "⊭", "⊮", "⊯", "⊰", "⊱", "⊲", "⊳", "⊴", "⊵", "⊶", "⊷", "⊸", "⊹", "⊺", "⊻", "⊼", "⊽", "⊾", "⊿", "⋀", "⋁", "⋂", "⋃", "⋄", "⋅", "⋆", "⋇", "⋈", "⋉", "⋊", "⋋", "⋌", "⋍", "⋎", "⋏", "⋐", "⋑", "⋒", "⋓", "⋔", "⋕", "⋖", "⋗", "⋘", "⋙", "⋚", "⋛", "⋜", "⋝", "⋞", "⋟", "⋠", "⋡", "⋢", "⋣", "⋤", "⋥", "⋦", "⋧", "⋨", "⋩", "⋪", "⋫", "⋬", "⋭", "⋮", "⋯", "⋰", "⋱", "⋲", "⋳", "⋴", "⋵", "⋶", "⋷", "⋸", "⋹", "⋺", "⋻", "⋼", "⋽", "⋾", "⋿"],
+  "aesthetic": ["✧", "✦", "✨", "✮", "⋆", "⭒", "☾", "✹", "❀", "🌸", "🎀", "🧸", "☁️", "🌊", "🩰", "🦢", "🦋", "🥂", "🕯️", "🏛️", "🖋️", "📜"],
+  "smiley": ["😀", "😃", "😄", "😁", "😆", "😅", "🤣", "😂", "🙂", "🙃", "😉", "😊", "😇", "🥰", "😍", "🤩", "😘", "😗", "😚", "😙", "😋", "😛", "😜", "🤪", "😝", "🤑", "🤗", "🤭", "🤫", "🤔", "🤐", "🤨", "😐", "😑", "😶", "😏", "😒", "🙄", "😬", "🤥", "😌", "😔", "😪", "🤤", "😴", "😷", "🤒", "🤕", "🤢", "🤮", "🥵", "🥶", "🥴", "😵", "🤯", "🤠", "🥳", "😎", "🤓", "🧐", "😕", "😟", "🙁", "☹", "😮", "😯", "😲", "😳", "🥺", "😦", "😧", "😨", "😰", "😥", "😢", "😭", "😱", "😖", "😣", "😞", "😓", "😩", "😫", "🥱", "😤", "😡", "😠", "🤬", "😈", "👿", "💀", "☠", "💩", "🤡", "👹", "👺", "👻", "👽", "👾", "🤖"]
+};
 
 function initSearch() {
   const searchBox = document.getElementById('searchBox');
-  if (!searchBox) return;
+  const resultsSection = document.getElementById('searchResultsSection');
+  const resultsGrid = document.getElementById('searchResultsGrid');
+  const mainSections = document.querySelectorAll('.main-content > .section-title, .main-content > div:not(.search-results-section), .main-content > section:not(.hero)');
 
-  // Find the main content area sections to show/hide during search
-  const mainContent = document.querySelector('.main-content');
-  if (!mainContent) return;
-
-  // Create a dedicated search results container
-  let searchResultsContainer = document.getElementById('searchResults');
-  if (!searchResultsContainer) {
-    searchResultsContainer = document.createElement('div');
-    searchResultsContainer.id = 'searchResults';
-    searchResultsContainer.style.display = 'none';
-    // Insert right after the hero section
-    const hero = mainContent.querySelector('.hero');
-    if (hero) hero.after(searchResultsContainer);
-    else mainContent.prepend(searchResultsContainer);
-  }
-
-  // Collect all existing page sections to hide during search
-  const allSections = () => mainContent.querySelectorAll(':scope > *:not(#searchResults):not(.hero)');
+  if (!searchBox || !resultsSection || !resultsGrid) return;
 
   searchBox.addEventListener('input', (e) => {
     const query = e.target.value.toLowerCase().trim();
+    
+    if (query.length > 0) {
+      // Hide all standard sections
+      mainSections.forEach(sec => sec.style.display = 'none');
+      resultsSection.style.display = 'block';
+      resultsGrid.innerHTML = '';
 
-    if (!query) {
-      // Restore normal view
-      searchResultsContainer.style.display = 'none';
-      allSections().forEach(el => el.style.display = '');
-      return;
+      // 1. Check dictionary for direct keyword match
+      let results = [];
+      for (const [key, icons] of Object.entries(SYMBOL_SEARCH_INDEX)) {
+        if (key.includes(query) || query.includes(key)) {
+          results = [...results, ...icons];
+        }
+      }
+
+      // 2. Also check text content on the current page for symbols/combos
+      const allItems = Array.from(document.querySelectorAll('.symbol-item, .combo-item, .lenny-item'));
+      allItems.forEach(item => {
+        if (item.textContent.toLowerCase().includes(query)) {
+          const char = item.classList.contains('combo-item') ? item.querySelector('.combo-text').textContent : item.textContent;
+          if (!results.includes(char)) results.push(char);
+        }
+      });
+
+      // 3. Render Luxury Tiles
+      if (results.length > 0) {
+        // Remove duplicates
+        const unique = [...new Set(results)].slice(0, 100);
+        unique.forEach(char => {
+          const div = document.createElement('div');
+          div.className = 'symbol-item reveal';
+          div.textContent = char;
+          resultsGrid.appendChild(div);
+        });
+      } else {
+        resultsGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #64748b;">No symbols found for "${query}". Try "heart", "star", or "math".</p>`;
+      }
+    } else {
+      // Restore Home Page
+      resultsSection.style.display = 'none';
+      mainSections.forEach(sec => sec.style.display = '');
     }
-
-    // Hide normal page content, show search results
-    allSections().forEach(el => el.style.display = 'none');
-    searchResultsContainer.style.display = '';
-
-    // Find matching categories (by name or individual symbol text)
-    const matched = SYMBOL_CATEGORIES.filter(cat =>
-      cat.name.toLowerCase().includes(query) ||
-      cat.symbols.some(s => s.toLowerCase().includes(query))
-    );
-
-    if (matched.length === 0) {
-      searchResultsContainer.innerHTML = `
-        <div style="text-align:center;padding:60px 20px;color:#9ca3af;">
-          <div style="font-size:3rem;margin-bottom:12px;">🔍</div>
-          <p style="font-size:1.1rem;font-weight:600;">No results for "<em>${query}</em>"</p>
-          <p style="font-size:0.9rem;margin-top:6px;">Try searching: heart, star, arrow, flower…</p>
-        </div>`;
-      return;
-    }
-
-    let html = `<p style="font-size:0.85rem;color:#9ca3af;margin-bottom:20px;">
-      ${matched.length} categor${matched.length === 1 ? 'y' : 'ies'} found for "<strong>${query}</strong>"
-    </p>`;
-
-    matched.forEach(cat => {
-      // Filter symbols that match the query (or show all if category name matched)
-      const categoryNameMatch = cat.name.toLowerCase().includes(query);
-      const visibleSymbols = categoryNameMatch
-        ? cat.symbols
-        : cat.symbols.filter(s => s.toLowerCase().includes(query));
-
-      html += `
-        <div class="section-title" style="margin-top:20px;">
-          <span class="icon">${cat.icon}</span>
-          <a href="${cat.href}" style="color:inherit;hover:color:#0d9488;">${cat.name}</a>
-          <span class="line"></span>
-          <a href="${cat.href}" style="font-size:0.78rem;color:#0d9488;font-weight:500;white-space:nowrap;">View all →</a>
-        </div>
-        <div class="symbol-grid" style="margin-bottom:24px;">
-          ${visibleSymbols.map(s => `
-            <div class="symbol-item" onclick="copyToClipboard('${s.replace(/'/g,"\\'")}'); this.classList.add('copied'); setTimeout(()=>this.classList.remove('copied'),800);">
-              ${s}
-            </div>`).join('')}
-        </div>`;
-    });
-
-    searchResultsContainer.innerHTML = html;
   });
 }
 
-
 // ===== FONT GENERATOR =====
-const fontMaps = {
-  'Bold': Object.fromEntries([...'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'].map((c, i) => {
-    if (i < 26) return [c, String.fromCodePoint(0x1D400 + i)];
-    if (i < 52) return [c, String.fromCodePoint(0x1D41A + (i - 26))];
-    return [c, String.fromCodePoint(0x1D7CE + (i - 52))];
-  })),
-  'Italic': Object.fromEntries([...'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'].map((c, i) => {
-    if (i < 26) return [c, String.fromCodePoint(0x1D434 + i)];
-    return [c, String.fromCodePoint(0x1D44E + (i - 26))];
-  })),
-  'Bold Italic': Object.fromEntries([...'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'].map((c, i) => {
-    if (i < 26) return [c, String.fromCodePoint(0x1D468 + i)];
-    return [c, String.fromCodePoint(0x1D482 + (i - 26))];
-  })),
-  'Script': Object.fromEntries([...'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'].map((c, i) => {
-    if (i < 26) return [c, String.fromCodePoint(0x1D49C + i)];
-    return [c, String.fromCodePoint(0x1D4B6 + (i - 26))];
-  })),
-  'Bold Script': Object.fromEntries([...'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'].map((c, i) => {
-    if (i < 26) return [c, String.fromCodePoint(0x1D4D0 + i)];
-    return [c, String.fromCodePoint(0x1D4EA + (i - 26))];
-  })),
-  'Fraktur': Object.fromEntries([...'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'].map((c, i) => {
-    if (i < 26) return [c, String.fromCodePoint(0x1D504 + i)];
-    return [c, String.fromCodePoint(0x1D51E + (i - 26))];
-  })),
-  'Double-Struck': Object.fromEntries([...'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'].map((c, i) => {
-    if (i < 26) return [c, String.fromCodePoint(0x1D538 + i)];
-    if (i < 52) return [c, String.fromCodePoint(0x1D552 + (i - 26))];
-    return [c, String.fromCodePoint(0x1D7D8 + (i - 52))];
-  })),
-  'Sans-Serif': Object.fromEntries([...'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'].map((c, i) => {
-    if (i < 26) return [c, String.fromCodePoint(0x1D5A0 + i)];
-    if (i < 52) return [c, String.fromCodePoint(0x1D5BA + (i - 26))];
-    return [c, String.fromCodePoint(0x1D7E2 + (i - 52))];
-  })),
-  'Sans Bold': Object.fromEntries([...'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'].map((c, i) => {
-    if (i < 26) return [c, String.fromCodePoint(0x1D5D4 + i)];
-    if (i < 52) return [c, String.fromCodePoint(0x1D5EE + (i - 26))];
-    return [c, String.fromCodePoint(0x1D7EC + (i - 52))];
-  })),
-  'Monospace': Object.fromEntries([...'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'].map((c, i) => {
-    if (i < 26) return [c, String.fromCodePoint(0x1D670 + i)];
-    if (i < 52) return [c, String.fromCodePoint(0x1D68A + (i - 26))];
-    return [c, String.fromCodePoint(0x1D7F6 + (i - 52))];
-  })),
-  'Circled': Object.fromEntries([...'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'].map((c, i) => {
-    if (i < 26) return [c, String.fromCodePoint(0x24B6 + i)];
-    return [c, String.fromCodePoint(0x24D0 + (i - 26))];
-  })),
-  'Squared': Object.fromEntries([...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'].map((c, i) => [c, String.fromCodePoint(0x1F130 + i)])),
-  'Fullwidth': Object.fromEntries([...'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'].map((c, i) => {
-    if (i < 26) return [c, String.fromCodePoint(0xFF21 + i)];
-    if (i < 52) return [c, String.fromCodePoint(0xFF41 + (i - 26))];
-    return [c, String.fromCodePoint(0xFF10 + (i - 52))];
-  })),
-};
-
-// Special transforms
-const specialFonts = {
-  'Upside Down': (text) => {
-    const map = {'a':'ɐ','b':'q','c':'ɔ','d':'p','e':'ǝ','f':'ɟ','g':'ƃ','h':'ɥ','i':'ᴉ','j':'ɾ','k':'ʞ','l':'l','m':'ɯ','n':'u','o':'o','p':'d','q':'b','r':'ɹ','s':'s','t':'ʇ','u':'n','v':'ʌ','w':'ʍ','x':'x','y':'ʎ','z':'z',
-    'A':'∀','B':'ꓭ','C':'Ɔ','D':'ꓷ','E':'Ǝ','F':'Ⅎ','G':'⅁','H':'H','I':'I','J':'ſ','K':'ꓘ','L':'˥','M':'W','N':'N','O':'O','P':'Ԁ','Q':'Q','R':'ꓤ','S':'S','T':'⊥','U':'∩','V':'Λ','W':'M','X':'X','Y':'⅄','Z':'Z',
-    '1':'Ɩ','2':'ꇛ','3':'Ɛ','4':'ㄣ','5':'ϛ','6':'9','7':'Ɫ','8':'8','9':'6','0':'0',
-    '.':'˙',',':'\'','\'':',','?':'¿','!':'¡','(':')',')':'(','[':']',']':'[','{':'}','}':'{','<':'>','>':'<','&':'⅋','_':'‾'};
-    return [...text].map(c => map[c] || c).reverse().join('');
-  },
-  'Strikethrough': (text) => [...text].map(c => c + '\u0336').join(''),
-  'Underline': (text) => [...text].map(c => c + '\u0332').join(''),
-  'Wavy': (text) => {
-    return [...text].map((c, i) => i % 2 === 0 ? c.toUpperCase() : c.toLowerCase()).join('');
-  },
-  'Sparkles': (text) => '✨ ' + text + ' ✨',
-  'Stars': (text) => '★彡 ' + text + ' 彡★',
-  'Hearts': (text) => '♡ ' + [...text].join(' ') + ' ♡',
-  'Brackets Text': (text) => '『' + text + '』',
-  'Gothic Frame': (text) => '꧁༺ ' + text + ' ༻꧂',
-};
-
-function convertFont(text, fontName) {
-  if (specialFonts[fontName]) {
-    return specialFonts[fontName](text);
-  }
-  const map = fontMaps[fontName];
-  if (!map) return text;
-  return [...text].map(c => map[c] || c).join('');
-}
-
 function initFontGenerator() {
   const input = document.getElementById('fontInput');
   const results = document.getElementById('fontResults');
   if (!input || !results) return;
 
-  const preppyDecorations = [
-    { prefix: '·.¸¸.·´¯ ', suffix: ' ¯´·.¸¸.·' },
-    { prefix: '꒰ ', suffix: ' ꒱' },
-    { prefix: '🎀 ', suffix: ' 🎀' },
-    { prefix: '˚ ༘♡ ', suffix: ' ˚ ༘♡' },
-    { prefix: '🧸 ', suffix: ' 🧸' },
-    { prefix: '🪐 ', suffix: ' 🪐' },
-    { prefix: '☕️ ', suffix: ' ☕️' },
-    { prefix: '🥂 ', suffix: ' 🥂' },
-    { prefix: '🍒 ', suffix: ' 🍒' },
-    { prefix: '🍓 ', suffix: ' 🍓' },
-    { prefix: '🦋 ', suffix: ' 🦋' },
-    { prefix: '☁️ ', suffix: ' ☁️' },
-    { prefix: '🧁 ', suffix: ' 🧁' },
-    { prefix: '🌸 ', suffix: ' 🌸' },
-    { prefix: '✨ ', suffix: ' ✨' },
-    { prefix: '🤍 ', suffix: ' 🤍' },
-    { prefix: '🩰 ', suffix: ' 🩰' },
-    { prefix: '🐚 ', suffix: ' 🐚' },
-    { prefix: '👼 ', suffix: ' 👼' },
-    { prefix: '💒 ', suffix: ' 💒' },
-    { prefix: '🏩 ', suffix: ' 🏩' },
-    { prefix: '💌 ', suffix: ' 💌' },
-    { prefix: '🕯️ ', suffix: ' 🕯️' },
-    { prefix: '🎀💖 ', suffix: ' 💖🎀' },
-    { prefix: '✨🌸 ', suffix: ' 🌸✨' },
-    { prefix: '🩰🐚 ', suffix: ' 🐚🩰' },
-    { prefix: '🍒🍓 ', suffix: ' 🍓🍒' },
-    { prefix: '🧁🌸 ', suffix: ' 🌸🧁' },
-    { prefix: '🎀👼 ', suffix: ' 👼🎀' },
-    { prefix: '✨🤍 ', suffix: ' 🤍✨' },
-    { prefix: '🦢 ', suffix: ' 🦢' },
-    { prefix: '🫧 ', suffix: ' 🫧' },
-    { prefix: '🥥 ', suffix: ' 🥥' },
-    { prefix: '🍄 ', suffix: ' 🍄' },
-    { prefix: '🌼 ', suffix: ' 🌼' },
-    { prefix: '🦖 ', suffix: ' 🦖' },
-    { prefix: '🦕 ', suffix: ' 🦕' },
-    { prefix: '🌵 ', suffix: ' 🌵' },
-    { prefix: '🍀 ', suffix: ' 🍀' },
-    { prefix: '👒 ', suffix: ' 👒' },
-    { prefix: '👑 ', suffix: ' 👑' },
-    { prefix: '🔮 ', suffix: ' 🔮' }
+  const fonts = [
+    { name: 'Bold', map: {'a':'𝗮','b':'𝗯','c':'𝗰','d':'𝗱','e':'𝗲','f':'𝗳','g':'𝗴','h':'𝗵','i':'𝗶','j':'𝗷','k':'𝗸','l':'𝗹','m':'𝗺','n':'𝗻','o':'𝗼','p':'𝗽','q':'𝗾','r':'𝗿','s':'𝘀','t':'𝘁','u':'𝘂','v':'𝘃','w':'𝘄','x':'𝘅','y':'𝘆','z':'𝘇'} },
+    { name: 'Italic', map: {'a':'𝘢','b':'𝘣','c':'𝘤','d':'𝘥','e':'𝘦','f':'𝘧','g':'𝘨','h':'𝘩','i':'𝘪','j':'𝘫','k':'𝘬','l':'𝘭','m':'𝘮','n':'𝘯','o':'𝘰','p':'𝘱','q':'𝘲','r':'𝘳','s':'𝘴','t':'𝘵','u':'𝘶','v':'𝘷','w':'𝘸','x':'𝘹','y':'𝘺','z':'𝘻'} }
   ];
 
-  const baseFonts = Object.keys(fontMaps);
-
-  function render() {
-    const text = input.value || 'Hello World';
-    let html = '';
-
-    // Generate Preppy Decorated versions
-    // Dynamic duplicate filter guarantee
-    const uniqueDecorations = preppyDecorations.filter((item, index, self) =>
-      index === self.findIndex(t => t.prefix === item.prefix && t.suffix === item.suffix)
-    );
-
-    uniqueDecorations.forEach(dec => {
-      baseFonts.forEach(font => {
-        const textToConvert = [...text].map(c => fontMaps[font]?.[c] || c).join('');
-        const converted = dec.prefix + textToConvert + dec.suffix;
-        html += `
-          <div class="font-result-item" onclick="copyToClipboard('${converted.replace(/'/g, "\\'")}')">
-            <span class="font-style-name">${font} ${dec.prefix.trim()}</span>
-            <span class="font-preview">${converted}</span>
-            <span class="font-copy-btn">Copy</span>
-          </div>
-        `;
-      });
-    });
-
-    // Pure base fonts for preppy look
-    baseFonts.forEach(font => {
-      const converted = [...text].map(c => fontMaps[font]?.[c] || c).join('');
-      html += `
-        <div class="font-result-item" onclick="copyToClipboard('${converted.replace(/'/g, "\\'")}')">
-          <span class="font-style-name">${font}</span>
+  input.addEventListener('input', () => {
+    const text = input.value || 'Preview';
+    results.innerHTML = fonts.map(f => {
+      const converted = [...text].map(c => f.map[c.toLowerCase()] || c).join('');
+      return `
+        <div class="font-result-item" onclick="copyToClipboard('${converted}')">
+          <span class="font-style-name">${f.name}</span>
           <span class="font-preview">${converted}</span>
           <span class="font-copy-btn">Copy</span>
         </div>
       `;
-    });
-
-    results.innerHTML = html;
-  }
-
-  input.addEventListener('input', render);
-  render();
-}
-
-// ===== PARTICLES BACKGROUND =====
-function initParticles() {
-  const container = document.querySelector('.particles');
-  if (!container) return;
-
-  for (let i = 0; i < 30; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    p.style.left = Math.random() * 100 + '%';
-    p.style.animationDuration = (10 + Math.random() * 20) + 's';
-    p.style.animationDelay = -(Math.random() * 20) + 's';
-    p.style.width = p.style.height = (2 + Math.random() * 3) + 'px';
-    const colors = ['#0d9488', '#14b8a6', '#5eead4'];
-    p.style.background = colors[Math.floor(Math.random() * colors.length)];
-    container.appendChild(p);
-  }
-}
-
-// ===== HIGHLIGHT ACTIVE SIDEBAR LINK =====
-function highlightActiveSidebarLink() {
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.sidebar-links a').forEach(link => {
-    const href = link.getAttribute('href')?.split('/').pop();
-    if (href === currentPage) {
-      link.classList.add('active');
-    }
+    }).join('');
   });
 }
 
-function initUniversalHeadings() {
-  const isSubdir = window.location.pathname.includes('/pages/');
-  const isMain = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/') || window.location.pathname.endsWith('all-symbols.html');
-  
-  if (isMain) return;
-  if (isSubdir) return; // For pages/privacy.html etc.
-
-  const h1 = document.querySelector('.main-content h1');
-  if (h1) {
-    let title = h1.textContent.trim();
-    // Use regex to remove emoji/symbols and extra words for normalization
-    const normalizedTitle = title.replace(/[^\w\s-]/gu, '').replace(/(Symbols|Symbol)$/, '').trim();
-    if (normalizedTitle) {
-      h1.textContent = normalizedTitle + ' Symbol Copy and Paste';
-    }
-  }
-}
-
-// ===== QUICK LINKS GRID (INTERNAL LINKING ON ALL PAGES) =====
-function renderQuickLinks() {
-  const mainContent = document.querySelector('.main-content');
-  if (!mainContent) return;
-
-  const isSubdir = window.location.pathname.includes('/pages/');
-  const root = isSubdir ? '../' : '';
-  const sym = '';
-
-  const links = [
-    { href: `${sym}heart.html`, icon: '❤️', label: 'Heart' },
-    { href: `${sym}checkmark.html`, icon: '✔️', label: 'Check Mark' },
-    { href: `${sym}animal.html`, icon: '🐾', label: 'Text Animal Symbols' },
-    { href: `${sym}star.html`, icon: '⭐', label: 'Star' },
-    { href: `${sym}sun.html`, icon: '☀', label: 'Sun' },
-    { href: `${sym}moon.html`, icon: '☾', label: 'Moon' },
-    { href: `${sym}music.html`, icon: '🎵', label: 'Music' },
-    { href: `${sym}cross.html`, icon: '✝', label: 'Cross' },
-    { href: `${sym}zodiac.html`, icon: '♈', label: 'Zodiac' },
-    { href: `${sym}numbers.html`, icon: '①', label: 'Numbers' },
-    { href: `${sym}arrow.html`, icon: '⇨', label: 'Arrow' },
-    { href: `${sym}uparrow.html`, icon: '↑', label: 'Up Arrow' },
-    { href: `${sym}downarrow.html`, icon: '↓', label: 'Down Arrow' },
-    { href: `${sym}flower.html`, icon: '✿', label: 'Flower' },
-    { href: `${sym}gender.html`, icon: '⚥', label: 'Gender' },
-    { href: `${sym}infinity.html`, icon: '∞', label: 'Infinity' },
-    { href: `${sym}medical.html`, icon: '⚕', label: 'Medical' },
-    { href: `${sym}currency.html`, icon: '$', label: 'Currency' },
-    { href: `${sym}chess.html`, icon: '♚', label: 'Chess' },
-    { href: `${sym}weather.html`, icon: '☀', label: 'Weather' },
-    { href: `${sym}bracket.html`, icon: '【', label: 'Bracket' },
-    { href: `${sym}religion.html`, icon: '✝', label: 'Religion' },
-    { href: `${sym}copyright.html`, icon: '©', label: 'Copyright, Trademark' },
-    { href: `${sym}unit.html`, icon: '℃', label: 'Unit' },
-    { href: `${sym}card.html`, icon: '♠', label: 'Card Symbol' },
-    { href: `${sym}dice.html`, icon: '🎲', label: 'Dice' },
-    { href: `${root}heart.html`, icon: '❤️', label: 'Heart' },
-    { href: `${root}checkmark.html`, icon: '✔️', label: 'Check Mark' },
-    { href: `${root}animal.html`, icon: '🐾', label: 'Text Animal Symbols' },
-    { href: `${root}star.html`, icon: '⭐', label: 'Star' },
-    { href: `${root}sun.html`, icon: '☀', label: 'Sun' },
-    { href: `${root}moon.html`, icon: '☾', label: 'Moon' },
-    { href: `${root}music.html`, icon: '🎵', label: 'Music' },
-    { href: `${root}cross.html`, icon: '✝', label: 'Cross' },
-    { href: `${root}zodiac.html`, icon: '♈', label: 'Zodiac' },
-    { href: `${root}numbers.html`, icon: '①', label: 'Numbers' },
-    { href: `${root}arrow.html`, icon: '➶', label: 'Arrow' },
-    { href: `${root}uparrow.html`, icon: '↑', label: 'Up Arrow' },
-    { href: `${root}downarrow.html`, icon: '↓', label: 'Down Arrow' },
-    { href: `${root}flower.html`, icon: '✿', label: 'Flower' },
-    { href: `${root}gender.html`, icon: '⚥', label: 'Gender' },
-    { href: `${root}infinity.html`, icon: '∞', label: 'Infinity' },
-    { href: `${root}medical.html`, icon: '⚕', label: 'Medical' },
-    { href: `${root}currency.html`, icon: '$', label: 'Currency' },
-    { href: `${root}chess.html`, icon: '♚', label: 'Chess' },
-    { href: `${root}weather.html`, icon: '🌤', label: 'Weather' },
-    { href: `${root}bracket.html`, icon: '【', label: 'Bracket' },
-    { href: `${root}religion.html`, icon: '✝', label: 'Religion' },
-    { href: `${root}copyright.html`, icon: '©', label: 'Copyright' },
-    { href: `${root}unit.html`, icon: '℃', label: 'Unit' },
-    { href: `${root}card.html`, icon: '♠', label: 'Card Symbol' },
-    { href: `${root}dice.html`, icon: '🎲', label: 'Dice' },
-    { href: `${root}transport.html`, icon: '🚗', label: 'Transport' },
-    { href: `${root}office.html`, icon: '💼', label: 'Office' },
-    { href: `${root}award.html`, icon: '🏆', label: 'Trophy Medals' },
-    { href: `${root}lock.html`, icon: '🔒', label: 'Lock and Key' },
-    { href: `${root}warning.html`, icon: '⚠️', label: 'Warning' },
-    { href: `${root}writing.html`, icon: '✍️', label: 'Writing' },
-    { href: `${root}weapon.html`, icon: '⚔️', label: 'Weapon' },
-    { href: `${root}roman.html`, icon: 'Ⅳ', label: 'Roman Numerals' },
-    { href: `${root}greek.html`, icon: 'Ω', label: 'Greek alphabet' },
-    { href: `${root}emoji-faces.html`, icon: '🥰', label: 'Smiley Face' },
-    { href: `${root}fraction.html`, icon: '½', label: 'Fraction' },
-    { href: `${root}comparison.html`, icon: '≥', label: 'Comparison' },
-    { href: `${root}line.html`, icon: '│', label: 'Line' },
-    { href: `${root}circle.html`, icon: '○', label: 'Circle' },
-    { href: `${root}triangle.html`, icon: '▲', label: 'Triangle' },
-    { href: `${root}square.html`, icon: '⬛', label: 'Square' },
-    { href: `${root}rectangle.html`, icon: '█', label: 'Rectangle' },
-    { href: `${root}corner.html`, icon: '╚', label: 'Corner' },
-    { href: `${root}punctuation.html`, icon: '!', label: 'Punctuation' },
-    { href: `${root}chinese.html`, icon: '愛', label: 'Chinese' },
-    { href: `${root}japanese.html`, icon: 'あ', label: 'Japanese' },
-    { href: `${root}korean.html`, icon: 'ㅿ', label: 'Korean' },
-    { href: `${root}hand.html`, icon: '✌️', label: 'Hand' },
-    { href: `${root}bubble.html`, icon: 'ⓐ', label: 'Bubble Text' },
-    { href: `${root}cursive.html`, icon: '𝒜', label: 'Cursive Letter' },
-    { href: `${root}upside-down.html`, icon: 'ʇ', label: 'Upside Down Text' },
-    { href: `${root}old-english.html`, icon: '𝔄', label: 'Old Enlish Text' },
-    { href: `${root}house.html`, icon: '🏠', label: 'House' },
-    { href: `${root}crown.html`, icon: '👑', label: 'Crown' },
-    { href: `${root}diamond.html`, icon: '◆', label: 'Daimond' },
-    { href: `${root}quotation.html`, icon: '❝', label: 'Quotation Mark' },
-    { href: `${root}crypto.html`, icon: '₿', label: 'Cryptocurrency' },
-    { href: `${root}loading.html`, icon: '▓', label: 'Loading' },
-    { href: `${root}wave.html`, icon: '〰', label: 'Wave' },
-    { href: `${root}divider.html`, icon: '┊', label: 'Divider' },
-    { href: `${root}border.html`, icon: '╔', label: 'Border' },
-    { href: `${root}sparkle.html`, icon: '✨', label: 'Sparkle' },
-    { href: `${root}aesthetic.html`, icon: '✧', label: 'Aesthetic' },
-    { href: `${root}dot.html`, icon: '•', label: 'Dot' },
-    { href: `${root}german.html`, icon: 'ß', label: 'German' }
-  ];
-
-  // Skip if quick-links-grid already exists on the page (e.g. hardcoded in HTML)
-  if (mainContent.querySelector('.quick-links-grid')) return;
-
-  const grid = document.createElement('div');
-  grid.className = 'quick-links-grid';
-  links.forEach(l => {
-    const a = document.createElement('a');
-    a.href = l.href;
-    a.className = 'quick-link-btn';
-    a.title = l.label;
-    a.innerHTML = `<span>${l.icon}</span> ${l.label}`;
-    grid.appendChild(a);
-  });
-
-  // Insert before the content-article, or before footer area
-  const article = mainContent.querySelector('.content-article');
-  if (article) {
-    mainContent.insertBefore(grid, article);
-  } else {
-    mainContent.appendChild(grid);
-  }
-}
-
-// ===== ROTATING HERO SYMBOL =====
+// ===== ROTATING LOGO =====
 function initRotatingLogo() {
   const heroSymbol = document.getElementById('heroSymbol');
   if (!heroSymbol) return;
-
-  const symbols = [
-    '✦', '❤️', '✔️', '🐾', '⭐', '☀', '☾', '🎵', '✝', '♈',
-    '①', '⇨', '↑', '↓', '✿', '⚥', '∞', '⚕', '$', '♚',
-    '☀', '【', '✝', '©', '℃', '♠', '🎲', '🚗', '💼', '🏆',
-    '🔒', '⚠️', '✍️', '⚔️', 'Ⅳ', 'Ω', '🥰', '½', '≥',
-    '│', '○', '▲', '⬛', '█', '╚', '!', '愛', 'あ', 'ㅿ',
-    '✌️', 'ⓐ', '𝒜', 'ʇ', '𝔄', '🏠', '👑', '◆', '❝', '₿',
-    '▓', '〰', '┊', '╔', '✨', '✧', '•', 'ß', 'π'
-  ];
-
-  let index = 0;
-
+  const symbols = ['✦', '❤️', '✔️', '🐾', '⭐', '☀', '☾', '🎵', '✝', '♈', '∞', '✨'];
+  let i = 0;
   setInterval(() => {
-    index = (index + 1) % symbols.length;
-    heroSymbol.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-    heroSymbol.style.opacity = '0';
-    heroSymbol.style.transform = 'translateY(-8px) scale(0.8)';
-
-    setTimeout(() => {
-      heroSymbol.textContent = symbols[index];
-      heroSymbol.style.opacity = '1';
-      heroSymbol.style.transform = 'translateY(0) scale(1)';
-    }, 400);
-  }, 7000);
+    i = (i + 1) % symbols.length;
+    heroSymbol.textContent = symbols[i];
+  }, 3000);
 }
 
-// ===== INIT =====
+// ===== SCROLL REVEAL =====
+function initScrollReveal() {
+  const items = document.querySelectorAll('.symbol-item, .combo-item, .lenny-item, .category-card');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  items.forEach(item => observer.observe(item));
+}
+
+// ===== INIT ALL =====
 document.addEventListener('DOMContentLoaded', () => {
-  initSidebar();
   ClipboardManager.init();
+  initSidebar();
   initCopyable();
   initSearch();
-  initUniversalHeadings(); // Apply the universal heading change
   initFontGenerator();
-  initParticles();
-  highlightActiveSidebarLink();
-  renderQuickLinks();
   initRotatingLogo();
+  initScrollReveal();
 });
