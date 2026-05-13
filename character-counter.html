@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset='UTF-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Character Counter — Word Counter, Line Counter & Text Stats | TextSymbols</title>
+  <meta name="description" content="Free character counter tool — instantly count characters, words, sentences, lines, and paragraphs. Track your Instagram bio (150), Twitter (280), and TikTok limits in real time.">
+  <link rel='canonical' href='https://fancysymbols.com/character-counter.html'>
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fancysymbols.com/character-counter">
+  <meta property="og:title" content="Character Counter — Word Counter & Text Stats">
+  <meta property="og:description" content="Free character counter — count characters, words, sentences, lines. Track Instagram, Twitter, TikTok limits in real time.">
+  <meta property="og:image" content="https://fancysymbols.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Character Counter — Word Counter & Text Stats">
+  <meta name="twitter:description" content="Count characters, words, sentences in real time. Track social media character limits.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css?v=5.2">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://fancysymbols.com"},{"@type":"ListItem","position":2,"name":"Character Counter","item":"https://fancysymbols.com/character-counter"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the Instagram bio character limit?","acceptedAnswer":{"@type":"Answer","text":"Instagram bios have a 150-character limit. This includes letters, numbers, symbols, spaces, and emoji. Each emoji counts as 1-2 characters depending on the specific emoji. Use this character counter to check your bio length before pasting."}},{"@type":"Question","name":"What is the Twitter/X character limit?","acceptedAnswer":{"@type":"Answer","text":"Twitter/X has a 280-character limit for standard posts. URLs count as 23 characters regardless of actual length. Emoji count as 2 characters each. Twitter Blue subscribers can post up to 25,000 characters."}},{"@type":"Question","name":"How many characters can a TikTok bio have?","acceptedAnswer":{"@type":"Answer","text":"TikTok bios have an 80-character limit. TikTok captions allow up to 2,200 characters. Comments are limited to 150 characters."}}]}</script>
+  <style>
+    .counter-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin:1.5rem 0}
+    .counter-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:1.2rem;text-align:center;transition:all .2s}
+    .counter-card:hover{border-color:var(--primary-color);transform:translateY(-2px)}
+    .counter-value{font-size:2rem;font-weight:800;color:var(--primary-color);font-family:'Outfit',sans-serif}
+    .counter-label{font-size:.8rem;color:#94a3b8;margin-top:.3rem;text-transform:uppercase;letter-spacing:.5px}
+    .limit-bar{display:flex;align-items:center;gap:.8rem;padding:.8rem 1rem;background:rgba(255,255,255,0.03);border-radius:10px;margin:.5rem 0}
+    .limit-name{font-weight:600;min-width:90px;font-size:.9rem}
+    .limit-track{flex:1;height:8px;background:rgba(255,255,255,0.1);border-radius:99px;overflow:hidden}
+    .limit-fill{height:100%;border-radius:99px;transition:width .2s,background .2s}
+    .limit-count{font-size:.85rem;color:#94a3b8;min-width:70px;text-align:right}
+    .counter-textarea{width:100%;min-height:200px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:1.2rem;color:var(--text-color);font-family:'Inter',sans-serif;font-size:1rem;resize:vertical;line-height:1.7;outline:none;transition:border-color .2s}
+    .counter-textarea:focus{border-color:var(--primary-color)}
+    .counter-textarea::placeholder{color:#64748b}
+  </style>
+</head>
+<body>
+<div class="particles"></div>
+<header class="header"><div class="header-inner"><a href="/" class="logo"><img src="/favicon.png" alt="TextSymbols Logo" class="logo-img"><span class="logo-text">TextSymbols</span></a><nav class="header-nav"><a href="/">Home</a><a href="/all-symbols.html">All Symbols</a><a href="/preppy-fonts.html"><span class="link-icon">🎀</span> Preppy Font Generator</a><a href="/cute-fonts.html">Cute Fonts</a><a href="/aesthetic-fonts.html">Aesthetic Fonts</a><a href="/lenny-face.html" class="nav-cta">Lenny Faces</a></nav><button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button></div></header>
+<div class="sidebar-overlay" id="sidebarOverlay"></div><aside class="sidebar" id="sidebar"></aside>
+
+<div class="page-wrapper"><main class="main-content">
+  <div class="page-header"><h1>📊 Character Counter</h1><p>Count characters, words, sentences, and paragraphs in real time. Track social media limits instantly.</p></div>
+
+  <div class="font-gen-container">
+    <textarea class="counter-textarea" id="counterInput" placeholder="Start typing or paste your text here..." autofocus></textarea>
+    <div class="counter-grid">
+      <div class="counter-card"><div class="counter-value" id="charCount">0</div><div class="counter-label">Characters</div></div>
+      <div class="counter-card"><div class="counter-value" id="charNoSpace">0</div><div class="counter-label">No Spaces</div></div>
+      <div class="counter-card"><div class="counter-value" id="wordCount">0</div><div class="counter-label">Words</div></div>
+      <div class="counter-card"><div class="counter-value" id="sentenceCount">0</div><div class="counter-label">Sentences</div></div>
+      <div class="counter-card"><div class="counter-value" id="lineCount">0</div><div class="counter-label">Lines</div></div>
+      <div class="counter-card"><div class="counter-value" id="paraCount">0</div><div class="counter-label">Paragraphs</div></div>
+    </div>
+
+    <div class="section-title" style="margin-top:1.5rem"><span class="icon">📱</span> Platform Limits <span class="line"></span></div>
+    <div id="limitBars"></div>
+  </div>
+
+  <div class="content-article">
+    <h2>Social Media Character Limits (2026)</h2>
+    <table class="comparison-table"><thead><tr><th>Platform</th><th>Bio</th><th>Post / Caption</th><th>Comment</th><th>Username</th></tr></thead><tbody>
+      <tr><td><strong>Instagram</strong></td><td>150</td><td>2,200</td><td>2,200</td><td>30</td></tr>
+      <tr><td><strong>Twitter / X</strong></td><td>160</td><td>280</td><td>280</td><td>15</td></tr>
+      <tr><td><strong>TikTok</strong></td><td>80</td><td>2,200</td><td>150</td><td>24</td></tr>
+      <tr><td><strong>YouTube</strong></td><td>1,000</td><td>100 (title)</td><td>10,000</td><td>30</td></tr>
+      <tr><td><strong>Discord</strong></td><td>190</td><td>2,000</td><td>2,000</td><td>32</td></tr>
+      <tr><td><strong>Facebook</strong></td><td>101</td><td>63,206</td><td>8,000</td><td>50</td></tr>
+      <tr><td><strong>LinkedIn</strong></td><td>220</td><td>3,000</td><td>1,250</td><td>N/A</td></tr>
+      <tr><td><strong>Pinterest</strong></td><td>500</td><td>500 (desc)</td><td>500</td><td>30</td></tr>
+    </tbody></table>
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-q">What is the Instagram bio character limit?</div><div class="faq-a"><p><b>Instagram bios have a 150-character limit.</b> This includes letters, numbers, symbols, spaces, and emoji. Each emoji counts as 1-2 characters. Use this counter to check your bio length before pasting.</p></div></div>
+      <div class="faq-item"><div class="faq-q">What is the Twitter/X character limit?</div><div class="faq-a"><p><b>Twitter/X has a 280-character limit for standard posts.</b> URLs count as 23 characters. Emoji count as 2 characters each. Twitter Blue subscribers can post up to 25,000 characters.</p></div></div>
+      <div class="faq-item"><div class="faq-q">How many characters can a TikTok bio have?</div><div class="faq-a"><p><b>TikTok bios have an 80-character limit.</b> Captions allow up to 2,200 characters. Comments are limited to 150 characters.</p></div></div>
+    </div>
+
+    <h3>More Tools</h3>
+    <div class="category-pills"><a href="/bio-generator.html" class="category-pill">📝 Bio Generator</a><a href="/aesthetic-fonts.html" class="category-pill">✨ Aesthetic Fonts</a><a href="/invisible-character.html" class="category-pill">👻 Invisible Character</a><a href="/" class="category-pill">🏠 All Symbols</a></div>
+  </div>
+</main></div>
+
+<footer class="footer"><div class="footer-inner"><div class="footer-grid"><div class="footer-brand"><span class="logo-text highlight">TextSymbols</span><p class="footer-desc">Your premium destination for aesthetic symbols, cute fonts, and creative text tools.</p></div><div><h4 class="footer-col-title">Text Tools</h4><ul class="footer-links-list"><li><a href="/all-symbols.html">All Symbols</a></li><li><a href="/aesthetic-fonts.html">Aesthetic Fonts</a></li><li><a href="/bio-generator.html">Bio Generator</a></li><li><a href="/character-counter.html">Character Counter</a></li></ul></div><div><h4 class="footer-col-title">Categories</h4><ul class="footer-links-list"><li><a href="/symbols/heart.html">Heart Symbols</a></li><li><a href="/symbols/star.html">Star Symbols</a></li><li><a href="/symbols/sparkle.html">Sparkle Symbols</a></li></ul></div><div><h4 class="footer-col-title">Company</h4><ul class="footer-links-list"><li><a href="/pages/privacy.html">Privacy Policy</a></li><li><a href="/pages/terms.html">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><p class="footer-copy">© 2026 FancySymbols.</p></div></div></footer>
+
+<script>
+const LIMITS = [
+  { name: 'IG Bio', max: 150, color: '#e91e63' },
+  { name: 'TikTok Bio', max: 80, color: '#00bcd4' },
+  { name: 'Twitter/X', max: 280, color: '#1da1f2' },
+  { name: 'Discord Bio', max: 190, color: '#5865f2' },
+  { name: 'YouTube Title', max: 100, color: '#ff0000' },
+  { name: 'LinkedIn Bio', max: 220, color: '#0077b5' },
+];
+
+function renderLimits(charCount) {
+  return LIMITS.map(l => {
+    const pct = Math.min((charCount / l.max) * 100, 100);
+    const clr = pct >= 100 ? '#ef4444' : pct >= 80 ? '#f59e0b' : l.color;
+    return `<div class="limit-bar"><span class="limit-name">${l.name}</span><div class="limit-track"><div class="limit-fill" style="width:${pct}%;background:${clr}"></div></div><span class="limit-count">${charCount}/${l.max}</span></div>`;
+  }).join('');
+}
+
+function updateCounts() {
+  const text = document.getElementById('counterInput').value;
+  const chars = text.length;
+  const noSpace = text.replace(/\s/g, '').length;
+  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+  const sentences = text.trim() ? (text.match(/[.!?]+(\s|$)/g) || []).length || (text.trim() ? 1 : 0) : 0;
+  const lines = text ? text.split('\n').length : 0;
+  const paras = text.trim() ? text.split(/\n\s*\n/).filter(p => p.trim()).length : 0;
+
+  document.getElementById('charCount').textContent = chars;
+  document.getElementById('charNoSpace').textContent = noSpace;
+  document.getElementById('wordCount').textContent = words;
+  document.getElementById('sentenceCount').textContent = sentences;
+  document.getElementById('lineCount').textContent = lines;
+  document.getElementById('paraCount').textContent = paras;
+  document.getElementById('limitBars').innerHTML = renderLimits(chars);
+}
+
+document.getElementById('counterInput').addEventListener('input', updateCounts);
+updateCounts();
+</script>
+<script src="/script.js?v=5.2"></script>
+</body></html>
