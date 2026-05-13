@@ -249,7 +249,6 @@ function renderSidebar() {
     <div class="sidebar-links">
       <a href="${root}pages/privacy.html"><span class="link-icon">🛡️</span> Privacy Policy</a>
       <a href="${root}pages/terms.html"><span class="link-icon">📄</span> Terms of Service</a>
-      <a href="${root}pages/contact.html"><span class="link-icon">✉️</span> Contact Us</a>
     </div>
   </div>
   `;
