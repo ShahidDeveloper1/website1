@@ -71,7 +71,7 @@ function getFooter() {
     </div>
 
     <div class="footer-bottom">
-      <p class="footer-copy">© 2026 FancySymbols. Created with ❤️ for creators.</p>
+      <p class="footer-copy">© 2026 FancySymbols.</p>
       <div class="footer-socials">
         <a href="#" class="footer-social-icon">𝕏</a>
         <a href="#" class="footer-social-icon">📸</a>
