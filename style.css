@@ -156,7 +156,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .header-inner {
-  display: flex; height: 100%; align-items: center; justify-content: space-between; width: 100%; max-width: 1400px; margin: 0 auto;
+  display: flex; height: 100%; align-items: center; justify-content: center; width: 100%; max-width: 1400px; margin: 0 auto;
 }
 .logo {
   display: flex; align-items: center; gap: 0.625rem; font-size: 1.5rem; font-weight: 800; font-family: 'Outfit', sans-serif;
