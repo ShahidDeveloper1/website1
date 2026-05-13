@@ -6,7 +6,7 @@
     "dev": "vite --host 0.0.0.0 --port 3000 --strictPort",
     "build": "vite build",
     "preview": "vite preview",
-    "fix": "node modernize_all_pages.js",
+    "fix": "node modernize_all_pages.cjs",
     "seo:sitemap": "node generate_sitemap.js",
     "seo:inject": "node apply_global_seo.js",
     "build:seo": "npm run seo:inject && npm run seo:sitemap"

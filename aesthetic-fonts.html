@@ -4,242 +4,195 @@
 <head>
   <meta charset='UTF-8'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aesthetic Font Generator Copy and Paste Text </title>
-  <meta name="description"
-    content="Copy and paste aesthetic font generator for your bio, social posts, and messages. Unique collection of text symbols.">
+  <title>Aesthetic Fonts Generator - TextSymbols</title>
+  <meta name="description" content="Copy and paste aesthetic fonts generator for your bio, social posts, and messages. Huge collection of aesthetic and cool text symbols. One-click copy!">
   <link rel='canonical' href='https://fancysymbols.com/aesthetic-fonts.html'>
-
+  
+  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://fancysymbols.com/aesthetic-fonts.html">
   <meta property="og:title" content="Aesthetic Fonts Generator">
-  <meta property="og:description"
-    content="Copy and paste aesthetic font generator instantly. Perfect for Instagram, TikTok, and gaming.">
+  <meta property="og:description" content="Copy and paste aesthetic fonts generator instantly. Perfect for Instagram, TikTok, and gaming.">
   <meta property="og:image" content="https://fancysymbols.com/og-image.png">
 
-  <!-- Preconnect and Google Fonts -->
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://fancysymbols.com/aesthetic-fonts.html">
+  <meta name="twitter:title" content="Aesthetic Fonts Generator">
+  <meta name="twitter:description" content="One-click copy for aesthetic fonts generator and aesthetic text decorations.">
+  <meta name="twitter:image" content="https://fancysymbols.com/og-image.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet">
-
-  <meta name="theme-color" content="#0d9488">
-  <link rel="stylesheet" href="/style.css?v=5.2">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css?v=5.1">
   <link rel="icon" type="image/png" href="/favicon.png">
-
-  <style>
-    /* Aesthetic Fonts Specific Layout */
-    .aesthetic-page {
-      background-color: #eaf5f5;
-      /* Light blue/mint as per images */
-    }
-
-    .aesthetic-header h1 {
-      font-family: 'Merriweather', serif;
-      color: #5a5a5a;
-      font-weight: 700;
-      font-size: 2rem;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-
-    .aesthetic-section-title {
-      font-family: 'Merriweather', serif;
-      color: #5a5a5a;
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin: 2rem 0 1rem 0;
-    }
-
-    .aesthetic-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-      gap: 1rem;
-    }
-
-    .aesthetic-pill {
-      background: #ffffff;
-      border-radius: 50px;
-      padding: 0.75rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.05);
-      border: 1px solid rgba(0, 0, 0, 0.03);
-      transition: all 0.2s ease, transform 0.2s ease;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .aesthetic-pill:hover {
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.05);
-      transform: translateY(-2px);
-    }
-
-    .aesthetic-pill:active {
-      transform: translateY(0);
-    }
-
-    .aesthetic-pill-left {
-      font-size: 0.65rem;
-      color: #999;
-      font-style: italic;
-      min-width: 50px;
-      text-align: center;
-    }
-
-    .aesthetic-pill-center {
-      flex-grow: 1;
-      text-align: center;
-      font-size: 1.1rem;
-      color: #333;
-      padding: 0 1rem;
-      overflow-wrap: break-word;
-      word-break: break-all;
-    }
-
-    .aesthetic-pill-right {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      min-width: 70px;
-      justify-content: flex-end;
-    }
-
-    .aesthetic-icon {
-      font-size: 1rem;
-      color: #555;
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.2rem;
-      border-radius: 50%;
-      opacity: 0.7;
-      transition: opacity 0.2s;
-    }
-
-    .aesthetic-icon:hover {
-      opacity: 1;
-      background: #f0f0f0;
-    }
-
-    .copy-toast {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      padding: 0.4rem 1rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 500;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s, transform 0.2s;
-    }
-
-    .aesthetic-pill.copied .copy-toast {
-      opacity: 1;
-      transform: translate(-50%, -60%);
-    }
-
-    .aesthetic-input-container {
-      margin-bottom: 2rem;
-    }
-
-    .aesthetic-input {
-      width: 100%;
-      padding: 1.25rem 2rem;
-      border-radius: 50px;
-      border: 2px solid #ddd;
-      font-size: 1.25rem;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      transition: all 0.3s ease;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .aesthetic-input:focus {
-      outline: none;
-      border-color: #0d9488;
-      box-shadow: 0 4px 20px rgba(13, 148, 136, 0.15);
-    }
-
-    @media (max-width: 600px) {
-      .aesthetic-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-
-  
-  <link rel="alternate" hreflang="x-default" href="https://fancysymbols.com/aesthetic-fonts">
-  <link rel="alternate" hreflang="en" href="https://fancysymbols.com/aesthetic-fonts">
-  <script type="application/ld+json">
-    [
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Aesthetic Font Generator Copy and Paste Text ",
-    "description": "Copy and paste aesthetic text symbols.",
-    "url": "https://fancysymbols.com/aesthetic-fonts"
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Aesthetic Font Generator Copy and Paste Text ",
-    "operatingSystem": "All",
-    "applicationCategory": "UtilitiesApplication",
-    "offers": {
-      "@type": "Offer",
-      "price": "0.00",
-      "priceCurrency": "USD"
-    }
-  }
-]
-  </script>
 </head>
 
 <body class="aesthetic-page">
   <header class="header">
-    <div class="header-inner">
-      <a href="/" class="logo">
-        <img src="/favicon.png" alt="TextSymbols Logo" class="logo-img">
-        <span class="logo-text">TextSymbols</span>
-      </a>
-      <nav class="header-nav">
-        <a href="/">Home</a>
-        <a href="/all-symbols.html">All Symbols</a>
-        <a href="/preppy-fonts.html">Preppy Font Generator</a>
-        <a href="/cute-fonts.html">Cute Fonts</a>
-        <a href="/aesthetic-fonts.html" class="active">Aesthetic Fonts</a>
-        <a href="/lenny-face.html" class="nav-cta">Lenny Faces</a>
-      </nav>
-      <button class="menu-toggle" id="menuToggle">☰</button>
-    </div>
-  </header>
-  <aside class="sidebar" id="sidebar"></aside>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <img src="/favicon.png" alt="TextSymbols Logo" class="logo-img">
+      <span class="logo-text">TextSymbols</span>
+    </a>
+    <nav class="header-nav">
+      <a href="/">Home</a>
+      <a href="/all-symbols.html">All Symbols</a>
+      <a href="/preppy-fonts.html"><span class="link-icon">🎀</span> Preppy Font Generator</a>
+      <a href="/cute-fonts.html">Cute Fonts</a>
+      <a href="/aesthetic-fonts.html">Aesthetic Fonts</a>
+      <a href="/lenny-face.html" class="nav-cta">Lenny Faces</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+  </div>
+</header>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="sidebar" id="sidebar"></aside>
 
   <div class="page-wrapper">
     <main class="main-content">
-      <div class="aesthetic-header">
-        <h1>Aesthetic Fonts Generator</h1>
+    <div class="page-header">
+      <h1>✨ Aesthetic Fonts Generator ✨</h1>
+      <p>Type your text below and get aesthetic font styles instantly. Click to copy!</p>
+    </div>
+    <div class="font-gen-container">
+      <div class="font-input-area">
+        <input type="text" class="font-input" id="aestheticInput" placeholder="Type your text here..." value="hellow" autofocus>
       </div>
-      <div class="aesthetic-input-container">
-        <input type="text" class="aesthetic-input" id="aestheticInput" value="hellow" autofocus>
+      <div class="font-results" id="aestheticResults"></div>
+    </div>
+
+    <!-- RICH CONTENT ARTICLE -->
+    <div class="content-article">
+
+      <h2>What Are Aesthetic Fonts?</h2>
+      <p><b>Aesthetic fonts are stylized Unicode text variations that transform standard English letters (A–Z, a–z, 0–9) into visually distinctive character sets.</b> These include cursive script (𝓐𝓮𝓼𝓽𝓱𝓮𝓽𝓲𝓬), bold serif (𝐀𝐞𝐬𝐭𝐡𝐞𝐭𝐢𝐜), double-struck (𝔸𝕖𝕤𝕥𝕙𝕖𝕥𝕚𝕔), old English (𝕬𝖊𝖘𝖙𝖍𝖊𝖙𝖎𝖈), small caps (ᴀᴇꜱᴛʜᴇᴛɪᴄ), and 15+ additional styles.</p>
+      <p>Unlike web fonts that require CSS or image files, aesthetic fonts are <strong>plain Unicode text</strong>. They copy and paste into any text field — Instagram bios, TikTok captions, Discord usernames, Twitter posts, and email subjects — without plugins, apps, or formatting dependencies.</p>
+
+      <div class="info-box">
+        Type any text in the generator above and instantly see it converted into 20+ aesthetic font styles. Click any result to copy it to your clipboard.
       </div>
 
-      <div id="aestheticResults"></div>
-    </main>
+      <h2>How the Aesthetic Font Generator Works</h2>
+      <p>The generator maps each standard ASCII character to its Unicode equivalent in a specific block. For example, the letter "A" (U+0041) maps to 𝓐 (U+1D4D0) in the Mathematical Script block, 𝐀 (U+1D400) in Mathematical Bold, and 𝔸 (U+1D538) in Mathematical Double-Struck.</p>
+      <p>This conversion happens instantly in your browser — <strong>no data is sent to any server</strong>. The tool processes text locally using JavaScript, ensuring zero latency and complete privacy.</p>
+
+      <div class="steps-grid">
+        <div class="step-item">
+          <h4>Type Your Text</h4>
+          <p>Enter any word, phrase, or sentence into the input field above.</p>
+        </div>
+        <div class="step-item">
+          <h4>Browse Styles</h4>
+          <p>Scroll through 20+ font variations rendered in real time.</p>
+        </div>
+        <div class="step-item">
+          <h4>Copy &amp; Paste</h4>
+          <p>Click any style to copy. Paste into Instagram, TikTok, Discord, or any app.</p>
+        </div>
+      </div>
+
+      <h2>Available Aesthetic Font Styles</h2>
+      <p>The generator provides the following Unicode font families:</p>
+      <table class="comparison-table">
+        <thead>
+          <tr><th>Style Name</th><th>Example</th><th>Best For</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Cursive Script</strong></td><td>𝓗𝓮𝓵𝓵𝓸</td><td>Instagram bios, wedding invites</td></tr>
+          <tr><td><strong>Bold Serif</strong></td><td>𝐇𝐞𝐥𝐥𝐨</td><td>Headlines, emphasis</td></tr>
+          <tr><td><strong>Old English</strong></td><td>𝕳𝖊𝖑𝖑𝖔</td><td>Gaming names, gothic themes</td></tr>
+          <tr><td><strong>Double-Struck</strong></td><td>ℍ𝕖𝕝𝕝𝕠</td><td>Math-inspired, academic</td></tr>
+          <tr><td><strong>Bubble Text</strong></td><td>Ⓗⓔⓛⓛⓞ</td><td>Playful bios, casual messages</td></tr>
+          <tr><td><strong>Small Caps</strong></td><td>ʜᴇʟʟᴏ</td><td>Professional profiles</td></tr>
+          <tr><td><strong>Monospace</strong></td><td>𝙷𝚎𝚕𝚕𝚘</td><td>Code-style, developer profiles</td></tr>
+          <tr><td><strong>Wide Text</strong></td><td>Ｈｅｌｌｏ</td><td>Vaporwave aesthetic</td></tr>
+          <tr><td><strong>Strikethrough</strong></td><td>H̶e̶l̶l̶o̶</td><td>Edits, corrections, humor</td></tr>
+          <tr><td><strong>Inverted</strong></td><td>ollǝH</td><td>Fun, attention-grabbing</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Where to Use Aesthetic Fonts</h2>
+      <div class="use-case-grid">
+        <div class="use-case-card">
+          <span class="use-case-icon">📱</span>
+          <div class="use-case-title">Instagram Bios</div>
+          <p class="use-case-desc">Stand out with cursive or bold serif text in your 150-character bio.</p>
+        </div>
+        <div class="use-case-card">
+          <span class="use-case-icon">🎮</span>
+          <div class="use-case-title">Gaming Usernames</div>
+          <p class="use-case-desc">Old English and double-struck fonts create unique, memorable names.</p>
+        </div>
+        <div class="use-case-card">
+          <span class="use-case-icon">🐦</span>
+          <div class="use-case-title">Twitter / X Posts</div>
+          <p class="use-case-desc">Bold serif text makes tweets more visible in timelines.</p>
+        </div>
+        <div class="use-case-card">
+          <span class="use-case-icon">💬</span>
+          <div class="use-case-title">Discord Servers</div>
+          <p class="use-case-desc">Style channel names and role titles with Unicode font variations.</p>
+        </div>
+      </div>
+
+      <h2>Aesthetic Fonts vs. Web Fonts vs. Image Text</h2>
+      <table class="comparison-table">
+        <thead>
+          <tr><th>Feature</th><th>Aesthetic Fonts</th><th>Web Fonts (CSS)</th><th>Image Text</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Copy-Paste</strong></td><td>Yes, anywhere</td><td>No (styling lost)</td><td>No</td></tr>
+          <tr><td><strong>Works in Bios</strong></td><td>Yes</td><td>No</td><td>No</td></tr>
+          <tr><td><strong>File Size</strong></td><td>0 KB (text)</td><td>50–200 KB</td><td>10–500 KB</td></tr>
+          <tr><td><strong>Cross-Platform</strong></td><td>All devices</td><td>Web only</td><td>All devices</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Frequently Asked Questions About Aesthetic Fonts</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q">Do aesthetic fonts work on Instagram?</div>
+          <div class="faq-a"><p><b>Yes, aesthetic fonts work in Instagram bios, captions, comments, and DMs.</b> Instagram supports Unicode text, so converted fonts display correctly. Cursive script and small caps are the most popular styles for profiles.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Are aesthetic fonts searchable by Google?</div>
+          <div class="faq-a"><p><b>Partially.</b> Google can index Unicode characters but may not treat styled text the same as standard text. Use aesthetic fonts for visual enhancement in bios and social media, but keep website body text in standard characters for SEO.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Can I use aesthetic fonts on my phone?</div>
+          <div class="faq-a"><p><b>Yes, aesthetic fonts work on both iPhone and Android.</b> Convert text using this generator on your phone browser, tap to copy, and paste into any app. No app installation required.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Why do some fonts show as boxes?</div>
+          <div class="faq-a"><p><b>Missing font support on the receiving device causes this.</b> Most modern devices (updated after 2018) support all Unicode font blocks. Older devices may lack glyphs for certain Mathematical Alphanumeric Symbols.</p></div>
+        </div>
+      </div>
+
+      <h3>More Tools on TextSymbols</h3>
+      <div class="category-pills">
+        <a href="/" class="category-pill">🏠 All Symbols</a>
+        <a href="/preppy-fonts.html" class="category-pill">🎀 Preppy Fonts</a>
+        <a href="/cute-fonts.html" class="category-pill">🌸 Cute Fonts</a>
+        <a href="/lenny-face.html" class="category-pill">( ͡° ͜ʖ ͡°) Lenny Faces</a>
+        <a href="/symbols/heart.html" class="category-pill">❤️ Hearts</a>
+        <a href="/symbols/star.html" class="category-pill">⭐ Stars</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 FancySymbols. Created with ❤️ for creators.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social-icon">𝕏</a>
+        <a href="#" class="footer-social-icon">📸</a>
+        <a href="#" class="footer-social-icon">🎵</a>
+      </div>
+    </div>
   </div>
-  <footer class="footer"></footer>
-
-  <script src="/aesthetic-fonts.js?v=5.2"></script>
-  <script src="/script.js?v=5.2"></script>
+</footer>
+<script src="/aesthetic-fonts.js?v=2.0"></script>
+<script src="/script.js?v=5.2"></script>
 </body>
 
 </html>

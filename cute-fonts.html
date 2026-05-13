@@ -21,35 +21,11 @@
   <meta name="twitter:description" content="One-click copy for 🌸 cute fonts symbols copy and paste ✨ and aesthetic text decorations.">
   <meta name="twitter:image" content="https://fancysymbols.com/og-image.png">
 
-  <link rel="stylesheet" href="/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css?v=5.1">
   <link rel="icon" type="image/png" href="/favicon.png">
-
-  
-  <link rel="alternate" hreflang="x-default" href="https://fancysymbols.com/cute-fonts">
-  <link rel="alternate" hreflang="en" href="https://fancysymbols.com/cute-fonts">
-  <script type="application/ld+json">
-    [
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "🌸 Cute Fonts Symbols Copy and Paste ✨ - TextSymbols",
-    "description": "Copy and paste 🌸 cute fonts symbols copy and paste ✨ for your bio, social posts, and messages. Huge collection of aesthetic and cool text symbols. One-click copy!",
-    "url": "https://fancysymbols.com/cute-fonts"
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "🌸 Cute Fonts Symbols Copy and Paste ✨ - TextSymbols",
-    "operatingSystem": "All",
-    "applicationCategory": "UtilitiesApplication",
-    "offers": {
-      "@type": "Offer",
-      "price": "0.00",
-      "priceCurrency": "USD"
-    }
-  }
-]
-  </script>
 </head>
 <body>
 <div class="particles"></div>
@@ -62,7 +38,7 @@
     <nav class="header-nav">
       <a href="/">Home</a>
       <a href="/all-symbols.html">All Symbols</a>
-      <a href="/preppy-fonts.html">Preppy Font Generator</a>
+      <a href="/preppy-fonts.html"><span class="link-icon">🎀</span> Preppy Font Generator</a>
       <a href="/cute-fonts.html">Cute Fonts</a>
       <a href="/aesthetic-fonts.html">Aesthetic Fonts</a>
       <a href="/lenny-face.html" class="nav-cta">Lenny Faces</a>
@@ -186,6 +162,7 @@
         };
 
         window.copyCardText = (el, text) => {
+          if (window.ClipboardManager) window.ClipboardManager.add(text);
           navigator.clipboard.writeText(text).then(() => {
             el.classList.add('copied');
             setTimeout(() => el.classList.remove('copied'), 1500);
@@ -198,43 +175,110 @@
         renderAll();
       });
     </script>
-  </main>
-</div>
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <span class="logo-text highlight">TextSymbols</span>
-        <p class="footer-desc">Your premium destination for aesthetic symbols, cute fonts, and creative text tools. Elevate your digital presence with ease.</p>
-      </div>
-      
-      <div>
-        <h4 class="footer-col-title">Text Tools</h4>
-        <ul class="footer-links-list">
-          <li><a href="/all-symbols.html">All Symbols</a></li>
-          <li><a href="/preppy-fonts.html">Preppy Font Generator</a></li>
-          <li><a href="/cute-fonts.html">Cute Fonts</a></li>
-          <li><a href="/lenny-face.html">Lenny Faces</a></li>
-        </ul>
+
+    <!-- RICH CONTENT ARTICLE -->
+    <div class="content-article">
+
+      <h2>What Are Cute Fonts?</h2>
+      <p><b>Cute fonts are Unicode text styles decorated with kawaii-inspired elements — hearts (♡), stars (☆), flowers (✿), sparkles (✧), and bows (🎀) — that create an adorable, playful visual appearance.</b> Originating from Japanese "kawaii" culture, cute fonts blend stylized character sets with decorative symbols to produce text that feels warm, approachable, and personality-rich.</p>
+      <p>Every cute font style on this page uses <strong>plain Unicode characters</strong>, not images. When you copy a cute font result, you're copying text that pastes into any app — Instagram, TikTok, Snapchat, WhatsApp, Discord, and 500+ more platforms that support text input.</p>
+
+      <div class="info-box">
+        Cute fonts are the most popular text style among TikTok and Snapchat users. The combination of kawaii characters + decorative elements creates an instantly recognizable aesthetic that increases profile engagement.
       </div>
 
-      <div>
-        <h4 class="footer-col-title">Categories</h4>
-        <ul class="footer-links-list">
-          <li><a href="/symbols/heart.html">Heart Symbols</a></li>
-          <li><a href="/symbols/star.html">Star Symbols</a></li>
-          <li><a href="/symbols/flower.html">Flower Symbols</a></li>
-          <li><a href="/symbols/aesthetic.html">Aesthetic Symbols</a></li>
-        </ul>
+      <h2>How to Use the Cute Fonts Generator</h2>
+      <div class="steps-grid">
+        <div class="step-item">
+          <h4>Type Any Text</h4>
+          <p>Enter your name, bio, or any message into the input box above. All English letters and numbers are supported.</p>
+        </div>
+        <div class="step-item">
+          <h4>Browse Cute Styles</h4>
+          <p>See your text instantly transformed into 15+ cute variations with hearts, sparkles, and kawaii decorations.</p>
+        </div>
+        <div class="step-item">
+          <h4>Copy &amp; Share</h4>
+          <p>Click to copy any style. Paste into Instagram, TikTok, Snapchat, messaging apps, or gaming profiles.</p>
+        </div>
       </div>
 
-      <div>
-        <h4 class="footer-col-title">Company</h4>
-        <ul class="footer-links-list">
-          <li><a href="/pages/privacy.html">Privacy Policy</a></li>
-          <li><a href="/pages/terms.html">Terms of Service</a></li>
-          <li><a href="/pages/contact.html">Contact Us</a></li>
-        </ul>
+      <h2>Popular Cute Font Styles</h2>
+      <div class="feature-cards">
+        <div class="feature-card">
+          <span class="feature-card-icon">♡</span>
+          <div class="feature-card-title">Heart Decorated</div>
+          <p class="feature-card-desc">Letters surrounded by hearts: ♡ 𝒞𝓊𝓉𝑒 ♡ — perfect for love-themed bios and romantic captions.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-card-icon">✧</span>
+          <div class="feature-card-title">Sparkle Style</div>
+          <p class="feature-card-desc">Glittering text with star accents: ✧ Cute ✧ — ideal for aesthetic profiles and dreamy content.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-card-icon">🌸</span>
+          <div class="feature-card-title">Flower Crown</div>
+          <p class="feature-card-desc">Text wrapped in floral elements: 🌸 Cute 🌸 — great for spring themes and nature-inspired bios.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-card-icon">☆</span>
+          <div class="feature-card-title">Star Burst</div>
+          <p class="feature-card-desc">Star-bordered text: ☆ Cute ☆ — popular in gaming usernames and achievement celebrations.</p>
+        </div>
+      </div>
+
+      <h2>Where to Use Cute Fonts</h2>
+      <div class="use-case-grid">
+        <div class="use-case-card">
+          <span class="use-case-icon">📱</span>
+          <div class="use-case-title">TikTok Bios</div>
+          <p class="use-case-desc">Cute fonts make your 101-character bio stand out in the For You page and follower feeds.</p>
+        </div>
+        <div class="use-case-card">
+          <span class="use-case-icon">👻</span>
+          <div class="use-case-title">Snapchat Names</div>
+          <p class="use-case-desc">Decorate your Snapchat display name with hearts and sparkles for a personalized touch.</p>
+        </div>
+        <div class="use-case-card">
+          <span class="use-case-icon">📸</span>
+          <div class="use-case-title">Instagram Captions</div>
+          <p class="use-case-desc">Add kawaii-style text to photo captions and story text for a cohesive cute aesthetic.</p>
+        </div>
+        <div class="use-case-card">
+          <span class="use-case-icon">💬</span>
+          <div class="use-case-title">WhatsApp Messages</div>
+          <p class="use-case-desc">Send decorated text messages that express personality beyond standard keyboard options.</p>
+        </div>
+      </div>
+
+      <h2>Frequently Asked Questions About Cute Fonts</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q">What are cute fonts?</div>
+          <div class="faq-a"><p><b>Cute fonts are Unicode text styles decorated with kawaii elements like hearts (♡), stars (☆), flowers (✿), and sparkles (✧)</b> that create an adorable, playful visual appearance. They're plain text that copies and pastes into any app without images or special software.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Do cute fonts work on Snapchat?</div>
+          <div class="faq-a"><p><b>Yes, cute fonts work in Snapchat display names, captions, and messages.</b> Snapchat supports Unicode characters, so decorated text displays correctly on both iPhone and Android devices.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Are cute fonts different from aesthetic fonts?</div>
+          <div class="faq-a"><p><b>Yes.</b> Cute fonts focus on kawaii-inspired, adorable decorations with hearts, sparkles, and playful elements. <a href="/aesthetic-fonts.html">Aesthetic fonts</a> provide cleaner Unicode style variations like cursive, bold, and gothic without decorative elements. Both are free on TextSymbols.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Can I save my favorite cute font styles?</div>
+          <div class="faq-a"><p><b>Yes, click the ♡ heart button on any font card to save it to your Favorites section.</b> Your favorites are stored in your browser's local storage and persist between visits — no account or login required.</p></div>
+        </div>
+      </div>
+
+      <h3>Explore More Tools</h3>
+      <div class="category-pills">
+        <a href="/" class="category-pill">🏠 All Symbols</a>
+        <a href="/preppy-fonts.html" class="category-pill">🎀 Preppy Fonts</a>
+        <a href="/aesthetic-fonts.html" class="category-pill">✨ Aesthetic Fonts</a>
+        <a href="/lenny-face.html" class="category-pill">( ͡° ͜ʖ ͡°) Lenny Faces</a>
+        <a href="/symbols/heart.html" class="category-pill">❤️ Hearts</a>
+        <a href="/symbols/sparkle.html" class="category-pill">✦ Sparkles</a>
       </div>
     </div>
 
@@ -247,8 +291,7 @@
       </div>
     </div>
   </div>
-  <div id="clipboard-bar"></div>
 </footer>
-<script src="/script.js?v=5.1"></script>
+<script src="/script.js?v=5.2"></script>
 </body>
 </html>

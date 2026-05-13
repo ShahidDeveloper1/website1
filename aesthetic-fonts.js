@@ -357,29 +357,32 @@ document.addEventListener('DOMContentLoaded', () => {
     
     let html = '';
     AESTHETIC_CATEGORIES.forEach(cat => {
-      html += `<h2 class="aesthetic-section-title">${cat.name}</h2>`;
-      html += `<div class="aesthetic-grid">`;
+      html += `
+        <section class="font-section">
+          <h2 class="font-category-title">${cat.name}</h2>
+          <div class="font-grid">
+      `;
       cat.styles.forEach(style => {
         let transformed = style.transform(text);
-        let count = transformed.length;
-        
         let displayHtml = transformed.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         let safeEscape = transformed.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '&quot;');
         
         html += `
-          <div class="aesthetic-pill" onclick="copyAestheticText(this, '${safeEscape}')">
-            <div class="aesthetic-pill-left">${count} chars</div>
-            <div class="aesthetic-pill-center">${displayHtml}</div>
-            <div class="aesthetic-pill-right">
-              <button class="aesthetic-icon">🪄</button>
-              <button class="aesthetic-icon">📋</button>
-              <button class="aesthetic-icon">➔</button>
+            <div class="font-card" onclick="copyAestheticText(this, '${safeEscape}')">
+              <div class="font-card-header">
+                <span class="font-card-label">${style.id}</span>
+                <div class="font-card-actions">
+                  <button class="font-card-btn copy-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="font-card-preview">${displayHtml}</div>
+              <div class="copy-feedback">Copied!</div>
             </div>
-            <div class="copy-toast">Copied!</div>
-          </div>
         `;
       });
-      html += `</div>`;
+      html += `</div></section>`;
     });
     resultsEl.innerHTML = html;
   }
@@ -393,6 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 window.copyAestheticText = function(cardEl, text) {
+  if (window.ClipboardManager) window.ClipboardManager.add(text);
   navigator.clipboard.writeText(text).then(() => {
     cardEl.classList.add('copied');
     setTimeout(() => {

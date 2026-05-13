@@ -3,7 +3,7 @@ document.documentElement.classList.add('js-ready');
 
 
 // ===== CLIPBOARD BAR MANAGER =====
-const ClipboardManager = {
+window.ClipboardManager = {
   symbols: [],
   barEl: null,
   containerEl: null,
@@ -19,7 +19,7 @@ const ClipboardManager = {
     this.barEl = this.bar; 
     this.bar.innerHTML = `
       <div class="clipboard-content">
-        <span class="clipboard-title">Copied</span>
+        <span class="clipboard-title">COPIED</span>
         <div class="clipboard-symbols" id="clipboard-symbols-container"></div>
       </div>
       <div class="clipboard-actions">
@@ -571,6 +571,18 @@ function initScrollReveal() {
   items.forEach(item => observer.observe(item));
 }
 
+// ===== FAQ ACCORDION =====
+function initFaqAccordion() {
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+}
+
 // ===== INIT ALL =====
 document.addEventListener('DOMContentLoaded', () => {
   ClipboardManager.init();
@@ -580,4 +592,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initFontGenerator();
   initRotatingLogo();
   initScrollReveal();
+  initFaqAccordion();
 });
