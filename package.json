@@ -1,0 +1,17 @@
+{
+  "name": "fancysymbols",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "vite": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
+

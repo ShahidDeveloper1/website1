@@ -147,7 +147,7 @@ function showToast(message) {
 function renderSidebar() {
   const sidebar = document.getElementById('sidebar');
   if (!sidebar) return;
-  const isSubdir = window.location.pathname.includes('/symbols/') || window.location.pathname.includes('/pages/');
+  const isSubdir = window.location.pathname.includes('/pages/');
   const root = isSubdir ? '../' : '';
 
   sidebar.innerHTML = `
@@ -164,74 +164,71 @@ function renderSidebar() {
     <div class="sidebar-title">POPULAR SYMBOLS</div>
     <div class="sidebar-links">
       <a href="${root}symbols/heart.html"><span class="link-icon">❤️</span> Heart</a>
-      <a href="${root}symbols/star.html"><span class="link-icon">⭐</span> Star</a>
-      <a href="${root}symbols/arrow.html"><span class="link-icon">⇨</span> Arrow</a>
-      <a href="${root}symbols/flower.html"><span class="link-icon">✿</span> Flower</a>
-      <a href="${root}symbols/hand.html"><span class="link-icon">✌️</span> Hand</a>
       <a href="${root}symbols/checkmark.html"><span class="link-icon">✔️</span> Check Mark</a>
+      <a href="${root}symbols/animal.html"><span class="link-icon">🐾</span> Animal Symbols</a>
+      <a href="${root}symbols/star.html"><span class="link-icon">⭐</span> Star</a>
+      <a href="${root}symbols/sun.html"><span class="link-icon">☀</span> Sun</a>
+      <a href="${root}symbols/moon.html"><span class="link-icon">☾</span> Moon</a>
       <a href="${root}symbols/music.html"><span class="link-icon">🎵</span> Music</a>
-      <a href="${root}symbols/emoji-faces.html"><span class="link-icon">🥰</span> Smiley Faces</a>
-      <a href="${root}symbols/crown.html"><span class="link-icon">👑</span> Crown</a>
-      <a href="${root}symbols/square.html"><span class="link-icon">⬛</span> Square</a>
-      <a href="${root}symbols/dot.html"><span class="link-icon">•</span> Dot</a>
+      <a href="${root}symbols/cross.html"><span class="link-icon">✝</span> Cross</a>
+      <a href="${root}symbols/zodiac.html"><span class="link-icon">♈</span> Zodiac</a>
+      <a href="${root}symbols/numbers.html"><span class="link-icon">①</span> Numbers</a>
+      <a href="${root}symbols/arrow.html"><span class="link-icon">➶</span> Arrow</a>
+      <a href="${root}symbols/uparrow.html"><span class="link-icon">↑</span> Up Arrow</a>
+      <a href="${root}symbols/downarrow.html"><span class="link-icon">↓</span> Down Arrow</a>
+      <a href="${root}symbols/flower.html"><span class="link-icon">✿</span> Flower</a>
+      <a href="${root}symbols/gender.html"><span class="link-icon">⚥</span> Gender</a>
+      <a href="${root}symbols/infinity.html"><span class="link-icon">∞</span> Infinity</a>
+      <a href="${root}symbols/medical.html"><span class="link-icon">⚕</span> Medical</a>
+      <a href="${root}symbols/currency.html"><span class="link-icon">$</span> Currency</a>
+      <a href="${root}symbols/chess.html"><span class="link-icon">♚</span> Chess</a>
+      <a href="${root}symbols/weather.html"><span class="link-icon">🌤</span> Weather</a>
+      <a href="${root}symbols/bracket.html"><span class="link-icon">【</span> Bracket</a>
+      <a href="${root}symbols/religion.html"><span class="link-icon">✝</span> Religion</a>
+      <a href="${root}symbols/copyright.html"><span class="link-icon">©</span> Copyright</a>
+      <a href="${root}symbols/unit.html"><span class="link-icon">℃</span> Unit</a>
+      <a href="${root}symbols/card.html"><span class="link-icon">♠</span> Card</a>
+      <a href="${root}symbols/dice.html"><span class="link-icon">🎲</span> Dice</a>
+      <a href="${root}symbols/transport.html"><span class="link-icon">🚗</span> Transport</a>
+      <a href="${root}symbols/office.html"><span class="link-icon">💼</span> Office</a>
+      <a href="${root}symbols/award.html"><span class="link-icon">🏆</span> Award</a>
+      <a href="${root}symbols/lock.html"><span class="link-icon">🔒</span> Lock</a>
+      <a href="${root}symbols/warning.html"><span class="link-icon">⚠️</span> Warning</a>
+      <a href="${root}symbols/writing.html"><span class="link-icon">✍️</span> Writing</a>
+      <a href="${root}symbols/weapon.html"><span class="link-icon">⚔️</span> Weapon</a>
+      <a href="${root}symbols/roman.html"><span class="link-icon">Ⅳ</span> Roman Numerals</a>
+      <a href="${root}symbols/greek.html"><span class="link-icon">Ω</span> Greek</a>
+      <a href="${root}symbols/emoji-faces.html"><span class="link-icon">🥰</span> Smiley Face</a>
+      <a href="${root}symbols/fraction.html"><span class="link-icon">½</span> Fraction</a>
+      <a href="${root}symbols/comparison.html"><span class="link-icon">≥</span> Comparison</a>
+      <a href="${root}symbols/line.html"><span class="link-icon">│</span> Line</a>
       <a href="${root}symbols/circle.html"><span class="link-icon">○</span> Circle</a>
+      <a href="${root}symbols/triangle.html"><span class="link-icon">▲</span> Triangle</a>
+      <a href="${root}symbols/square.html"><span class="link-icon">⬛</span> Square</a>
+      <a href="${root}symbols/rectangle.html"><span class="link-icon">█</span> Rectangle</a>
+      <a href="${root}symbols/corner.html"><span class="link-icon">╚</span> Corner</a>
+      <a href="${root}symbols/punctuation.html"><span class="link-icon">!</span> Punctuation</a>
+      <a href="${root}symbols/chinese.html"><span class="link-icon">愛</span> Chinese</a>
+      <a href="${root}symbols/japanese.html"><span class="link-icon">あ</span> Japanese</a>
+      <a href="${root}symbols/korean.html"><span class="link-icon">ㅿ</span> Korean</a>
+      <a href="${root}symbols/hand.html"><span class="link-icon">✌️</span> Hand</a>
+      <a href="${root}symbols/bubble.html"><span class="link-icon">ⓐ</span> Bubble Text</a>
+      <a href="${root}symbols/cursive.html"><span class="link-icon">𝒜</span> Cursive</a>
+      <a href="${root}symbols/upside-down.html"><span class="link-icon">ʇ</span> Upside Down</a>
+      <a href="${root}symbols/old-english.html"><span class="link-icon">𝔄</span> Old English</a>
+      <a href="${root}symbols/house.html"><span class="link-icon">🏠</span> House</a>
+      <a href="${root}symbols/crown.html"><span class="link-icon">👑</span> Crown</a>
+      <a href="${root}symbols/diamond.html"><span class="link-icon">◆</span> Diamond</a>
+      <a href="${root}symbols/quotation.html"><span class="link-icon">❝</span> Quotation</a>
+      <a href="${root}symbols/crypto.html"><span class="link-icon">₿</span> Crypto</a>
       <a href="${root}symbols/loading.html"><span class="link-icon">▓</span> Loading</a>
       <a href="${root}symbols/wave.html"><span class="link-icon">〰</span> Wave</a>
-      <a href="${root}symbols/bracket.html"><span class="link-icon">【</span> Bracket</a>
       <a href="${root}symbols/divider.html"><span class="link-icon">┊</span> Divider</a>
       <a href="${root}symbols/border.html"><span class="link-icon">╔</span> Border</a>
       <a href="${root}symbols/sparkle.html"><span class="link-icon">✨</span> Sparkle</a>
       <a href="${root}symbols/aesthetic.html"><span class="link-icon">✧</span> Aesthetic</a>
-      <a href="${root}symbols/crypto.html"><span class="link-icon">₿</span> Crypto</a>
-      <a href="${root}symbols/quotation.html"><span class="link-icon">❝</span> Quotation</a>
-      <a href="${root}symbols/diamond.html"><span class="link-icon">◆</span> Diamond</a>
-      <a href="${root}symbols/house.html"><span class="link-icon">🏠</span> House</a>
-      <a href="${root}symbols/old-english.html"><span class="link-icon">𝔄</span> Old English</a>
-      <a href="${root}symbols/upside-down.html"><span class="link-icon">ʇ</span> Upside Down</a>
-      <a href="${root}symbols/cursive.html"><span class="link-icon">𝒜</span> Cursive</a>
-      <a href="${root}symbols/bubble.html"><span class="link-icon">ⓐ</span> Bubble Text</a>
-      <a href="${root}symbols/korean.html"><span class="link-icon">ㅿ</span> Korean Symbols</a>
-      <a href="${root}symbols/japanese.html"><span class="link-icon">あ</span> Japanese Symbols</a>
-      <a href="${root}symbols/chinese.html"><span class="link-icon">愛</span> Chinese Symbols</a>
+      <a href="${root}symbols/dot.html"><span class="link-icon">•</span> Dot</a>
       <a href="${root}symbols/german.html"><span class="link-icon">ß</span> German Symbols</a>
-      <a href="${root}symbols/punctuation.html"><span class="link-icon">!</span> Punctuation Marks</a>
-      <a href="${root}symbols/corner.html"><span class="link-icon">╚</span> Corner Symbols</a>
-      <a href="${root}symbols/rectangle.html"><span class="link-icon">█</span> Rectangle Symbols</a>
-      <a href="${root}symbols/triangle.html"><span class="link-icon">▲</span> Triangle Symbols</a>
-      <a href="${root}symbols/line.html"><span class="link-icon">│</span> Line Symbols</a>
-      <a href="${root}symbols/comparison.html"><span class="link-icon">≥</span> Comparison Symbols</a>
-      <a href="${root}symbols/fraction.html"><span class="link-icon">½</span> Fraction Symbols</a>
-      <a href="${root}symbols/greek.html"><span class="link-icon">Ω</span> Greek Symbols</a>
-      <a href="${root}symbols/roman.html"><span class="link-icon">Ⅳ</span> Roman Numerals</a>
-      <a href="${root}symbols/weapon.html"><span class="link-icon">⚔️</span> Weapon Symbols</a>
-      <a href="${root}symbols/writing.html"><span class="link-icon">✍️</span> Writing Symbols</a>
-      <a href="${root}symbols/warning.html"><span class="link-icon">⚠️</span> Warning Symbols</a>
-      <a href="${root}symbols/lock.html"><span class="link-icon">🔒</span> Lock & Key Symbols</a>
-      <a href="${root}symbols/award.html"><span class="link-icon">🏆</span> Award Symbols</a>
-      <a href="${root}symbols/office.html"><span class="link-icon">💼</span> Office Symbols</a>
-      <a href="${root}symbols/transport.html"><span class="link-icon">🚗</span> Transport Symbols</a>
-      <a href="${root}symbols/dice.html"><span class="link-icon">🎲</span> Dice Symbols</a>
-      <a href="${root}symbols/card.html"><span class="link-icon">♠</span> Card Symbols</a>
-      <a href="${root}symbols/unit.html"><span class="link-icon">℃</span> Unit Symbols</a>
-      <a href="${root}symbols/copyright.html"><span class="link-icon">©</span> Copyright & Legal</a>
-      <a href="${root}symbols/religion.html"><span class="link-icon">✝</span> Religion Symbols</a>
-      <a href="${root}symbols/bracket.html"><span class="link-icon">【</span> Bracket Symbols</a>
-      <a href="${root}symbols/weather.html"><span class="link-icon">☀</span> Weather Symbols</a>
-      <a href="${root}symbols/chess.html"><span class="link-icon">♚</span> Chess Symbols</a>
-      <a href="${root}symbols/currency.html"><span class="link-icon">$</span> Currency Symbols</a>
-      <a href="${root}symbols/medical.html"><span class="link-icon">⚕</span> Medical Symbols</a>
-      <a href="${root}symbols/infinity.html"><span class="link-icon">∞</span> Infinity Symbols</a>
-      <a href="${root}symbols/gender.html"><span class="link-icon">⚥</span> Gender Symbols</a>
-      <a href="${root}symbols/downarrow.html"><span class="link-icon">↓</span> Down Arrow Symbols</a>
-      <a href="${root}symbols/uparrow.html"><span class="link-icon">↑</span> Up Arrow Symbols</a>
-      <a href="${root}symbols/arrow.html"><span class="link-icon">➶</span> Arrow Symbols</a>
-      <a href="${root}symbols/numbers.html"><span class="link-icon">①</span> Number Symbols</a>
-      <a href="${root}symbols/zodiac.html"><span class="link-icon">♈</span> Zodiac Symbols</a>
-      <a href="${root}symbols/cross.html"><span class="link-icon">✝</span> Cross Symbols</a>
-      <a href="${root}symbols/music.html"><span class="link-icon">♫</span> Music Symbols</a>
-      <a href="${root}symbols/moon.html"><span class="link-icon">☾</span> Moon Symbols</a>
-      <a href="${root}symbols/sun.html"><span class="link-icon">☀</span> Sun Symbols</a>
-      <a href="${root}symbols/animal.html"><span class="link-icon">🐾</span> Animal Symbols</a>
     </div>
   </div>
   `;
@@ -658,7 +655,7 @@ function initParticles() {
     p.style.animationDuration = (10 + Math.random() * 20) + 's';
     p.style.animationDelay = -(Math.random() * 20) + 's';
     p.style.width = p.style.height = (2 + Math.random() * 3) + 'px';
-    const colors = ['#8b5cf6', '#ec4899', '#3b82f6', '#06b6d4'];
+    const colors = ['#0d9488', '#14b8a6', '#5eead4'];
     p.style.background = colors[Math.floor(Math.random() * colors.length)];
     container.appendChild(p);
   }
@@ -675,14 +672,32 @@ function highlightActiveSidebarLink() {
   });
 }
 
+function initUniversalHeadings() {
+  const isSubdir = window.location.pathname.includes('/pages/');
+  const isMain = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/') || window.location.pathname.endsWith('all-symbols.html');
+  
+  if (isMain) return;
+  if (isSubdir) return; // For pages/privacy.html etc.
+
+  const h1 = document.querySelector('.main-content h1');
+  if (h1) {
+    let title = h1.textContent.trim();
+    // Use regex to remove emoji/symbols and extra words for normalization
+    const normalizedTitle = title.replace(/[^\w\s-]/gu, '').replace(/(Symbols|Symbol)$/, '').trim();
+    if (normalizedTitle) {
+      h1.textContent = normalizedTitle + ' Symbol Copy and Paste';
+    }
+  }
+}
+
 // ===== QUICK LINKS GRID (INTERNAL LINKING ON ALL PAGES) =====
 function renderQuickLinks() {
   const mainContent = document.querySelector('.main-content');
   if (!mainContent) return;
 
-  const isSubdir = window.location.pathname.includes('/symbols/') || window.location.pathname.includes('/pages/');
+  const isSubdir = window.location.pathname.includes('/pages/');
   const root = isSubdir ? '../' : '';
-  const sym = isSubdir ? '' : 'symbols/';
+  const sym = '';
 
   const links = [
     { href: `${sym}heart.html`, icon: '❤️', label: 'Heart' },
@@ -711,46 +726,72 @@ function renderQuickLinks() {
     { href: `${sym}unit.html`, icon: '℃', label: 'Unit' },
     { href: `${sym}card.html`, icon: '♠', label: 'Card Symbol' },
     { href: `${sym}dice.html`, icon: '🎲', label: 'Dice' },
-    { href: `${sym}transport.html`, icon: '🚗', label: 'Transport' },
-    { href: `${sym}office.html`, icon: '💼', label: 'Office' },
-    { href: `${sym}award.html`, icon: '🏆', label: 'Trophy Medals' },
-    { href: `${sym}lock.html`, icon: '🔒', label: 'Lock and Key' },
-    { href: `${sym}warning.html`, icon: '⚠️', label: 'Warning' },
-    { href: `${sym}writing.html`, icon: '✍️', label: 'Writing' },
-    { href: `${sym}weapon.html`, icon: '⚔️', label: 'Weapon' },
-    { href: `${sym}roman.html`, icon: 'Ⅳ', label: 'Roman Numerals' },
-    { href: `${sym}greek.html`, icon: 'Ω', label: 'Greek alphabet' },
-    { href: `${sym}emoji-faces.html`, icon: '🥰', label: 'Smiley Face' },
-    { href: `${sym}fraction.html`, icon: '½', label: 'Fraction' },
-    { href: `${sym}comparison.html`, icon: '≥', label: 'Comparison' },
-    { href: `${sym}line.html`, icon: '│', label: 'Line' },
-    { href: `${sym}circle.html`, icon: '○', label: 'Circle' },
-    { href: `${sym}triangle.html`, icon: '▲', label: 'Triangle' },
-    { href: `${sym}square.html`, icon: '⬛', label: 'Square' },
-    { href: `${sym}rectangle.html`, icon: '█', label: 'Rectangle' },
-    { href: `${sym}corner.html`, icon: '╚', label: 'Corner' },
-    { href: `${sym}punctuation.html`, icon: '!', label: 'Punctuation' },
-    { href: `${sym}chinese.html`, icon: '愛', label: 'Chinese' },
-    { href: `${sym}japanese.html`, icon: 'あ', label: 'Japanese' },
-    { href: `${sym}korean.html`, icon: 'ㅿ', label: 'Korean' },
-    { href: `${sym}hand.html`, icon: '✌️', label: 'Hand' },
-    { href: `${sym}bubble.html`, icon: 'ⓐ', label: 'Bubble Text' },
-    { href: `${sym}cursive.html`, icon: '𝒜', label: 'Cursive Letter' },
-    { href: `${sym}upside-down.html`, icon: 'ʇ', label: 'Upside Down Text' },
-    { href: `${sym}old-english.html`, icon: '𝔄', label: 'Old Enlish Text' },
-    { href: `${sym}house.html`, icon: '🏠', label: 'House' },
-    { href: `${sym}crown.html`, icon: '👑', label: 'Crown' },
-    { href: `${sym}diamond.html`, icon: '◆', label: 'Daimond' },
-    { href: `${sym}quotation.html`, icon: '❝', label: 'Quotation Mark' },
-    { href: `${sym}crypto.html`, icon: '₿', label: 'Cryptocurrency' },
-    { href: `${sym}loading.html`, icon: '▓', label: 'Loading' },
-    { href: `${sym}wave.html`, icon: '〰', label: 'Wave' },
-    { href: `${sym}divider.html`, icon: '┊', label: 'Divider' },
-    { href: `${sym}border.html`, icon: '╔', label: 'Border' },
-    { href: `${sym}sparkle.html`, icon: '✨', label: 'Sparkle' },
-    { href: `${sym}aesthetic.html`, icon: '✧', label: 'Aesthetic' },
-    { href: `${sym}dot.html`, icon: '•', label: 'Dot' },
-    { href: `${sym}german.html`, icon: 'ß', label: 'German' }
+    { href: `${root}heart.html`, icon: '❤️', label: 'Heart' },
+    { href: `${root}checkmark.html`, icon: '✔️', label: 'Check Mark' },
+    { href: `${root}animal.html`, icon: '🐾', label: 'Text Animal Symbols' },
+    { href: `${root}star.html`, icon: '⭐', label: 'Star' },
+    { href: `${root}sun.html`, icon: '☀', label: 'Sun' },
+    { href: `${root}moon.html`, icon: '☾', label: 'Moon' },
+    { href: `${root}music.html`, icon: '🎵', label: 'Music' },
+    { href: `${root}cross.html`, icon: '✝', label: 'Cross' },
+    { href: `${root}zodiac.html`, icon: '♈', label: 'Zodiac' },
+    { href: `${root}numbers.html`, icon: '①', label: 'Numbers' },
+    { href: `${root}arrow.html`, icon: '➶', label: 'Arrow' },
+    { href: `${root}uparrow.html`, icon: '↑', label: 'Up Arrow' },
+    { href: `${root}downarrow.html`, icon: '↓', label: 'Down Arrow' },
+    { href: `${root}flower.html`, icon: '✿', label: 'Flower' },
+    { href: `${root}gender.html`, icon: '⚥', label: 'Gender' },
+    { href: `${root}infinity.html`, icon: '∞', label: 'Infinity' },
+    { href: `${root}medical.html`, icon: '⚕', label: 'Medical' },
+    { href: `${root}currency.html`, icon: '$', label: 'Currency' },
+    { href: `${root}chess.html`, icon: '♚', label: 'Chess' },
+    { href: `${root}weather.html`, icon: '🌤', label: 'Weather' },
+    { href: `${root}bracket.html`, icon: '【', label: 'Bracket' },
+    { href: `${root}religion.html`, icon: '✝', label: 'Religion' },
+    { href: `${root}copyright.html`, icon: '©', label: 'Copyright' },
+    { href: `${root}unit.html`, icon: '℃', label: 'Unit' },
+    { href: `${root}card.html`, icon: '♠', label: 'Card Symbol' },
+    { href: `${root}dice.html`, icon: '🎲', label: 'Dice' },
+    { href: `${root}transport.html`, icon: '🚗', label: 'Transport' },
+    { href: `${root}office.html`, icon: '💼', label: 'Office' },
+    { href: `${root}award.html`, icon: '🏆', label: 'Trophy Medals' },
+    { href: `${root}lock.html`, icon: '🔒', label: 'Lock and Key' },
+    { href: `${root}warning.html`, icon: '⚠️', label: 'Warning' },
+    { href: `${root}writing.html`, icon: '✍️', label: 'Writing' },
+    { href: `${root}weapon.html`, icon: '⚔️', label: 'Weapon' },
+    { href: `${root}roman.html`, icon: 'Ⅳ', label: 'Roman Numerals' },
+    { href: `${root}greek.html`, icon: 'Ω', label: 'Greek alphabet' },
+    { href: `${root}emoji-faces.html`, icon: '🥰', label: 'Smiley Face' },
+    { href: `${root}fraction.html`, icon: '½', label: 'Fraction' },
+    { href: `${root}comparison.html`, icon: '≥', label: 'Comparison' },
+    { href: `${root}line.html`, icon: '│', label: 'Line' },
+    { href: `${root}circle.html`, icon: '○', label: 'Circle' },
+    { href: `${root}triangle.html`, icon: '▲', label: 'Triangle' },
+    { href: `${root}square.html`, icon: '⬛', label: 'Square' },
+    { href: `${root}rectangle.html`, icon: '█', label: 'Rectangle' },
+    { href: `${root}corner.html`, icon: '╚', label: 'Corner' },
+    { href: `${root}punctuation.html`, icon: '!', label: 'Punctuation' },
+    { href: `${root}chinese.html`, icon: '愛', label: 'Chinese' },
+    { href: `${root}japanese.html`, icon: 'あ', label: 'Japanese' },
+    { href: `${root}korean.html`, icon: 'ㅿ', label: 'Korean' },
+    { href: `${root}hand.html`, icon: '✌️', label: 'Hand' },
+    { href: `${root}bubble.html`, icon: 'ⓐ', label: 'Bubble Text' },
+    { href: `${root}cursive.html`, icon: '𝒜', label: 'Cursive Letter' },
+    { href: `${root}upside-down.html`, icon: 'ʇ', label: 'Upside Down Text' },
+    { href: `${root}old-english.html`, icon: '𝔄', label: 'Old Enlish Text' },
+    { href: `${root}house.html`, icon: '🏠', label: 'House' },
+    { href: `${root}crown.html`, icon: '👑', label: 'Crown' },
+    { href: `${root}diamond.html`, icon: '◆', label: 'Daimond' },
+    { href: `${root}quotation.html`, icon: '❝', label: 'Quotation Mark' },
+    { href: `${root}crypto.html`, icon: '₿', label: 'Cryptocurrency' },
+    { href: `${root}loading.html`, icon: '▓', label: 'Loading' },
+    { href: `${root}wave.html`, icon: '〰', label: 'Wave' },
+    { href: `${root}divider.html`, icon: '┊', label: 'Divider' },
+    { href: `${root}border.html`, icon: '╔', label: 'Border' },
+    { href: `${root}sparkle.html`, icon: '✨', label: 'Sparkle' },
+    { href: `${root}aesthetic.html`, icon: '✧', label: 'Aesthetic' },
+    { href: `${root}dot.html`, icon: '•', label: 'Dot' },
+    { href: `${root}german.html`, icon: 'ß', label: 'German' }
   ];
 
   // Skip if quick-links-grid already exists on the page (e.g. hardcoded in HTML)
@@ -813,6 +854,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ClipboardManager.init();
   initCopyable();
   initSearch();
+  initUniversalHeadings(); // Apply the universal heading change
   initFontGenerator();
   initParticles();
   highlightActiveSidebarLink();
