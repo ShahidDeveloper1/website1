@@ -260,6 +260,11 @@ function renderSidebar() {
       <a href="${root}small-text.html"><span class="link-icon">ᵗ</span> Small Text</a>
       <a href="${root}bold-text.html"><span class="link-icon">𝗕</span> Bold Text</a>
       <a href="${root}morse-code.html"><span class="link-icon">·-</span> Morse Code</a>
+      <a href="${root}cursive-text.html"><span class="link-icon">𝒞</span> Cursive Text</a>
+      <a href="${root}upside-down-text.html"><span class="link-icon">ʇ</span> Upside Down Text</a>
+      <a href="${root}vaporwave-text.html"><span class="link-icon">Ｖ</span> Vaporwave Text</a>
+      <a href="${root}bubble-text.html"><span class="link-icon">ⓑ</span> Bubble Text</a>
+      <a href="${root}gothic-text.html"><span class="link-icon">𝔊</span> Gothic Text</a>
     </div>
   </div>
   

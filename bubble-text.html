@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset='UTF-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bubble Text Generator — ⓑⓤⓑⓑⓛⓔ ⓣⓔⓧⓣ Copy Paste | FancySymbols</title>
+  <meta name="description" content="Convert text into bubble letter font ⓑⓤⓑⓑⓛⓔ instantly. Copy paste circled text, dark bubble, and squared letters for social media bios.">
+  <link rel="canonical" href="https://fancysymbols.com/bubble-text">
+  <meta property="og:title" content="Bubble Text Generator — ⓑⓤⓑⓑⓛⓔ Font Copy Paste">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=5.5">
+</head>
+<body>
+  <header class="header"><div class="header-inner">
+    <a href="index.html" class="logo"><img src="favicon.png" alt="FancySymbols" width="32" height="32"> FancySymbols</a>
+    <nav class="header-nav"><a href="index.html">Home</a><a href="all-symbols.html">All Symbols</a><a href="aesthetic-fonts.html">Aesthetic</a><a href="cute-fonts.html">Cute</a><a href="lenny-face.html" class="cta-btn">Lenny Faces</a></nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button>
+  </div></header>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <main class="main-content" style="padding-top:6rem;">
+    <section class="hero" style="text-align:center;padding:2rem 1rem;">
+      <h1 style="font-size:2.2rem;font-weight:800;margin-bottom:.5rem;">Bubble Text Generator ⓑⓤⓑⓑⓛⓔ</h1>
+      <p style="color:#64748b;max-width:600px;margin:0 auto 1.5rem;">Convert your text into <strong>bubble letters, dark circles & squared text</strong>. Click to copy!</p>
+    </section>
+    <div style="max-width:700px;margin:0 auto;padding:0 1rem;">
+      <input type="text" id="bubbleInput" placeholder="Type your text here..." value="Hello World" style="width:100%;padding:1rem 1.25rem;font-size:1.15rem;border:2px solid #e2e8f0;border-radius:14px;outline:none;font-family:'Outfit',sans-serif;">
+    </div>
+    <div id="bubbleResults" style="max-width:700px;margin:1.5rem auto 0;padding:0 1rem;"></div>
+    <section style="max-width:700px;margin:3rem auto;padding:0 1rem;">
+      <h2 style="font-size:1.4rem;font-weight:700;margin-bottom:1rem;">What Are Bubble Letters?</h2>
+      <p style="color:#334155;line-height:1.8;margin-bottom:1rem;">Bubble letters (also called circled letters) are Unicode characters where each letter appears inside a circle. They come from the Enclosed Alphanumerics block (U+2460–U+24FF) and the Enclosed Alphanumeric Supplement block. There are several variations including light circles ⓐ, dark/filled circles 🅐, and squared letters 🄰.</p>
+      <p style="color:#334155;line-height:1.8;">These characters work everywhere — Instagram, Discord, TikTok, Twitter, and any app that supports Unicode. They're perfect for making your text stand out in bios, usernames, and messages.</p>
+      <h2 style="font-size:1.4rem;font-weight:700;margin:2rem 0 1rem;">FAQ</h2>
+      <div class="faq-item"><div class="faq-q">Do bubble letters work on Instagram?</div><div class="faq-a">Yes! Bubble letters are Unicode characters that work perfectly on Instagram bios, captions, and comments.</div></div>
+      <div class="faq-item"><div class="faq-q">Why don't some letters have bubble versions?</div><div class="faq-a">Numbers and lowercase letters have official Unicode bubble/circle versions. Some special characters may not have circled equivalents and will appear unchanged.</div></div>
+    </section>
+    <footer class="footer"><div class="footer-bottom"><p class="footer-copy">&copy; 2026 FancySymbols.</p></div></footer>
+  </main>
+  <div id="toast" class="toast"></div>
+  <script src="script.js?v=5.5"></script>
+  <script>
+  (function(){
+    const bubble={'a':'ⓐ','b':'ⓑ','c':'ⓒ','d':'ⓓ','e':'ⓔ','f':'ⓕ','g':'ⓖ','h':'ⓗ','i':'ⓘ','j':'ⓙ','k':'ⓚ','l':'ⓛ','m':'ⓜ','n':'ⓝ','o':'ⓞ','p':'ⓟ','q':'ⓠ','r':'ⓡ','s':'ⓢ','t':'ⓣ','u':'ⓤ','v':'ⓥ','w':'ⓦ','x':'ⓧ','y':'ⓨ','z':'ⓩ','A':'Ⓐ','B':'Ⓑ','C':'Ⓒ','D':'Ⓓ','E':'Ⓔ','F':'Ⓕ','G':'Ⓖ','H':'Ⓗ','I':'Ⓘ','J':'Ⓙ','K':'Ⓚ','L':'Ⓛ','M':'Ⓜ','N':'Ⓝ','O':'Ⓞ','P':'Ⓟ','Q':'Ⓠ','R':'Ⓡ','S':'Ⓢ','T':'Ⓣ','U':'Ⓤ','V':'Ⓥ','W':'Ⓦ','X':'Ⓧ','Y':'Ⓨ','Z':'Ⓩ'};
+    const dark={'a':'🅐','b':'🅑','c':'🅒','d':'🅓','e':'🅔','f':'🅕','g':'🅖','h':'🅗','i':'🅘','j':'🅙','k':'🅚','l':'🅛','m':'🅜','n':'🅝','o':'🅞','p':'🅟','q':'🅠','r':'🅡','s':'🅢','t':'🅣','u':'🅤','v':'🅥','w':'🅦','x':'🅧','y':'🅨','z':'🅩','A':'🅐','B':'🅑','C':'🅒','D':'🅓','E':'🅔','F':'🅕','G':'🅖','H':'🅗','I':'🅘','J':'🅙','K':'🅚','L':'🅛','M':'🅜','N':'🅝','O':'🅞','P':'🅟','Q':'🅠','R':'🅡','S':'🅢','T':'🅣','U':'🅤','V':'🅥','W':'🅦','X':'🅧','Y':'🅨','Z':'🅩'};
+    const sq={'a':'🄰','b':'🄱','c':'🄲','d':'🄳','e':'🄴','f':'🄵','g':'🄶','h':'🄷','i':'🄸','j':'🄹','k':'🄺','l':'🄻','m':'🄼','n':'🄽','o':'🄾','p':'🄿','q':'🅀','r':'🅁','s':'🅂','t':'🅃','u':'🅄','v':'🅅','w':'🅆','x':'🅇','y':'🅈','z':'🅉','A':'🄰','B':'🄱','C':'🄲','D':'🄳','E':'🄴','F':'🄵','G':'🄶','H':'🄷','I':'🄸','J':'🄹','K':'🄺','L':'🄻','M':'🄼','N':'🄽','O':'🄾','P':'🄿','Q':'🅀','R':'🅁','S':'🅂','T':'🅃','U':'🅄','V':'🅅','W':'🅆','X':'🅇','Y':'🅈','Z':'🅉'};
+    function tx(t,m){return[...t].map(c=>m[c]||c).join('');}
+    const styles={'Bubble ⓐⓑⓒ':bubble,'Dark Bubble 🅐🅑🅒':dark,'Squared 🄰🄱🄲':sq};
+    function render(){
+      const input=document.getElementById('bubbleInput'),res=document.getElementById('bubbleResults');
+      if(!input||!res)return;const t=input.value||'Hello World';let h='';
+      for(const[n,m]of Object.entries(styles)){const c=tx(t,m),s=c.replace(/\\/g,'\\\\').replace(/'/g,"\\'"),d=c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        h+=`<div class="font-result-item" onclick="copyToClipboard('${s}')"><span class="font-style-name">${n}</span><span class="font-preview">${d}</span><span class="font-copy-btn">Copy</span></div>`;}
+      res.innerHTML=h;
+    }
+    document.addEventListener('DOMContentLoaded',()=>{const i=document.getElementById('bubbleInput');if(i){i.addEventListener('input',render);render();}});
+  })();
+  </script>
+</body>
+</html>

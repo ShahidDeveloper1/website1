@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset='UTF-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gothic Text Generator — 𝔊𝔬𝔱𝔥𝔦𝔠 / Old English Font Copy Paste | FancySymbols</title>
+  <meta name="description" content="Convert text into gothic, old english & blackletter fonts instantly. Copy paste 𝔊𝔬𝔱𝔥𝔦𝔠 and 𝕲𝖔𝖙𝖍𝖎𝖈 Unicode fonts for Discord, Instagram & gaming.">
+  <link rel="canonical" href="https://fancysymbols.com/gothic-text">
+  <meta property="og:title" content="Gothic Text Generator — 𝔊𝔬𝔱𝔥𝔦𝔠 Font Copy Paste">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=5.5">
+</head>
+<body>
+  <header class="header"><div class="header-inner">
+    <a href="index.html" class="logo"><img src="favicon.png" alt="FancySymbols" width="32" height="32"> FancySymbols</a>
+    <nav class="header-nav"><a href="index.html">Home</a><a href="all-symbols.html">All Symbols</a><a href="aesthetic-fonts.html">Aesthetic</a><a href="cute-fonts.html">Cute</a><a href="lenny-face.html" class="cta-btn">Lenny Faces</a></nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button>
+  </div></header>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <main class="main-content" style="padding-top:6rem;">
+    <section class="hero" style="text-align:center;padding:2rem 1rem;">
+      <h1 style="font-size:2.2rem;font-weight:800;margin-bottom:.5rem;">Gothic Text Generator 𝔊𝔬𝔱𝔥𝔦𝔠</h1>
+      <p style="color:#64748b;max-width:600px;margin:0 auto 1.5rem;">Convert your text into <strong>gothic, old english & blackletter fonts</strong>. Click any style to copy!</p>
+    </section>
+    <div style="max-width:700px;margin:0 auto;padding:0 1rem;">
+      <input type="text" id="gothicInput" placeholder="Type your text here..." value="Dark Knight" style="width:100%;padding:1rem 1.25rem;font-size:1.15rem;border:2px solid #e2e8f0;border-radius:14px;outline:none;font-family:'Outfit',sans-serif;">
+    </div>
+    <div id="gothicResults" style="max-width:700px;margin:1.5rem auto 0;padding:0 1rem;"></div>
+    <section style="max-width:700px;margin:3rem auto;padding:0 1rem;">
+      <h2 style="font-size:1.4rem;font-weight:700;margin-bottom:1rem;">What is Gothic Text?</h2>
+      <p style="color:#334155;line-height:1.8;margin-bottom:1rem;">Gothic text (also called Fraktur, blackletter, or Old English) uses Unicode characters from the Mathematical Fraktur block. These characters mimic the medieval calligraphy style used in manuscripts and early printed books across Europe. There are two variations: regular Fraktur (𝔄𝔅ℭ) and bold Fraktur (𝕬𝕭𝕮).</p>
+      <p style="color:#334155;line-height:1.8;">Gothic fonts are extremely popular for gaming usernames, Discord servers, Instagram bios, tattoo text previews, and dark aesthetic content.</p>
+      <h2 style="font-size:1.4rem;font-weight:700;margin:2rem 0 1rem;">FAQ</h2>
+      <div class="faq-item"><div class="faq-q">Does gothic text work on Discord?</div><div class="faq-a">Yes! Gothic/Fraktur Unicode characters work perfectly for Discord usernames, server names, and messages.</div></div>
+      <div class="faq-item"><div class="faq-q">Can I use gothic font for tattoos?</div><div class="faq-a">You can use this generator to preview how your text looks in gothic style. However, for actual tattoo designs, we recommend working with a tattoo artist who can create custom blackletter calligraphy.</div></div>
+      <div class="faq-item"><div class="faq-q">Is this free?</div><div class="faq-a">Yes, 100% free with no limits.</div></div>
+    </section>
+    <footer class="footer"><div class="footer-bottom"><p class="footer-copy">&copy; 2026 FancySymbols.</p></div></footer>
+  </main>
+  <div id="toast" class="toast"></div>
+  <script src="script.js?v=5.5"></script>
+  <script>
+  (function(){
+    const fraktur={'a':'𝔞','b':'𝔟','c':'𝔠','d':'𝔡','e':'𝔢','f':'𝔣','g':'𝔤','h':'𝔥','i':'𝔦','j':'𝔧','k':'𝔨','l':'𝔩','m':'𝔪','n':'𝔫','o':'𝔬','p':'𝔭','q':'𝔮','r':'𝔯','s':'𝔰','t':'𝔱','u':'𝔲','v':'𝔳','w':'𝔴','x':'𝔵','y':'𝔶','z':'𝔷','A':'𝔄','B':'𝔅','C':'ℭ','D':'𝔇','E':'𝔈','F':'𝔉','G':'𝔊','H':'ℌ','I':'ℑ','J':'𝔍','K':'𝔎','L':'𝔏','M':'𝔐','N':'𝔑','O':'𝔒','P':'𝔓','Q':'𝔔','R':'ℜ','S':'𝔖','T':'𝔗','U':'𝔘','V':'𝔙','W':'𝔚','X':'𝔛','Y':'𝔜','Z':'ℨ'};
+    const boldFraktur={'a':'𝖆','b':'𝖇','c':'𝖈','d':'𝖉','e':'𝖊','f':'𝖋','g':'𝖌','h':'𝖍','i':'𝖎','j':'𝖏','k':'𝖐','l':'𝖑','m':'𝖒','n':'𝖓','o':'𝖔','p':'𝖕','q':'𝖖','r':'𝖗','s':'𝖘','t':'𝖙','u':'𝖚','v':'𝖛','w':'𝖜','x':'𝖝','y':'𝖞','z':'𝖟','A':'𝕬','B':'𝕭','C':'𝕮','D':'𝕯','E':'𝕰','F':'𝕱','G':'𝕲','H':'𝕳','I':'𝕴','J':'𝕵','K':'𝕶','L':'𝕷','M':'𝕸','N':'𝕹','O':'𝕺','P':'𝕻','Q':'𝕼','R':'𝕽','S':'𝕾','T':'𝕿','U':'𝖀','V':'𝖁','W':'𝖂','X':'𝖃','Y':'𝖄','Z':'𝖅'};
+    function tx(t,m){return[...t].map(c=>m[c]||c).join('');}
+    const deco={'☠ Dark Gothic ☠':(t)=>'☠ '+t+' ☠','⚔ Battle Gothic ⚔':(t)=>'⚔ '+t+' ⚔','♛ Royal Gothic ♛':(t)=>'♛ '+t+' ♛','✞ Cross Gothic ✞':(t)=>'✞ '+t+' ✞','꧁ Ornate Gothic ꧂':(t)=>'꧁ '+t+' ꧂','═══ Framed ═══':(t)=>'═══ '+t+' ═══'};
+    function render(){
+      const input=document.getElementById('gothicInput'),res=document.getElementById('gothicResults');
+      if(!input||!res)return;const t=input.value||'Dark Knight';let h='';
+      const styles={'Gothic (Fraktur)':fraktur,'Bold Gothic':boldFraktur};
+      for(const[n,m]of Object.entries(styles)){const c=tx(t,m),s=c.replace(/\\/g,'\\\\').replace(/'/g,"\\'"),d=c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        h+=`<div class="font-result-item" onclick="copyToClipboard('${s}')"><span class="font-style-name">${n}</span><span class="font-preview">${d}</span><span class="font-copy-btn">Copy</span></div>`;}
+      for(const[n,fn]of Object.entries(deco)){const b=tx(t,boldFraktur),c=fn(b),s=c.replace(/\\/g,'\\\\').replace(/'/g,"\\'"),d=c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        h+=`<div class="font-result-item" onclick="copyToClipboard('${s}')"><span class="font-style-name">${n}</span><span class="font-preview">${d}</span><span class="font-copy-btn">Copy</span></div>`;}
+      res.innerHTML=h;
+    }
+    document.addEventListener('DOMContentLoaded',()=>{const i=document.getElementById('gothicInput');if(i){i.addEventListener('input',render);render();}});
+  })();
+  </script>
+</body>
+</html>

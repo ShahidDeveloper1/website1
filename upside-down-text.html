@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset='UTF-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upside Down Text Generator — ʇxǝʇ uʍop ǝpᴉsd∩ | FancySymbols</title>
+  <meta name="description" content="Flip your text upside down instantly! Copy paste upside down, reversed & flipped Unicode text for social media, pranks & fun messages.">
+  <link rel="canonical" href="https://fancysymbols.com/upside-down-text">
+  <meta property="og:title" content="Upside Down Text Generator — Flip Text Instantly">
+  <meta property="og:description" content="Flip your text upside down instantly. Copy paste for social media & pranks.">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=5.5">
+</head>
+<body>
+  <header class="header"><div class="header-inner">
+    <a href="index.html" class="logo"><img src="favicon.png" alt="FancySymbols" width="32" height="32"> FancySymbols</a>
+    <nav class="header-nav"><a href="index.html">Home</a><a href="all-symbols.html">All Symbols</a><a href="aesthetic-fonts.html">Aesthetic</a><a href="cute-fonts.html">Cute</a><a href="lenny-face.html" class="cta-btn">Lenny Faces</a></nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button>
+  </div></header>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <main class="main-content" style="padding-top:6rem;">
+    <section class="hero" style="text-align:center;padding:2rem 1rem;">
+      <h1 style="font-size:2.2rem;font-weight:800;margin-bottom:.5rem;">Upside Down Text Generator ʇxǝ⊥</h1>
+      <p style="color:#64748b;max-width:600px;margin:0 auto 1.5rem;">Type below to <strong>flip your text upside down</strong>. Click the result to copy!</p>
+    </section>
+    <div style="max-width:700px;margin:0 auto;padding:0 1rem;">
+      <textarea id="flipInput" rows="3" placeholder="Type your text here..." style="width:100%;padding:1rem 1.25rem;font-size:1.1rem;border:2px solid #e2e8f0;border-radius:14px;outline:none;font-family:'Outfit',sans-serif;resize:vertical;">Hello World</textarea>
+      <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">
+        <button onclick="doFlip('upside')" style="flex:1;padding:.85rem;border:none;border-radius:12px;background:#6366f1;color:#fff;font-weight:600;cursor:pointer;font-size:.95rem;">↕ Upside Down</button>
+        <button onclick="doFlip('reverse')" style="flex:1;padding:.85rem;border:none;border-radius:12px;background:#0f172a;color:#fff;font-weight:600;cursor:pointer;font-size:.95rem;">⇄ Reverse</button>
+        <button onclick="doFlip('mirror')" style="flex:1;padding:.85rem;border:none;border-radius:12px;background:#059669;color:#fff;font-weight:600;cursor:pointer;font-size:.95rem;">⟷ Mirror</button>
+      </div>
+      <div id="flipOutput" style="margin-top:1.5rem;padding:1.25rem;background:#f8fafc;border-radius:14px;min-height:60px;font-size:1.3rem;cursor:pointer;text-align:center;word-break:break-all;border:2px dashed #e2e8f0;" onclick="copyToClipboard(this.textContent)"></div>
+      <p style="text-align:center;color:#94a3b8;font-size:.8rem;margin-top:.5rem;">Click the result to copy</p>
+    </div>
+    <section style="max-width:700px;margin:3rem auto;padding:0 1rem;">
+      <h2 style="font-size:1.4rem;font-weight:700;margin-bottom:1rem;">How Does Upside Down Text Work?</h2>
+      <p style="color:#334155;line-height:1.8;margin-bottom:1rem;">Upside down text replaces each letter with a Unicode character that looks like the flipped version. For example, 'a' becomes 'ɐ', 'b' becomes 'q', and 'h' becomes 'ɥ'. The entire string is then reversed so it reads correctly when viewed upside down.</p>
+      <p style="color:#334155;line-height:1.8;margin-bottom:1rem;">This works on every platform — Instagram, Discord, TikTok, Twitter, Facebook, WhatsApp, and more. It's perfect for fun messages, pranks, or making your social media stand out!</p>
+      <h2 style="font-size:1.4rem;font-weight:700;margin:2rem 0 1rem;">FAQ</h2>
+      <div class="faq-item"><div class="faq-q">Does upside down text work everywhere?</div><div class="faq-a">Yes! Since these are standard Unicode characters, they work on all modern devices, apps, and websites.</div></div>
+      <div class="faq-item"><div class="faq-q">Can I flip emojis upside down?</div><div class="faq-a">Emojis can't be flipped since they're image-based characters. Only regular letters and some punctuation can be flipped using Unicode substitutions.</div></div>
+      <div class="faq-item"><div class="faq-q">Is this free?</div><div class="faq-a">Yes, 100% free with no limits.</div></div>
+    </section>
+    <footer class="footer"><div class="footer-bottom"><p class="footer-copy">&copy; 2026 FancySymbols.</p></div></footer>
+  </main>
+  <div id="toast" class="toast"></div>
+  <script src="script.js?v=5.5"></script>
+  <script>
+  const flipMap={'a':'ɐ','b':'q','c':'ɔ','d':'p','e':'ǝ','f':'ɟ','g':'ƃ','h':'ɥ','i':'ᴉ','j':'ɾ','k':'ʞ','l':'l','m':'ɯ','n':'u','o':'o','p':'d','q':'b','r':'ɹ','s':'s','t':'ʇ','u':'n','v':'ʌ','w':'ʍ','x':'x','y':'ʎ','z':'z','A':'∀','B':'𐐒','C':'Ɔ','D':'◖','E':'Ǝ','F':'Ⅎ','G':'⅁','H':'H','I':'I','J':'Ր','K':'ʞ','L':'˥','M':'W','N':'N','O':'O','P':'Ԁ','Q':'Ό','R':'ᴚ','S':'S','T':'⊥','U':'∩','V':'Λ','W':'M','X':'X','Y':'⅄','Z':'Z','1':'Ɩ','2':'ᄅ','3':'Ɛ','4':'ㄣ','5':'ϛ','6':'9','7':'Ɫ','8':'8','9':'6','0':'0','.':'˙',',':'\'','\'':',','?':'¿','!':'¡','(':')',')':'(','[':']',']':'[','{':'}','}':'{','<':'>','>':'<','_':'‾'};
+  const mirrorMap={'a':'ɒ','b':'d','c':'ɔ','d':'b','e':'ɘ','f':'ʇ','g':'ϱ','h':'ʜ','i':'i','j':'ꞁ','k':'ʞ','l':'l','m':'m','n':'ᴎ','o':'o','p':'q','q':'p','r':'ɿ','s':'ꙅ','t':'ƚ','u':'υ','v':'v','w':'w','x':'x','y':'ʏ','z':'ƹ','A':'A','B':'ᙏ','C':'Ɔ','D':'ᗡ','E':'Ǝ','F':'ꟻ','G':'Ꭾ','H':'H','I':'I','J':'Ꞁ','K':'⋊','L':'⅃','M':'M','N':'И','O':'O','P':'¶','Q':'Ϙ','R':'Я','S':'Ꙅ','T':'T','U':'U','V':'V','W':'W','X':'X','Y':'Y','Z':'Ƹ'};
+  function doFlip(mode){
+    const t=document.getElementById('flipInput').value;
+    let r='';
+    if(mode==='upside'){r=[...t].map(c=>flipMap[c]||c).reverse().join('');}
+    else if(mode==='reverse'){r=[...t].reverse().join('');}
+    else if(mode==='mirror'){r=[...t].map(c=>mirrorMap[c]||c).reverse().join('');}
+    document.getElementById('flipOutput').textContent=r;
+  }
+  document.addEventListener('DOMContentLoaded',()=>doFlip('upside'));
+  </script>
+</body>
+</html>

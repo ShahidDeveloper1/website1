@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset='UTF-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vaporwave Text Generator — Ｖａｐｏｒｗａｖｅ Ａｅｓｔｈｅｔｉｃ Font | FancySymbols</title>
+  <meta name="description" content="Convert text into vaporwave aesthetic ｆｕｌｌｗｉｄｔｈ font instantly. Copy paste vaporwave text for Discord, Instagram & TikTok.">
+  <link rel="canonical" href="https://fancysymbols.com/vaporwave-text">
+  <meta property="og:title" content="Vaporwave Text Generator — Ａｅｓｔｈｅｔｉｃ Font">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=5.5">
+</head>
+<body>
+  <header class="header"><div class="header-inner">
+    <a href="index.html" class="logo"><img src="favicon.png" alt="FancySymbols" width="32" height="32"> FancySymbols</a>
+    <nav class="header-nav"><a href="index.html">Home</a><a href="all-symbols.html">All Symbols</a><a href="aesthetic-fonts.html">Aesthetic</a><a href="cute-fonts.html">Cute</a><a href="lenny-face.html" class="cta-btn">Lenny Faces</a></nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button>
+  </div></header>
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <main class="main-content" style="padding-top:6rem;">
+    <section class="hero" style="text-align:center;padding:2rem 1rem;">
+      <h1 style="font-size:2.2rem;font-weight:800;margin-bottom:.5rem;">Vaporwave Text Generator</h1>
+      <p style="color:#64748b;max-width:600px;margin:0 auto 1.5rem;">Convert your text into <strong>ｖａｐｏｒｗａｖｅ ａｅｓｔｈｅｔｉｃ</strong> fullwidth characters. Click to copy!</p>
+    </section>
+    <div style="max-width:700px;margin:0 auto;padding:0 1rem;">
+      <input type="text" id="vaporInput" placeholder="Type your text here..." value="Aesthetic Vibes" style="width:100%;padding:1rem 1.25rem;font-size:1.15rem;border:2px solid #e2e8f0;border-radius:14px;outline:none;font-family:'Outfit',sans-serif;">
+    </div>
+    <div id="vaporResults" style="max-width:700px;margin:1.5rem auto 0;padding:0 1rem;"></div>
+    <section style="max-width:700px;margin:3rem auto;padding:0 1rem;">
+      <h2 style="font-size:1.4rem;font-weight:700;margin-bottom:1rem;">What is Vaporwave Text?</h2>
+      <p style="color:#334155;line-height:1.8;margin-bottom:1rem;">Vaporwave text (also called fullwidth text or aesthetic text) replaces standard ASCII characters with their fullwidth Unicode equivalents. Originally designed for East Asian typography where Latin characters need to match the width of CJK characters, the vaporwave/aesthetic internet culture adopted it for its distinctive s p a c e d  o u t look.</p>
+      <p style="color:#334155;line-height:1.8;">The style is associated with the vaporwave aesthetic movement — featuring neon colors, '80s/'90s nostalgia, Japanese text, and retro-futuristic visuals. It's widely used in Discord servers, Tumblr, Reddit, and social media bios.</p>
+      <h2 style="font-size:1.4rem;font-weight:700;margin:2rem 0 1rem;">FAQ</h2>
+      <div class="faq-item"><div class="faq-q">What makes vaporwave text different?</div><div class="faq-a">Vaporwave text uses fullwidth Unicode characters (U+FF01–U+FF5E) which are wider than normal characters, giving that distinctive spaced-out aesthetic look.</div></div>
+      <div class="faq-item"><div class="faq-q">Does vaporwave text work on Discord?</div><div class="faq-a">Yes! Fullwidth characters work perfectly on Discord for usernames, messages, and server channel names.</div></div>
+      <div class="faq-item"><div class="faq-q">Is this free?</div><div class="faq-a">Yes, 100% free with no limits.</div></div>
+    </section>
+    <footer class="footer"><div class="footer-bottom"><p class="footer-copy">&copy; 2026 FancySymbols.</p></div></footer>
+  </main>
+  <div id="toast" class="toast"></div>
+  <script src="script.js?v=5.5"></script>
+  <script>
+  (function(){
+    function toFullwidth(t){return[...t].map(c=>{const code=c.charCodeAt(0);if(code===32)return'\u3000';if(code>=33&&code<=126)return String.fromCharCode(code+65248);return c;}).join('');}
+    function toSpaced(t){return[...t].join(' ');}
+    function toSpacedDots(t){return[...t].join('.');}
+    function toClap(t){return t.split(' ').join(' 👏 ');}
+    const styles={'Ｖａｐｏｒｗａｖｅ':toFullwidth,'S p a c e d  O u t':toSpaced,'D.o.t.t.e.d':toSpacedDots,'Clap 👏 Back':toClap,'⟦ Bracketed ⟧':(t)=>'⟦ '+toFullwidth(t)+' ⟧','✧ Sparkle Vapor ✧':(t)=>'✧ '+toFullwidth(t)+' ✧','☾ Moon Vapor ☾':(t)=>'☾ '+toFullwidth(t)+' ☾','★ Star Vapor ★':(t)=>'★ '+toFullwidth(t)+' ★'};
+    function render(){
+      const input=document.getElementById('vaporInput'),res=document.getElementById('vaporResults');
+      if(!input||!res)return;
+      const t=input.value||'Aesthetic Vibes';let h='';
+      for(const[n,fn]of Object.entries(styles)){
+        const c=fn(t),s=c.replace(/\\/g,'\\\\').replace(/'/g,"\\'"),d=c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        h+=`<div class="font-result-item" onclick="copyToClipboard('${s}')"><span class="font-style-name">${n}</span><span class="font-preview">${d}</span><span class="font-copy-btn">Copy</span></div>`;
+      }
+      res.innerHTML=h;
+    }
+    document.addEventListener('DOMContentLoaded',()=>{const i=document.getElementById('vaporInput');if(i){i.addEventListener('input',render);render();}});
+  })();
+  </script>
+</body>
+</html>
