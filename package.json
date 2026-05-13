@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0 --port 3000 --strictPort",
-    "build": "vite build",
+    "build": "npm run build:seo",
     "preview": "vite preview",
     "fix": "node modernize_all_pages.cjs",
     "seo:sitemap": "node generate_sitemap.js",

@@ -3,7 +3,7 @@ document.documentElement.classList.add('js-ready');
 
 
 // ===== CLIPBOARD BAR MANAGER =====
-window.ClipboardManager = {
+const ClipboardManager = window.ClipboardManager = {
   symbols: [],
   barEl: null,
   containerEl: null,
