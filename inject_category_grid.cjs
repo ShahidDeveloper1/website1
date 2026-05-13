@@ -1,81 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset='UTF-8'>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chess Symbols Copy and Paste - TextSymbols</title>
-  <meta name="description" content="Copy and paste chess symbols copy and paste for your bio, social posts, and messages. Huge collection of aesthetic and cool text symbols. One-click copy!">
-  <link rel='canonical' href='https://fancysymbols.com/symbols/chess.html'>
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://fancysymbols.com/symbols/chess.html">
-  <meta property="og:title" content="Chess Symbols Copy and Paste">
-  <meta property="og:description" content="Copy and paste chess symbols copy and paste instantly. Perfect for Instagram, TikTok, and gaming.">
-  <meta property="og:image" content="https://fancysymbols.com/og-image.png">
+const fs = require('fs');
+const path = require('path');
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://fancysymbols.com/symbols/chess.html">
-  <meta name="twitter:title" content="Chess Symbols Copy and Paste">
-  <meta name="twitter:description" content="One-click copy for chess symbols copy and paste and aesthetic text decorations.">
-  <meta name="twitter:image" content="https://fancysymbols.com/og-image.png">
+const symbolsDir = path.join(__dirname, 'symbols');
 
-  <link rel="stylesheet" href="/style.css">
-  <link rel="icon" type="image/png" href="/favicon.png">
-</head>
-<body>
-<div class="particles"></div>
-<header class="header">
-  <div class="header-inner">
-    <a href="/" class="logo">
-      <img src="/favicon.png" alt="TextSymbols Logo" class="logo-img">
-      <span class="logo-text">TextSymbols</span>
-    </a>
-    <nav class="header-nav">
-      <a href="/">Home</a>
-      <a href="/all-symbols.html">All Symbols</a>
-      <a href="/font-generator.html">Preppy Font Generator</a>
-      <a href="/cute-fonts.html">Cute Fonts</a>
-      <a href="/lenny-face.html" class="nav-cta">Lenny Faces</a>
-    </nav>
-    <button class="menu-toggle" id="menuToggle">☰</button>
-  </div>
-</header>
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
-<aside class="sidebar" id="sidebar"></aside>
-
-</div>
-
-
-
-
-<div class="page-wrapper"><main class="main-content">
-  <a href="/" class="back-link">← Back to Home</a>
-  <div class="page-header"><h1>Chess Symbols Copy and Paste</h1><p>Click any chess or royal symbol to copy it!</p></div>
-  
-  <div class="section-title"><span class="icon">♘</span> White Chess Pieces <span class="line"></span></div>
-  <div class="symbol-grid">
-    <div class="symbol-item">♔</div><div class="symbol-item">♕</div><div class="symbol-item">♖</div><div class="symbol-item">♗</div><div class="symbol-item">♘</div><div class="symbol-item">♙</div>
-  </div>
-
-  <div class="section-title"><span class="icon">♞</span> Black Chess Pieces <span class="line"></span></div>
-  <div class="symbol-grid">
-    <div class="symbol-item">♚</div><div class="symbol-item">♛</div><div class="symbol-item">♜</div><div class="symbol-item">♝</div><div class="symbol-item">♞</div><div class="symbol-item">♟</div>
-  </div>
-
-  <div class="section-title"><span class="icon">👑</span> Royalty Emojis <span class="line"></span></div>
-  <div class="symbol-grid">
-    <div class="symbol-item">👑</div><div class="symbol-item">🤴</div><div class="symbol-item">👸</div>
-  </div>
-
-  <div class="section-title"><span class="icon">♠</span> Card Suits <span class="line"></span></div>
-  <div class="symbol-grid">
-    <div class="symbol-item">♤</div><div class="symbol-item">♠</div><div class="symbol-item">♧</div><div class="symbol-item">♣</div>
-    <div class="symbol-item">♡</div><div class="symbol-item">♥</div><div class="symbol-item">♢</div><div class="symbol-item">♦</div>
-  </div>
-
-  
+const gridHtml = `
   <!-- CATEGORY NAVIGATION -->
   <div class="section-title">Browse More Symbols <span class="line"></span></div>
   <div class="quick-links-grid">
@@ -145,62 +73,34 @@
     <a href="/symbols/aesthetic.html" class="quick-link-btn" title="Aesthetic Symbols"><span>✧</span> Aesthetic</a>
     <a href="/symbols/dot.html" class="quick-link-btn" title="Dot Symbols"><span>•</span> Dot</a>
     <a href="/symbols/german.html" class="quick-link-btn" title="German Symbols"><span>ß</span> German</a>
-  </div>
-<div class="content-article">
-    <h2>About Chess Symbols</h2>
-    <p>Whether you're notating a grandmaster-level chess match or just want your social media profiles to look royal, these chess symbols are perfect! This page provides a complete set of unicode characters for every game piece in both outlined (white) and filled (black) variants. From the powerful Queen (♕ ♛) to the trusty Knight (♘ ♞), mix and match them with our Card Suits for the ultimate aesthetic gaming bio!</p>
-  </div>
-</main></div>
+  </div>`;
 
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <span class="logo-text highlight">TextSymbols</span>
-        <p class="footer-desc">Your premium destination for aesthetic symbols, cute fonts, and creative text tools. Elevate your digital presence with ease.</p>
-      </div>
-      
-      <div>
-        <h4 class="footer-col-title">Text Tools</h4>
-        <ul class="footer-links-list">
-          <li><a href="/all-symbols.html">All Symbols</a></li>
-          <li><a href="/font-generator.html">Preppy Font Generator</a></li>
-          <li><a href="/cute-fonts.html">Cute Fonts</a></li>
-          <li><a href="/lenny-face.html">Lenny Faces</a></li>
-        </ul>
-      </div>
+const files = fs.readdirSync(symbolsDir).filter(f => f.endsWith('.html'));
 
-      <div>
-        <h4 class="footer-col-title">Categories</h4>
-        <ul class="footer-links-list">
-          <li><a href="/symbols/heart.html">Heart Symbols</a></li>
-          <li><a href="/symbols/star.html">Star Symbols</a></li>
-          <li><a href="/symbols/flower.html">Flower Symbols</a></li>
-          <li><a href="/symbols/aesthetic.html">Aesthetic Symbols</a></li>
-        </ul>
-      </div>
+let updatedCount = 0;
 
-      <div>
-        <h4 class="footer-col-title">Company</h4>
-        <ul class="footer-links-list">
-          <li><a href="/pages/privacy.html">Privacy Policy</a></li>
-          <li><a href="/pages/terms.html">Terms of Service</a></li>
-          <li><a href="/pages/contact.html">Contact Us</a></li>
-        </ul>
-      </div>
-    </div>
+files.forEach(file => {
+    const filePath = path.join(symbolsDir, file);
+    let content = fs.readFileSync(filePath, 'utf8');
 
-    <div class="footer-bottom">
-      <p class="footer-copy">© 2026 FancySymbols. Created with ❤️ for creators.</p>
-      <div class="footer-socials">
-        <a href="#" class="footer-social-icon">𝕏</a>
-        <a href="#" class="footer-social-icon">📸</a>
-        <a href="#" class="footer-social-icon">🎵</a>
-      </div>
-    </div>
-  </div>
-  <div id="clipboard-bar"></div>
-</footer>
-<script src="/script.js?v=4.5"></script>
-</body>
-</html>
+    // 1. Remove any existing category grids / quick links grids to avoid duplicates
+    // We match the "CATEGORY NAVIGATION" comment or "Browse More Symbols" section and the following grid.
+    content = content.replace(/<!-- CATEGORY NAVIGATION -->\s*/g, '');
+    content = content.replace(/<div class="section-title">Browse More Symbols\s*<span class="line"><\/span><\/div>\s*<div class="quick-links-grid">[\s\S]*?<\/div>\s*/gi, '');
+
+    // 2. Inject the new grid right before the <div class="content-article">
+    if (content.includes('<div class="content-article">')) {
+        content = content.replace(
+            /(<\/div>\s*)(<div class="content-article">)/, 
+            '$1' + gridHtml + '\n$2'
+        );
+    } else {
+        // Fallback: insert right before </main>
+        content = content.replace('</main>', gridHtml + '\n</main>');
+    }
+
+    fs.writeFileSync(filePath, content, 'utf8');
+    updatedCount++;
+});
+
+console.log(`Successfully injected category grid into ${updatedCount} symbol pages.`);
