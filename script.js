@@ -1,7 +1,80 @@
 // ===== FANCY SYMBOLS - MAIN SCRIPT =====
 
+// ===== CLIPBOARD BAR MANAGER =====
+const ClipboardManager = {
+  symbols: [],
+  barEl: null,
+  containerEl: null,
+
+  init() {
+    this.barEl = document.createElement('div');
+    this.barEl.id = 'clipboard-bar';
+    this.barEl.innerHTML = `
+      <div class="clipboard-content">
+        <span class="clipboard-title">Copied</span>
+        <div class="clipboard-symbols" id="clipboard-symbols-container"></div>
+      </div>
+      <div class="clipboard-actions">
+        <button class="clipboard-btn clipboard-clear-btn" onclick="ClipboardManager.clear()">Clear</button>
+        <button class="clipboard-btn clipboard-copy-btn" onclick="ClipboardManager.copyAll()">Copy All</button>
+      </div>
+    `;
+    document.body.appendChild(this.barEl);
+    this.containerEl = document.getElementById('clipboard-symbols-container');
+  },
+
+  add(symbol) {
+    if (symbol.length > 5) return; // Only add single symbols or short emojis, not full sentences
+    this.symbols.push(symbol);
+    this.render();
+    this.show();
+  },
+
+  clear() {
+    this.symbols = [];
+    this.render();
+    this.barEl.classList.remove('show');
+  },
+
+  copyAll() {
+    if (this.symbols.length === 0) return;
+    const allText = this.symbols.join('');
+    // Use the native global copy but bypass adding to clipboard manager
+    navigator.clipboard.writeText(allText).then(() => {
+      showToast('✓ Copied ' + this.symbols.length + ' symbols!');
+    }).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = allText;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('✓ Copied ' + this.symbols.length + ' symbols!');
+    });
+  },
+
+  render() {
+    if (!this.containerEl) return;
+    this.containerEl.innerHTML = this.symbols.map(sym => 
+      `<div class="clipboard-symbol-item">${sym}</div>`
+    ).join('');
+    // Scroll to end
+    this.containerEl.scrollLeft = this.containerEl.scrollWidth;
+  },
+
+  show() {
+    if (this.symbols.length > 0 && this.barEl) {
+      this.barEl.classList.add('show');
+    }
+  }
+};
+
 // ===== COPY TO CLIPBOARD =====
 function copyToClipboard(text) {
+  ClipboardManager.add(text); // Track in clipboard bar
+  
   navigator.clipboard.writeText(text).then(() => {
     showToast('✓ Copied to clipboard!');
   }).catch(() => {
@@ -643,9 +716,7 @@ function renderQuickLinks() {
     { href: `${sym}sparkle.html`, icon: '✨', label: 'Sparkle' },
     { href: `${sym}aesthetic.html`, icon: '✧', label: 'Aesthetic' },
     { href: `${sym}dot.html`, icon: '•', label: 'Dot' },
-    { href: `${sym}german.html`, icon: 'ß', label: 'German' },
-    { href: `${sym}pi.html`, icon: 'π', label: 'PI Symbol' },
-    { href: `${sym}bullet.html`, icon: '•̈', label: 'Bullet Point' },
+    { href: `${sym}german.html`, icon: 'ß', label: 'German' }
   ];
 
   // Skip if quick-links-grid already exists on the page (e.g. hardcoded in HTML)
@@ -705,6 +776,7 @@ function initRotatingLogo() {
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', () => {
   initSidebar();
+  ClipboardManager.init();
   initCopyable();
   initSearch();
   initFontGenerator();
