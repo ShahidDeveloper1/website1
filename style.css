@@ -4,14 +4,14 @@
 /* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: #ffffff; }
-::-webkit-scrollbar-thumb { background: #c2185b; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #db2777; }
+::-webkit-scrollbar-thumb { background: #0d9488; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #14b8a6; }
 
 /* ===== WEBKIT GRADIENT TEXT CLIP ===== */
 .gradient-text,
 .logo-text,
 .highlight {
-  background: linear-gradient(135deg, #c2185b, #db2777);
+  background: linear-gradient(135deg, #0d9488, #14b8a6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -48,7 +48,7 @@
   position: absolute;
   top: -50%; left: -50%;
   width: 200%; height: 200%;
-  background: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.08) 0%, transparent 60%);
+  background: radial-gradient(ellipse at center, rgba(20, 184, 166, 0.08) 0%, transparent 60%);
   animation: heroGlow 8s ease-in-out infinite;
   pointer-events: none;
 }
@@ -63,13 +63,13 @@
 
 /* ===== PARTICLE BACKGROUND ===== */
 .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; overflow: hidden; }
-.particle { position: absolute; width: 3px; height: 3px; background: #c2185b; border-radius: 50%; opacity: 0.2; animation: floatParticle linear infinite; }
+.particle { position: absolute; width: 3px; height: 3px; background: #0d9488; border-radius: 50%; opacity: 0.2; animation: floatParticle linear infinite; }
 
 /* ===== SIDEBAR ACTIVE LINK ===== */
 .sidebar-links a.active {
   background: rgba(0,0,0,0.04);
-  color: #c2185b;
-  border-left: 3px solid #c2185b;
+  color: #0d9488;
+  border-left: 3px solid #0d9488;
 }
 
 /* ===== SYMBOL ITEM COPIED STATE ===== */
@@ -166,7 +166,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #000000; padding: 0.5rem 0; font-family: 'Outfit', sans-serif;
 }
 .sidebar-links a {
-  display: flex; align-items: center; gap: 0.625rem; padding: 0.5625rem 0.875rem; border-radius: 0.375rem; font-size: 0.88rem; color: #000000; transition: all 0.2s;
+  display: flex; align-items: center; gap: 0.625rem; padding: 0.35rem 0.875rem; border-radius: 0.375rem; font-size: 0.83rem; color: #000000; transition: all 0.2s;
 }
 .sidebar-links a:hover {
   background-color: rgba(0, 0, 0, 0.02); color: #000000; transform: translateX(4px);
@@ -199,7 +199,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   width: 100%; padding: 0.875rem 1.25rem 0.875rem 3rem; background-color: rgba(0, 0, 0, 0.02); border: 1px solid #e5e7eb; border-radius: 9999px; color: #000000; font-size: 1rem; outline: none; transition: all 0.2s;
 }
 .search-box:focus {
-  border-color: #db2777; background-color: rgba(0, 0, 0, 0.04);
+  border-color: #14b8a6; background-color: rgba(0, 0, 0, 0.04);
 }
 .section-title {
   display: flex; align-items: center; gap: 0.75rem; font-size: 1.6rem; font-weight: 700; margin-bottom: 1.5rem; font-family: 'Outfit', sans-serif;
@@ -217,7 +217,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: flex; align-items: center; justify-content: center; padding: 0.875rem 0.5rem; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 0.5rem; font-size: 1.6rem; cursor: pointer; user-select: none; position: relative; transition: all 0.2s;
 }
 .symbol-item:hover {
-  transform: translateY(-2px); border-color: #f472b6; box-shadow: 0 0 16px rgba(194, 24, 91, 0.12);
+  transform: translateY(-2px); border-color: #5eead4; box-shadow: 0 0 16px rgba(13, 148, 136, 0.12);
 }
 .symbol-item:active {
   transform: translateY(0) scale(0.95);
@@ -229,7 +229,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: flex; align-items: center; justify-content: space-between; padding: 1rem; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 0.5rem; cursor: pointer; user-select: none; gap: 0.75rem; transition: all 0.2s;
 }
 .combo-item:hover {
-  transform: translateY(-2px); border-color: #f472b6; box-shadow: 0 0 16px rgba(194, 24, 91, 0.12);
+  transform: translateY(-2px); border-color: #5eead4; box-shadow: 0 0 16px rgba(13, 148, 136, 0.12);
 }
 .combo-item:active {
   transform: scale(0.98);
@@ -241,7 +241,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   font-size: 0.75rem; padding: 0.375rem 0.75rem; background-color: rgba(0, 0, 0, 0.04); border-radius: 0.25rem; color: #000000; white-space: nowrap; transition: all 0.2s;
 }
 .combo-item:hover .combo-copy-btn {
-  background-color: #c2185b; color: #ffffff;
+  background-color: #0d9488; color: #ffffff;
 }
 .category-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.875rem; margin-bottom: 2.5rem;
@@ -250,7 +250,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.75rem 1rem; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 0.75rem; text-align: center; cursor: pointer; transition: all 0.2s;
 }
 .category-card:hover {
-  transform: translateY(-4px); border-color: #f472b6; box-shadow: 0 0 16px rgba(194, 24, 91, 0.12);
+  transform: translateY(-4px); border-color: #5eead4; box-shadow: 0 0 16px rgba(13, 148, 136, 0.12);
 }
 .category-card:hover .category-icon {
   transform: scale(1.15);
@@ -268,7 +268,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 0.75rem; padding: 2rem; margin-bottom: 2rem; line-height: 1.8;
 }
 .content-article h2 {
-  font-size: 1.3rem; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #c2185b; font-family: 'Outfit', sans-serif;
+  font-size: 1.3rem; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #0d9488; font-family: 'Outfit', sans-serif;
 }
 .content-article h3 {
   font-size: 1.1rem; margin-top: 1.25rem; margin-bottom: 0.625rem; font-family: 'Outfit', sans-serif;
@@ -295,7 +295,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: #000000; font-size: 0.875rem; transition: color 0.2s;
 }
 .footer-links a:hover {
-  color: #c2185b;
+  color: #0d9488;
 }
 .footer-copy {
   font-size: 0.75rem; color: #000000;
@@ -313,7 +313,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: inline-flex; align-items: center; gap: 0.375rem; color: #000000; font-size: 0.875rem; margin-bottom: 1rem; transition: color 0.2s;
 }
 .back-link:hover {
-  color: #c2185b;
+  color: #0d9488;
 }
 .font-gen-container {
   max-width: 42rem; margin: 0 auto;
@@ -325,7 +325,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   width: 100%; padding: 1.125rem 1.5rem; background-color: rgba(0, 0, 0, 0.02); border: 2px solid #e5e7eb; border-radius: 0.75rem; color: #000000; font-size: 1.25rem; outline: none; transition: all 0.2s;
 }
 .font-input:focus {
-  border-color: #c2185b; box-shadow: 0 0 16px rgba(194, 24, 91, 0.12);
+  border-color: #0d9488; box-shadow: 0 0 16px rgba(13, 148, 136, 0.12);
 }
 .font-results {
   display: flex; flex-direction: column; gap: 0.75rem;
@@ -334,7 +334,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: flex; align-items: center; justify-content: space-between; padding: 1rem; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 0.5rem; cursor: pointer; gap: 1rem; transition: all 0.2s;
 }
 .font-result-item:hover {
-  background-color: #000000; border-color: #f472b6; box-shadow: 0 0 16px rgba(194, 24, 91, 0.12);
+  background-color: #f0fdfa; border-color: #5eead4; box-shadow: 0 0 16px rgba(13, 148, 136, 0.12);
 }
 .font-style-name {
   font-size: 0.78rem; color: #000000; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; min-width: 100px;
@@ -346,7 +346,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   padding: 0.375rem 0.875rem; background-color: rgba(0, 0, 0, 0.04); border-radius: 0.25rem; color: #000000; font-size: 0.78rem; white-space: nowrap; transition: all 0.2s;
 }
 .font-result-item:hover .font-copy-btn {
-  background-color: #c2185b; color: #ffffff;
+  background-color: #0d9488; color: #ffffff;
 }
 .lenny-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.75rem; margin-bottom: 2.5rem;
@@ -355,7 +355,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: flex; align-items: center; justify-content: center; padding: 1.125rem; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 0.5rem; font-size: 1.25rem; cursor: pointer; user-select: none; text-align: center; word-break: break-all; transition: all 0.2s;
 }
 .lenny-item:hover {
-  background-color: #000000; border-color: #f472b6; transform: translateY(-2px); box-shadow: 0 0 16px rgba(194, 24, 91, 0.12);
+  background-color: #f0fdfa; border-color: #5eead4; transform: translateY(-2px); box-shadow: 0 0 16px rgba(13, 148, 136, 0.12);
 }
 
 /* ===== RESPONSIVE ===== */
@@ -386,4 +386,39 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .tags-label { font-size: 0.85rem; color: #4b5563; font-weight: 600; }
 .hero-tag { padding: 0.5rem 1.125rem; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 9999px; font-size: 0.85rem; font-weight: 600; color: #000000; transition: all 0.25s ease; display: inline-flex; align-items: center; gap: 0.4rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03); }
 .hero-tag span { font-size: 1rem; }
-.hero-tag:hover { transform: translateY(-3px); border-color: #f472b6; color: #c2185b; box-shadow: 0 4px 15px rgba(194, 24, 91, 0.1); }
+.hero-tag:hover { transform: translateY(-3px); border-color: #5eead4; color: #0d9488; box-shadow: 0 4px 15px rgba(13, 148, 136, 0.1); }
+
+/* ===== QUICK LINKS GRID (ALL SYMBOLS PAGE) ===== */
+.quick-links-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.quick-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  color: #334155;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  word-break: keep-all;
+  white-space: nowrap;
+}
+.quick-link-btn span {
+  font-size: 1.2rem;
+}
+.quick-link-btn:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+  color: #0d9488;
+}
