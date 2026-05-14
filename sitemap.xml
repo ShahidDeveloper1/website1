@@ -67,12 +67,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.fancysymbols.com/dist</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
     <loc>https://www.fancysymbols.com/emoticons</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -896,18 +890,6 @@
   </url>
   <url>
     <loc>https://www.fancysymbols.com/names/zoey</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.fancysymbols.com/pages/privacy</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.fancysymbols.com/pages/terms</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

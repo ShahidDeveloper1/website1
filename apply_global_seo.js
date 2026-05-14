@@ -45,7 +45,9 @@ function generateSchemaAndTags(title, description, urlPath, isSymbolPage) {
     ${JSON.stringify(schemas, null, 2)}
   </script>`;
 
-    return hreflangTags + jsonLd;
+    const canonicalTag = `\n  <link rel="canonical" href="${fullUrl}">`;
+
+    return canonicalTag + hreflangTags + jsonLd;
 }
 
 const EEAT_BOX = `
@@ -81,6 +83,7 @@ function processPage(filepath, isSymbolPage, baseLang = '') {
 
     const seoPayload = generateSchemaAndTags(title, description, urlPath, isSymbolPage);
 
+    content = content.replace(/<link\s+rel=["']canonical["']\s+href=["'][^"']*["']\s*\/?>\s*/gi, '');
     content = content.replace(/<link rel="alternate" hreflang="[^"]*" href="[^"]*">\s*/g, '');
     content = content.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>\s*/g, '');
     content = content.replace(/<\/head>/i, seoPayload + '\n</head>');

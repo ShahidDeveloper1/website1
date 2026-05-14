@@ -1,5 +1,5 @@
 # FancySymbols Robots.txt
-# https://fancysymbols.com
+# https://www.fancysymbols.com
 
 User-agent: *
 Allow: /
@@ -13,7 +13,7 @@ Allow: /cute-fonts.js
 Allow: /aesthetic-fonts.js
 
 # Sitemaps
-Sitemap: https://fancysymbols.com/sitemap.xml
+Sitemap: https://www.fancysymbols.com/sitemap.xml
 
 # Crawl-delay for polite bots
 User-agent: AhrefsBot

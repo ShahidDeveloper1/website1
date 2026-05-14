@@ -17,7 +17,7 @@ function generateSitemap() {
         files.forEach(f => {
             const fullPath = path.join(dir, f);
             if (fs.statSync(fullPath).isDirectory()) {
-                if (f === '.git' || f === 'node_modules') return;
+                if (f === '.git' || f === 'node_modules' || f === 'dist' || f === 'pages') return;
                 processDir(fullPath, prefix ? `${prefix}/${f}` : f);
             } else if (f.endsWith('.html')) {
                 let cleanName = f.replace('.html', '');
