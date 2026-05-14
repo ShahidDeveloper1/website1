@@ -143,6 +143,15 @@ function processFile(filepath) {
     changes.push('preload');
   }
 
+  // 1.5 ADD GOOGLE SITE VERIFICATION
+  if (!content.includes('google-site-verification')) {
+    content = content.replace(
+      /<\/head>/i,
+      `  <meta name="google-site-verification" content="OvJ6uQVDw0PgIWerWJ88MgLeEMs_hutUY-J1xTOiGBY" />\n</head>`
+    );
+    changes.push('gsc');
+  }
+
   // 2. ADD LANG ATTRIBUTE (ensure html tag has lang="en")
   if (content.includes('<html>')) {
     content = content.replace('<html>', '<html lang="en">');

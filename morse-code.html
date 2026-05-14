@@ -105,7 +105,24 @@
     .morse-char:hover { background: #ede9fe; border-color: #a5b4fc; transform: translateY(-2px); }
     .morse-char-letter { font-size: 1.1rem; font-weight: 700; color: #0f172a; }
     .morse-char-code { font-size: 0.8rem; color: #6366f1; font-family: monospace; margin-top: 2px; }
+    /* Advanced Controls */
+    .advanced-controls { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; margin-top: 1rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .adv-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem; color: #0f172a; }
+    .adv-row { display: flex; gap: 2rem; margin-bottom: 1.5rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 1.5rem; align-items: flex-start; }
+    .adv-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .adv-input-col { flex: 0 0 220px; display: flex; flex-direction: column; gap: 0.5rem; }
+    .adv-input-col label { font-size: 0.9rem; font-weight: 600; color: #334155; }
+    .adv-input-col select, .adv-input-col input { width: 100%; padding: 0.5rem; border: 1px solid #cbd5e1; border-radius: 6px; font-family: inherit; font-size: 0.95rem; background: #f8fafc; }
+    .adv-input-col input[type=number] { background: #e2e8f0; border-color: #cbd5e1; }
+    .adv-desc-col { flex: 1; font-size: 0.95rem; color: #475569; line-height: 1.6; padding-top: 1.5rem; }
+    
+    @media (max-width: 600px) {
+      .adv-row { flex-direction: column; gap: 0.5rem; }
+      .adv-desc-col { padding-top: 0; font-size: 0.85rem; }
+    }
   </style>
+  <meta name="google-site-verification" content="OvJ6uQVDw0PgIWerWJ88MgLeEMs_hutUY-J1xTOiGBY" />
+  <meta property="article:modified_time" content="2026-05-14">
 </head>
 <body>
   <header class="header"><div class="header-inner">
@@ -195,7 +212,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
           Vibrate
         </button>
-        <button class="ctrl-btn" id="btnConfigure" onclick="document.querySelector('.morse-sliders').scrollIntoView({behavior:'smooth'})">
+        <button class="ctrl-btn" id="btnConfigure" onclick="toggleAdvancedControls()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
           Configure
         </button>
@@ -211,6 +228,79 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
           Share
         </button>
+      </div>
+
+      <!-- Advanced Controls -->
+      <div id="advancedControls" class="advanced-controls" style="display:none;">
+        <h3 class="adv-title">Advanced Controls</h3>
+        
+        <div class="adv-row">
+          <div class="adv-input-col">
+            <label>Sound type</label>
+            <select id="advSoundType" onchange="updateSoundType()">
+              <option value="cw">CW Radio Tone</option>
+              <option value="telegraph">Telegraph Sounder</option>
+            </select>
+          </div>
+          <div class="adv-desc-col">
+            "CW Radio Tone" is the modern beep sound used in radio; "Telegraph Sounder" is the original clicky noise mostly used with American (not International) Morse.
+          </div>
+        </div>
+
+        <div class="adv-row">
+          <div class="adv-input-col">
+            <label>Pitch</label>
+            <input type="number" id="advPitch" value="550" min="200" max="1200" oninput="syncFromAdv('pitch')">
+          </div>
+          <div class="adv-desc-col">
+            Pitch in Hz. A high number makes a high pitched sound. 550 is a good value.
+          </div>
+        </div>
+
+        <div class="adv-row">
+          <div class="adv-input-col">
+            <label>Volume</label>
+            <input type="number" id="advVolume" value="80" min="0" max="100" oninput="syncFromAdv('volume')">
+          </div>
+          <div class="adv-desc-col">
+            Volume from 0 to 100.
+          </div>
+        </div>
+
+        <div class="adv-row">
+          <div class="adv-input-col">
+            <label>Character speed</label>
+            <input type="number" id="advSpeed" value="20" min="5" max="50" oninput="syncFromAdv('speed')">
+          </div>
+          <div class="adv-desc-col">
+            The character speed in words per minute, taking 'PARIS ' as the standard word.
+          </div>
+        </div>
+
+        <div class="adv-row">
+          <div class="adv-input-col">
+            <label>Farnsworth speed</label>
+            <input type="number" id="advFarnsworth" value="20" min="5" max="50" oninput="updateFarnsworth()">
+          </div>
+          <div class="adv-desc-col">
+            The Farnsworth speed adjusts the space between letters and words, making it easier to learn Morse. It should be a lower value than the speed.
+          </div>
+        </div>
+
+        <div class="adv-row">
+          <div class="adv-input-col">
+            <label>Alphabet</label>
+            <select id="advAlphabet" onchange="changeAlphabet()">
+              <option value="Latin">Latin</option>
+              <option value="Arabic">Arabic</option>
+              <option value="Cyrillic">Cyrillic</option>
+              <option value="Hebrew">Hebrew</option>
+            </select>
+          </div>
+          <div class="adv-desc-col">
+            The "Latin" alphabet is e.g. "ABC" (and includes accented characters). All the alphabets translate into dots and dashes with standard timing.
+          </div>
+        </div>
       </div>
 
       <!-- Morse Code Reference Chart -->
@@ -251,18 +341,70 @@
   <script src="script.js?v=5.5"></script>
   <script>
   // ===== MORSE CODE ENGINE =====
-  const MC = {
-    'A':'.-','B':'-...','C':'-.-.','D':'-..','E':'.','F':'..-.','G':'--.','H':'....','I':'..','J':'.---','K':'-.-','L':'.-..','M':'--','N':'-.','O':'---','P':'.--.','Q':'--.-','R':'.-.','S':'...','T':'-','U':'..-','V':'...-','W':'.--','X':'-..-','Y':'-.--','Z':'--..',
-    '0':'-----','1':'.----','2':'..---','3':'...--','4':'....-','5':'.....','6':'-....','7':'--...','8':'---..','9':'----.',
-    '.':'.-.-.-',',':'--..--','?':'..--..','!':'-.-.--','/':'-..-.','(':'-.--.',')':'-.--.-','&':'.-...',':':'---...',';':'-.-.-.','=':'-...-','+':'.-.-.', '-':'-....-','_':'..--.-','"':'.-..-.','@':'.--.-.',"'":'.----.'
+  const ALPHABETS = {
+    Latin: {
+      'A':'.-','B':'-...','C':'-.-.','D':'-..','E':'.','F':'..-.','G':'--.','H':'....','I':'..','J':'.---','K':'-.-','L':'.-..','M':'--','N':'-.','O':'---','P':'.--.','Q':'--.-','R':'.-.','S':'...','T':'-','U':'..-','V':'...-','W':'.--','X':'-..-','Y':'-.--','Z':'--..',
+      '0':'-----','1':'.----','2':'..---','3':'...--','4':'....-','5':'.....','6':'-....','7':'--...','8':'---..','9':'----.',
+      '.':'.-.-.-',',':'--..--','?':'..--..','!':'-.-.--','/':'-..-.','(':'-.--.',')':'-.--.-','&':'.-...',':':'---...',';':'-.-.-.','=':'-...-','+':'.-.-.', '-':'-....-','_':'..--.-','"':'.-..-.','@':'.--.-.',"'":'.----.'
+    },
+    Arabic: {
+      'ا':'.-','ب':'-...','ت':'-','ث':'-.-.','ج':'.---','ح':'....','خ':'---','د':'-..','ذ':'--..','ر':'.-.','ز':'---.','س':'...','ش':'----','ص':'-.-.','ض':'...-','ط':'..-','ظ':'-.--','ع':'.-.-','غ':'--.','ف':'..-.','ق':'--.-','ك':'-.-','ل':'.-..','م':'--','ن':'-.','ه':'..-..','و':'.--','ي':'..'
+    },
+    Cyrillic: {
+      'А':'.-','Б':'-...','В':'.--','Г':'--.','Д':'-..','Е':'.','Ж':'...-','З':'--..','И':'..','Й':'.---','К':'-.-','Л':'.-..','М':'--','Н':'-.','О':'---','П':'.--.','Р':'.-.','С':'...','Т':'-','У':'..-','Ф':'..-.','Х':'....','Ц':'-.-.','Ч':'---.','Ш':'----','Щ':'--.-','Ь':'-..-','Ы':'-.--','Э':'..-..','Ю':'..--','Я':'.-.-'
+    },
+    Hebrew: {
+      'א':'.-','ב':'-...','ג':'--.','ד':'-..','ה':'---','ו':'.','ז':'--..','ח':'....','ט':'..-','י':'..','כ':'-.-','ל':'.-..','מ':'--','נ':'-.','ס':'-.-.','ע':'.---','פ':'.--.','צ':'.---','ק':'--.-','ר':'.-.','ש':'...','ת':'-'
+    }
   };
-  const RM = {}; for (const [k,v] of Object.entries(MC)) RM[v] = k;
+  
+  let currentAlphabet = 'Latin';
+  let MC = ALPHABETS[currentAlphabet];
+  let RM = {};
+  
+  function updateDictionaries() {
+    MC = ALPHABETS[currentAlphabet];
+    RM = {};
+    for (const [k,v] of Object.entries(MC)) RM[v] = k;
+    if(typeof buildChart === 'function') buildChart();
+    if(typeof updateOutput === 'function') updateOutput();
+  }
+  updateDictionaries();
 
   let isTextToMorse = true;
   let soundOn = true, lightOn = false, vibrateOn = false, repeatOn = false;
   let isPlaying = false, isPaused = false;
   let playTimeouts = [];
   let audioCtx = null;
+  
+  let soundType = 'cw';
+  let farnsworthSpeed = 20;
+
+  function toggleAdvancedControls() {
+    const el = document.getElementById('advancedControls');
+    el.style.display = el.style.display === 'none' ? 'block' : 'none';
+  }
+  function updateSoundType() {
+    soundType = document.getElementById('advSoundType').value;
+  }
+  function syncFromAdv(prop) {
+    const val = document.getElementById('adv' + prop.charAt(0).toUpperCase() + prop.slice(1)).value;
+    document.getElementById(prop + 'Slider').value = val;
+    document.getElementById(prop + 'Val').textContent = val;
+  }
+  function syncToAdv() {
+    document.getElementById('advSpeed').value = document.getElementById('speedSlider').value;
+    document.getElementById('advPitch').value = document.getElementById('pitchSlider').value;
+    document.getElementById('advVolume').value = document.getElementById('volumeSlider').value;
+  }
+  function updateFarnsworth() {
+    farnsworthSpeed = parseInt(document.getElementById('advFarnsworth').value);
+  }
+  function changeAlphabet() {
+    currentAlphabet = document.getElementById('advAlphabet').value;
+    updateDictionaries();
+    translate();
+  }
 
   // ===== TRANSLATION =====
   function translate() {
@@ -292,9 +434,9 @@
   }
 
   // ===== SLIDER UPDATES =====
-  document.getElementById('speedSlider').oninput = function() { document.getElementById('speedVal').textContent = this.value; };
-  document.getElementById('pitchSlider').oninput = function() { document.getElementById('pitchVal').textContent = this.value; };
-  document.getElementById('volumeSlider').oninput = function() { document.getElementById('volumeVal').textContent = this.value; };
+  document.getElementById('speedSlider').oninput = function() { document.getElementById('speedVal').textContent = this.value; syncToAdv(); };
+  document.getElementById('pitchSlider').oninput = function() { document.getElementById('pitchVal').textContent = this.value; syncToAdv(); };
+  document.getElementById('volumeSlider').oninput = function() { document.getElementById('volumeVal').textContent = this.value; syncToAdv(); };
 
   // ===== AUDIO PLAYBACK =====
   function getAudioCtx() {
@@ -305,13 +447,38 @@
   function beep(duration, freq, vol) {
     return new Promise(resolve => {
       const ctx = getAudioCtx();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain); gain.connect(ctx.destination);
-      osc.frequency.value = freq;
-      gain.gain.value = vol / 100;
-      osc.start();
-      setTimeout(() => { osc.stop(); resolve(); }, duration);
+      if (soundType === 'telegraph') {
+        const click = ctx.createOscillator();
+        const clickGain = ctx.createGain();
+        click.type = 'square';
+        click.frequency.value = 120; 
+        click.connect(clickGain); clickGain.connect(ctx.destination);
+        clickGain.gain.setValueAtTime(vol / 100, ctx.currentTime);
+        clickGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.05);
+        click.start(ctx.currentTime);
+        click.stop(ctx.currentTime + 0.05);
+
+        setTimeout(() => {
+          const clack = ctx.createOscillator();
+          const clackGain = ctx.createGain();
+          clack.type = 'square';
+          clack.frequency.value = 160; 
+          clack.connect(clackGain); clackGain.connect(ctx.destination);
+          clackGain.gain.setValueAtTime((vol / 100) * 0.8, ctx.currentTime);
+          clackGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.05);
+          clack.start(ctx.currentTime);
+          clack.stop(ctx.currentTime + 0.05);
+          resolve();
+        }, duration);
+      } else {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain); gain.connect(ctx.destination);
+        osc.frequency.value = freq;
+        gain.gain.value = vol / 100;
+        osc.start();
+        setTimeout(() => { osc.stop(); resolve(); }, duration);
+      }
     });
   }
 
@@ -342,10 +509,13 @@
     if (!morseStr) return;
 
     const dotLen = 1200 / speed; // ms per dot
+    const fSpeed = (farnsworthSpeed < speed) ? farnsworthSpeed : speed;
+    const fDotLen = 1200 / fSpeed;
+
     const dashLen = dotLen * 3;
     const symbolGap = dotLen;
-    const letterGap = dotLen * 3;
-    const wordGap = dotLen * 7;
+    const letterGap = fDotLen * 3;
+    const wordGap = fDotLen * 7;
 
     isPlaying = true; isPaused = false;
     document.getElementById('btnPlay').classList.add('playing');
@@ -436,17 +606,21 @@
     
     const speed = parseInt(document.getElementById('speedSlider').value);
     const freq = parseInt(document.getElementById('pitchSlider').value);
+    const vol = parseInt(document.getElementById('volumeSlider').value) / 100;
+    
     const dotLen = 1.2 / speed; 
+    const fSpeed = (farnsworthSpeed < speed) ? farnsworthSpeed : speed;
+    const fDotLen = 1.2 / fSpeed;
     
     let time = 0;
     for(let i=0; i<text.length; i++) {
       const c = text[i];
       if(c === '.') time += dotLen;
       else if(c === '-') time += 3 * dotLen;
-      else if(c === ' ') time += 2 * dotLen;
-      else if(c === '/') time += 6 * dotLen;
+      else if(c === ' ') time += 2 * fDotLen; // word split logic uses '/' mostly, but standard text has ' ' for letter gap, which needs 3 total. The symbol itself has 1 dotLen gap after it. Wait, the loop adds symbol gap for all!
+      else if(c === '/') time += 6 * fDotLen;
       
-      if(c === '.' || c === '-') time += dotLen;
+      if(c === '.' || c === '-') time += dotLen; // symbol gap
     }
     if(time === 0) return;
     
@@ -456,33 +630,71 @@
     
     const OfflineCtx = window.OfflineAudioContext || window.webkitOfflineAudioContext;
     const ctx = new OfflineCtx(1, Math.ceil(44100 * time), 44100);
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
     
-    osc.type = 'sine';
-    osc.frequency.value = freq;
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    gain.gain.value = 0;
-    osc.start(0);
-    
-    let t = 0;
-    for(let i=0; i<text.length; i++) {
-      const c = text[i];
-      if(c === '.') {
-        gain.gain.setValueAtTime(1, t);
-        t += dotLen;
-        gain.gain.setValueAtTime(0, t);
-        t += dotLen;
-      } else if(c === '-') {
-        gain.gain.setValueAtTime(1, t);
-        t += 3 * dotLen;
-        gain.gain.setValueAtTime(0, t);
-        t += dotLen;
-      } else if(c === ' ') {
-        t += 2 * dotLen;
-      } else if(c === '/') {
-        t += 6 * dotLen;
+    if (soundType === 'telegraph') {
+      const clkOsc = ctx.createOscillator();
+      const clkGain = ctx.createGain();
+      clkOsc.type = 'square';
+      clkOsc.connect(clkGain);
+      clkGain.connect(ctx.destination);
+      clkGain.gain.value = 0;
+      clkOsc.start(0);
+
+      let t = 0;
+      for(let i=0; i<text.length; i++) {
+        const c = text[i];
+        if(c === '.') {
+          clkOsc.frequency.setValueAtTime(120, t);
+          clkGain.gain.setValueAtTime(vol, t);
+          clkGain.gain.exponentialRampToValueAtTime(0.01, t + 0.05);
+          t += dotLen;
+          clkOsc.frequency.setValueAtTime(160, t);
+          clkGain.gain.setValueAtTime(vol * 0.8, t);
+          clkGain.gain.exponentialRampToValueAtTime(0.01, t + 0.05);
+          t += dotLen;
+        } else if(c === '-') {
+          clkOsc.frequency.setValueAtTime(120, t);
+          clkGain.gain.setValueAtTime(vol, t);
+          clkGain.gain.exponentialRampToValueAtTime(0.01, t + 0.05);
+          t += 3 * dotLen;
+          clkOsc.frequency.setValueAtTime(160, t);
+          clkGain.gain.setValueAtTime(vol * 0.8, t);
+          clkGain.gain.exponentialRampToValueAtTime(0.01, t + 0.05);
+          t += dotLen;
+        } else if(c === ' ') {
+          t += 2 * fDotLen;
+        } else if(c === '/') {
+          t += 6 * fDotLen;
+        }
+      }
+    } else {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      gain.gain.value = 0;
+      osc.start(0);
+      
+      let t = 0;
+      for(let i=0; i<text.length; i++) {
+        const c = text[i];
+        if(c === '.') {
+          gain.gain.setValueAtTime(vol, t);
+          t += dotLen;
+          gain.gain.setValueAtTime(0, t);
+          t += dotLen;
+        } else if(c === '-') {
+          gain.gain.setValueAtTime(vol, t);
+          t += 3 * dotLen;
+          gain.gain.setValueAtTime(0, t);
+          t += dotLen;
+        } else if(c === ' ') {
+          t += 2 * fDotLen;
+        } else if(c === '/') {
+          t += 6 * fDotLen;
+        }
       }
     }
     
