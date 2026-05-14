@@ -230,6 +230,16 @@
 </footer>
 
 
+<script>
+function copyInvisible(el, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = el.querySelector('.combo-copy-btn');
+    if (btn) { btn.textContent = 'Copied!'; btn.style.background = '#0d9488'; btn.style.color = '#fff'; }
+    if (window.ClipboardManager) window.ClipboardManager.add(text);
+    setTimeout(() => { if (btn) { btn.textContent = 'Copy'; btn.style.background = ''; btn.style.color = ''; } }, 1500);
+  });
+}
+</script>
 <script src="/script.js?v=5.6"></script>
 </body>
 </html>

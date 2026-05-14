@@ -26,6 +26,98 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/style.css?v=5.6">
   <link rel="icon" type="image/png" href="/favicon.png?v=5.6">
+
+<style>
+    .morse-app { max-width: 900px; margin: 0 auto; padding: 0 1rem; }
+
+    /* Input / Output panels */
+    .morse-io { display: flex; flex-direction: column; gap: 0; }
+    @media(min-width:768px) { .morse-io { flex-direction: row; gap: 1.5rem; } }
+    .morse-panel-left { flex: 1; }
+    .morse-panel-right { display: flex; gap: 1rem; }
+    .morse-sliders { display: flex; gap: 1rem; }
+
+    .morse-label { font-size: 1rem; font-weight: normal; color: #111; margin-bottom: 0.2rem; display: block; font-family: Georgia, serif; }
+    .morse-textarea {
+      width: 100%; min-height: 120px; background: #ffffff; border: 1px solid #a3a3a3;
+      border-radius: 0; padding: 0.75rem; color: #333; font-family: 'Courier New', Courier, monospace;
+      font-size: 1.1rem; resize: vertical; outline: none; transition: border-color .2s;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .morse-textarea:focus { border-color: #6366f1; }
+    .morse-textarea[readonly] { background: #e5e5e5; color: #555; }
+
+    /* Vertical Sliders */
+    .slider-group {
+      display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+      background: #f1f5f9; border-radius: 12px; padding: 0.75rem 0.5rem;
+    }
+    .slider-title { font-size: 0.7rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+    .slider-val { font-size: 0.85rem; font-weight: 700; color: #0f172a; }
+    .v-slider {
+      writing-mode: vertical-lr; direction: rtl;
+      -webkit-appearance: none; appearance: none;
+      width: 120px; height: 6px; background: #cbd5e1; border-radius: 4px; outline: none;
+    }
+    .v-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: #6366f1; cursor: pointer; border: 3px solid #fff;
+      box-shadow: 0 2px 8px rgba(99,102,241,0.4);
+    }
+    .v-slider::-moz-range-thumb {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: #6366f1; cursor: pointer; border: 3px solid #fff;
+      box-shadow: 0 2px 8px rgba(99,102,241,0.4);
+    }
+
+    /* Control Buttons */
+    .morse-controls {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem;
+      justify-content: center;
+    }
+    .ctrl-btn {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 0.25rem; padding: 0.65rem 0.85rem; border-radius: 12px;
+      border: 2px solid #e2e8f0; background: #f8fafc; color: #334155;
+      font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all .2s;
+      min-width: 64px; text-transform: uppercase; letter-spacing: 0.3px;
+    }
+    .ctrl-btn svg { width: 22px; height: 22px; }
+    .ctrl-btn:hover { background: #e2e8f0; border-color: #cbd5e1; transform: translateY(-1px); }
+    .ctrl-btn.active { background: #6366f1; color: #fff; border-color: #6366f1; }
+    .ctrl-btn.active:hover { background: #4f46e5; }
+    .ctrl-btn.playing { background: #059669; color: #fff; border-color: #059669; }
+    .ctrl-btn.on { background: #059669; color: #fff; border-color: #059669; box-shadow: 0 0 12px rgba(5,150,105,0.35); }
+    .ctrl-btn.on:hover { background: #047857; }
+
+    /* Light flash overlay */
+    .flash-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: #fff; opacity: 0; pointer-events: none; z-index: 9999;
+      transition: opacity 0.05s;
+    }
+    .flash-overlay.on { opacity: 0.85; }
+
+    /* Swap button */
+    .swap-row { display: flex; justify-content: center; margin: 0.75rem 0; }
+    .swap-btn {
+      background: #6366f1; color: #fff; border: none; border-radius: 50%;
+      width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 4px 12px rgba(99,102,241,0.3); transition: all .2s;
+    }
+    .swap-btn:hover { transform: scale(1.1) rotate(180deg); }
+
+    /* Reference chart */
+    .morse-chart { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 0.5rem; margin: 1.5rem 0; }
+    .morse-char {
+      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;
+      padding: 0.5rem; text-align: center; cursor: pointer; transition: all .15s;
+    }
+    .morse-char:hover { background: #ede9fe; border-color: #a5b4fc; transform: translateY(-2px); }
+    .morse-char-letter { font-size: 1.1rem; font-weight: 700; color: #0f172a; }
+    .morse-char-code { font-size: 0.8rem; color: #6366f1; font-family: monospace; margin-top: 2px; }
+  </style>
 </head>
 <body>
   <header class="header">
@@ -261,5 +353,216 @@
   translate();
   buildChart();
   </script>
+<script>
+  // ===== MORSE CODE ENGINE =====
+  const MC = {
+    'A':'.-','B':'-...','C':'-.-.','D':'-..','E':'.','F':'..-.','G':'--.','H':'....','I':'..','J':'.---','K':'-.-','L':'.-..','M':'--','N':'-.','O':'---','P':'.--.','Q':'--.-','R':'.-.','S':'...','T':'-','U':'..-','V':'...-','W':'.--','X':'-..-','Y':'-.--','Z':'--..',
+    '0':'-----','1':'.----','2':'..---','3':'...--','4':'....-','5':'.....','6':'-....','7':'--...','8':'---..','9':'----.',
+    '.':'.-.-.-',',':'--..--','?':'..--..','!':'-.-.--','/':'-..-.','(':'-.--.',')':'-.--.-','&':'.-...',':':'---...',';':'-.-.-.','=':'-...-','+':'.-.-.', '-':'-....-','_':'..--.-','"':'.-..-.','@':'.--.-.',"'":'.----.'
+  };
+  const RM = {}; for (const [k,v] of Object.entries(MC)) RM[v] = k;
+
+  let isTextToMorse = true;
+  let soundOn = true, lightOn = false, vibrateOn = false, repeatOn = false;
+  let isPlaying = false, isPaused = false;
+  let playTimeouts = [];
+  let audioCtx = null;
+
+  // ===== TRANSLATION =====
+  function translate() {
+    const inp = document.getElementById('morseInput').value;
+    const out = document.getElementById('morseOutput');
+    if (isTextToMorse) {
+      out.value = inp.toUpperCase().split('').map(c => {
+        if (c === ' ') return '/';
+        return MC[c] || '#';
+      }).join(' ').replace(/ \/ /g, ' / ');
+    } else {
+      const words = inp.replace(/_/g,'-').replace(/\*/g,'.').split('/');
+      out.value = words.map(w => w.trim().split(' ').map(c => RM[c] || '#').join('')).join(' ');
+    }
+  }
+
+  function swapMode() {
+    isTextToMorse = !isTextToMorse;
+    const li = document.getElementById('labelInput');
+    const lo = document.getElementById('labelOutput');
+    const mi = document.getElementById('morseInput');
+    const mo = document.getElementById('morseOutput');
+    if (isTextToMorse) { li.textContent='Input:'; lo.textContent='Output:'; mi.placeholder='Type text here...'; }
+    else { li.textContent='Morse Code Input:'; lo.textContent='Text Output:'; mi.placeholder='Type morse (use . and - , / for word break)...'; }
+    const tmp = mi.value; mi.value = mo.value; mo.value = tmp;
+    translate();
+  }
+
+  // ===== SLIDER UPDATES =====
+  document.getElementById('speedSlider').oninput = function() { document.getElementById('speedVal').textContent = this.value; };
+  document.getElementById('pitchSlider').oninput = function() { document.getElementById('pitchVal').textContent = this.value; };
+  document.getElementById('volumeSlider').oninput = function() { document.getElementById('volumeVal').textContent = this.value; };
+
+  // ===== AUDIO PLAYBACK =====
+  function getAudioCtx() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    return audioCtx;
+  }
+
+  function beep(duration, freq, vol) {
+    return new Promise(resolve => {
+      const ctx = getAudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.frequency.value = freq;
+      gain.gain.value = vol / 100;
+      osc.start();
+      setTimeout(() => { osc.stop(); resolve(); }, duration);
+    });
+  }
+
+  function flashScreen(duration) {
+    if (!lightOn) return;
+    const el = document.getElementById('flashOverlay');
+    el.classList.add('on');
+    setTimeout(() => el.classList.remove('on'), duration);
+  }
+
+  function vibrate(duration) {
+    if (!vibrateOn) return;
+    if (navigator.vibrate) navigator.vibrate(duration);
+  }
+
+  async function playMorseSequence() {
+    const speed = parseInt(document.getElementById('speedSlider').value);
+    const freq = parseInt(document.getElementById('pitchSlider').value);
+    const vol = parseInt(document.getElementById('volumeSlider').value);
+
+    // Get morse output
+    let morseStr = '';
+    if (isTextToMorse) {
+      morseStr = document.getElementById('morseOutput').value;
+    } else {
+      morseStr = document.getElementById('morseInput').value;
+    }
+    if (!morseStr) return;
+
+    const dotLen = 1200 / speed; // ms per dot
+    const dashLen = dotLen * 3;
+    const symbolGap = dotLen;
+    const letterGap = dotLen * 3;
+    const wordGap = dotLen * 7;
+
+    isPlaying = true; isPaused = false;
+    document.getElementById('btnPlay').classList.add('playing');
+
+    do {
+      const chars = morseStr.split('');
+      for (let i = 0; i < chars.length; i++) {
+        if (!isPlaying) return;
+        while (isPaused) { await new Promise(r => setTimeout(r, 100)); if (!isPlaying) return; }
+
+        const c = chars[i];
+        if (c === '.') {
+          if (soundOn) await beep(dotLen, freq, vol);
+          else await new Promise(r => setTimeout(r, dotLen));
+          flashScreen(dotLen); vibrate(dotLen);
+        } else if (c === '-') {
+          if (soundOn) await beep(dashLen, freq, vol);
+          else await new Promise(r => setTimeout(r, dashLen));
+          flashScreen(dashLen); vibrate(dashLen);
+        } else if (c === '/') {
+          await new Promise(r => setTimeout(r, wordGap));
+        } else if (c === ' ') {
+          await new Promise(r => setTimeout(r, letterGap));
+        }
+        // gap between symbols within a letter
+        if (c === '.' || c === '-') {
+          await new Promise(r => setTimeout(r, symbolGap));
+        }
+      }
+      if (repeatOn && isPlaying) await new Promise(r => setTimeout(r, wordGap * 2));
+    } while (repeatOn && isPlaying);
+
+    stopMorse();
+  }
+
+  function playMorse() {
+    if (isPaused && isPlaying) { isPaused = false; return; }
+    stopMorse();
+    playMorseSequence();
+  }
+  function pauseMorse() { if (isPlaying) isPaused = !isPaused; }
+  function stopMorse() {
+    isPlaying = false; isPaused = false;
+    document.getElementById('btnPlay').classList.remove('playing');
+    document.getElementById('flashOverlay').classList.remove('on');
+  }
+
+  // ===== TOGGLES =====
+  function toggleRepeat() { repeatOn = !repeatOn; document.getElementById('btnRepeat').classList.toggle('active', repeatOn); }
+  function toggleSound() {
+    soundOn = !soundOn;
+    const btn = document.getElementById('btnSound');
+    btn.classList.toggle('on', soundOn);
+    btn.innerHTML = soundOn
+      ? '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 010 7.07" fill="none" stroke="currentColor" stroke-width="2"/></svg>Sound ON'
+      : '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15" stroke="currentColor" stroke-width="2"/><line x1="17" y1="9" x2="23" y2="15" stroke="currentColor" stroke-width="2"/></svg>Sound OFF';
+  }
+  function toggleLight() { lightOn = !lightOn; document.getElementById('btnLight').classList.toggle('active', lightOn); }
+  function toggleVibrate() { vibrateOn = !vibrateOn; document.getElementById('btnVibrate').classList.toggle('active', vibrateOn); }
+
+  function copyOutput() {
+    const text = document.getElementById('morseOutput').value;
+    if (!text) return;
+    navigator.clipboard.writeText(text).then(() => {
+      if (window.showToast) showToast('✓ Copied to clipboard!');
+      const btn = document.getElementById('btnCopy');
+      btn.classList.add('active');
+      setTimeout(() => btn.classList.remove('active'), 1500);
+    });
+  }
+
+  function shareResult() {
+    const text = document.getElementById('morseOutput').value;
+    if (navigator.share) {
+      navigator.share({ title: 'Morse Code', text: text, url: 'https://fancysymbols.com/morse-code' });
+    } else {
+      copyOutput();
+      if (window.showToast) showToast('Link copied! Share it with friends.');
+    }
+  }
+
+  // ===== PLAY SINGLE CHARACTER =====
+  async function playChar(letter) {
+    const morse = MC[letter.toUpperCase()];
+    if (!morse) return;
+    const speed = parseInt(document.getElementById('speedSlider').value);
+    const freq = parseInt(document.getElementById('pitchSlider').value);
+    const vol = parseInt(document.getElementById('volumeSlider').value);
+    const dotLen = 1200 / speed;
+    for (const c of morse) {
+      if (c === '.') { await beep(dotLen, freq, vol); flashScreen(dotLen); vibrate(dotLen); }
+      else if (c === '-') { await beep(dotLen*3, freq, vol); flashScreen(dotLen*3); vibrate(dotLen*3); }
+      await new Promise(r => setTimeout(r, dotLen));
+    }
+  }
+
+  // ===== REFERENCE CHART =====
+  function buildChart() {
+    const chart = document.getElementById('morseChart');
+    const entries = Object.entries(MC);
+    chart.innerHTML = entries.map(([letter, code]) =>
+      `<div class="morse-char" onclick="playChar('${letter.replace("'","\\'")}')">
+        <div class="morse-char-letter">${letter}</div>
+        <div class="morse-char-code">${code}</div>
+      </div>`
+    ).join('');
+  }
+
+  // ===== INIT =====
+  document.getElementById('morseInput').addEventListener('input', translate);
+  translate();
+  buildChart();
+  </script>
+<script src="/script.js?v=5.6"></script>
 </body>
 </html>

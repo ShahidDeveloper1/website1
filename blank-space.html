@@ -26,6 +26,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/style.css?v=5.6">
   <link rel="icon" type="image/png" href="/favicon.png?v=5.6">
+
+<style>.blank-hero{text-align:center;padding:2rem;background:rgba(255,255,255,0.03);border:2px dashed rgba(255,255,255,0.15);border-radius:16px;margin-bottom:2rem}.blank-hero-btn{display:inline-flex;align-items:center;gap:.7rem;padding:1rem 2.5rem;background:var(--primary-color);color:#fff;border:none;border-radius:12px;font-size:1.15rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Outfit',sans-serif}.blank-hero-btn:hover{transform:scale(1.05);box-shadow:0 8px 30px rgba(99,102,241,.4)}.blank-hero-btn.copied-btn{background:#0d9488}</style>
 </head>
 <body>
 <div class="particles"></div>
@@ -165,5 +167,9 @@
 </footer>
 
 
+<script>
+function copyHero(){const b=document.getElementById('heroCopy');navigator.clipboard.writeText('\u3164').then(()=>{b.textContent='✅ Copied!';b.classList.add('copied-btn');setTimeout(()=>{b.textContent='📋 Copy Blank Space';b.classList.remove('copied-btn')},2e3)});}
+function copyB(el,t){const b=el.querySelector('.combo-copy-btn');navigator.clipboard.writeText(t).then(()=>{if(b){b.textContent='Copied!';b.style.background='#0d9488';b.style.color='#fff';}if(window.ClipboardManager)window.ClipboardManager.add(t);setTimeout(()=>{if(b){b.textContent='Copy';b.style.background='';b.style.color='';}},1500)});}
+</script>
 <script src="/script.js?v=5.6"></script>
 </body></html>

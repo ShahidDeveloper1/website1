@@ -139,5 +139,48 @@
 </footer>
 
 
+<script>
+const M={cb:{u:'𝓐𝓑𝓒𝓓𝓔𝓕𝓖𝓗𝓘𝓙𝓚𝓛𝓜𝓝𝓞𝓟𝓠𝓡𝓢𝓣𝓤𝓥𝓦𝓧𝓨𝓩',l:'𝓪𝓫𝓬𝓭𝓮𝓯𝓰𝓱𝓲𝓳𝓴𝓵𝓶𝓷𝓸𝓹𝓺𝓻𝓼𝓽𝓾𝓿𝔀𝔁𝔂𝔃'},f:{u:'𝕬𝕭𝕮𝕯𝕰𝕱𝕲𝕳𝕴𝕵𝕶𝕷𝕸𝕹𝕺𝕻𝕼𝕽𝕾𝕿𝖀𝖁𝖂𝖃𝖄𝖅',l:'𝖆𝖇𝖈𝖉𝖊𝖋𝖌𝖍𝖎𝖏𝖐𝖑𝖒𝖓𝖔𝖕𝖖𝖗𝖘𝖙𝖚𝖛𝖜𝖝𝖞𝖟'},d:{u:'𝔸𝔹ℂ𝔻𝔼𝔽𝔾ℍ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ',l:'𝕒𝕓𝕔𝕕𝕖𝕗𝕘𝕙𝕚𝕛𝕜𝕝𝕞𝕟𝕠𝕡𝕢𝕣𝕤𝕥𝕦𝕧𝕨𝕩𝕪𝕫'},fw:{u:'ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ',l:'ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ'}};
+function ms(s,m){const u=Array.from(m.u),l=Array.from(m.l);return Array.from(s).map(c=>{const k=c.charCodeAt(0);if(k>=65&&k<=90)return u[k-65]||c;if(k>=97&&k<=122)return l[k-97]||c;return c}).join('');}
+function ac(s,ch){return Array.from(s).map(c=>c!==' '?c+ch:c).join('');}
+
+const FF_TEMPLATES = [
+  n=>`꧁༒☬ ${ms(n,M.f)} ☬༒꧂`, n=>`꧁▪ ${n.toUpperCase()} ▪꧂`, n=>`꧁⁣⁣ ${ms(n,M.cb)} ⁣⁣꧂`,
+  n=>`꧁ ★ ${n.toUpperCase()} ★ ꧂`, n=>`꧁❤️ ${ms(n,M.cb)} ❤️꧂`,
+  n=>`⚡ ${ms(n,M.f)} ⚡`, n=>`☠ ${ms(n,M.f)} ☠`, n=>`🔥 ${n.toUpperCase()} 🔥`,
+  n=>`◤ ${n.toUpperCase()} ◢`, n=>`「 ${ms(n,M.d)} 」`, n=>`▰▰ ${n.toUpperCase()} ▰▰`,
+  n=>`░▒▓ ${n.toUpperCase()} ▓▒░`, n=>`╰‿╯ ${ms(n,M.cb)} ╰‿╯`,
+  n=>`⚔ ${ms(n,M.f)} ⚔`, n=>`☬ ${n.toUpperCase()} ☬`, n=>`✞ ${ms(n,M.f)} ✞`,
+  n=>`ᴳᵒᵈ ${n.toUpperCase()}`, n=>`${n.toUpperCase()} ᴮᵒˢˢ`, n=>`ᴷⁱⁿᵍ ${n.toUpperCase()}`,
+  n=>`${n.toUpperCase()} ᴾʳᵒ`, n=>`${n.toUpperCase()} ᵀᵀⱽ`, n=>`${n.toUpperCase()} ᵞᵀ`,
+  n=>`☆ ${ms(n,M.fw)} ☆`, n=>`★ ${ms(n,M.d)} ★`,
+  n=>`꧁⚡ ${n.toUpperCase().replace(/E/g,'Ξ').replace(/O/g,'Ø')} ⚡꧂`,
+  n=>`꧁☠ ${n.toUpperCase().replace(/E/g,'Ɇ').replace(/O/g,'Ø').replace(/A/g,'Λ')} ☠꧂`,
+  n=>`💀 ${ms(n,M.f)} 💀`, n=>`👑 ${ms(n,M.cb)} 👑`,
+  n=>`彡 ${n.toUpperCase()} 彡`, n=>`乂 ${n.toUpperCase()} 乂`,
+  n=>`× ${n.toUpperCase()} ×`, n=>`• ${ms(n,M.cb)} •`,
+  n=>`┃ ${n.toUpperCase()} ┃`, n=>`━━ ${n.toUpperCase()} ━━`,
+  n=>`⫷ ${ms(n,M.f)} ⫸`, n=>`❖ ${n.toUpperCase()} ❖`,
+  n=>`卍 ${ms(n,M.f)} 卍`, n=>`☯ ${n.toUpperCase()} ☯`,
+  n=>`✰ ${ms(n,M.cb)} ✰`, n=>`♛ ${n.toUpperCase()} ♛`,
+  n=>`♕ ${ms(n,M.f)} ♕`, n=>`⍟ ${n.toUpperCase()} ⍟`,
+  n=>`✿ ${ms(n,M.cb)} ✿`, n=>`❀ ${n.toUpperCase()} ❀`,
+  n=>`${ac(n.toUpperCase(),'\u0336')}`, n=>`${ac(n.toUpperCase(),'\u0332')}`,
+  n=>`${Array.from(n.toUpperCase()).join('•')}`, n=>`${Array.from(n.toUpperCase()).join('꧂꧁')}`,
+  n=>`Ꭰ${n.toUpperCase()}Ꭰ`, n=>`Ꮢ${n.toUpperCase()}Ꮢ`,
+  n=>`꧁${ms(n,M.f)}꧂`, n=>`꧁⁣⁣${n.toUpperCase().replace(/E/g,'Σ').replace(/O/g,'Θ').replace(/A/g,'Δ')}⁣⁣꧂`,
+];
+
+function render(){
+  const name=document.getElementById('ffInput').value||'PLAYER';
+  document.getElementById('ffResults').innerHTML=FF_TEMPLATES.map(fn=>{
+    const r=fn(name);const e=r.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    return `<div class="combo-item" onclick="copyFF(this,'${r.replace(/\\/g,'\\\\').replace(/'/g,"\\'")}')" style="cursor:pointer"><span class="combo-text">${e}</span><span class="combo-copy-btn">Copy</span></div>`;
+  }).join('');
+}
+function copyFF(el,t){const b=el.querySelector('.combo-copy-btn');navigator.clipboard.writeText(t).then(()=>{if(b){b.textContent='Copied!';b.style.background='#0d9488';b.style.color='#fff';}if(window.ClipboardManager)window.ClipboardManager.add(t);setTimeout(()=>{if(b){b.textContent='Copy';b.style.background='';b.style.color='';}},1500);});}
+document.getElementById('ffInput').addEventListener('input',render);
+render();
+</script>
 <script src="/script.js?v=5.6"></script>
 </body></html>

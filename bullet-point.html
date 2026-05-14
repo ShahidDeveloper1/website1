@@ -149,5 +149,19 @@
 </footer>
 
 
+<script>
+const BULLETS = {
+  standard: ['•','‣','⁃','◦','◉','◎','●','○','◌','◍','◐','◑','◒','◓','⦿','⊙','⊚','⊛'],
+  arrow: ['➤','➜','➔','→','▸','▹','►','▻','▶','⇒','⇨','⇾','↣','↠','➥','➧','➨','➩','➪','➫','➬','➭','➮','➯','➱'],
+  decorative: ['✦','✧','★','☆','✪','✫','✬','✭','✮','✯','✰','✱','✲','✳','✴','✵','✶','✷','✸','✹','✺','✻','✼','✽','✾','✿','❀','❁','❂','❃','❇','❈','❉','❊','❋','⬥','⬦','◆','◇','◈'],
+  checks: ['✓','✔','☑','✅','✕','✖','✗','✘','❌','☒','☐','▪','▫','◾','◽','■','□','◼','◻'],
+  numbers: ['①','②','③','④','⑤','⑥','⑦','⑧','⑨','⑩','❶','❷','❸','❹','❺','❻','❼','❽','❾','❿','⑴','⑵','⑶','⑷','⑸','⑹','⑺','⑻','⑼','⑽'],
+};
+function renderGrid(id,symbols){
+  document.getElementById(id).innerHTML=symbols.map(s=>`<div class="symbol-item" onclick="copyS(this,'${s}')">${s}</div>`).join('');
+}
+function copyS(el,s){navigator.clipboard.writeText(s).then(()=>{el.style.background='#0d9488';el.style.color='#fff';if(window.ClipboardManager)window.ClipboardManager.add(s);setTimeout(()=>{el.style.background='';el.style.color='';},1e3);});}
+renderGrid('grid1',BULLETS.standard);renderGrid('grid2',BULLETS.arrow);renderGrid('grid3',BULLETS.decorative);renderGrid('grid4',BULLETS.checks);renderGrid('grid5',BULLETS.numbers);
+</script>
 <script src="/script.js?v=5.6"></script>
 </body></html>

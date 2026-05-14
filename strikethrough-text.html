@@ -140,5 +140,46 @@
 </footer>
 
 
+<script>
+const STYLES = [
+  { name: 'Strikethrough', char: '\u0336', icon: '━' },
+  { name: 'Underline', char: '\u0332', icon: '_' },
+  { name: 'Double Underline', char: '\u0333', icon: '═' },
+  { name: 'Slash Through', char: '\u0338', icon: '/' },
+  { name: 'Tilde Below', char: '\u0330', icon: '~' },
+  { name: 'X Above', char: '\u033D', icon: 'x' },
+  { name: 'Bridge Above', char: '\u0346', icon: '⌢' },
+  { name: 'Ring Above', char: '\u030A', icon: '°' },
+  { name: 'Dot Below', char: '\u0323', icon: '.' },
+  { name: 'Double Dot Above', char: '\u0308', icon: '¨' },
+  { name: 'Cedilla Below', char: '\u0327', icon: '¸' },
+  { name: 'Breve Above', char: '\u0306', icon: '˘' },
+];
+
+function decorate(text, combChar) {
+  return Array.from(text).map(c => c === ' ' ? c : c + combChar).join('');
+}
+
+function render() {
+  const text = document.getElementById('strikeInput').value || 'Hello World';
+  const el = document.getElementById('strikeResults');
+  el.innerHTML = STYLES.map(st => {
+    const result = decorate(text, st.char);
+    const escaped = result.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    return `<div class="font-card" onclick="copyStrike(this,'${result.replace(/\\/g,'\\\\').replace(/'/g,"\\'")}')"><div class="font-card-header"><span class="font-card-label">${st.icon} ${st.name}</span><div class="font-card-actions"><button class="font-card-btn copy-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div></div><div class="font-card-preview">${escaped}</div><div class="copy-feedback">Copied!</div></div>`;
+  }).join('');
+}
+
+function copyStrike(el, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    el.classList.add('copied');
+    if (window.ClipboardManager) window.ClipboardManager.add(text);
+    setTimeout(() => el.classList.remove('copied'), 1500);
+  });
+}
+
+document.getElementById('strikeInput').addEventListener('input', render);
+render();
+</script>
 <script src="/script.js?v=5.6"></script>
 </body></html>
