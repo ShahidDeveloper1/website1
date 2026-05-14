@@ -4,23 +4,14 @@
   <meta charset='UTF-8'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Text Repeater - FancySymbols</title>
-  <meta name="description" content="Copy and paste text repeater for your bio, social posts, and messages. Huge collection of aesthetic and cool text symbols. One-click copy!">
+  <meta name="description" content="Repeat any text, word, or emoji up to 100,000 times instantly. Free online text repeater.">
   <link rel='canonical' href='https://www.fancysymbols.com/text-repeater.html'>
-  
-  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.fancysymbols.com/text-repeater.html">
   <meta property="og:title" content="Text Repeater">
-  <meta property="og:description" content="Copy and paste text repeater instantly. Perfect for Instagram, TikTok, and gaming.">
+  <meta property="og:description" content="Repeat any text up to 100,000 times instantly.">
   <meta property="og:image" content="https://www.fancysymbols.com/og-image.png">
-
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://www.fancysymbols.com/text-repeater.html">
-  <meta name="twitter:title" content="Text Repeater">
-  <meta name="twitter:description" content="One-click copy for text repeater and aesthetic text decorations.">
-  <meta name="twitter:image" content="https://www.fancysymbols.com/og-image.png">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -31,130 +22,68 @@
 <div class="particles"></div>
 <header class="header">
   <div class="header-inner">
-    <a href="/" class="logo">
-      <img src="/favicon.png?v=5.6" alt="FancySymbols Logo" class="logo-img">
-      <span class="logo-text">FancySymbols</span>
-    </a>
-    <nav class="header-nav">
-      <a href="/">Home</a>
-      <a href="/all-symbols.html">All Symbols</a>
-      <a href="/preppy-fonts.html"><span class="link-icon">🎀</span> Preppy Font Generator</a>
-      <a href="/cute-fonts.html">Cute Fonts</a>
-      <a href="/aesthetic-fonts.html">Aesthetic Fonts</a>
-      <a href="/lenny-face.html" class="nav-cta">Lenny Faces</a>
-    </nav>
+    <a href="/" class="logo"><img src="/favicon.png?v=5.6" alt="FancySymbols Logo" class="logo-img"><span class="logo-text">FancySymbols</span></a>
+    <nav class="header-nav"><a href="/">Home</a><a href="/all-symbols.html">All Symbols</a><a href="/preppy-fonts.html"><span class="link-icon">🎀</span> Preppy Font Generator</a><a href="/cute-fonts.html">Cute Fonts</a><a href="/aesthetic-fonts.html">Aesthetic Fonts</a><a href="/lenny-face.html" class="nav-cta">Lenny Faces</a></nav>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
   </div>
 </header>
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 <aside class="sidebar" id="sidebar"></aside>
-
 <div class="page-wrapper"><main class="main-content">
-  <div class="page-header"><h1>Text Repeater</h1><p>Repeat a word, phrase, or emoji up to 100,000 times instantly. Perfect for WhatsApp, Discord, or sending long messages.</p></div>
-
+  <div class="page-header"><h1>Text Repeater</h1><p>Repeat a word, phrase, or emoji up to 100,000 times instantly.</p></div>
   <div class="repeater-grid">
     <div class="repeater-panel">
       <textarea class="repeater-input" id="sourceText" placeholder="Enter text to repeat...">I love you 💖</textarea>
-      
       <div class="repeater-controls">
-        <div class="control-group">
-          <label class="control-label">Number of Repetitions</label>
-          <input type="number" class="number-input" id="repCount" min="1" max="100000" value="100">
-        </div>
-        <div class="control-group">
-          <label class="control-label">Separator</label>
-          <input type="text" class="number-input" id="separator" placeholder="e.g. space, comma" value=" ">
-        </div>
+        <div class="control-group"><label class="control-label">Repetitions</label><input type="number" class="number-input" id="repCount" min="1" max="100000" value="100"></div>
+        <div class="control-group"><label class="control-label">Separator</label><input type="text" class="number-input" id="separator" value=" "></div>
       </div>
-      
-      <div class="control-group" style="margin-bottom: 1.5rem;">
-        <label class="checkbox-label">
-          <input type="checkbox" id="addNewline"> Add New Line after each repetition
-        </label>
-        <label class="checkbox-label">
-          <input type="checkbox" id="addIndex"> Add Index Number (1., 2., 3.)
-        </label>
+      <div class="control-group" style="margin-bottom:1.5rem;">
+        <label class="checkbox-label"><input type="checkbox" id="addNewline"> New Line after each</label>
+        <label class="checkbox-label"><input type="checkbox" id="addIndex"> Add Index (1. 2. 3.)</label>
       </div>
-
-      <button class="action-btn generate-btn" id="generateBtn" onclick="generate()">Repeat Text 🚀</button>
-      <button class="action-btn copy-btn" id="copyBtn" onclick="copyOutput()">Copy Results</button>
+      <button class="action-btn generate-btn" onclick="generate()">Repeat Text 🚀</button>
+      <button class="action-btn copy-btn" onclick="copyOutput()">Copy Results</button>
     </div>
-
     <div class="repeater-panel">
-      <textarea class="repeater-output" id="outputArea" readonly placeholder="Your repeated text will appear here..."></textarea>
+      <textarea class="repeater-output" id="outputArea" readonly placeholder="Results appear here..."></textarea>
       <div class="stats" id="statsArea">Characters: 0</div>
     </div>
   </div>
-
   <div class="content-article">
     <h2>What is a Text Repeater?</h2>
-    <p>A <b>Text Repeater</b> is an online utility that allows you to multiply a specific string of text, word, or emoji as many times as you want. Instead of manually copying and pasting multiple times, you can simply type your message once, set the repetition count (e.g., 100, 10,000, or even 100,000 times), and generate a massive wall of text in milliseconds.</p>
-    
-    <h2>How to Use This Tool</h2>
-    <ul>
-      <li><strong>Type your message:</strong> It can be a single word, a sentence, or a string of emojis (like "I'm sorry", "Happy Birthday 🎂", or just "a").</li>
-      <li><strong>Set the limit:</strong> Enter how many times you want it repeated. Our tool handles up to 100,000 repetitions without crashing your browser.</li>
-      <li><strong>Choose format:</strong> You can add a space, comma, or any other separator between repetitions. You can also force each repetition onto a new line, or add numbers (1. 2. 3.) to make a numbered list.</li>
-      <li><strong>Copy and send:</strong> Click the copy button and paste it into WhatsApp, Discord, iMessage, or Instagram.</li>
-    </ul>
-
-    <h3>More Utility Tools</h3>
-    <div class="category-pills"><a href="/character-counter.html" class="category-pill">📊 Character Counter</a><a href="/blank-space.html" class="category-pill">📋 Blank Space</a><a href="/zalgo-text.html" class="category-pill">G̷l̶i̷t̶c̷h̶ Text</a><a href="/" class="category-pill">🏠 All Symbols</a>
-  
-  
-  
+    <p>A <b>Text Repeater</b> multiplies text as many times as you want — up to 100,000 repetitions instantly.</p>
+    <h3>More Tools</h3>
+    <div class="category-pills"><a href="/character-counter.html" class="category-pill">📊 Counter</a><a href="/zalgo-text.html" class="category-pill">G̷l̶i̷t̶c̷h̶ Text</a><a href="/" class="category-pill">🏠 Home</a></div>
+  </div>
 </main></div>
-
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-grid">
-      <div class="footer-brand">
-        <span class="logo-text highlight">FancySymbols</span>
-        <p class="footer-desc">Your premium destination for aesthetic symbols, cute fonts, and creative text tools. Elevate your digital presence with ease.</p>
-      </div>
-      
-      <div>
-        <h4 class="footer-col-title">Text Tools</h4>
-        <ul class="footer-links-list">
-          <li><a href="/all-symbols.html">All Symbols</a></li>
-          <li><a href="/preppy-fonts.html">Preppy Font Generator</a></li>
-          <li><a href="/aesthetic-fonts.html">Aesthetic Fonts</a></li>
-          <li><a href="/cute-fonts.html">Cute Fonts</a></li>
-          <li><a href="/lenny-face.html">Lenny Faces</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 class="footer-col-title">Categories</h4>
-        <ul class="footer-links-list">
-          <li><a href="/symbols/heart.html">Heart Symbols</a></li>
-          <li><a href="/symbols/star.html">Star Symbols</a></li>
-          <li><a href="/symbols/flower.html">Flower Symbols</a></li>
-          <li><a href="/symbols/aesthetic.html">Aesthetic Symbols</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 class="footer-col-title">Company</h4>
-        <ul class="footer-links-list">
-          <li><a href="/pages/privacy.html">Privacy Policy</a></li>
-          <li><a href="/pages/terms.html">Terms of Service</a></li>
-          <li><a href="/pages/contact.html">Contact Us</a></li>
-        </ul>
-      </div>
+      <div class="footer-brand"><span class="logo-text highlight">FancySymbols</span><p class="footer-desc">Your premium destination for aesthetic symbols, cute fonts, and creative text tools.</p></div>
+      <div><h4 class="footer-col-title">Text Tools</h4><ul class="footer-links-list"><li><a href="/all-symbols.html">All Symbols</a></li><li><a href="/preppy-fonts.html">Preppy Font Generator</a></li><li><a href="/aesthetic-fonts.html">Aesthetic Fonts</a></li><li><a href="/lenny-face.html">Lenny Faces</a></li></ul></div>
+      <div><h4 class="footer-col-title">Categories</h4><ul class="footer-links-list"><li><a href="/symbols/heart.html">Heart Symbols</a></li><li><a href="/symbols/star.html">Star Symbols</a></li><li><a href="/symbols/aesthetic.html">Aesthetic Symbols</a></li></ul></div>
+      <div><h4 class="footer-col-title">Company</h4><ul class="footer-links-list"><li><a href="/pages/privacy.html">Privacy Policy</a></li><li><a href="/pages/terms.html">Terms of Service</a></li></ul></div>
     </div>
-
-    <div class="footer-bottom">
-      <p class="footer-copy">© 2026 FancySymbols.</p>
-      <div class="footer-socials">
-        <a href="#" class="footer-social-icon">𝕏</a>
-        <a href="#" class="footer-social-icon">📸</a>
-        <a href="#" class="footer-social-icon">🎵</a>
-      </div>
-    </div>
+    <div class="footer-bottom"><p class="footer-copy">© 2026 FancySymbols.</p></div>
   </div>
-  <div id="clipboard-bar"></div>
 </footer>
-<script src="/script.js?v=5.1"></script>
-<script src="/script.js?v=5.5"></script>
+<script src="/script.js?v=5.6"></script>
+<script>
+function generate(){
+  const text=document.getElementById('sourceText').value;
+  const count=Math.min(parseInt(document.getElementById('repCount').value)||1,100000);
+  const sep=document.getElementById('separator').value;
+  const nl=document.getElementById('addNewline').checked;
+  const idx=document.getElementById('addIndex').checked;
+  if(!text){document.getElementById('outputArea').value='Please enter text.';return;}
+  const parts=[];
+  for(let i=0;i<count;i++){let l='';if(idx)l+=(i+1)+'. ';l+=text;parts.push(l);}
+  const result=parts.join(nl?'\n':sep);
+  document.getElementById('outputArea').value=result;
+  document.getElementById('statsArea').textContent='Characters: '+result.length.toLocaleString();
+}
+function copyOutput(){const t=document.getElementById('outputArea').value;if(t)copyToClipboard(t);}
+document.addEventListener('DOMContentLoaded',()=>{generate();});
+</script>
 </body></html>

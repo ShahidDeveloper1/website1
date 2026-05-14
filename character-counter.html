@@ -4,23 +4,14 @@
   <meta charset='UTF-8'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>📊 Character Counter - FancySymbols</title>
-  <meta name="description" content="Copy and paste 📊 character counter for your bio, social posts, and messages. Huge collection of aesthetic and cool text symbols. One-click copy!">
+  <meta name="description" content="Count characters, words, sentences, paragraphs in real time. Track Instagram, TikTok, Twitter character limits instantly.">
   <link rel='canonical' href='https://www.fancysymbols.com/character-counter.html'>
-  
-  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.fancysymbols.com/character-counter.html">
   <meta property="og:title" content="📊 Character Counter">
-  <meta property="og:description" content="Copy and paste 📊 character counter instantly. Perfect for Instagram, TikTok, and gaming.">
+  <meta property="og:description" content="Count characters, words, sentences in real time.">
   <meta property="og:image" content="https://www.fancysymbols.com/og-image.png">
-
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://www.fancysymbols.com/character-counter.html">
-  <meta name="twitter:title" content="📊 Character Counter">
-  <meta name="twitter:description" content="One-click copy for 📊 character counter and aesthetic text decorations.">
-  <meta name="twitter:image" content="https://www.fancysymbols.com/og-image.png">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -31,27 +22,15 @@
 <div class="particles"></div>
 <header class="header">
   <div class="header-inner">
-    <a href="/" class="logo">
-      <img src="/favicon.png?v=5.6" alt="FancySymbols Logo" class="logo-img">
-      <span class="logo-text">FancySymbols</span>
-    </a>
-    <nav class="header-nav">
-      <a href="/">Home</a>
-      <a href="/all-symbols.html">All Symbols</a>
-      <a href="/preppy-fonts.html"><span class="link-icon">🎀</span> Preppy Font Generator</a>
-      <a href="/cute-fonts.html">Cute Fonts</a>
-      <a href="/aesthetic-fonts.html">Aesthetic Fonts</a>
-      <a href="/lenny-face.html" class="nav-cta">Lenny Faces</a>
-    </nav>
+    <a href="/" class="logo"><img src="/favicon.png?v=5.6" alt="FancySymbols Logo" class="logo-img"><span class="logo-text">FancySymbols</span></a>
+    <nav class="header-nav"><a href="/">Home</a><a href="/all-symbols.html">All Symbols</a><a href="/preppy-fonts.html"><span class="link-icon">🎀</span> Preppy Font Generator</a><a href="/cute-fonts.html">Cute Fonts</a><a href="/aesthetic-fonts.html">Aesthetic Fonts</a><a href="/lenny-face.html" class="nav-cta">Lenny Faces</a></nav>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
   </div>
 </header>
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 <aside class="sidebar" id="sidebar"></aside>
-
 <div class="page-wrapper"><main class="main-content">
-  <div class="page-header"><h1>📊 Character Counter</h1><p>Count characters, words, sentences, and paragraphs in real time. Track social media limits instantly.</p></div>
-
+  <div class="page-header"><h1>📊 Character Counter</h1><p>Count characters, words, sentences, and paragraphs in real time.</p></div>
   <div class="font-gen-container">
     <textarea class="counter-textarea" id="counterInput" placeholder="Start typing or paste your text here..." autofocus></textarea>
     <div class="counter-grid">
@@ -62,88 +41,65 @@
       <div class="counter-card"><div class="counter-value" id="lineCount">0</div><div class="counter-label">Lines</div></div>
       <div class="counter-card"><div class="counter-value" id="paraCount">0</div><div class="counter-label">Paragraphs</div></div>
     </div>
-
     <div class="section-title" style="margin-top:1.5rem"><span class="icon">📱</span> Platform Limits <span class="line"></span></div>
     <div id="limitBars"></div>
   </div>
-
   <div class="content-article">
     <h2>Social Media Character Limits (2026)</h2>
-    <table class="comparison-table"><thead><tr><th>Platform</th><th>Bio</th><th>Post / Caption</th><th>Comment</th><th>Username</th></tr></thead><tbody>
+    <table class="comparison-table"><thead><tr><th>Platform</th><th>Bio</th><th>Post</th><th>Comment</th><th>Username</th></tr></thead><tbody>
       <tr><td><strong>Instagram</strong></td><td>150</td><td>2,200</td><td>2,200</td><td>30</td></tr>
       <tr><td><strong>Twitter / X</strong></td><td>160</td><td>280</td><td>280</td><td>15</td></tr>
       <tr><td><strong>TikTok</strong></td><td>80</td><td>2,200</td><td>150</td><td>24</td></tr>
       <tr><td><strong>YouTube</strong></td><td>1,000</td><td>100 (title)</td><td>10,000</td><td>30</td></tr>
       <tr><td><strong>Discord</strong></td><td>190</td><td>2,000</td><td>2,000</td><td>32</td></tr>
-      <tr><td><strong>Facebook</strong></td><td>101</td><td>63,206</td><td>8,000</td><td>50</td></tr>
-      <tr><td><strong>LinkedIn</strong></td><td>220</td><td>3,000</td><td>1,250</td><td>N/A</td></tr>
-      <tr><td><strong>Pinterest</strong></td><td>500</td><td>500 (desc)</td><td>500</td><td>30</td></tr>
     </tbody></table>
-
-    <h2>Frequently Asked Questions</h2>
+    <h2>FAQ</h2>
     <div class="faq-list">
-      <div class="faq-item"><div class="faq-q">What is the Instagram bio character limit?</div><div class="faq-a"><p><b>Instagram bios have a 150-character limit.</b> This includes letters, numbers, symbols, spaces, and emoji. Each emoji counts as 1-2 characters. Use this counter to check your bio length before pasting.</p></div></div>
-      <div class="faq-item"><div class="faq-q">What is the Twitter/X character limit?</div><div class="faq-a"><p><b>Twitter/X has a 280-character limit for standard posts.</b> URLs count as 23 characters. Emoji count as 2 characters each. Twitter Blue subscribers can post up to 25,000 characters.</p></div></div>
-      <div class="faq-item"><div class="faq-q">How many characters can a TikTok bio have?</div><div class="faq-a"><p><b>TikTok bios have an 80-character limit.</b> Captions allow up to 2,200 characters. Comments are limited to 150 characters.</p></div></div>
+      <div class="faq-item"><div class="faq-q">What is the Instagram bio character limit?</div><div class="faq-a"><p><b>150 characters.</b> Each emoji counts as 1-2 characters.</p></div></div>
+      <div class="faq-item"><div class="faq-q">What is the Twitter/X character limit?</div><div class="faq-a"><p><b>280 characters</b> for standard posts. URLs count as 23.</p></div></div>
     </div>
-
     <h3>More Tools</h3>
-    <div class="category-pills"><a href="/bio-generator.html" class="category-pill">📝 Bio Generator</a><a href="/aesthetic-fonts.html" class="category-pill">✨ Aesthetic Fonts</a><a href="/invisible-character.html" class="category-pill">👻 Invisible Character</a><a href="/" class="category-pill">🏠 All Symbols</a>
-  
-  
-  
+    <div class="category-pills"><a href="/bio-generator.html" class="category-pill">📝 Bio Generator</a><a href="/aesthetic-fonts.html" class="category-pill">✨ Aesthetic Fonts</a><a href="/" class="category-pill">🏠 Home</a></div>
+  </div>
 </main></div>
-
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-grid">
-      <div class="footer-brand">
-        <span class="logo-text highlight">FancySymbols</span>
-        <p class="footer-desc">Your premium destination for aesthetic symbols, cute fonts, and creative text tools. Elevate your digital presence with ease.</p>
-      </div>
-      
-      <div>
-        <h4 class="footer-col-title">Text Tools</h4>
-        <ul class="footer-links-list">
-          <li><a href="/all-symbols.html">All Symbols</a></li>
-          <li><a href="/preppy-fonts.html">Preppy Font Generator</a></li>
-          <li><a href="/aesthetic-fonts.html">Aesthetic Fonts</a></li>
-          <li><a href="/cute-fonts.html">Cute Fonts</a></li>
-          <li><a href="/lenny-face.html">Lenny Faces</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 class="footer-col-title">Categories</h4>
-        <ul class="footer-links-list">
-          <li><a href="/symbols/heart.html">Heart Symbols</a></li>
-          <li><a href="/symbols/star.html">Star Symbols</a></li>
-          <li><a href="/symbols/flower.html">Flower Symbols</a></li>
-          <li><a href="/symbols/aesthetic.html">Aesthetic Symbols</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 class="footer-col-title">Company</h4>
-        <ul class="footer-links-list">
-          <li><a href="/pages/privacy.html">Privacy Policy</a></li>
-          <li><a href="/pages/terms.html">Terms of Service</a></li>
-          <li><a href="/pages/contact.html">Contact Us</a></li>
-        </ul>
-      </div>
+      <div class="footer-brand"><span class="logo-text highlight">FancySymbols</span><p class="footer-desc">Your premium destination for aesthetic symbols, cute fonts, and creative text tools.</p></div>
+      <div><h4 class="footer-col-title">Text Tools</h4><ul class="footer-links-list"><li><a href="/all-symbols.html">All Symbols</a></li><li><a href="/preppy-fonts.html">Preppy Font Generator</a></li><li><a href="/aesthetic-fonts.html">Aesthetic Fonts</a></li><li><a href="/lenny-face.html">Lenny Faces</a></li></ul></div>
+      <div><h4 class="footer-col-title">Categories</h4><ul class="footer-links-list"><li><a href="/symbols/heart.html">Heart Symbols</a></li><li><a href="/symbols/star.html">Star Symbols</a></li><li><a href="/symbols/aesthetic.html">Aesthetic Symbols</a></li></ul></div>
+      <div><h4 class="footer-col-title">Company</h4><ul class="footer-links-list"><li><a href="/pages/privacy.html">Privacy Policy</a></li><li><a href="/pages/terms.html">Terms of Service</a></li></ul></div>
     </div>
-
-    <div class="footer-bottom">
-      <p class="footer-copy">© 2026 FancySymbols.</p>
-      <div class="footer-socials">
-        <a href="#" class="footer-social-icon">𝕏</a>
-        <a href="#" class="footer-social-icon">📸</a>
-        <a href="#" class="footer-social-icon">🎵</a>
-      </div>
-    </div>
+    <div class="footer-bottom"><p class="footer-copy">© 2026 FancySymbols.</p></div>
   </div>
-  <div id="clipboard-bar"></div>
 </footer>
-<script src="/script.js?v=5.1"></script>
-<script src="/script.js?v=5.5"></script>
+<script src="/script.js?v=5.6"></script>
+<script>
+(function(){
+  const limits=[
+    {name:'Instagram Bio',max:150},{name:'TikTok Bio',max:80},{name:'Twitter Post',max:280},
+    {name:'Discord Bio',max:190},{name:'Instagram Caption',max:2200},{name:'Discord Message',max:2000}
+  ];
+  function update(){
+    const t=document.getElementById('counterInput').value;
+    document.getElementById('charCount').textContent=t.length;
+    document.getElementById('charNoSpace').textContent=t.replace(/\s/g,'').length;
+    document.getElementById('wordCount').textContent=t.trim()?t.trim().split(/\s+/).length:0;
+    document.getElementById('sentenceCount').textContent=t.trim()?t.split(/[.!?]+/).filter(s=>s.trim()).length:0;
+    document.getElementById('lineCount').textContent=t?t.split('\n').length:0;
+    document.getElementById('paraCount').textContent=t.trim()?t.split(/\n\s*\n/).filter(p=>p.trim()).length:0;
+    // Limit bars
+    const barsEl=document.getElementById('limitBars');
+    barsEl.innerHTML=limits.map(l=>{
+      const pct=Math.min((t.length/l.max)*100,100);
+      const over=t.length>l.max;
+      return `<div class="limit-bar"><span class="limit-name">${l.name}</span><div class="limit-track"><div class="limit-fill${over?' over':''}" style="width:${pct}%"></div></div><span class="limit-count">${t.length}/${l.max}</span></div>`;
+    }).join('');
+  }
+  document.addEventListener('DOMContentLoaded',()=>{
+    document.getElementById('counterInput').addEventListener('input',update);
+    update();
+  });
+})();
+</script>
 </body></html>
