@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const DOMAIN = 'https://fancysymbols.com';
+const DOMAIN = 'https://www.fancysymbols.com';
 
 // ── Related symbol groups for internal linking ──
 const RELATED_MAP = {

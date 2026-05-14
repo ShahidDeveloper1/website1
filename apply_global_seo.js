@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const DOMAIN = 'https://fancysymbols.com';
+const DOMAIN = 'https://www.fancysymbols.com';
 const AUTHOR_NAME = 'Shahid Developer';
 const PUBLISH_DATE = '2026-05-13';
 
