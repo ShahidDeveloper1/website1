@@ -1510,3 +1510,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 @media (max-width: 480px) {
   .counter-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+@media (max-width: 768px) { .repeater-grid { grid-template-columns: 1fr !important; } .counter-grid { grid-template-columns: repeat(3, 1fr) !important; } }
+@media (max-width: 480px) { .counter-grid { grid-template-columns: repeat(2, 1fr) !important; } }
