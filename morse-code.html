@@ -3,176 +3,50 @@
 <head>
   <meta charset='UTF-8'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Morse Code Translator — Text to Morse Code Generator | FancySymbols</title>
-  <meta name="description" content="Translate text to Morse code and Morse code to text instantly. Free online Morse code translator with audio playback, speed/pitch/volume controls. Copy and paste Morse code.">
+  <title>Morse Code Translator — Text to Morse Code & Morse to Text - FancySymbols</title>
+  <meta name="description" content="Copy and paste morse code translator — text to morse code & morse to text for your bio, social posts, and messages. Huge collection of aesthetic and cool text symbols. One-click copy!">
+  <link rel='canonical' href='https://www.fancysymbols.com/morse-code.html'>
+  
+  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://fancysymbols.com/morse-code">
-  <meta property="og:title" content="Morse Code Translator — Text to Morse Code">
-  <meta property="og:description" content="Translate text to Morse code instantly with audio playback.">
+  <meta property="og:url" content="https://www.fancysymbols.com/morse-code.html">
+  <meta property="og:title" content="Morse Code Translator — Text to Morse Code & Morse to Text">
+  <meta property="og:description" content="Copy and paste morse code translator — text to morse code & morse to text instantly. Perfect for Instagram, TikTok, and gaming.">
+  <meta property="og:image" content="https://www.fancysymbols.com/og-image.png">
+
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="favicon.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=5.5">
-  <style>
-    .morse-app { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+  <meta name="twitter:url" content="https://www.fancysymbols.com/morse-code.html">
+  <meta name="twitter:title" content="Morse Code Translator — Text to Morse Code & Morse to Text">
+  <meta name="twitter:description" content="One-click copy for morse code translator — text to morse code & morse to text and aesthetic text decorations.">
+  <meta name="twitter:image" content="https://www.fancysymbols.com/og-image.png">
 
-    /* Input / Output panels */
-    .morse-io { display: flex; flex-direction: column; gap: 0; }
-    @media(min-width:768px) { .morse-io { flex-direction: row; gap: 2rem; } }
-    .morse-panel-left { flex: 1; }
-    .morse-panel-right { display: flex; gap: 1rem; }
-    .morse-sliders { display: flex; gap: 1.5rem; }
-
-    .morse-label { font-size: 1.05rem; font-weight: normal; color: #000; margin-bottom: 0.2rem; display: block; font-family: Georgia, serif; }
-    .morse-textarea {
-      width: 100%; min-height: 120px; background: #ffffff; border: 1px solid #b0b0b0;
-      border-radius: 0; padding: 1rem; color: #333; font-family: 'Courier New', Courier, monospace;
-      font-size: 1.2rem; resize: vertical; outline: none; transition: border-color .2s;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
-      letter-spacing: 3px; word-spacing: 5px; line-height: 1.6;
-    }
-    .morse-textarea:focus { border-color: #6366f1; }
-    .morse-textarea[readonly] { background: #ffffff; color: #333; }
-
-    /* Vertical Sliders */
-    .slider-group {
-      display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
-      background: #f1f5f9; border-radius: 12px; padding: 0.75rem 0.5rem;
-    }
-    .slider-title { font-size: 0.7rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
-    .slider-val { font-size: 0.85rem; font-weight: 700; color: #0f172a; }
-    .v-slider {
-      writing-mode: vertical-lr; direction: rtl;
-      -webkit-appearance: none; appearance: none;
-      width: 120px; height: 6px; background: #cbd5e1; border-radius: 4px; outline: none;
-    }
-    .v-slider::-webkit-slider-thumb {
-      -webkit-appearance: none; appearance: none;
-      width: 18px; height: 18px; border-radius: 50%;
-      background: #6366f1; cursor: pointer; border: 3px solid #fff;
-      box-shadow: 0 2px 8px rgba(99,102,241,0.4);
-    }
-    .v-slider::-moz-range-thumb {
-      width: 18px; height: 18px; border-radius: 50%;
-      background: #6366f1; cursor: pointer; border: 3px solid #fff;
-      box-shadow: 0 2px 8px rgba(99,102,241,0.4);
-    }
-
-    /* Control Buttons */
-    .morse-controls {
-      display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem;
-      justify-content: center;
-    }
-    .ctrl-btn {
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 0.25rem; padding: 0.65rem 0.85rem; border-radius: 12px;
-      border: 2px solid #e2e8f0; background: #f8fafc; color: #334155;
-      font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all .2s;
-      min-width: 64px; text-transform: uppercase; letter-spacing: 0.3px;
-    }
-    .ctrl-btn svg { width: 22px; height: 22px; }
-    .ctrl-btn:hover { background: #e2e8f0; border-color: #cbd5e1; transform: translateY(-1px); }
-    .ctrl-btn.active { background: #6366f1; color: #fff; border-color: #6366f1; }
-    .ctrl-btn.active:hover { background: #4f46e5; }
-    .ctrl-btn.playing { background: #059669; color: #fff; border-color: #059669; }
-    .ctrl-btn.on { background: #059669; color: #fff; border-color: #059669; box-shadow: 0 0 12px rgba(5,150,105,0.35); }
-    .ctrl-btn.on:hover { background: #047857; }
-
-    /* Light flash overlay */
-    .flash-overlay {
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background: #fff; opacity: 0; pointer-events: none; z-index: 9999;
-      transition: opacity 0.05s;
-    }
-    .flash-overlay.on { opacity: 0.85; }
-
-    /* Swap button */
-    .swap-row { display: flex; justify-content: center; margin: 0.75rem 0; }
-    .swap-btn {
-      background: #6366f1; color: #fff; border: none; border-radius: 50%;
-      width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
-      cursor: pointer; box-shadow: 0 4px 12px rgba(99,102,241,0.3); transition: all .2s;
-    }
-    .swap-btn:hover { transform: scale(1.1) rotate(180deg); }
-
-    /* Reference chart */
-    .morse-chart { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 0.5rem; margin: 1.5rem 0; }
-    .morse-char {
-      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;
-      padding: 0.5rem; text-align: center; cursor: pointer; transition: all .15s;
-    }
-    .morse-char:hover { background: #ede9fe; border-color: #a5b4fc; transform: translateY(-2px); }
-    .morse-char-letter { font-size: 1.1rem; font-weight: 700; color: #0f172a; }
-    .morse-char-code { font-size: 0.8rem; color: #6366f1; font-family: monospace; margin-top: 2px; }
-    /* Advanced Controls */
-    .advanced-controls { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; margin-top: 1rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-    .adv-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem; color: #0f172a; }
-    .adv-row { display: flex; gap: 2rem; margin-bottom: 1.5rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 1.5rem; align-items: flex-start; }
-    .adv-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-    .adv-input-col { flex: 0 0 220px; display: flex; flex-direction: column; gap: 0.5rem; }
-    .adv-input-col label { font-size: 0.9rem; font-weight: 600; color: #334155; }
-    .adv-input-col select, .adv-input-col input { width: 100%; padding: 0.5rem; border: 1px solid #cbd5e1; border-radius: 6px; font-family: inherit; font-size: 0.95rem; background: #f8fafc; }
-    .adv-input-col input[type=number] { background: #e2e8f0; border-color: #cbd5e1; }
-    .adv-desc-col { flex: 1; font-size: 0.95rem; color: #475569; line-height: 1.6; padding-top: 1.5rem; }
-    
-    @media (max-width: 600px) {
-      .adv-row { flex-direction: column; gap: 0.5rem; }
-      .adv-desc-col { padding-top: 0; font-size: 0.85rem; }
-    }
-  </style>
-  <meta name="google-site-verification" content="OvJ6uQVDw0PgIWerWJ88MgLeEMs_hutUY-J1xTOiGBY" />
-  <meta property="article:modified_time" content="2026-05-14">
-
-  
-  
-  
-  <link rel="canonical" href="https://www.fancysymbols.com/morse-code">
-  <link rel="alternate" hreflang="x-default" href="https://www.fancysymbols.com/morse-code">
-  <link rel="alternate" hreflang="en" href="https://www.fancysymbols.com/morse-code">
-  <script type="application/ld+json">
-    [
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "Morse Code Translator — Text to Morse Code Generator | FancySymbols",
-    "description": "Translate text to Morse code and Morse code to text instantly. Free online Morse code translator with audio playback, speed/pitch/volume controls. Copy and paste Morse code.",
-    "url": "https://www.fancysymbols.com/morse-code"
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Morse Code Translator — Text to Morse Code Generator | FancySymbols",
-    "description": "Translate text to Morse code and Morse code to text instantly. Free online Morse code translator with audio playback, speed/pitch/volume controls. Copy and paste Morse code.",
-    "author": {
-      "@type": "Person",
-      "name": "Shahid Developer",
-      "url": "https://www.fancysymbols.com"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "FancySymbols",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://www.fancysymbols.com/favicon.png"
-      }
-    },
-    "datePublished": "2024-01-01",
-    "dateModified": "2026-05-13",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https://www.fancysymbols.com/morse-code"
-    }
-  }
-]
-  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css?v=5.6">
+  <link rel="icon" type="image/png" href="/favicon.png?v=5.6">
 </head>
 <body>
-  <header class="header"><div class="header-inner">
-    <a href="index.html" class="logo"><img src="favicon.png" alt="FancySymbols" width="32" height="32"> FancySymbols</a>
-    <nav class="header-nav"><a href="index.html">Home</a><a href="all-symbols.html">All Symbols</a><a href="aesthetic-fonts.html">Aesthetic</a><a href="cute-fonts.html">Cute</a><a href="lenny-face.html" class="cta-btn">Lenny Faces</a></nav>
-    <button class="menu-toggle" id="menuToggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button>
-  </div></header>
-  <aside class="sidebar" id="sidebar"></aside>
+  <header class="header">
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <img src="/favicon.png?v=5.6" alt="FancySymbols Logo" class="logo-img">
+      <span class="logo-text">FancySymbols</span>
+    </a>
+    <nav class="header-nav">
+      <a href="/">Home</a>
+      <a href="/all-symbols.html">All Symbols</a>
+      <a href="/preppy-fonts.html"><span class="link-icon">🎀</span> Preppy Font Generator</a>
+      <a href="/cute-fonts.html">Cute Fonts</a>
+      <a href="/aesthetic-fonts.html">Aesthetic Fonts</a>
+      <a href="/lenny-face.html" class="nav-cta">Lenny Faces</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+  </div>
+</header>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="sidebar" id="sidebar"></aside>
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
   <div class="flash-overlay" id="flashOverlay"></div>
 

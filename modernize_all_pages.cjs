@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const DOMAIN = "https://fancysymbols.com";
+const DOMAIN = "https://www.fancysymbols.com";
 
 const CORE_ROOT_PAGES = [
     'index.html', 'all-symbols.html', 'cute-fonts.html', 
@@ -12,18 +12,18 @@ function getHeader() {
     return `<header class="header">
   <div class="header-inner">
     <a href="/" class="logo">
-      <img src="/favicon.png" alt="TextSymbols Logo" class="logo-img">
-      <span class="logo-text">TextSymbols</span>
+      <img src="/favicon.png?v=5.6" alt="FancySymbols Logo" class="logo-img">
+      <span class="logo-text">FancySymbols</span>
     </a>
     <nav class="header-nav">
-      <a href="/index.html">Home</a>
+      <a href="/">Home</a>
       <a href="/all-symbols.html">All Symbols</a>
       <a href="/preppy-fonts.html"><span class="link-icon">🎀</span> Preppy Font Generator</a>
       <a href="/cute-fonts.html">Cute Fonts</a>
       <a href="/aesthetic-fonts.html">Aesthetic Fonts</a>
       <a href="/lenny-face.html" class="nav-cta">Lenny Faces</a>
     </nav>
-    <button class="menu-toggle" id="menuToggle">☰</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
   </div>
 </header>
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
@@ -35,7 +35,7 @@ function getFooter() {
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
-        <span class="logo-text highlight">TextSymbols</span>
+        <span class="logo-text highlight">FancySymbols</span>
         <p class="footer-desc">Your premium destination for aesthetic symbols, cute fonts, and creative text tools. Elevate your digital presence with ease.</p>
       </div>
       
@@ -115,7 +115,7 @@ function modernizePage(filepath) {
 
     const seoHead = `  <meta charset='UTF-8'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${titleText} - TextSymbols</title>
+  <title>${titleText} - FancySymbols</title>
   <meta name="description" content="Copy and paste ${titleText.toLowerCase()} for your bio, social posts, and messages. Huge collection of aesthetic and cool text symbols. One-click copy!">
   <link rel='canonical' href='${fullUrl}'>
   
@@ -136,8 +136,8 @@ function modernizePage(filepath) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style.css?v=5.1">
-  <link rel="icon" type="image/png" href="/favicon.png">`;
+  <link rel="stylesheet" href="/style.css?v=5.6">
+  <link rel="icon" type="image/png" href="/favicon.png?v=5.6">`;
 
     // 1. Inject Head
     content = content.replace(/<head>[\s\S]*?<\/head>/i, `<head>\n${seoHead}\n</head>`);
