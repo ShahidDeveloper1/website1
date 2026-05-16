@@ -850,11 +850,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 /* ===== MODERN FOOTER STYLES ===== */
 .footer {
-  background: #ffffff;
+  background: transparent;
   color: #334155;
   padding: 5rem 1.5rem 2rem;
   font-family: 'Outfit', sans-serif;
-  border-top: 1px solid rgba(13, 148, 136, 0.1);
+  border-top: none;
 }
 
 .footer-inner {
