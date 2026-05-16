@@ -33,7 +33,7 @@ function generateSchemaAndTags(title, description, urlPath, isSymbolPage) {
             "headline": title,
             "description": description,
             "author": { "@type": "Person", "name": AUTHOR_NAME, "url": DOMAIN },
-            "publisher": { "@type": "Organization", "name": "FancySymbols", "logo": { "@type": "ImageObject", "url": `${DOMAIN}/favicon.png` } },
+            "publisher": { "@type": "Organization", "name": "TextSymbols", "logo": { "@type": "ImageObject", "url": `${DOMAIN}/favicon.png` } },
             "datePublished": "2024-01-01",
             "dateModified": PUBLISH_DATE,
             "mainEntityOfPage": { "@type": "WebPage", "@id": fullUrl }
@@ -78,7 +78,7 @@ function processPage(filepath, isSymbolPage, baseLang = '') {
     let titleMatch = content.match(/<title>([\s\S]*?)<\/title>/i);
     let descMatch = content.match(/<meta name="description" content="([^"]*)">/i);
     
-    const title = titleMatch ? titleMatch[1] : "Fancy Symbols";
+    const title = titleMatch ? titleMatch[1] : "Text Symbols";
     const description = descMatch ? descMatch[1] : "Copy and paste aesthetic text symbols.";
 
     const seoPayload = generateSchemaAndTags(title, description, urlPath, isSymbolPage);
