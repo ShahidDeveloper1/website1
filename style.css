@@ -138,6 +138,7 @@ body {
   overflow-x: hidden; 
 }
 a { text-decoration: none; color: inherit; }
+p { color: #000000; }
 ul { list-style: none; }
 button { cursor: pointer; border: none; background: none; font-family: inherit; }
 
@@ -1062,7 +1063,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   margin: 2.5rem 0 0.8rem;
 }
 
-.content-article p { font-size: 1.02rem; color: #475569; margin-bottom: 1.3rem; }
+.content-article p { font-size: 1.02rem; color: #000000; margin-bottom: 1.3rem; }
 .content-article ul, .content-article ol { padding-left: 1.5rem; margin-bottom: 1.5rem; }
 .content-article li { margin-bottom: 0.6rem; color: #475569; font-size: 1rem; }
 .content-article strong { color: #0f172a; font-weight: 700; }
@@ -1156,7 +1157,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   margin: 0 auto 1.2rem; box-shadow: 0 4px 14px rgba(13,148,136,0.3);
 }
 .step-item h4 { font-family: 'Outfit', sans-serif; font-size: 1.05rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; }
-.step-item p { font-size: 0.88rem; color: #64748b; margin: 0; line-height: 1.55; }
+.step-item p { font-size: 0.88rem; color: #000000; margin: 0; line-height: 1.55; }
 
 /* Premium FAQ */
 .faq-list { margin: 2rem 0 2.5rem; display: flex; flex-direction: column; gap: 0.85rem; }
