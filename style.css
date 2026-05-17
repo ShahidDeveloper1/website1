@@ -852,11 +852,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 /* ===== PREMIUM SAAS FOOTER ===== */
 .footer-saas {
-  background: #09090b;
-  color: #a1a1aa;
+  background: transparent;
+  color: #475569;
   padding: 5rem 1.5rem 2rem;
   font-family: 'Inter', sans-serif;
-  border-top: 1px solid #27272a;
+  border-top: 1px solid rgba(13, 148, 136, 0.15);
   margin-top: 4rem;
 }
 
@@ -895,14 +895,14 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   font-family: 'Outfit', sans-serif;
   font-size: 1.5rem;
   font-weight: 800;
-  color: #ffffff;
+  color: #0d9488;
   letter-spacing: -0.02em;
 }
 
 .footer-saas-desc {
   font-size: 0.95rem;
   line-height: 1.6;
-  color: #a1a1aa;
+  color: #475569;
 }
 
 .footer-saas-links {
@@ -922,8 +922,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .footer-saas-title {
   font-family: 'Outfit', sans-serif;
   font-size: 0.85rem;
-  font-weight: 600;
-  color: #ffffff;
+  font-weight: 700;
+  color: #0d9488;
   margin-bottom: 1.5rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -939,14 +939,14 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .footer-saas-col a {
-  color: #a1a1aa;
+  color: #475569;
   text-decoration: none;
   font-size: 0.9rem;
   transition: all 0.2s ease;
 }
 
 .footer-saas-col a:hover {
-  color: #ffffff;
+  color: #0d9488;
   transform: translateX(2px);
   display: inline-block;
 }
@@ -957,7 +957,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   align-items: center;
   gap: 1.5rem;
   padding-top: 2rem;
-  border-top: 1px solid #27272a;
+  border-top: 1px solid rgba(13, 148, 136, 0.15);
 }
 
 @media (min-width: 768px) {
@@ -968,32 +968,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .footer-saas-status {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.85rem;
-  color: #d4d4d8;
-  font-weight: 500;
-}
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  background-color: #22c55e;
-  border-radius: 50%;
-  box-shadow: 0 0 0 rgba(34, 197, 94, 0.4);
-  animation: pulse-green 2s infinite;
-}
-
-@keyframes pulse-green {
-  0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
-  70% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+  display: none; /* Hide if it still exists anywhere */
 }
 
 .footer-saas-copy {
   font-size: 0.85rem;
-  color: #71717a;
+  color: #64748b;
 }
 
 .footer-saas-socials {
@@ -1002,7 +982,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .footer-saas-socials a {
-  color: #71717a;
+  color: #64748b;
   transition: color 0.2s ease;
   display: flex;
   align-items: center;
@@ -1010,9 +990,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .footer-saas-socials a:hover {
-  color: #ffffff;
+  color: #0d9488;
 }
-
 
 .page-up-btn {
   display: flex;
