@@ -342,58 +342,213 @@ function initCopyable() {
 
 // ===== SEARCH FILTER =====
 // ===== SMART GLOBAL SEARCH =====
-const SYMBOL_SEARCH_INDEX = {
-  "heart": ["❤️", "♡", "♥", "❣", "💕", "💞", "💓", "💗", "💖", "💘", "💝", "💟", "💌", "❤️‍🔥", "❤️‍🩹", "❥", "ღ", "❦", "❧", "☙"],
-  "star": ["⭐", "★", "☆", "✦", "✧", "⋆", "✶", "✴", "✹", "✨", "✡", "❂", "🌌", "🌃"],
-  "music": ["🎵", "🎶", "♪", "♫", "🎼", "🎹", "🎸", "🎻", "🎺", "🎷", "🎧", "📻"],
-  "currency": ["$", "€", "£", "¥", "₿", "₹", "₱", "₩", "₫", "₭", "₮", "₯", "₰", "₱", "₲", "₳", "₴", "₵", "₶", "₷", "₸", "₽", "₻", "₼", "₾", "₿"],
-  "weather": ["☀", "☁", "🌧️", "⛈️", "❄️", "🌪️", "🌊", "🌈", "🌡️", "🌙", "☾", "✹"],
-  "animal": ["🐾", "🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐻‍❄️", "🐨", "🐯", "🦁", "🐮", "🐷", "🐸", "🐵", "🐧", "🐦", "🐤", "🦆", "🦅", "🦉", "🦇", "🐺", "🐗", "🐴", "🦄", "🐝", "🪱", "🐛", "🦋", "🐌", "🐞", "🐜", "🪰", "🪲", "🪳", "🦟", "🦗", "🕷️", "🕸️", "🦂", "🐢", "🐍", "🦎", "🦖", "🦕", "🐙", "🦑", "🦐", "🦞", "🦀", "🐡", "🐠", "🐟", "🐬", "🐳", "🐋", "🦈", "🐊", "🐅", "🐆", "🦓", "🦍", "🦧", "🐘", "🦛", "🦏", "🐪", "🐫", "🦒", "🦘", "🦬", "🐃", "🐄", "🐎", "🐖", "🐏", "🐑", "🐐", "🦌", "🐕", "🐩", "🦮", "🐕‍🦺", "🐈", "🐈‍⬛", "🐓", "🦃", "🦚", "🦜", "🦢", "🦩", "🕊️", "🐇", "🦝", "🦨", " badger", "🦦", "🦥", "🐁", "🐀", "🐿️", "🦔"],
-  "check": ["✔️", "✅", "☑", "✓", "✗", "✘", "✕", "✖", "✔"],
-  "arrow": ["→", "←", "↑", "↓", "↔", "↕", "↖", "↗", "↘", "↙", "↚", "↛", "↜", "↝", "↞", "↟", "↠", "↡", "↢", "↣", "↤", "↥", "↦", "↧", "↨", "↩", "↪", "↫", "↬", "↭", "↮", "↯", "↰", "↱", "↲", "↳", "↴", "↵", "↶", "↷", "↸", "↹", "↺", "↻", "↼", "↽", "↾", "↿", "⇀", "⇁", "⇂", "⇃", "⇄", "⇅", "⇆", "⇇", "⇈", "⇉", "⇊", "⇋", "⇌", "⇍", "⇎", "⇏", "⇐", "⇑", "⇒", "⇓", "⇔", "⇕", "⇖", "⇗", "⇘", "⇙", "⇚", "⇛", "⇜", "⇝", "⇞", "⇟", "⇠", "⇡", "⇢", "⇣", "⇤", "⇥", "⇦", "⇧", "⇨", "⇩", "⇪", "⇫", "⇬", "⇭", "⇮", "⇯", "⇰", "⇱", "⇲", "⇳", "⇴", "⇵", "⇶", "⇷", "⇸", "⇹", "⇺", "⇻", "⇼", "⇽", "⇾", "⇿"],
-  "math": ["+", "-", "×", "÷", "=", "≠", "≈", "∞", "√", "∑", "∆", "∏", "±", "≤", "≥", "∂", "∫", "¬", "∧", "∨", "∩", "∪", "⊂", "⊃", "⊆", "⊇", "∈", "∉", "∋", "∌", "∝", "∟", "∠", "∡", "∢", "∣", "∦", "∥", "∳", "∴", "∵", "∶", "∷", "∸", "∹", "∺", "∻", "∼", "∽", "≀", "≁", "≂", "≃", "≄", "≅", "≆", "≇", "≈", "≉", "≊", "≋", "≌", "≍", "≎", "≏", "≐", "≑", "≒", "≓", "≔", "≕", "≖", "≗", "≘", "≙", "≚", "≛", "≜", "≝", "≞", "≟", "≡", "≢", "≣", "≮", "≯", "≰", "≱", "≲", "≳", "≴", "≵", "≶", "≷", "≸", "≹", "≺", "≻", "≼", "≽", "≾", "≿", "⊀", "⊁", "⊂", "⊃", "⊄", "⊅", "⊆", "⊇", "⊈", "⊉", "⊊", "⊋", "⊌", "⊍", "⊎", "⊏", "⊐", "⊑", "⊒", "⊓", "⊔", "⊕", "⊖", "⊗", "⊘", "⊙", "⊚", "⊛", "⊜", "⊝", "⊞", "⊟", "⊠", "⊡", "⊢", "⊣", "⊤", "⊥", "⊦", "⊧", "⊨", "⊩", "⊪", "⊫", "⊬", "⊭", "⊮", "⊯", "⊰", "⊱", "⊲", "⊳", "⊴", "⊵", "⊶", "⊷", "⊸", "⊹", "⊺", "⊻", "⊼", "⊽", "⊾", "⊿", "⋀", "⋁", "⋂", "⋃", "⋄", "⋅", "⋆", "⋇", "⋈", "⋉", "⋊", "⋋", "⋌", "⋍", "⋎", "⋏", "⋐", "⋑", "⋒", "⋓", "⋔", "⋕", "⋖", "⋗", "⋘", "⋙", "⋚", "⋛", "⋜", "⋝", "⋞", "⋟", "⋠", "⋡", "⋢", "⋣", "⋤", "⋥", "⋦", "⋧", "⋨", "⋩", "⋪", "⋫", "⋬", "⋭", "⋮", "⋯", "⋰", "⋱", "⋲", "⋳", "⋴", "⋵", "⋶", "⋷", "⋸", "⋹", "⋺", "⋻", "⋼", "⋽", "⋾", "⋿"],
-  "aesthetic": ["✧", "✦", "✨", "✮", "⋆", "⭒", "☾", "✹", "❀", "🌸", "🎀", "🧸", "☁️", "🌊", "🩰", "🦢", "🦋", "🥂", "🕯️", "🏛️", "🖋️", "📜"],
-  "smiley": ["😀", "😃", "😄", "😁", "😆", "😅", "🤣", "😂", "🙂", "🙃", "😉", "😊", "😇", "🥰", "😍", "🤩", "😘", "😗", "😚", "😙", "😋", "😛", "😜", "🤪", "😝", "🤑", "🤗", "🤭", "🤫", "🤔", "🤐", "🤨", "😐", "😑", "😶", "😏", "😒", "🙄", "😬", "🤥", "😌", "😔", "😪", "🤤", "😴", "😷", "🤒", "🤕", "🤢", "🤮", "🥵", "🥶", "🥴", "😵", "🤯", "🤠", "🥳", "😎", "🤓", "🧐", "😕", "😟", "🙁", "☹", "😮", "😯", "😲", "😳", "🥺", "😦", "😧", "😨", "😰", "😥", "😢", "😭", "😱", "😖", "😣", "😞", "😓", "😩", "😫", "🥱", "😤", "😡", "😠", "🤬", "😈", "👿", "💀", "☠", "💩", "🤡", "👹", "👺", "👻", "👽", "👾", "🤖"]
+const CATEGORY_SYMBOLS = {
+  aesthetic: ["✧", "✦", "✨", "≛", "ೃ", "࿔", "࿐", "🪐", "🧸", "🩰", "🦢", "🕯️", "🥂", "🎬"],
+  animal: ["🐾", "🐱", "🐶", "🦊", "🦁", "🐯", "🐼", "🐻", "🐨", "🐰", "🐭", "🐹", "🐸", "🐔", "🦄", "🐝", "🦋", "🐙", "🐬", "🐳"],
+  arrow: ["→", "←", "↑", "↓", "↔", "↕", "↖", "↗", "↘", "↙", "↚", "↛", "↞", "↠", "↢", "↣", "↩", "↪", "↫", "↬", "↯", "➔", "➜", "➤"],
+  award: ["🏆", "🏅", "🥇", "🥈", "🥉", "👑", "✨", "⭐", "🎖️", "🎫", "🎬"],
+  border: ["╔", "╗", "╚", "╝", "═", "║", "╠", "╣", "╦", "╩", "╬", "╒", "╓", "╕", "╖", "╘", "╙", "╛", "╜", "╞", "╟"],
+  bracket: ["【", "】", "〔", "〕", "《", "》", "「", "」", "『", "』", "【", "】", "〖", "〗", "（", "）", "［", "］", "｛", "｝"],
+  bubble: ["ⓐ", "ⓑ", "ⓒ", "ⓓ", "ⓔ", "ⓕ", "ⓖ", "ⓗ", "ⓘ", "ⓙ", "ⓚ", "ⓛ", "ⓜ", "ⓝ", "ⓞ", "ⓟ", "ⓠ", "ⓡ", "ⓢ", "ⓣ", "ⓤ", "ⓥ", "ⓦ", "ⓧ", "ⓨ", "ⓩ"],
+  card: ["♠", "♥", "♦", "♣", "♤", "♡", "♢", "♧", "🃏", "🀄", "🎴"],
+  checkmark: ["✔️", "✅", "☑", "✓", "✔", "✗", "✘", "✕", "✖"],
+  chess: ["♚", "♛", "♜", "♝", "♞", "♟", "♔", "♕", "♖", "♗", "♘", "♙"],
+  chinese: ["愛", "友", "福", "吉", "和", "康", "美", "忍", "勇", "力", "心", "龍", "虎", "鳳", "生", "死", "陰", "陽"],
+  circle: ["○", "●", "🔴", "🔵", "⚫", "⚪", "🔘", "⊙", "⊚", "⊕", "⊖", "⊗", "⊘"],
+  comparison: ["≥", "≤", "≠", "≈", "≡", "≒", "≓", "≣", "≮", "≯", "≰", "≱", "≲", "≳", "≴", "≵"],
+  copyright: ["©", "®", "™", "℠", "℗", "🄫", "🄬"],
+  corner: ["╚", "╗", "╝", "╔", "╘", "╙", "╛", "╜", "╞", "╟", "╠", "╣", "╦", "╩", "╬"],
+  cross: ["†", "✟", "✙", "✞", "✟", "✠", "✝", "☨", "☦", "☩", "☫", "☬", "✝️"],
+  crown: ["👑", "♕", "♔", "♛", "♚", "🃎", "🃚"],
+  crypto: ["₿", "Ξ", "₳", "🪙", "💳", "💰", "💵", "💸"],
+  currency: ["$", "€", "£", "¥", "₿", "₹", "₱", "₩", "₫", "₭", "₮", "₯", "₰", "₲", "₳", "₴", "₵", "₸", "₽"],
+  cursive: ["𝒜", "ℬ", "𝒞", "𝒯", "𝒰", "𝒱", "𝒲", "𝒳", "𝒴", "𝒵", "as", "bs", "cs", "ds", "es", "fs", "gs", "hs", "is", "js"],
+  diamond: ["◆", "◇", "❖", "💎", "🔸", "🔹", "🔶", "🔷", "💠", "⬖", "⬗"],
+  dice: ["🎲", "⚀", "⚁", "⚂", "⚃", "⚄", "⚅"],
+  divider: ["┊", "❃", "━", "═", "─", "───", "━━━━", "┈┈┈┈", "╌╌╌╌"],
+  dot: ["•", "⊙", "◘", "◦", "∙", "☉", "⁕", "·", "․", "‥", "…"],
+  downarrow: ["↓", "▼", "⬇️", "🔽", "↯", "↴", "↳", "↧", "⇓", "⇩", "👇"],
+  "emoji-faces": ["😀", "😃", "😄", "😁", "😆", "😅", "🤣", "😂", "🥰", "😍", "🤩", "😘", "😎", "🤓", "🥺", "😭", "😡", "😈", "💀"],
+  flower: ["✿", "🌸", "🌹", "🌺", "🌻", "🌼", "💮", "🏵️", "🌷", "🌱", "🌿", "🌾", "🍃", "🍂", "🍁", "🍀", "☘️", "🌲", "🌳"],
+  fraction: ["½", "¼", "¾", "⅓", "⅔", "⅕", "⅖", "⅗", "⅘", "⅙", "⅚", "⅛", "⅜", "⅝", "⅞", "⅟"],
+  gender: ["⚥", "♀", "♂", "⚧", "⚢", "⚣", "⚤", "⚦", "⚧", "⚨", "⚩", "⚪", "⚫", "🟪", "🟦", "🟥"],
+  german: ["ß", "ä", "ö", "ü", "Ä", "Ö", "Ü"],
+  greek: ["Ω", "α", "β", "γ", "δ", "ε", "ζ", "η", "θ", "ι", "κ", "λ", "μ", "ν", "ξ", "ο", "π", "ρ", "σ", "τ", "υ", "φ", "χ", "ψ", "ω"],
+  hand: ["✌️", "✍️", "✊", "✋", "👉", "👈", "👆", "👇", "🖕", "👍", "👎", "👊", "🤛", "🤜", "👏", "🙌", "👐", "🤲", "🤝", "🙏"],
+  heart: ["❤️", "♡", "♥", "❣", "💕", "💞", "💓", "💗", "💖", "💘", "💝", "💟", "💌", "❤️‍🔥", "❤️‍🩹", "❥", "ღ", "❦", "❧", "☙"],
+  house: ["🏠", "🏡", "🏢", "🏫", "🏰", "🏯", "⛩️", "⛪", "🏩", "🏨"],
+  infinity: ["∞", "♾"],
+  japanese: ["あ", "イ", "う", "え", "お", "か", "き", "く", "け", "こ", "さ", "し", "す", "せ", "そ", "の", "に", "は", "を", "ん"],
+  korean: ["ㅿ", "ㅂ", "ㄷ", "ㄱ", "ㄴ", "ㅁ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"],
+  line: ["│", "┃", "─", "━", "┄", "┅", "┆", "┇", "┈", "┉", "┊", "┋"],
+  loading: ["▓", "▒", "░", "█", "▄", "▀", "▌", "▐", "▰", "▱", "▲", "△", "🔌", "🔋"],
+  lock: ["🔒", "🔓", "🔑", "🗝", "🔐", "🔏", "🛡️", "👮", "🧱"],
+  math: ["+", "-", "×", "÷", "=", "≠", "≈", "∞", "√", "∑", "∆", "∏", "±", "≤", "≥", "∂", "∫", "¬", "▲", "▼", "∠", "⊥"],
+  medical: ["⚕", "⚕", "➕", "🏥", "🚑", "🩺", "💊", "💉", "🩸", "🩹", "🧬", "🧪", "🌡️", "😷"],
+  moon: ["☾", "☽", "🌙", "🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"],
+  music: ["🎵", "🎶", "♪", "♫", "🎼", "🎹", "🎸", "🎻", "🎺", "🎷", "🎧", "📻"],
+  numbers: ["①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨", "⑩", "❶", "❷", "❸", "❹", "❺", "❻", "❼", "❽", "❾", "❿"],
+  office: ["💼", "📁", "📝", "📂", "🗂", "📊", "📈", "📉", "📄", "📃", "📅", "📆", "📐", "📏", "📎"],
+  "old-english": ["🔤", "𝔄", "𝔅", "𝔍", "𝔎", "𝔏", "𝔐", "𝔑", "𝔒", "𝔓", "𝔔", "𝔕", "𝔖", "𝔗", "𝔘", "𝔙", "𝔚", "𝔛", "𝔜"],
+  punctuation: ["!", "?", "&", "@", "#", "$", "%", "^", "*", "(", ")", "_", "+", "-", "=", "[", "]"],
+  quotation: ["❝", "❞", "“", "”", "‘", "’", "«", "»", "‹", "›"],
+  rectangle: ["█", "▄", "▀", "▌", "▐", "▬", "▭", "▮", "▯", "▰", "▱"],
+  religion: ["✝", "☪", "🕉", "☸", "✡", "⛪", "🕌", "🛕", "🕍", "⛩️", "🕊️"],
+  roman: ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "Ⅷ", "Ⅸ", "Ⅹ", "Ⅺ", "Ⅻ", "Ⅼ", "Ⅽ", "Ⅾ", "Ⅿ"],
+  sparkle: ["✨", "✦", "≛", "❇", "❈", "❊", "❉", "❋", "✺", "✹", "✸", "✷", "✶", "✴", "✵", "🌠", "🌟", "⭐"],
+  square: ["■", "□", "▢", "▣", "▤", "▥", "▦", "▧", "▨", "▩", "▪", "▫"],
+  star: ["★", "⭐", "☆", "✦", "✧", "⋆", "✶", "✴", "✹", "✨", "✡", "❂", "🌌", "🌠", "🌟", "☄️", "✪", "✫", "✬", "✭", "✮", "✯", "✰"],
+  sun: ["☀️", "☼", "☀", "☉", "🌞", "🌅", "🌄", "🏜️", "🔆", "🌡️"],
+  transport: ["🚗", "🚲", "✈️", "🚢", "🚆", "🚁", "🚀", "🛸", "🛵", "🏍️"],
+  triangle: ["▲", "▼", "▵", "▿", "◄", "►", "◀", "▶", "▲", "▼", "◤", "◥", "◣", "◢"],
+  unit: ["℃", "℉", "°", "‰", "‱", "㏜", "㏉", "㏈", "㏕", "㎡", "㎥", "㎞"],
+  uparrow: ["↑", "▲", "⬆️", "🔼", "⇪", "⇫", "⇬", "⇭", "⇮", "⇯", "👆"],
+  "upside-down": ["ʇ", "ɐ", "ɥ", "ɔ", "ɟ", "ƃ", "ᴉ", "ɾ", "ʞ", "l", "ɯ", "u", "o", "d", "b", "ɹ", "s", "ʇ", "n", "ʌ", "ʍ", "x", "ʎ", "z"],
+  warning: ["⚠️", "🛈", "🚨", "⛔", "🚫", "❌", "🚫", "⚡"],
+  wave: ["〰", "🌊", "♒", "∽", "≈", "≋", "∿"],
+  weapon: ["⚔️", "🛡", "🔫", "🏹", "🔪", "🗡", "bomb"],
+  weather: ["🌤", "☀️", "🌧", "❄️", "⚡", "☁️", "⛈", "🌪", "💧", "💦", "☔"],
+  writing: ["✍️", "✏️", "✒️", "📝", "🗒", "🖍", "🖌️", "🎨", "📚"],
+  zodiac: ["♈", "♉", "♊", "♋", "♌", "♍", "♎", "♏", "♐", "♑", "♒", "♓", "☉", "☽", "☿", "♀", "♂"]
+};
+
+const SEARCH_ALIASES = {
+  "zodiac": "zodiac", "horoscope": "zodiac", "astrology": "zodiac", "aries": "zodiac", "taurus": "zodiac", "gemini": "zodiac", "cancer": "zodiac", "leo": "zodiac", "virgo": "zodiac", "libra": "zodiac", "scorpio": "zodiac", "sagittarius": "zodiac", "capricorn": "zodiac", "aquarius": "zodiac", "pisces": "zodiac",
+  "heart": "heart", "hearts": "heart", "love": "heart", "romance": "heart", "romantic": "heart", "valentines": "heart", "like": "heart",
+  "star": "star", "stars": "star", "sparkle": "sparkle", "sparkles": "sparkle", "shine": "star", "shiny": "star", "space": "star", "galaxy": "star", "planet": "star",
+  "sun": "sun", "solar": "sun", "day": "sun", "moon": "moon", "lunar": "moon", "night": "moon", "weather": "weather", "rain": "weather", "cloud": "weather", "clouds": "weather", "snow": "weather", "wind": "weather", "temp": "weather", "storm": "weather", "sky": "weather",
+  "cross": "cross", "christian": "cross", "religion": "religion", "jesus": "cross", "god": "cross", "church": "religion", "mosque": "religion", "temple": "religion",
+  "flower": "flower", "flowers": "flower", "rose": "flower", "sakura": "flower", "plant": "flower", "leaf": "flower", "leaves": "flower", "tree": "flower", "garden": "flower",
+  "crown": "crown", "king": "crown", "queen": "crown", "royal": "crown", "royalty": "crown",
+  "chess": "chess", "rook": "chess", "knight": "chess", "bishop": "chess", "pawn": "chess",
+  "card": "card", "cards": "card", "spade": "card", "spades": "card", "club": "card", "clubs": "card", "diamond": "diamond", "diamonds": "diamond", "poker": "card", "casino": "card",
+  "checkmark": "checkmark", "check": "checkmark", "tick": "checkmark", "yes": "checkmark", "correct": "checkmark", "ok": "checkmark", "approve": "checkmark", "done": "checkmark",
+  "warning": "warning", "caution": "warning", "danger": "warning", "alert": "warning", "error": "warning", "info": "warning",
+  "arrow": "arrow", "arrows": "arrow", "direction": "arrow", "pointer": "arrow", "left": "arrow", "right": "arrow", "up": "uparrow", "down": "downarrow",
+  "math": "math", "mathematics": "math", "plus": "math", "minus": "math", "equal": "math", "divide": "math", "multiply": "math", "sum": "math", "fraction": "fraction", "fractions": "fraction", "percent": "fraction",
+  "number": "numbers", "numbers": "numbers", "digit": "numbers", "digits": "numbers", "roman": "roman", "numerals": "roman",
+  "money": "currency", "cash": "currency", "dollar": "currency", "euro": "currency", "pound": "currency", "yen": "currency", "crypto": "crypto", "bitcoin": "crypto", "currency": "currency",
+  "animal": "animal", "animals": "animal", "paw": "animal", "dog": "animal", "cat": "animal", "fox": "animal", "pet": "animal", "pets": "animal",
+  "music": "music", "song": "music", "songs": "music", "note": "music", "notes": "music", "melody": "music", "sound": "music", "audio": "music", "sing": "music",
+  "bullet": "dot", "point": "dot", "dots": "dot", "pointy": "dot", "list": "dot",
+  "bracket": "bracket", "brackets": "bracket", "parenthesis": "bracket", "parentheses": "bracket",
+  "line": "line", "lines": "line", "border": "border", "borders": "border", "corner": "corner", "corners": "corner", "divider": "divider", "dividers": "divider",
+  "smiley": "emoji-faces", "smileys": "emoji-faces", "emoji": "emoji-faces", "emojis": "emoji-faces", "face": "emoji-faces", "faces": "emoji-faces", "happy": "emoji-faces", "laugh": "emoji-faces",
+  "dice": "dice", "game": "dice", "roll": "dice", "play": "dice", "boardgame": "dice",
+  "loading": "loading", "progress": "loading", "block": "rectangle", "blocks": "rectangle", "rectangle": "rectangle", "square": "square", "triangle": "triangle", "circle": "circle",
+  "house": "house", "home": "house", "building": "house", "office": "office", "work": "office", "job": "office",
+  "award": "award", "trophy": "award", "medal": "award", "winner": "award", "first": "award",
+  "lock": "lock", "key": "lock", "secure": "lock", "security": "lock", "private": "lock", "safety": "lock",
+  "weapon": "weapon", "sword": "weapon", "swords": "weapon", "gun": "weapon", "guns": "weapon", "shield": "weapon", "fight": "weapon", "battle": "weapon",
+  "transport": "transport", "car": "transport", "cars": "transport", "plane": "transport", "flight": "transport", "ship": "transport", "travel": "transport",
+  "medical": "medical", "doctor": "medical", "hospital": "medical", "health": "medical", "medicine": "medical",
+  "writing": "writing", "write": "writing", "pencil": "writing", "pen": "writing", "book": "writing", "read": "writing"
 };
 
 function initSearch() {
   const searchBox = document.getElementById('searchBox');
-  const resultsSection = document.getElementById('searchResultsSection');
-  const resultsGrid = document.getElementById('searchResultsGrid');
-  const mainSections = document.querySelectorAll('.main-content > .section-title, .main-content > div:not(.search-results-section), .main-content > section:not(.hero)');
+  if (!searchBox) return;
 
-  if (!searchBox || !resultsSection || !resultsGrid) return;
+  let resultsSection = document.getElementById('searchResultsSection');
+  let resultsGrid = document.getElementById('searchResultsGrid');
+
+  // Dynamically self-heal and inject search results container if missing on the page (e.g. all-symbols.html)
+  if (!resultsSection || !resultsGrid) {
+    resultsSection = document.createElement('section');
+    resultsSection.id = 'searchResultsSection';
+    resultsSection.className = 'search-results-section';
+    resultsSection.style.display = 'none';
+    resultsSection.style.marginBottom = '3rem';
+    
+    resultsSection.innerHTML = `
+      <div class="section-title">
+        <span class="icon">🔍</span> Search Results
+        <span class="line"></span>
+      </div>
+      <div id="searchResultsGrid" class="symbol-grid"></div>
+    `;
+    
+    const searchContainer = searchBox.closest('.search-container');
+    if (searchContainer) {
+      searchContainer.parentNode.insertBefore(resultsSection, searchContainer.nextSibling);
+      resultsGrid = document.getElementById('searchResultsGrid');
+    }
+  }
+
+  const mainContent = document.querySelector('.main-content');
+  if (!mainContent || !resultsSection || !resultsGrid) return;
+
+  // Generic selector: hide all children of .main-content except the search bar, header, and search results
+  const siblingsToHide = Array.from(mainContent.children).filter(el => {
+    return !el.classList.contains('page-header') && 
+           !el.classList.contains('search-container') && 
+           !el.classList.contains('hero') && 
+           !el.classList.contains('back-link') &&
+           el.id !== 'searchResultsSection';
+  });
 
   searchBox.addEventListener('input', (e) => {
     const query = e.target.value.toLowerCase().trim();
     
     if (query.length > 0) {
-      // Hide all standard sections
-      mainSections.forEach(sec => sec.style.display = 'none');
+      siblingsToHide.forEach(sec => sec.style.display = 'none');
       resultsSection.style.display = 'block';
       resultsGrid.innerHTML = '';
 
-      // 1. Check dictionary for direct keyword match
       let results = [];
-      for (const [key, icons] of Object.entries(SYMBOL_SEARCH_INDEX)) {
+
+      // 1. Stage 1: Smart Keyword Aliases & Category lookup
+      const matchedCategories = new Set();
+      for (const [kw, catKey] of Object.entries(SEARCH_ALIASES)) {
+        if (kw === query || (query.length >= 3 && (kw.includes(query) || query.includes(kw)))) {
+          matchedCategories.add(catKey);
+        }
+      }
+
+      matchedCategories.forEach(catKey => {
+        const symbols = CATEGORY_SYMBOLS[catKey];
+        if (symbols) {
+          results = [...results, ...symbols];
+        }
+      });
+
+      // 2. Stage 2: Direct Category Key substring match
+      for (const [key, icons] of Object.entries(CATEGORY_SYMBOLS)) {
         if (key.includes(query) || query.includes(key)) {
           results = [...results, ...icons];
         }
       }
 
-      // 2. Also check text content on the current page for symbols/combos
-      const allItems = Array.from(document.querySelectorAll('.symbol-item, .combo-item, .lenny-item'));
-      allItems.forEach(item => {
-        if (item.textContent.toLowerCase().includes(query)) {
-          const char = item.classList.contains('combo-item') ? item.querySelector('.combo-text').textContent : item.textContent;
-          if (!results.includes(char)) results.push(char);
+      // 3. Stage 3: Section Title matching on current page (e.g. all-symbols.html)
+      const sections = Array.from(document.querySelectorAll('.main-content > .section-title, .main-content > h2, .main-content > h3'));
+      sections.forEach(sec => {
+        if (sec.textContent.toLowerCase().includes(query)) {
+          let next = sec.nextElementSibling;
+          while (next && !next.classList.contains('symbol-grid') && !next.classList.contains('combo-grid') && !next.classList.contains('section-title')) {
+            next = next.nextElementSibling;
+          }
+          if (next && (next.classList.contains('symbol-grid') || next.classList.contains('combo-grid'))) {
+            const items = next.querySelectorAll('.symbol-item, .combo-item, .lenny-item');
+            items.forEach(item => {
+              const char = item.classList.contains('combo-item') ? (item.querySelector('.combo-text')?.textContent || item.textContent) : item.textContent;
+              if (!results.includes(char)) results.push(char.trim());
+            });
+          }
         }
       });
 
-      // 3. Render Luxury Tiles
+      // 4. Stage 4: Individual symbol/combo substring match
+      const allItems = Array.from(document.querySelectorAll('.symbol-item, .combo-item, .lenny-item'));
+      allItems.forEach(item => {
+        if (item.textContent.toLowerCase().includes(query)) {
+          const char = item.classList.contains('combo-item') ? (item.querySelector('.combo-text')?.textContent || item.textContent) : item.textContent;
+          if (!results.includes(char)) results.push(char.trim());
+        }
+      });
+
+      // 5. Render results as luxury, animated tiles
       if (results.length > 0) {
-        // Remove duplicates
-        const unique = [...new Set(results)].slice(0, 100);
+        const unique = [...new Set(results)].slice(0, 150);
         unique.forEach(char => {
           const div = document.createElement('div');
           div.className = 'symbol-item reveal';
@@ -401,12 +556,11 @@ function initSearch() {
           resultsGrid.appendChild(div);
         });
       } else {
-        resultsGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #64748b;">No symbols found for "${query}". Try "heart", "star", or "math".</p>`;
+        resultsGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #64748b;">No symbols found for "${query}". Try "heart", "star", "flower", or "checkmark".</p>`;
       }
     } else {
-      // Restore Home Page
       resultsSection.style.display = 'none';
-      mainSections.forEach(sec => sec.style.display = '');
+      siblingsToHide.forEach(sec => sec.style.display = '');
     }
   });
 }
