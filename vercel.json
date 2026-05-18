@@ -44,8 +44,7 @@
     { "source": "/cursive", "destination": "/symbols/cursive", "permanent": true },
     { "source": "/german", "destination": "/symbols/german", "permanent": true },
     { "source": "/math", "destination": "/symbols/math", "permanent": true },
-    { "source": "/pages/contact", "destination": "/", "permanent": true },
-    { "source": "/symbols/medal", "destination": "/all-symbols", "permanent": true }
+    { "source": "/pages/contact", "destination": "/", "permanent": true }
   ],
   "headers": [
     {
