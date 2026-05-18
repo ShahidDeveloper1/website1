@@ -76,12 +76,13 @@ function generateLetterPage(letter) {
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style.css?v=5.2"><link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="/style.css?v=6.1"><link rel="icon" type="image/png" href="/favicon.png?v=6.1">
+  <link rel="apple-touch-icon" href="/favicon.png?v=6.1">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"${DOMAIN}"},{"@type":"ListItem","position":2,"name":"Fancy Letters","item":"${DOMAIN}/letters"},{"@type":"ListItem","position":3,"name":"Letter ${upper}","item":"${DOMAIN}/letters/${slug}"}]}</script>
 </head>
 <body>
 <div class="particles"></div>
-<header class="header"><div class="header-inner"><a href="/" class="logo"><img src="/favicon.png" alt="TextSymbols Logo" class="logo-img"><span class="logo-text">TextSymbols</span></a><nav class="header-nav"><a href="/">Home</a><a href="/all-symbols.html">All Symbols</a><a href="/preppy-fonts.html"><span class="link-icon">🎀</span> Preppy Font Generator</a><a href="/cute-fonts.html">Cute Fonts</a><a href="/aesthetic-fonts.html">Aesthetic Fonts</a><a href="/lenny-face.html" class="nav-cta">Lenny Faces</a></nav><button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button></div></header>
+<header class="header"><div class="header-inner"><a href="/" class="logo"><img src="/favicon.png?v=6.1" alt="TextSymbols Logo" class="logo-img" width="32" height="32" style="border-radius:8px;"><span class="logo-text">TextSymbols</span></a><nav class="header-nav"><a href="/">Home</a><a href="/all-symbols.html">All Symbols</a><a href="/preppy-fonts.html"><span class="link-icon">🎀</span> Preppy Font Generator</a><a href="/cute-fonts.html">Cute Fonts</a><a href="/aesthetic-fonts.html">Aesthetic Fonts</a><a href="/lenny-face.html" class="nav-cta">Lenny Faces</a></nav><button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button></div></header>
 <div class="sidebar-overlay" id="sidebarOverlay"></div><aside class="sidebar" id="sidebar"></aside>
 
 <div class="page-wrapper"><main class="main-content">
@@ -113,7 +114,7 @@ ${decorated}
 
 <footer class="footer"><div class="footer-inner"><div class="footer-bottom"><p class="footer-copy">© 2026 FancySymbols.</p></div></div></footer>
 <script>function copyL(el,t){const b=el.querySelector('.combo-copy-btn');navigator.clipboard.writeText(t).then(()=>{if(b){b.textContent='Copied!';b.style.background='#0d9488';b.style.color='#fff';}setTimeout(()=>{if(b){b.textContent='Copy';b.style.background='';b.style.color='';}},1500);});}</script>
-<script src="/script.js?v=5.2"></script>
+<script defer src="/script.js?v=6.0"></script>
 </body></html>`;
 }
 

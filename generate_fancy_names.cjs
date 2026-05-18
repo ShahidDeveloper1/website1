@@ -105,8 +105,9 @@ function generateNamePage(name) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style.css?v=5.2">
-  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="/style.css?v=6.1">
+  <link rel="icon" type="image/png" href="/favicon.png?v=6.1">
+  <link rel="apple-touch-icon" href="/favicon.png?v=6.1">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"${DOMAIN}"},{"@type":"ListItem","position":2,"name":"Fancy Names","item":"${DOMAIN}/names"},{"@type":"ListItem","position":3,"name":"${name}","item":"${DOMAIN}/names/${slug}"}]}
   </script>
@@ -115,7 +116,7 @@ function generateNamePage(name) {
 <div class="particles"></div>
 <header class="header">
   <div class="header-inner">
-    <a href="/" class="logo"><img src="/favicon.png" alt="TextSymbols Logo" class="logo-img"><span class="logo-text">TextSymbols</span></a>
+    <a href="/" class="logo"><img src="/favicon.png?v=6.1" alt="TextSymbols Logo" class="logo-img" width="32" height="32" style="border-radius:8px;"><span class="logo-text">TextSymbols</span></a>
     <nav class="header-nav">
       <a href="/">Home</a>
       <a href="/all-symbols.html">All Symbols</a>
@@ -178,7 +179,7 @@ ${styles}
     <div class="footer-bottom"><p class="footer-copy">© 2026 FancySymbols.</p></div>
   </div>
 </footer>
-<script src="/script.js?v=5.2"></script>
+<script defer src="/script.js?v=6.0"></script>
 </body>
 </html>`;
 }
