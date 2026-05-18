@@ -353,7 +353,7 @@ function initSearch() {
   const searchBox = document.getElementById('searchBox');
   const resultsSection = document.getElementById('searchResultsSection');
   const resultsGrid = document.getElementById('searchResultsGrid');
-  const mainSections = document.querySelectorAll('.main-content > .section-title, .main-content > div:not(.search-results-section):not(.page-header):not(.search-container), .main-content > section:not(.hero)');
+  const mainSections = document.querySelectorAll('.main-content > .section-title, .main-content > div:not(.search-results-section), .main-content > section:not(.hero)');
 
   if (!searchBox || !resultsSection || !resultsGrid) return;
 
