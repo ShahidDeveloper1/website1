@@ -106,7 +106,7 @@ function buildRelatedLinks(slug) {
 
   const links = related.map(r => {
     const display = PAGE_DISPLAY_NAMES[r] || titleCase(r);
-    return `      <a href="/symbols/${r}.html" class="quick-link-btn" title="${titleCase(r)} Symbols"><span>${display.split(' ')[0]}</span> ${display.split(' ').slice(1).join(' ')} Symbols</a>`;
+    return `      <a href="/symbols/${r}" class="quick-link-btn" title="${titleCase(r)} Symbols"><span>${display.split(' ')[0]}</span> ${display.split(' ').slice(1).join(' ')} Symbols</a>`;
   }).join('\n');
 
   return `

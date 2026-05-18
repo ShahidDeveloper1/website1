@@ -223,70 +223,70 @@ function renderSidebar() {
   <div class="sidebar-section">
     <div class="sidebar-title">NAVIGATION</div>
     <div class="sidebar-links">
-      <a href="${root}index.html"><span class="link-icon">🏠</span> Home</a>
-      <a href="${root}all-symbols.html"><span class="link-icon">🚀</span> All Symbols</a>
-      <a href="${root}cute-fonts.html"><span class="link-icon">🌸</span> Cute Fonts</a>
-      <a href="${root}aesthetic-fonts.html"><span class="link-icon">✨</span> Aesthetic Fonts</a>
-      <a href="${root}preppy-fonts.html"><span class="link-icon">🎀</span> Preppy Font Generator</a>
-      <a href="${root}font-generator.html"><span class="link-icon">𝕱</span> Fancy Text Generator</a>
-      <a href="${root}lenny-face.html"><span class="link-icon">( ͡° ͜ʖ ͡°)</span> Lenny Faces</a>
+      <a href="${root || '/'}"><span class="link-icon">🏠</span> Home</a>
+      <a href="${root}all-symbols"><span class="link-icon">🚀</span> All Symbols</a>
+      <a href="${root}cute-fonts"><span class="link-icon">🌸</span> Cute Fonts</a>
+      <a href="${root}aesthetic-fonts"><span class="link-icon">✨</span> Aesthetic Fonts</a>
+      <a href="${root}preppy-fonts"><span class="link-icon">🎀</span> Preppy Font Generator</a>
+      <a href="${root}font-generator"><span class="link-icon">𝕱</span> Fancy Text Generator</a>
+      <a href="${root}lenny-face"><span class="link-icon">( ͡° ͜ʖ ͡°)</span> Lenny Faces</a>
     </div>
   </div>
 
   <div class="sidebar-section">
     <div class="sidebar-title">SYMBOLS FOR</div>
     <div class="sidebar-links">
-      <a href="${root}instagram-symbols.html"><span class="link-icon">📸</span> Instagram Symbols</a>
-      <a href="${root}discord-symbols.html"><span class="link-icon">🎮</span> Discord Symbols</a>
-      <a href="${root}tiktok-symbols.html"><span class="link-icon">🎵</span> TikTok Symbols</a>
-      <a href="${root}roblox-symbols.html"><span class="link-icon">🎲</span> Roblox Symbols</a>
+      <a href="${root}instagram-symbols"><span class="link-icon">📸</span> Instagram Symbols</a>
+      <a href="${root}discord-symbols"><span class="link-icon">🎮</span> Discord Symbols</a>
+      <a href="${root}tiktok-symbols"><span class="link-icon">🎵</span> TikTok Symbols</a>
+      <a href="${root}roblox-symbols"><span class="link-icon">🎲</span> Roblox Symbols</a>
     </div>
   </div>
 
   <div class="sidebar-section">
     <div class="sidebar-title">TEXT TOOLS</div>
     <div class="sidebar-links">
-      <a href="${root}bio-generator.html"><span class="link-icon">📝</span> Bio Generator</a>
-      <a href="${root}username-generator.html"><span class="link-icon">✧</span> Username Generator</a>
-      <a href="${root}character-counter.html"><span class="link-icon">📊</span> Character Counter</a>
-      <a href="${root}strikethrough-text.html"><span class="link-icon">━</span> Strikethrough Text</a>
-      <a href="${root}emoticons.html"><span class="link-icon">😊</span> Emoticons & Kaomoji</a>
-      <a href="${root}invisible-character.html"><span class="link-icon">👻</span> Invisible Character</a>
-      <a href="${root}blank-space.html"><span class="link-icon">📋</span> Blank Space</a>
-      <a href="${root}bullet-point.html"><span class="link-icon">•</span> Bullet Points</a>
-      <a href="${root}free-fire-name.html"><span class="link-icon">🔥</span> Free Fire Names</a>
-      <a href="${root}zalgo-text.html"><span class="link-icon">Z̷</span> Zalgo Text</a>
-      <a href="${root}text-repeater.html"><span class="link-icon">🔁</span> Text Repeater</a>
-      <a href="${root}small-text.html"><span class="link-icon">ᵗ</span> Small Text</a>
-      <a href="${root}bold-text.html"><span class="link-icon">𝗕</span> Bold Text</a>
-      <a href="${root}morse-code.html"><span class="link-icon">·-</span> Morse Code</a>
-      <a href="${root}cursive-text.html"><span class="link-icon">𝒞</span> Cursive Text</a>
-      <a href="${root}upside-down-text.html"><span class="link-icon">ʇ</span> Upside Down Text</a>
-      <a href="${root}vaporwave-text.html"><span class="link-icon">Ｖ</span> Vaporwave Text</a>
-      <a href="${root}bubble-text.html"><span class="link-icon">ⓑ</span> Bubble Text</a>
-      <a href="${root}gothic-text.html"><span class="link-icon">𝔊</span> Gothic Text</a>
+      <a href="${root}bio-generator"><span class="link-icon">📝</span> Bio Generator</a>
+      <a href="${root}username-generator"><span class="link-icon">✧</span> Username Generator</a>
+      <a href="${root}character-counter"><span class="link-icon">📊</span> Character Counter</a>
+      <a href="${root}strikethrough-text"><span class="link-icon">━</span> Strikethrough Text</a>
+      <a href="${root}emoticons"><span class="link-icon">😊</span> Emoticons & Kaomoji</a>
+      <a href="${root}invisible-character"><span class="link-icon">👻</span> Invisible Character</a>
+      <a href="${root}blank-space"><span class="link-icon">📋</span> Blank Space</a>
+      <a href="${root}bullet-point"><span class="link-icon">•</span> Bullet Points</a>
+      <a href="${root}free-fire-name"><span class="link-icon">🔥</span> Free Fire Names</a>
+      <a href="${root}zalgo-text"><span class="link-icon">Z̷</span> Zalgo Text</a>
+      <a href="${root}text-repeater"><span class="link-icon">🔁</span> Text Repeater</a>
+      <a href="${root}small-text"><span class="link-icon">ᵗ</span> Small Text</a>
+      <a href="${root}bold-text"><span class="link-icon">𝗕</span> Bold Text</a>
+      <a href="${root}morse-code"><span class="link-icon">·-</span> Morse Code</a>
+      <a href="${root}cursive-text"><span class="link-icon">𝒞</span> Cursive Text</a>
+      <a href="${root}upside-down-text"><span class="link-icon">ʇ</span> Upside Down Text</a>
+      <a href="${root}vaporwave-text"><span class="link-icon">Ｖ</span> Vaporwave Text</a>
+      <a href="${root}bubble-text"><span class="link-icon">ⓑ</span> Bubble Text</a>
+      <a href="${root}gothic-text"><span class="link-icon">𝔊</span> Gothic Text</a>
     </div>
   </div>
   
   <div class="sidebar-section">
     <div class="sidebar-title">TRENDING NOW</div>
     <div class="sidebar-links">
-      ${populars.map(c => `<a href="${root}symbols/${c.f}.html"><span class="link-icon">${c.i}</span> ${c.n}</a>`).join('')}
+      ${populars.map(c => `<a href="${root}symbols/${c.f}"><span class="link-icon">${c.i}</span> ${c.n}</a>`).join('')}
     </div>
   </div>
 
   <div class="sidebar-section">
     <div class="sidebar-title">ALL CATEGORIES</div>
     <div class="sidebar-links">
-      ${categories.map(c => `<a href="${root}symbols/${c.f}.html"><span class="link-icon">${c.i}</span> ${c.n}</a>`).join('')}
+      ${categories.map(c => `<a href="${root}symbols/${c.f}"><span class="link-icon">${c.i}</span> ${c.n}</a>`).join('')}
     </div>
   </div>
 
   <div class="sidebar-section">
     <div class="sidebar-title">SITE INFO</div>
     <div class="sidebar-links">
-      <a href="${root}pages/privacy.html"><span class="link-icon">🛡️</span> Privacy Policy</a>
-      <a href="${root}pages/terms.html"><span class="link-icon">📄</span> Terms of Service</a>
+      <a href="${root}pages/privacy"><span class="link-icon">🛡️</span> Privacy Policy</a>
+      <a href="${root}pages/terms"><span class="link-icon">📄</span> Terms of Service</a>
     </div>
   </div>
   `;
@@ -303,7 +303,7 @@ function initSidebar() {
   const links = document.querySelectorAll('.sidebar-links a');
   links.forEach(link => {
     const href = link.getAttribute('href');
-    if (href === currentPath || (href === '/index.html' && currentPath === '/') || (currentPath.includes(href) && href !== '/')) {
+    if (href === currentPath || (href === '/' && currentPath === '/') || (currentPath.includes(href) && href !== '/')) {
       link.classList.add('active');
     }
   });
