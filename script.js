@@ -314,6 +314,13 @@ function initSidebar() {
       overlay.classList.toggle('show');
     });
   }
+
+  if (overlay) {
+    overlay.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('show');
+    });
+  }
 }
 
 // ===== CLICK-TO-COPY LOGIC =====
