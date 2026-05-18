@@ -256,7 +256,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   font-size: 1.125rem; min-width: 1.5rem; width: auto; text-align: center; flex-shrink: 0; white-space: nowrap;
 }
 .page-wrapper {
-  display: flex; margin-top: 70px; min-height: calc(100vh - 70px);
+  display: flex; margin-top: 76px; min-height: calc(100vh - 76px);
 }
 .main-content {
   flex: 1; padding: 2rem; margin-left: 280px; max-width: calc(100% - 280px);
@@ -590,6 +590,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   }
 }
 @media (max-width: 768px) {
+  .header { padding: 0 1rem !important; height: 64px !important; }
+  .logo { font-size: 1.4rem !important; }
+  .logo-img { width: 28px !important; height: 28px !important; }
+  .page-wrapper { margin-top: 64px !important; min-height: calc(100vh - 64px) !important; }
   .symbol-grid { grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)) !important; gap: 0.625rem !important; }
   .combo-grid { grid-template-columns: 1fr !important; }
   .category-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important; }
@@ -600,6 +604,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .hero { padding: 2.5rem 0.625rem !important; }
 }
 @media (max-width: 480px) {
+  .header { padding: 0 0.75rem !important; }
+  .logo { font-size: 1.25rem !important; gap: 0.5rem !important; }
+  .logo-img { width: 24px !important; height: 24px !important; }
   .hero-title { font-size: 1.5rem !important; }
   .category-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
