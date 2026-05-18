@@ -34,7 +34,6 @@
   <meta name="google-site-verification" content="OvJ6uQVDw0PgIWerWJ88MgLeEMs_hutUY-J1xTOiGBY" />
   <meta property="article:modified_time" content="2026-05-18">
 
-  
   <link rel="canonical" href="https://www.fancysymbols.com/cute-fonts">
   <link rel="alternate" hreflang="x-default" href="https://www.fancysymbols.com/cute-fonts">
   <link rel="alternate" hreflang="en" href="https://www.fancysymbols.com/cute-fonts">
@@ -153,6 +152,93 @@
 
           // Handle All Other Categories
           window.CuteFonts.categories.forEach(cat => {
+            if (cat.name === "Favorite Fonts") return;
+            const catStyles = cat.styles.map(s => ({
+                ...s,
+                text: s.transform(text)
+            }));
+            
+            html += `
+              <section class="font-section">
+                <h3 class="font-category-title">${cat.name}</h3>
+                <div class="font-grid">
+                  ${catStyles.map(s => renderCard(s, text, true)).join('')}
+                </div>
+              </section>
+            `;
+          });
+
+          fontsContainer.innerHTML = html;
+        }
+
+        function renderCard(style, text, useComputed = false) {
+          const isFav = favorites.includes(style.id);
+          const rawText = useComputed ? style.text : (window.CuteFonts.categories.flatMap(c => c.styles).find(s => s.id === style.id).transform(text));
+          const escapedText = escapeHTML(rawText);
+          
+          return `
+            <div class="font-card" onclick="copyCardText(this, '${rawText.replace(/'/g, "\\'").replace(/"/g, '&quot;')}')">
+              <div class="font-card-header">
+                <span class="font-card-label">${style.name}</span>
+                <div class="font-card-actions">
+                  <button class="font-card-btn fav-btn ${isFav ? 'active' : ''}" 
+                          onclick="event.stopPropagation(); toggleFavorite('${style.id}')">
+                    ${isFav ? '❤️' : '♡'}
+                  </button>
+                  <button class="font-card-btn copy-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="font-card-preview">${escapedText}</div>
+              <div class="copy-feedback">Copied!</div>
+            </div>
+          `;
+        }
+
+        window.toggleFavorite = (id) => {
+          if (favorites.includes(id)) {
+            favorites = favorites.filter(f => f !== id);
+          } else {
+            favorites.push(id);
+          }
+          localStorage.setItem('fontFavorites', JSON.stringify(favorites));
+          renderAll();
+        };
+
+        window.copyCardText = (el, text) => {
+          if (window.ClipboardManager) window.ClipboardManager.add(text);
+          navigator.clipboard.writeText(text).then(() => {
+            el.classList.add('copied');
+            setTimeout(() => el.classList.remove('copied'), 1500);
+            
+            if (window.showToast) window.showToast('Font Copied!');
+          });
+        };
+
+        fontInput.addEventListener('input', renderAll);
+        renderAll();
+      });
+    </script>
+
+    <!-- RICH CONTENT ARTICLE -->
+    <div class="content-article">
+
+      <h3>What Are Cute Fonts?</h3>
+      <p><b>Cute fonts are Unicode text styles decorated with kawaii-inspired elements — hearts (♡), stars (☆), flowers (✿), sparkles (✧), and bows (🎀) — that create an adorable, playful visual appearance.</b> Originating from Japanese "kawaii" culture, cute fonts blend stylized character sets with decorative symbols to produce text that feels warm, approachable, and personality-rich.</p>
+      <p>Every cute font style on this page uses <strong>plain Unicode characters</strong>, not images. When you copy a cute font result, you're copying text that pastes into any app — Instagram, TikTok, Snapchat, WhatsApp, Discord, and 500+ more platforms that support text input.</p>
+
+      <div class="info-box">
+        Cute fonts are the most popular text style among TikTok and Snapchat users. The combination of kawaii characters + decorative elements creates an instantly recognizable aesthetic that increases profile engagement.
+      </div>
+
+      <h3>How to Use the Cute Fonts Generator</h3>
+      <div class="steps-grid">
+        <div class="step-item">
+          <h3>Type Any Text</h3>
+          <p>Enter your name, bio, or any message into the input box above. All English letters and numbers are supported.</p>
+        </div>
+        <div class="step-item">
           <h3>Browse Cute Styles</h3>
           <p>See your text instantly transformed into 15+ cute variations with hearts, sparkles, and kawaii decorations.</p>
         </div>
@@ -162,7 +248,7 @@
         </div>
       </div>
 
-      <h2>Popular Cute Font Styles</h2>
+      <h3>Popular Cute Font Styles</h3>
       <div class="feature-cards">
         <div class="feature-card">
           <span class="feature-card-icon">♡</span>
@@ -186,7 +272,7 @@
         </div>
       </div>
 
-      <h2>Where to Use Cute Fonts</h2>
+      <h3>Where to Use Cute Fonts</h3>
       <div class="use-case-grid">
         <div class="use-case-card">
           <span class="use-case-icon">📱</span>
@@ -210,7 +296,7 @@
         </div>
       </div>
 
-      <h2>Frequently Asked Questions About Cute Fonts</h2>
+      <h3>Frequently Asked Questions About Cute Fonts</h3>
       <div class="faq-list">
         <div class="faq-item">
           <div class="faq-q">What are cute fonts?</div>
@@ -230,7 +316,7 @@
         </div>
       </div>
 
-      <h2>Explore More Tools</h2>
+      <h3>Explore More Tools</h3>
       <div class="category-pills">
         <a href="/" class="category-pill">🏠 All Symbols</a>
         <a href="/preppy-fonts" class="category-pill">🎀 Preppy Fonts</a>
