@@ -114,7 +114,22 @@
     <section class="hero" style="text-align:center;padding:2rem 1rem;">
       <h1 style="font-size:2.2rem;font-weight:800;margin-bottom:.5rem;">Upside Down Text Generator ʇxǝ⊥</h1>
       <p style="color:#64748b;max-width:600px;margin:0 auto 1.5rem;">Type below to <strong>flip your text upside down</strong>. Click the result to copy!</p>
+    
+      <div class="search-container" style="margin-top: 1.5rem;">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-box" id="searchBox" placeholder="Search symbols, categories...">
+      </div>
     </section>
+
+    <!-- SEARCH RESULTS SECTION (HIDDEN BY DEFAULT) -->
+    <section id="searchResultsSection" class="search-results-section" style="display: none; margin-bottom: 3rem; margin-top: 2rem; max-width: 800px; margin-left: auto; margin-right: auto; padding: 0 1rem;">
+      <div class="section-title">
+        <span class="icon">🔍</span> Search Results
+        <span class="line"></span>
+      </div>
+      <div id="searchResultsGrid" class="symbol-grid"></div>
+    </section>
+
     <div style="max-width:700px;margin:0 auto;padding:0 1rem;">
       <textarea id="flipInput" rows="3" placeholder="Type your text here..." style="width:100%;padding:1rem 1.25rem;font-size:1.1rem;border:2px solid #e2e8f0;border-radius:14px;outline:none;font-family:'Outfit',sans-serif;resize:vertical;">Hello World</textarea>
       <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;">

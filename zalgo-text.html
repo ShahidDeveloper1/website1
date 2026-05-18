@@ -67,7 +67,22 @@
 <aside class="sidebar" id="sidebar"></aside>
 
 <div class="page-wrapper"><main class="main-content">
-  <div class="page-header"><h1>Z̷a̶l̷g̶o̶ Text Generator</h1><p>Generate creepy, glitchy, and cursed text instantly. Adjust the craziness level and copy-paste anywhere.</p></div>
+  <div class="page-header"><h1>Z̷a̶l̷g̶o̶ Text Generator</h1><p>Generate creepy, glitchy, and cursed text instantly. Adjust the craziness level and copy-paste anywhere.</p>
+      <div class="search-container" style="margin-top: 1.5rem;">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-box" id="searchBox" placeholder="Search symbols, categories...">
+      </div>
+    </div>
+
+    <!-- SEARCH RESULTS SECTION (HIDDEN BY DEFAULT) -->
+    <section id="searchResultsSection" class="search-results-section" style="display: none; margin-bottom: 3rem; margin-top: 2rem; max-width: 800px; margin-left: auto; margin-right: auto; padding: 0 1rem;">
+      <div class="section-title">
+        <span class="icon">🔍</span> Search Results
+        <span class="line"></span>
+      </div>
+      <div id="searchResultsGrid" class="symbol-grid"></div>
+    </section>
+
 
   <div class="font-gen-container">
     <input type="text" class="font-input" id="zalgoInput" placeholder="Type normal text here..." value="HE COMES" autofocus>

@@ -112,7 +112,22 @@
 <aside class="sidebar" id="sidebar"></aside>
 
 <div class="page-wrapper"><main class="main-content">
-  <div class="page-header"><h1>S̶t̶r̶i̶k̶e̶t̶h̶r̶o̶u̶g̶h̶ Text Generator</h1><p>Type your text and get strikethrough, underline, and decorated text styles instantly. Click to copy!</p></div>
+  <div class="page-header"><h1>S̶t̶r̶i̶k̶e̶t̶h̶r̶o̶u̶g̶h̶ Text Generator</h1><p>Type your text and get strikethrough, underline, and decorated text styles instantly. Click to copy!</p>
+      <div class="search-container" style="margin-top: 1.5rem;">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-box" id="searchBox" placeholder="Search symbols, categories...">
+      </div>
+    </div>
+
+    <!-- SEARCH RESULTS SECTION (HIDDEN BY DEFAULT) -->
+    <section id="searchResultsSection" class="search-results-section" style="display: none; margin-bottom: 3rem; margin-top: 2rem; max-width: 800px; margin-left: auto; margin-right: auto; padding: 0 1rem;">
+      <div class="section-title">
+        <span class="icon">🔍</span> Search Results
+        <span class="line"></span>
+      </div>
+      <div id="searchResultsGrid" class="symbol-grid"></div>
+    </section>
+
 
   <div class="font-gen-container">
     <div class="font-input-area"><input type="text" class="font-input" id="strikeInput" placeholder="Type your text here..." value="Hello World" autofocus></div>

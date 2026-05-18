@@ -141,7 +141,22 @@
 
 <div class="page-wrapper"><main class="main-content">
   <a href="/" class="back-link">← Back to Home</a>
-  <div class="page-header"><h1>Music Symbols Copy and Paste</h1><p>Click any music note, clef, instrument, or audio emoji to copy it!</p></div>
+  <div class="page-header"><h1>Music Symbols Copy and Paste</h1><p>Click any music note, clef, instrument, or audio emoji to copy it!</p>
+      <div class="search-container" style="margin-top: 1.5rem;">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-box" id="searchBox" placeholder="Search symbols, categories...">
+      </div>
+    </div>
+
+    <!-- SEARCH RESULTS SECTION (HIDDEN BY DEFAULT) -->
+    <section id="searchResultsSection" class="search-results-section" style="display: none; margin-bottom: 3rem; margin-top: 2rem; max-width: 800px; margin-left: auto; margin-right: auto; padding: 0 1rem;">
+      <div class="section-title">
+        <span class="icon">🔍</span> Search Results
+        <span class="line"></span>
+      </div>
+      <div id="searchResultsGrid" class="symbol-grid"></div>
+    </section>
+
   
   <div class="section-title"><span class="icon">♪</span> Notes & Sheet Music <span class="line"></span></div>
   <div class="symbol-grid">
