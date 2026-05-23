@@ -3,26 +3,26 @@ const path = require('path');
 
 const skip = new Set(['.git', 'node_modules', 'dist', 'images', '.vscode', 'es', 'fr', 'names']);
 
-// Standardized titles: "[Name] Symbols Copy and Paste | Text Symbols - FancySymbols"
+// Standardized titles: "[Name] Symbols Copy and Paste - Fancy Text"
 // Target: 40-60 chars (Google displays ~55-60)
 const titleFixes = {
   // Symbol pages with bad titles
-  'symbols/card.html': 'Card Symbols Copy and Paste | Text Symbols - FancySymbols',
-  'symbols/cross.html': 'Cross Symbols Copy and Paste | Text Symbols - FancySymbols',
-  'symbols/crown.html': 'Crown & Diamond Symbols Copy and Paste | Text Symbols - FancySymbols',
-  'symbols/award.html': 'Award & Medal Symbols Copy and Paste | Text Symbols - FancySymbols',
+  'symbols/card.html': 'Card Symbols Copy and Paste - Fancy Text',
+  'symbols/cross.html': 'Cross Symbols Copy and Paste - Fancy Text',
+  'symbols/crown.html': 'Crown & Diamond Symbols Copy and Paste - Fancy Text',
+  'symbols/award.html': 'Award & Medal Symbols Copy and Paste - Fancy Text',
   
   // Utility pages - short titles
-  'font-generator.html': 'Fancy Text Generator | Copy and Paste Stylish Fonts - FancySymbols',
-  'text-repeater.html': 'Text Repeater Tool | Repeat Text and Emoji Online - FancySymbols',
-  'bold-text.html': 'Bold Text Generator | Copy and Paste Bold Font - FancySymbols',
-  'small-text.html': 'Small Text Generator | Tiny Superscript Text Copy Paste - FancySymbols',
-  'vaporwave-text.html': 'Vaporwave Text Generator | Wide Aesthetic Text - FancySymbols',
-  'blank-space.html': 'Blank Space Copy and Paste | Empty Characters - FancySymbols',
-  'character-counter.html': 'Character Counter | Count Words and Letters Online - FancySymbols',
-  'instagram-symbols.html': 'Instagram Bio Symbols Copy and Paste | Text Symbols - FancySymbols',
-  'tiktok-symbols.html': 'TikTok Bio Symbols Copy and Paste | Text Symbols - FancySymbols',
-  'roblox-symbols.html': 'Roblox Symbols Copy and Paste | Gaming Text Symbols - FancySymbols',
+  'font-generator.html': 'Fancy Text Generator | Copy and Paste Stylish Fonts - Fancy Text',
+  'text-repeater.html': 'Text Repeater Tool | Repeat Text and Emoji Online - Fancy Text',
+  'bold-text.html': 'Bold Text Generator | Copy and Paste Bold Font - Fancy Text',
+  'small-text.html': 'Small Text Generator | Tiny Superscript Text Copy Paste - Fancy Text',
+  'vaporwave-text.html': 'Vaporwave Text Generator | Wide Aesthetic Text - Fancy Text',
+  'blank-space.html': 'Blank Space Copy and Paste | Empty Characters - Fancy Text',
+  'character-counter.html': 'Character Counter | Count Words and Letters Online - Fancy Text',
+  'instagram-symbols.html': 'Instagram Bio Symbols Copy and Paste - Fancy Text',
+  'tiktok-symbols.html': 'TikTok Bio Symbols Copy and Paste - Fancy Text',
+  'roblox-symbols.html': 'Roblox Symbols Copy and Paste - Fancy Text',
 };
 
 let updated = 0;

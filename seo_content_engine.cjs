@@ -89,10 +89,10 @@ function buildArticle(slug, name) {
   let html = `<div class="content-article">
     <h2>About ${name} Text Symbols</h2>
     <p>${about}</p>
-    <p>On FancySymbols, we provide a carefully curated collection of ${lname} text symbols that you can copy and paste anywhere. These Unicode characters are part of the universal text standard, which means they work on every device and platform without installing any fonts or apps. Whether you are on an iPhone, Android, Windows PC, or Mac, these ${lname} text symbols will display correctly every time.</p>
+    <p>On Fancy Text, we provide a carefully curated collection of ${lname} text symbols that you can copy and paste anywhere. These Unicode characters are part of the universal text standard, which means they work on every device and platform without installing any fonts or apps. Whether you are on an iPhone, Android, Windows PC, or Mac, these ${lname} text symbols will display correctly every time.</p>
 
     <h2>How to Copy and Paste ${name} Symbols</h2>
-    <p>Using ${lname} text symbols from FancySymbols is simple and fast. Browse through the collection above and click or tap on any symbol you want to use. The character is instantly copied to your clipboard. Then open the app or website where you want to use it — Instagram, TikTok, Twitter, Discord, WhatsApp, Facebook, or any text field — and paste it with Ctrl+V on desktop or long-press and paste on mobile devices.</p>
+    <p>Using ${lname} text symbols from Fancy Text is simple and fast. Browse through the collection above and click or tap on any symbol you want to use. The character is instantly copied to your clipboard. Then open the app or website where you want to use it — Instagram, TikTok, Twitter, Discord, WhatsApp, Facebook, or any text field — and paste it with Ctrl+V on desktop or long-press and paste on mobile devices.</p>
     <p>You can combine multiple symbols to create unique designs. Try mixing ${lname} characters with other text symbols from our <a href="/all-symbols">complete symbols collection</a> to build eye-catching bios, usernames, and messages that stand out from the crowd.</p>
 
     <h2>Where to Use ${name} Symbols</h2>
@@ -113,14 +113,14 @@ function buildArticle(slug, name) {
     </div>
     <div class="faq-item">
       <div class="faq-q">Do ${lname} text symbols work on all platforms?</div>
-      <div class="faq-a">Yes. All ${lname} symbols on FancySymbols are standard Unicode characters supported by every major platform including Instagram, TikTok, Twitter, Facebook, Discord, WhatsApp, and all modern web browsers and operating systems.</div>
+      <div class="faq-a">Yes. All ${lname} symbols on Fancy Text are standard Unicode characters supported by every major platform including Instagram, TikTok, Twitter, Facebook, Discord, WhatsApp, and all modern web browsers and operating systems.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Can I use these ${lname} symbols in my Instagram bio?</div>
       <div class="faq-a">Absolutely. These ${lname} text symbols are perfect for Instagram bios. Copy any symbol from this page, open Instagram, edit your profile, and paste the symbol directly into your bio to add a creative, eye-catching touch.</div>
     </div>
 
-    <p>Explore our full library of <a href="/all-symbols">text symbols</a>, <a href="/font-generator">fancy text generators</a>, and <a href="/aesthetic-fonts">aesthetic font tools</a> to take your online presence to the next level. Every symbol on FancySymbols is free to use with no sign-up required.</p>
+    <p>Explore our full library of <a href="/all-symbols">text symbols</a>, <a href="/font-generator">fancy text generators</a>, and <a href="/aesthetic-fonts">aesthetic font tools</a> to take your online presence to the next level. Every symbol on Fancy Text is free to use with no sign-up required.</p>
   </div>`;
   return html;
 }
@@ -157,7 +157,7 @@ function processFile(filepath) {
   }
 
   // Update title
-  const newTitle = `${name} Symbols Copy and Paste | Text Symbols - FancySymbols`;
+  const newTitle = `${name} Symbols Copy and Paste | Fancy Text`;
   content = content.replace(/<title>[^<]*<\/title>/, `<title>${newTitle}</title>`);
 
   fs.writeFileSync(filepath, content, 'utf8');

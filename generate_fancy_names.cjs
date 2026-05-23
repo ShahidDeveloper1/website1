@@ -92,7 +92,7 @@ function generateNamePage(name) {
 <head>
   <meta charset='UTF-8'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${name} in Fancy Text — Stylish Fonts Copy Paste | TextSymbols</title>
+  <title>${name} in Fancy Text — Stylish Fonts Copy Paste | Fancy Text</title>
   <meta name="description" content="${name} in 20+ fancy font styles — cursive, gothic, bubble, bold, decorated. Copy and paste ${name} in aesthetic fonts for Instagram, TikTok, Discord bios.">
   <link rel='canonical' href='${DOMAIN}/names/${slug}'>
   <meta property="og:type" content="website">
@@ -116,7 +116,7 @@ function generateNamePage(name) {
 <div class="particles"></div>
 <header class="header">
   <div class="header-inner">
-    <a href="/" class="logo"><img src="/favicon.png?v=6.1" alt="TextSymbols Logo" class="logo-img" width="32" height="32" style="border-radius:8px;"><span class="logo-text">TextSymbols</span></a>
+    <a href="/" class="logo"><img src="/favicon.png?v=6.1" alt="Fancy Text Logo" class="logo-img" width="32" height="32" style="border-radius:8px;"><span class="logo-text">Fancy Text</span></a>
     <nav class="header-nav">
       <a href="/">Home</a>
       <a href="/all-symbols.html">All Symbols</a>
@@ -171,12 +171,12 @@ ${styles}
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-grid">
-      <div class="footer-brand"><span class="logo-text highlight">TextSymbols</span><p class="footer-desc">Your premium destination for aesthetic symbols, cute fonts, and creative text tools.</p></div>
+      <div class="footer-brand"><span class="logo-text highlight">Fancy Text</span><p class="footer-desc">Your premium destination for aesthetic symbols, cute fonts, and creative text tools.</p></div>
       <div><h4 class="footer-col-title">Text Tools</h4><ul class="footer-links-list"><li><a href="/all-symbols.html">All Symbols</a></li><li><a href="/aesthetic-fonts.html">Aesthetic Fonts</a></li><li><a href="/bio-generator.html">Bio Generator</a></li><li><a href="/invisible-character.html">Invisible Character</a></li></ul></div>
       <div><h4 class="footer-col-title">Categories</h4><ul class="footer-links-list"><li><a href="/symbols/heart.html">Heart Symbols</a></li><li><a href="/symbols/star.html">Star Symbols</a></li><li><a href="/symbols/sparkle.html">Sparkle Symbols</a></li></ul></div>
       <div><h4 class="footer-col-title">Company</h4><ul class="footer-links-list"><li><a href="/pages/privacy.html">Privacy Policy</a></li><li><a href="/pages/terms.html">Terms of Service</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><p class="footer-copy">© 2026 FancySymbols.</p></div>
+    <div class="footer-bottom"><p class="footer-copy">© 2026 Fancy Text.</p></div>
   </div>
 </footer>
 <script defer src="/script.js?v=6.0"></script>

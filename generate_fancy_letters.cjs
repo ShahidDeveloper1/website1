@@ -69,7 +69,7 @@ function generateLetterPage(letter) {
 <head>
   <meta charset='UTF-8'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fancy Letter ${upper} — ${upper} in Cursive, Gothic, Bubble & 20+ Fonts | TextSymbols</title>
+  <title>Fancy Letter ${upper} — ${upper} in Cursive, Gothic, Bubble & 20+ Fonts | Fancy Text</title>
   <meta name="description" content="Copy fancy letter ${upper} in 20+ font styles — cursive ${getChar(MAPS.cursiveBold,upper)}, gothic ${getChar(MAPS.fraktur,upper)}, bubble ${getChar(MAPS.circled,upper)}, double-struck ${getChar(MAPS.doubleStruck,upper)}. Click to copy, paste anywhere.">
   <link rel='canonical' href='${DOMAIN}/letters/${slug}'>
   <meta property="og:type" content="website"><meta property="og:title" content="Fancy Letter ${upper} — Copy in 20+ Font Styles"><meta property="og:description" content="Copy fancy ${upper} in cursive, gothic, bubble, and 20+ styles."><meta property="og:image" content="${DOMAIN}/og-image.png">
@@ -82,7 +82,7 @@ function generateLetterPage(letter) {
 </head>
 <body>
 <div class="particles"></div>
-<header class="header"><div class="header-inner"><a href="/" class="logo"><img src="/favicon.png?v=6.1" alt="TextSymbols Logo" class="logo-img" width="32" height="32" style="border-radius:8px;"><span class="logo-text">TextSymbols</span></a><nav class="header-nav"><a href="/">Home</a><a href="/all-symbols.html">All Symbols</a><a href="/preppy-fonts.html"><span class="link-icon">🎀</span> Preppy Font Generator</a><a href="/cute-fonts.html">Cute Fonts</a><a href="/aesthetic-fonts.html">Aesthetic Fonts</a><a href="/lenny-face.html" class="nav-cta">Lenny Faces</a></nav><button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button></div></header>
+<header class="header"><div class="header-inner"><a href="/" class="logo"><img src="/favicon.png?v=6.1" alt="Fancy Text Logo" class="logo-img" width="32" height="32" style="border-radius:8px;"><span class="logo-text">Fancy Text</span></a><nav class="header-nav"><a href="/">Home</a><a href="/all-symbols.html">All Symbols</a><a href="/preppy-fonts.html"><span class="link-icon">🎀</span> Preppy Font Generator</a><a href="/cute-fonts.html">Cute Fonts</a><a href="/aesthetic-fonts.html">Aesthetic Fonts</a><a href="/lenny-face.html" class="nav-cta">Lenny Faces</a></nav><button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button></div></header>
 <div class="sidebar-overlay" id="sidebarOverlay"></div><aside class="sidebar" id="sidebar"></aside>
 
 <div class="page-wrapper"><main class="main-content">
@@ -112,7 +112,7 @@ ${decorated}
   </div>
 </main></div>
 
-<footer class="footer"><div class="footer-inner"><div class="footer-bottom"><p class="footer-copy">© 2026 FancySymbols.</p></div></div></footer>
+<footer class="footer"><div class="footer-inner"><div class="footer-bottom"><p class="footer-copy">© 2026 Fancy Text.</p></div></div></footer>
 <script>function copyL(el,t){const b=el.querySelector('.combo-copy-btn');navigator.clipboard.writeText(t).then(()=>{if(b){b.textContent='Copied!';b.style.background='#0d9488';b.style.color='#fff';}setTimeout(()=>{if(b){b.textContent='Copy';b.style.background='';b.style.color='';}},1500);});}</script>
 <script defer src="/script.js?v=6.0"></script>
 </body></html>`;

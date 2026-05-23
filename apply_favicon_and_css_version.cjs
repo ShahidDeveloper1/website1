@@ -41,11 +41,11 @@ function processHTMLFile(filePath) {
   fileContent = fileContent.replace(logoImgRegex, (match) => {
     // Reconstruct the logo image to be perfectly absolute, cache-busted, and robust
     // Ensure height/width 32 are set for desktop & responsive layout
-    return '<img src="/favicon.png?v=6.1" alt="TextSymbols Logo" class="logo-img" width="32" height="32" style="border-radius:8px;">';
+    return '<img src="/favicon.png?v=6.1" alt="Fancy Text Logo" class="logo-img" width="32" height="32" style="border-radius:8px;">';
   });
 
   // 5. Update any fallback logo img tags that might not have class="logo-img" but point to favicon.png
-  const fallbackLogoRegex = /<img src="\/favicon\.png[^"]*" alt="TextSymbols Logo" class="logo-img" width="32" height="32" style="border-radius:8px;">/g;
+  const fallbackLogoRegex = /<img src="\/favicon\.png[^"]*" alt="Fancy Text Logo" class="logo-img" width="32" height="32" style="border-radius:8px;">/g;
   
   if (fileContent !== originalContent) {
     fs.writeFileSync(filePath, fileContent, 'utf8');

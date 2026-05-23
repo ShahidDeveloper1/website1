@@ -8,8 +8,8 @@ const newFooterHTML = `
     <div class="footer-saas-top">
       <div class="footer-saas-brand">
         <a href="/" class="logo" style="text-decoration:none; color:inherit; display:flex; align-items:center; gap:10px;">
-          <img src="/favicon.png?v=5.8" alt="TextSymbols Logo" class="logo-img" width="32" height="32" style="border-radius:8px;">
-          <span class="logo-text highlight">TextSymbols</span>
+          <img src="/favicon.png?v=5.8" alt="Fancy Text Logo" class="logo-img" width="32" height="32" style="border-radius:8px;">
+          <span class="logo-text highlight">Fancy Text</span>
         </a>
         <p class="footer-saas-desc">Your ultimate premium destination for aesthetic symbols, cool fonts, and creative digital expression tools. Elevate your online presence with one click.</p>
       </div>
@@ -67,7 +67,7 @@ const newFooterHTML = `
         <span class="status-dot"></span> All systems operational
       </div>
       <div class="footer-saas-copy">
-        &copy; 2026 TextSymbols. All rights reserved.
+        &copy; 2026 Fancy Text. All rights reserved.
       </div>
       <div class="footer-saas-socials">
         <a href="#" aria-label="Twitter">

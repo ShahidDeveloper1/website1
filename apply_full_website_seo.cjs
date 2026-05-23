@@ -308,8 +308,8 @@ function processHTMLFile(filePath) {
   
   // Determine page type and keywords
   if (baseName === 'index.html') {
-    title = 'Text Symbols Copy and Paste ✦ 1000+ Cool Special Glyphs';
-    desc = 'Copy text symbols instantly — ✦ ★ ❤ ✿. Browse cute emojis, cool aesthetic characters & fonts. One click copy. Works everywhere. No app needed!';
+    title = 'Fancy Text Generator ✦ Copy and Paste Cool Fonts & Symbols';
+    desc = 'Generate fancy text instantly — 𝒻𝒶𝓃𝒸𝓎 ✦ ★ ❤. Browse 1000+ cool fonts, aesthetic symbols & fancy letters. One click copy. Works everywhere. No app needed!';
   } else if (toolPageMap[baseName]) {
     title = toolPageMap[baseName].title;
     desc = toolPageMap[baseName].desc;
@@ -392,11 +392,11 @@ function processHTMLFile(filePath) {
   } else {
     // Catch all for any other page, use title fallback
     const titleMatch = fileContent.match(/<title>([^<]+)<\/title>/);
-    const existingTitle = titleMatch ? titleMatch[1] : 'FancySymbols';
+    const existingTitle = titleMatch ? titleMatch[1] : 'Fancy Text';
     title = generateTitle(
       existingTitle.split('|')[0].split('—')[0].trim(),
       '✦',
-      'TextSymbols'
+      'Fancy Text'
     );
     desc = generateDescription(
       'Browse',

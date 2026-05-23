@@ -1,4 +1,4 @@
-# FancySymbols Robots.txt
+# Fancy Text Robots.txt
 # https://www.fancysymbols.com
 
 User-agent: *
