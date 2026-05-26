@@ -5,107 +5,310 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/emoji-faces", "destination": "/symbols/emoji-faces", "permanent": true },
-    { "source": "/sun", "destination": "/symbols/sun", "permanent": true },
-    { "source": "/moon", "destination": "/symbols/moon", "permanent": true },
-    { "source": "/cross", "destination": "/symbols/cross", "permanent": true },
-    { "source": "/numbers", "destination": "/symbols/numbers", "permanent": true },
-    { "source": "/uparrow", "destination": "/symbols/uparrow", "permanent": true },
-    { "source": "/downarrow", "destination": "/symbols/downarrow", "permanent": true },
-    { "source": "/gender", "destination": "/symbols/gender", "permanent": true },
-    { "source": "/infinity", "destination": "/symbols/infinity", "permanent": true },
-    { "source": "/medical", "destination": "/symbols/medical", "permanent": true },
-    { "source": "/chess", "destination": "/symbols/chess", "permanent": true },
-    { "source": "/religion", "destination": "/symbols/religion", "permanent": true },
-    { "source": "/copyright", "destination": "/symbols/copyright", "permanent": true },
-    { "source": "/unit", "destination": "/symbols/unit", "permanent": true },
-    { "source": "/card", "destination": "/symbols/card", "permanent": true },
-    { "source": "/dice", "destination": "/symbols/dice", "permanent": true },
-    { "source": "/transport", "destination": "/symbols/transport", "permanent": true },
-    { "source": "/office", "destination": "/symbols/office", "permanent": true },
-    { "source": "/award", "destination": "/symbols/award", "permanent": true },
-    { "source": "/lock", "destination": "/symbols/lock", "permanent": true },
-    { "source": "/warning", "destination": "/symbols/warning", "permanent": true },
-    { "source": "/writing", "destination": "/symbols/writing", "permanent": true },
-    { "source": "/weapon", "destination": "/symbols/weapon", "permanent": true },
-    { "source": "/roman", "destination": "/symbols/roman", "permanent": true },
-    { "source": "/greek", "destination": "/symbols/greek", "permanent": true },
-    { "source": "/fraction", "destination": "/symbols/fraction", "permanent": true },
-    { "source": "/comparison", "destination": "/symbols/comparison", "permanent": true },
-    { "source": "/line", "destination": "/symbols/line", "permanent": true },
-    { "source": "/triangle", "destination": "/symbols/triangle", "permanent": true },
-    { "source": "/rectangle", "destination": "/symbols/rectangle", "permanent": true },
-    { "source": "/corner", "destination": "/symbols/corner", "permanent": true },
-    { "source": "/punctuation", "destination": "/symbols/punctuation", "permanent": true },
-    { "source": "/chinese", "destination": "/symbols/chinese", "permanent": true },
-    { "source": "/japanese", "destination": "/symbols/japanese", "permanent": true },
-    { "source": "/korean", "destination": "/symbols/korean", "permanent": true },
-    { "source": "/bubble", "destination": "/symbols/bubble", "permanent": true },
-    { "source": "/cursive", "destination": "/symbols/cursive", "permanent": true },
-    { "source": "/german", "destination": "/symbols/german", "permanent": true },
-    { "source": "/math", "destination": "/symbols/math", "permanent": true },
-    { "source": "/pages/contact", "destination": "/", "permanent": true }
+    {
+      "source": "/emoji-faces",
+      "destination": "/symbols/emoji-faces",
+      "permanent": true
+    },
+    {
+      "source": "/sun",
+      "destination": "/symbols/sun",
+      "permanent": true
+    },
+    {
+      "source": "/moon",
+      "destination": "/symbols/moon",
+      "permanent": true
+    },
+    {
+      "source": "/cross",
+      "destination": "/symbols/cross",
+      "permanent": true
+    },
+    {
+      "source": "/numbers",
+      "destination": "/symbols/numbers",
+      "permanent": true
+    },
+    {
+      "source": "/uparrow",
+      "destination": "/symbols/uparrow",
+      "permanent": true
+    },
+    {
+      "source": "/downarrow",
+      "destination": "/symbols/downarrow",
+      "permanent": true
+    },
+    {
+      "source": "/gender",
+      "destination": "/symbols/gender",
+      "permanent": true
+    },
+    {
+      "source": "/infinity",
+      "destination": "/symbols/infinity",
+      "permanent": true
+    },
+    {
+      "source": "/medical",
+      "destination": "/symbols/medical",
+      "permanent": true
+    },
+    {
+      "source": "/chess",
+      "destination": "/symbols/chess",
+      "permanent": true
+    },
+    {
+      "source": "/religion",
+      "destination": "/symbols/religion",
+      "permanent": true
+    },
+    {
+      "source": "/copyright",
+      "destination": "/symbols/copyright",
+      "permanent": true
+    },
+    {
+      "source": "/unit",
+      "destination": "/symbols/unit",
+      "permanent": true
+    },
+    {
+      "source": "/card",
+      "destination": "/symbols/card",
+      "permanent": true
+    },
+    {
+      "source": "/dice",
+      "destination": "/symbols/dice",
+      "permanent": true
+    },
+    {
+      "source": "/transport",
+      "destination": "/symbols/transport",
+      "permanent": true
+    },
+    {
+      "source": "/office",
+      "destination": "/symbols/office",
+      "permanent": true
+    },
+    {
+      "source": "/award",
+      "destination": "/symbols/award",
+      "permanent": true
+    },
+    {
+      "source": "/lock",
+      "destination": "/symbols/lock",
+      "permanent": true
+    },
+    {
+      "source": "/warning",
+      "destination": "/symbols/warning",
+      "permanent": true
+    },
+    {
+      "source": "/writing",
+      "destination": "/symbols/writing",
+      "permanent": true
+    },
+    {
+      "source": "/weapon",
+      "destination": "/symbols/weapon",
+      "permanent": true
+    },
+    {
+      "source": "/roman",
+      "destination": "/symbols/roman",
+      "permanent": true
+    },
+    {
+      "source": "/greek",
+      "destination": "/symbols/greek",
+      "permanent": true
+    },
+    {
+      "source": "/fraction",
+      "destination": "/symbols/fraction",
+      "permanent": true
+    },
+    {
+      "source": "/comparison",
+      "destination": "/symbols/comparison",
+      "permanent": true
+    },
+    {
+      "source": "/line",
+      "destination": "/symbols/line",
+      "permanent": true
+    },
+    {
+      "source": "/triangle",
+      "destination": "/symbols/triangle",
+      "permanent": true
+    },
+    {
+      "source": "/rectangle",
+      "destination": "/symbols/rectangle",
+      "permanent": true
+    },
+    {
+      "source": "/corner",
+      "destination": "/symbols/corner",
+      "permanent": true
+    },
+    {
+      "source": "/punctuation",
+      "destination": "/symbols/punctuation",
+      "permanent": true
+    },
+    {
+      "source": "/chinese",
+      "destination": "/symbols/chinese",
+      "permanent": true
+    },
+    {
+      "source": "/japanese",
+      "destination": "/symbols/japanese",
+      "permanent": true
+    },
+    {
+      "source": "/korean",
+      "destination": "/symbols/korean",
+      "permanent": true
+    },
+    {
+      "source": "/bubble",
+      "destination": "/symbols/bubble",
+      "permanent": true
+    },
+    {
+      "source": "/cursive",
+      "destination": "/symbols/cursive",
+      "permanent": true
+    },
+    {
+      "source": "/german",
+      "destination": "/symbols/german",
+      "permanent": true
+    },
+    {
+      "source": "/math",
+      "destination": "/symbols/math",
+      "permanent": true
+    }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "X-XSS-Protection", "value": "1; mode=block" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
-        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
+        }
       ]
     },
     {
       "source": "/style.css",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/script.js",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/(.*)\\.js",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/(.*)\\.css",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/(.*)\\.png",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/(.*)\\.woff2",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/sitemap.xml",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600" },
-        { "key": "Content-Type", "value": "application/xml" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        },
+        {
+          "key": "Content-Type",
+          "value": "application/xml"
+        }
       ]
     },
     {
       "source": "/robots.txt",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=86400" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
       ]
     }
   ]
