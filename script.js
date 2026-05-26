@@ -143,8 +143,9 @@ function copyToClipboard(text, event) {
 function renderSidebar() {
   const sidebar = document.getElementById('sidebar');
   if (!sidebar) return;
-  const isSubdir = window.location.pathname.includes('/pages/') || window.location.pathname.includes('/symbols/');
-  const root = isSubdir ? '../' : '';
+  const pathParts = window.location.pathname.split('/').filter(Boolean);
+  const depth = Math.max(0, pathParts.length - 1);
+  const root = '../'.repeat(depth);
 
   const categories = [
     { n: 'Aesthetic', f: 'aesthetic', i: '✧' },

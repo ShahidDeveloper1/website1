@@ -6,6 +6,61 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/names/symbols/:path*",
+      "destination": "/symbols/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/letters/symbols/:path*",
+      "destination": "/symbols/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/names/cursive-text",
+      "destination": "/cursive-text",
+      "permanent": true
+    },
+    {
+      "source": "/names/small-text",
+      "destination": "/small-text",
+      "permanent": true
+    },
+    {
+      "source": "/names/emoticons",
+      "destination": "/emoticons",
+      "permanent": true
+    },
+    {
+      "source": "/names/emoticons.html",
+      "destination": "/emoticons",
+      "permanent": true
+    },
+    {
+      "source": "/letters/font-generator",
+      "destination": "/font-generator",
+      "permanent": true
+    },
+    {
+      "source": "/letters/all-symbols",
+      "destination": "/all-symbols",
+      "permanent": true
+    },
+    {
+      "source": "/letters/free-fire-name",
+      "destination": "/free-fire-name",
+      "permanent": true
+    },
+    {
+      "source": "/letters/instagram-symbols",
+      "destination": "/instagram-symbols",
+      "permanent": true
+    },
+    {
+      "source": "/letters/bullet-point",
+      "destination": "/bullet-point",
+      "permanent": true
+    },
+    {
       "source": "/emoji-faces",
       "destination": "/symbols/emoji-faces",
       "permanent": true
