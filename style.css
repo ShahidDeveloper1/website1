@@ -165,6 +165,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: flex; align-items: center; gap: 0.75rem; font-size: 1.6rem; font-weight: 800; font-family: 'Outfit', sans-serif;
   color: #0f172a;
   letter-spacing: -0.02em;
+  flex-shrink: 0;
 }
 .logo-img {
   display: block;
@@ -213,7 +214,19 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   background: #1e293b;
 }
 .menu-toggle {
-  display: none; font-size: 1.5rem; color: #0f172a; padding: 0.5rem; cursor: pointer; background: transparent; border: 0; border-radius: 8px; transition: background-color 0.2s;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  color: #0f172a;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  transition: background-color 0.2s;
 }
 .menu-toggle:hover {
   background-color: #f1f5f9;
@@ -563,7 +576,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .main-content { margin-left: 0 !important; max-width: 100% !important; padding: 1.25rem 1rem !important; }
   .footer { margin-left: 0 !important; }
   .footer-saas { margin-left: 0 !important; }
-  .menu-toggle { display: block !important; }
+  .menu-toggle { display: flex !important; }
   .header-nav { display: none !important; }
 }
 @media (max-width: 1366px) {
