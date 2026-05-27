@@ -217,19 +217,24 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: none;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   flex-shrink: 0;
   font-size: 1.5rem;
-  color: #0f172a;
+  color: #0d9488;
   cursor: pointer;
-  background: transparent;
-  border: 0;
-  border-radius: 8px;
-  transition: background-color 0.2s;
+  background: rgba(13, 148, 136, 0.06);
+  border: 1px solid rgba(13, 148, 136, 0.15);
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .menu-toggle:hover {
-  background-color: #f1f5f9;
+  background-color: rgba(13, 148, 136, 0.12);
+  border-color: rgba(13, 148, 136, 0.3);
+  transform: scale(1.05);
+}
+.menu-toggle:active {
+  transform: scale(0.95);
 }
 .sidebar-overlay {
   display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); z-index: 850;
@@ -576,7 +581,15 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .main-content { margin-left: 0 !important; max-width: 100% !important; padding: 1.25rem 1rem !important; }
   .footer { margin-left: 0 !important; }
   .footer-saas { margin-left: 0 !important; }
-  .menu-toggle { display: flex !important; }
+  .header-inner { position: relative; }
+  .menu-toggle {
+    display: flex !important;
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1002;
+  }
   .header-nav { display: none !important; }
 }
 @media (max-width: 1366px) {
@@ -623,6 +636,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .content-article { padding: 1.25rem !important; }
   .hero-title { font-size: 1.8rem !important; }
   .hero { padding: 2.5rem 0.625rem !important; }
+  .menu-toggle {
+    right: 1rem !important;
+  }
 }
 @media (max-width: 480px) {
   .header { padding: 0 0.75rem !important; }
@@ -630,6 +646,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .logo-img { width: 24px !important; height: 24px !important; }
   .hero-title { font-size: 1.5rem !important; }
   .category-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .menu-toggle {
+    right: 0.75rem !important;
+  }
 }
 
 /* ===== HERO QUICK LINKS ===== */
@@ -1332,9 +1351,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .stat-number { font-size: 1.8rem; }
 }
 
-.menu-toggle:hover {
-  background-color: #f1f5f9;
-}
+/* Hover styled above */
 
 /* ===== ZALGO TEXT TOOL ===== */
 .zalgo-controls {
