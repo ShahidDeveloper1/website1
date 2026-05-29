@@ -982,13 +982,21 @@ const LanguageManager = {
 
 // ===== INIT ALL =====
 document.addEventListener('DOMContentLoaded', () => {
-  ClipboardManager.init();
-  initSidebar();
-  initCopyable();
-  initSearch();
-  initFontGenerator();
-  initRotatingLogo();
-  initScrollReveal();
-  initFaqAccordion();
-  LanguageManager.init();
+  const safeInit = (name, fn) => {
+    try {
+      fn();
+    } catch (e) {
+      console.error(`[Init Error] Failed to initialize ${name}:`, e);
+    }
+  };
+
+  safeInit('ClipboardManager', () => ClipboardManager.init());
+  safeInit('LanguageManager', () => LanguageManager.init());
+  safeInit('initSidebar', () => initSidebar());
+  safeInit('initCopyable', () => initCopyable());
+  safeInit('initSearch', () => initSearch());
+  safeInit('initFontGenerator', () => initFontGenerator());
+  safeInit('initRotatingLogo', () => initRotatingLogo());
+  safeInit('initScrollReveal', () => initScrollReveal());
+  safeInit('initFaqAccordion', () => initFaqAccordion());
 });
