@@ -11,9 +11,12 @@ const CORE_PAGES = [
 ];
 
 function generateSchemaAndTags(title, description, urlPath, isSymbolPage) {
-    let hreflangTags = `
-  <link rel="alternate" hreflang="x-default" href="${DOMAIN}/${urlPath}">
-  <link rel="alternate" hreflang="en" href="${DOMAIN}/${urlPath}">`;
+    const langs = ['en', 'hi', 'es', 'ru', 'fr', 'de', 'it', 'pt', 'bn', 'ja', 'ko', 'ms', 'pl', 'id', 'ar', 'bg', 'tr', 'sv'];
+    let hreflangTags = `\n  <link rel="alternate" hreflang="x-default" href="${DOMAIN}/${urlPath}">`;
+    langs.forEach(lang => {
+        const langUrl = lang === 'en' ? `${DOMAIN}/${urlPath}` : `${DOMAIN}/${lang}/${urlPath}`;
+        hreflangTags += `\n  <link rel="alternate" hreflang="${lang}" href="${langUrl}">`;
+    });
 
     const fullUrl = `${DOMAIN}/${urlPath}`;
     let schemas = [];

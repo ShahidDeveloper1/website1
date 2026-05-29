@@ -782,6 +782,154 @@ function initFaqAccordion() {
   });
 }
 
+// ===== SITEPART TRANSLATION ENGINE =====
+const LanguageManager = {
+  langCodes: new Set(['hi', 'es', 'ru', 'fr', 'de', 'it', 'pt', 'bn', 'ja', 'ko', 'ms', 'pl', 'id', 'ar', 'bg', 'tr', 'sv']),
+  currentLang: 'en',
+
+  init() {
+    const pathParts = window.location.pathname.split('/').filter(Boolean);
+    if (pathParts.length > 0 && this.langCodes.has(pathParts[0])) {
+      this.currentLang = pathParts[0];
+    }
+    
+    this.renderSwitcher();
+
+    if (this.currentLang !== 'en') {
+      this.loadTranslations();
+    }
+  },
+
+  loadTranslations() {
+    // Determine depth to reach root directory translations path
+    const pathParts = window.location.pathname.split('/').filter(Boolean);
+    const depth = pathParts.length - 1;
+    const rootPrefix = depth > 0 ? '../'.repeat(depth) : './';
+    
+    fetch(`${rootPrefix}translations/${this.currentLang}.json`)
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to load translations');
+        return res.json();
+      })
+      .then(data => this.apply(data))
+      .catch(err => console.error('Translation error:', err));
+  },
+
+  apply(data) {
+    if (!data) return;
+
+    // 1. Logo Text
+    const logos = document.querySelectorAll('.logo-text');
+    logos.forEach(el => { if (data.logo_text) el.textContent = data.logo_text; });
+
+    // 2. Navigation Header Links
+    const navLinks = document.querySelectorAll('.header-nav a');
+    if (navLinks.length >= 5) {
+      if (data.nav_home) navLinks[0].childNodes[navLinks[0].childNodes.length - 1].textContent = ' ' + data.nav_home;
+      if (data.nav_all_symbols) navLinks[1].childNodes[navLinks[1].childNodes.length - 1].textContent = ' ' + data.nav_all_symbols;
+      if (data.nav_preppy_fonts) navLinks[2].childNodes[navLinks[2].childNodes.length - 1].textContent = ' ' + data.nav_preppy_fonts;
+      if (data.nav_cute_fonts) navLinks[3].childNodes[navLinks[3].childNodes.length - 1].textContent = ' ' + data.nav_cute_fonts;
+      if (data.nav_aesthetic_fonts) navLinks[4].childNodes[navLinks[4].childNodes.length - 1].textContent = ' ' + data.nav_aesthetic_fonts;
+      if (navLinks[5] && data.nav_lenny_faces) navLinks[5].textContent = data.nav_lenny_faces;
+    }
+
+    // 3. Sidebar Navigation Links
+    const sidebarLinks = document.querySelectorAll('.sidebar-links a');
+    sidebarLinks.forEach(link => {
+      const text = link.textContent.trim();
+      if (text.includes('Home') && data.nav_home) link.childNodes[link.childNodes.length - 1].textContent = ' ' + data.nav_home;
+      else if (text.includes('All Symbols') && data.nav_all_symbols) link.childNodes[link.childNodes.length - 1].textContent = ' ' + data.nav_all_symbols;
+      else if (text.includes('Cute Fonts') && data.nav_cute_fonts) link.childNodes[link.childNodes.length - 1].textContent = ' ' + data.nav_cute_fonts;
+      else if (text.includes('Aesthetic Fonts') && data.nav_aesthetic_fonts) link.childNodes[link.childNodes.length - 1].textContent = ' ' + data.nav_aesthetic_fonts;
+      else if (text.includes('Preppy Font Generator') && data.nav_preppy_fonts) link.childNodes[link.childNodes.length - 1].textContent = ' ' + data.nav_preppy_fonts;
+      else if (text.includes('Fancy Text Generator') && data.nav_fancy_text) link.childNodes[link.childNodes.length - 1].textContent = ' ' + data.nav_fancy_text;
+      else if (text.includes('Lenny Faces') && data.nav_lenny_faces) link.childNodes[link.childNodes.length - 1].textContent = ' ' + data.nav_lenny_faces;
+    });
+
+    // 4. Hero Content
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTitle && data.hero_title) heroTitle.textContent = data.hero_title;
+
+    const heroSubtitle = document.querySelector('.hero-subtitle');
+    if (heroSubtitle && data.hero_subtitle) heroSubtitle.textContent = data.hero_subtitle;
+
+    // 5. Search Placeholder
+    const searchBox = document.getElementById('searchBox');
+    if (searchBox && data.search_placeholder) searchBox.placeholder = data.search_placeholder;
+
+    // 6. Primary Page Headers (H1)
+    const pageHeaders = document.querySelectorAll('.page-header h1, section.hero h1');
+    pageHeaders.forEach(h1 => {
+      let text = h1.textContent;
+      if (text.includes('Symbols Copy and Paste') && data.logo_text) {
+        h1.textContent = text.replace('Symbols Copy and Paste', data.logo_text === '特殊文字' ? '記号コピペ' : data.logo_text);
+      } else if (text.includes('Generator') && data.nav_fancy_text) {
+        h1.textContent = text.replace('Generator', data.nav_fancy_text.split(' ').slice(1).join(' ') || 'Generator');
+      }
+    });
+
+    // 7. Section Titles
+    const sectionTitles = document.querySelectorAll('.section-title');
+    sectionTitles.forEach(sec => {
+      const text = sec.textContent.trim();
+      if (text.includes('Popular Symbol Categories') && data.section_popular_categories) {
+        sec.childNodes[sec.childNodes.length - 1].textContent = ' ' + data.section_popular_categories;
+      } else if (text.includes('Browse More Symbols') && data.section_browse_more) {
+        sec.childNodes[sec.childNodes.length - 1].textContent = ' ' + data.section_browse_more;
+      }
+    });
+
+    // 8. Footer Description & Copyright
+    const footerDesc = document.querySelector('.footer-saas-desc');
+    if (footerDesc && data.footer_desc) footerDesc.textContent = data.footer_desc;
+
+    const footerCopy = document.querySelector('.footer-saas-copy');
+    if (footerCopy && data.footer_copy) footerCopy.textContent = data.footer_copy;
+  },
+
+  renderSwitcher() {
+    const footerInner = document.querySelector('.footer-saas-inner');
+    if (!footerInner) return;
+
+    const currentPath = window.location.pathname;
+    const pathParts = currentPath.split('/').filter(Boolean);
+    let rootPath = currentPath;
+
+    if (pathParts.length > 0 && this.langCodes.has(pathParts[0])) {
+      rootPath = '/' + pathParts.slice(1).join('/');
+    }
+
+    const langs = [
+      { code: 'en', label: 'EN' }, { code: 'hi', label: 'HI' }, { code: 'es', label: 'ES' },
+      { code: 'ru', label: 'RU' }, { code: 'fr', label: 'FR' }, { code: 'de', label: 'DE' },
+      { code: 'it', label: 'IT' }, { code: 'pt', label: 'PT' }, { code: 'bn', label: 'BN' },
+      { code: 'ja', label: 'JA' }, { code: 'ko', label: 'KO' }, { code: 'ms', label: 'MS' },
+      { code: 'pl', label: 'PL' }, { code: 'id', label: 'ID' }, { code: 'ar', label: 'AR' },
+      { code: 'bg', label: 'BG' }, { code: 'tr', label: 'TR' }, { code: 'sv', label: 'SV' }
+    ];
+
+    const switcherContainer = document.createElement('div');
+    switcherContainer.className = 'lang-switcher-container';
+    switcherContainer.innerHTML = `
+      <div class="lang-switcher-title">LANGUAGE</div>
+      <div class="lang-switcher-grid">
+        ${langs.map(l => {
+          const langPath = l.code === 'en' ? rootPath : `/${l.code}${rootPath === '/' ? '' : rootPath}`;
+          const activeClass = l.code === this.currentLang ? 'active' : '';
+          return `<a href="${langPath}" class="lang-btn ${activeClass}">${l.label}</a>`;
+        }).join('')}
+      </div>
+    `;
+
+    const footerBottom = footerInner.querySelector('.footer-saas-bottom');
+    if (footerBottom) {
+      footerInner.insertBefore(switcherContainer, footerBottom);
+    } else {
+      footerInner.appendChild(switcherContainer);
+    }
+  }
+};
+
 // ===== INIT ALL =====
 document.addEventListener('DOMContentLoaded', () => {
   ClipboardManager.init();
@@ -792,4 +940,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initRotatingLogo();
   initScrollReveal();
   initFaqAccordion();
+  LanguageManager.init();
 });
