@@ -1019,7 +1019,6 @@ const LanguageManager = {
     dropdown.className = 'lang-dropdown';
     dropdown.innerHTML = `
       <button class="lang-dropdown-btn" aria-haspopup="true" aria-expanded="false">
-        <img src="https://flagcdn.com/${currentLangObj.flag}.svg" alt="${currentLangObj.label}" class="lang-flag-current">
         <span class="lang-dropdown-label">${currentLangObj.short}</span>
         <span class="lang-dropdown-arrow">
           <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1033,7 +1032,6 @@ const LanguageManager = {
           const activeClass = l.code === this.currentLang ? 'active' : '';
           return `
             <a href="${langPath}" class="lang-dropdown-item ${activeClass}">
-              <img src="https://flagcdn.com/${l.flag}.svg" alt="${l.label}" class="lang-flag-item">
               <span class="lang-label">${l.label}</span>
               <span class="lang-short">${l.short}</span>
             </a>

@@ -1731,13 +1731,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   border-color: #3b82f6;
   background: rgba(59, 130, 246, 0.05);
 }
-.lang-flag-current {
-  width: 20px;
-  height: 14px;
-  border-radius: 3px;
-  object-fit: cover;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-}
 .lang-dropdown-arrow {
   display: flex;
   align-items: center;
@@ -1818,14 +1811,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   background: rgba(59, 130, 246, 0.08) !important;
   color: #3b82f6 !important;
 }
-.lang-flag-item {
-  width: 20px;
-  height: 14px;
-  border-radius: 3px;
-  object-fit: cover;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  flex-shrink: 0;
-}
+
 .lang-label {
   flex-grow: 1;
 }
