@@ -794,6 +794,7 @@ const LanguageManager = {
     }
     
     this.renderSwitcher();
+    this.renderHeaderDropdown();
 
     if (this.currentLang !== 'en') {
       this.loadTranslations();
@@ -977,6 +978,83 @@ const LanguageManager = {
     } else {
       footerInner.appendChild(switcherContainer);
     }
+  },
+
+  renderHeaderDropdown() {
+    const headerNav = document.querySelector('.header-nav');
+    if (!headerNav) return;
+
+    const currentPath = window.location.pathname;
+    const pathParts = currentPath.split('/').filter(Boolean);
+    let rootPath = currentPath;
+
+    if (pathParts.length > 0 && this.langCodes.has(pathParts[0])) {
+      rootPath = '/' + pathParts.slice(1).join('/');
+    }
+
+    const langs = [
+      { code: 'en', label: 'English', short: 'EN' },
+      { code: 'hi', label: 'हिन्दी', short: 'HI' },
+      { code: 'es', label: 'Español', short: 'ES' },
+      { code: 'ru', label: 'Русский', short: 'RU' },
+      { code: 'fr', label: 'Français', short: 'FR' },
+      { code: 'de', label: 'Deutsch', short: 'DE' },
+      { code: 'it', label: 'Italiano', short: 'IT' },
+      { code: 'pt', label: 'Português', short: 'PT' },
+      { code: 'bn', label: 'বাংলা', short: 'BN' },
+      { code: 'ja', label: '日本語', short: 'JA' },
+      { code: 'ko', label: '한국어', short: 'KO' },
+      { code: 'ms', label: 'Melayu', short: 'MS' },
+      { code: 'pl', label: 'Polski', short: 'PL' },
+      { code: 'id', label: 'Indonesia', short: 'ID' },
+      { code: 'ar', label: 'العربية', short: 'AR' },
+      { code: 'bg', label: 'Български', short: 'BG' },
+      { code: 'tr', label: 'Türkçe', short: 'TR' },
+      { code: 'sv', label: 'Svenska', short: 'SV' }
+    ];
+
+    const currentLangObj = langs.find(l => l.code === this.currentLang) || langs[0];
+
+    const dropdown = document.createElement('div');
+    dropdown.className = 'lang-dropdown';
+    dropdown.innerHTML = `
+      <button class="lang-dropdown-btn" aria-haspopup="true" aria-expanded="false">
+        <span class="lang-dropdown-icon">🌐</span>
+        <span class="lang-dropdown-label">${currentLangObj.short}</span>
+        <span class="lang-dropdown-arrow">▼</span>
+      </button>
+      <div class="lang-dropdown-menu">
+        ${langs.map(l => {
+          const langPath = l.code === 'en' ? rootPath : `/${l.code}${rootPath === '/' ? '' : rootPath}`;
+          const activeClass = l.code === this.currentLang ? 'active' : '';
+          return `<a href="${langPath}" class="lang-dropdown-item ${activeClass}">${l.label} (${l.short})</a>`;
+        }).join('')}
+      </div>
+    `;
+
+    // Append to headerNav
+    headerNav.appendChild(dropdown);
+
+    // Toggle behavior
+    const btn = dropdown.querySelector('.lang-dropdown-btn');
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dropdown.classList.contains('open');
+      document.querySelectorAll('.lang-dropdown.open').forEach(d => d.classList.remove('open'));
+      if (!isOpen) {
+        dropdown.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      } else {
+        dropdown.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Close on click outside
+    document.addEventListener('click', () => {
+      dropdown.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    });
   }
 };
 
