@@ -993,24 +993,24 @@ const LanguageManager = {
     }
 
     const langs = [
-      { code: 'en', label: 'English', short: 'EN' },
-      { code: 'hi', label: 'हिन्दी', short: 'HI' },
-      { code: 'es', label: 'Español', short: 'ES' },
-      { code: 'ru', label: 'Русский', short: 'RU' },
-      { code: 'fr', label: 'Français', short: 'FR' },
-      { code: 'de', label: 'Deutsch', short: 'DE' },
-      { code: 'it', label: 'Italiano', short: 'IT' },
-      { code: 'pt', label: 'Português', short: 'PT' },
-      { code: 'bn', label: 'বাংলা', short: 'BN' },
-      { code: 'ja', label: '日本語', short: 'JA' },
-      { code: 'ko', label: '한국어', short: 'KO' },
-      { code: 'ms', label: 'Melayu', short: 'MS' },
-      { code: 'pl', label: 'Polski', short: 'PL' },
-      { code: 'id', label: 'Indonesia', short: 'ID' },
-      { code: 'ar', label: 'العربية', short: 'AR' },
-      { code: 'bg', label: 'Български', short: 'BG' },
-      { code: 'tr', label: 'Türkçe', short: 'TR' },
-      { code: 'sv', label: 'Svenska', short: 'SV' }
+      { code: 'en', label: 'English', short: 'EN', flag: 'us' },
+      { code: 'hi', label: 'हिन्दी', short: 'HI', flag: 'in' },
+      { code: 'es', label: 'Español', short: 'ES', flag: 'es' },
+      { code: 'ru', label: 'Русский', short: 'RU', flag: 'ru' },
+      { code: 'fr', label: 'Français', short: 'FR', flag: 'fr' },
+      { code: 'de', label: 'Deutsch', short: 'DE', flag: 'de' },
+      { code: 'it', label: 'Italiano', short: 'IT', flag: 'it' },
+      { code: 'pt', label: 'Português', short: 'PT', flag: 'pt' },
+      { code: 'bn', label: 'বাংলা', short: 'BN', flag: 'bd' },
+      { code: 'ja', label: '日本語', short: 'JA', flag: 'jp' },
+      { code: 'ko', label: '한국어', short: 'KO', flag: 'kr' },
+      { code: 'ms', label: 'Melayu', short: 'MS', flag: 'my' },
+      { code: 'pl', label: 'Polski', short: 'PL', flag: 'pl' },
+      { code: 'id', label: 'Indonesia', short: 'ID', flag: 'id' },
+      { code: 'ar', label: 'العربية', short: 'AR', flag: 'sa' },
+      { code: 'bg', label: 'Български', short: 'BG', flag: 'bg' },
+      { code: 'tr', label: 'Türkçe', short: 'TR', flag: 'tr' },
+      { code: 'sv', label: 'Svenska', short: 'SV', flag: 'se' }
     ];
 
     const currentLangObj = langs.find(l => l.code === this.currentLang) || langs[0];
@@ -1019,15 +1019,25 @@ const LanguageManager = {
     dropdown.className = 'lang-dropdown';
     dropdown.innerHTML = `
       <button class="lang-dropdown-btn" aria-haspopup="true" aria-expanded="false">
-        <span class="lang-dropdown-icon">🌐</span>
+        <img src="https://flagcdn.com/${currentLangObj.flag}.svg" alt="${currentLangObj.label}" class="lang-flag-current">
         <span class="lang-dropdown-label">${currentLangObj.short}</span>
-        <span class="lang-dropdown-arrow">▼</span>
+        <span class="lang-dropdown-arrow">
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
       </button>
       <div class="lang-dropdown-menu">
         ${langs.map(l => {
           const langPath = l.code === 'en' ? rootPath : `/${l.code}${rootPath === '/' ? '' : rootPath}`;
           const activeClass = l.code === this.currentLang ? 'active' : '';
-          return `<a href="${langPath}" class="lang-dropdown-item ${activeClass}">${l.label} (${l.short})</a>`;
+          return `
+            <a href="${langPath}" class="lang-dropdown-item ${activeClass}">
+              <img src="https://flagcdn.com/${l.flag}.svg" alt="${l.label}" class="lang-flag-item">
+              <span class="lang-label">${l.label}</span>
+              <span class="lang-short">${l.short}</span>
+            </a>
+          `;
         }).join('')}
       </div>
     `;
