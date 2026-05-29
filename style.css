@@ -584,10 +584,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .header-inner { position: relative; }
   .menu-toggle {
     display: flex !important;
-    position: absolute;
-    right: 1.5rem;
-    top: 50%;
-    transform: translateY(-50%);
+    position: relative;
     z-index: 1002;
   }
   .header-nav { display: none !important; }
@@ -636,9 +633,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .content-article { padding: 1.25rem !important; }
   .hero-title { font-size: 1.8rem !important; }
   .hero { padding: 2.5rem 0.625rem !important; }
-  .menu-toggle {
-    right: 1rem !important;
-  }
+  /* menu-toggle layout handled by flexbox */
 }
 @media (max-width: 480px) {
   .header { padding: 0 0.75rem !important; }
@@ -646,9 +641,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .logo-img { width: 24px !important; height: 24px !important; }
   .hero-title { font-size: 1.5rem !important; }
   .category-grid { grid-template-columns: repeat(2, 1fr) !important; }
-  .menu-toggle {
-    right: 0.75rem !important;
-  }
+  /* menu-toggle layout handled by flexbox */
 }
 
 /* ===== HERO QUICK LINKS ===== */
@@ -944,6 +937,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   font-family: 'Inter', sans-serif;
   border-top: 1px solid rgba(13, 148, 136, 0.15);
   margin-top: 4rem;
+  margin-left: 280px;
 }
 
 .footer-saas-inner {

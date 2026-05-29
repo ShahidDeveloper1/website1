@@ -8,40 +8,40 @@ function processHTMLFile(filePath) {
   let fileContent = fs.readFileSync(filePath, 'utf8');
   let originalContent = fileContent;
 
-  // 1. Update/Add Favicon with cache-bust ?v=6.2
+  // 1. Update/Add Favicon with cache-bust ?v=6.3
   // If <link rel="icon" type="image/png" href="..."> exists, replace it
   const relIconRegex = /<link rel="icon"[^>]*href="[^"]*"[^>]*>/g;
   const relIconMatch = fileContent.match(relIconRegex);
   if (relIconMatch) {
-    fileContent = fileContent.replace(relIconRegex, '<link rel="icon" type="image/png" href="/favicon.png?v=6.2">');
+    fileContent = fileContent.replace(relIconRegex, '<link rel="icon" type="image/png" href="/favicon.png?v=6.3">');
   } else {
     // If not found, inject in head
-    fileContent = fileContent.replace(/<\/head>/, '  <link rel="icon" type="image/png" href="/favicon.png?v=6.2">\n</head>');
+    fileContent = fileContent.replace(/<\/head>/, '  <link rel="icon" type="image/png" href="/favicon.png?v=6.3">\n</head>');
   }
 
   // 2. Ensure apple-touch-icon is present for Apple devices (iOS/Safari)
   if (!fileContent.includes('rel="apple-touch-icon"')) {
     // Inject right after favicon icon link
     fileContent = fileContent.replace(
-      'href="/favicon.png?v=6.2">',
-      'href="/favicon.png?v=6.2">\n  <link rel="apple-touch-icon" href="/favicon.png?v=6.2">'
+      'href="/favicon.png?v=6.3">',
+      'href="/favicon.png?v=6.3">\n  <link rel="apple-touch-icon" href="/favicon.png?v=6.3">'
     );
   } else {
     const appleIconRegex = /<link rel="apple-touch-icon"[^>]*href="[^"]*"[^>]*>/g;
-    fileContent = fileContent.replace(appleIconRegex, '<link rel="apple-touch-icon" href="/favicon.png?v=6.2">');
+    fileContent = fileContent.replace(appleIconRegex, '<link rel="apple-touch-icon" href="/favicon.png?v=6.3">');
   }
 
-  // 3. Update style.css cache-bust version to v=6.2
+  // 3. Update style.css cache-bust version to v=6.3
   const cssRegex = /style\.css\?v=[0-9.]+/g;
-  fileContent = fileContent.replace(cssRegex, 'style.css?v=6.2');
+  fileContent = fileContent.replace(cssRegex, 'style.css?v=6.3');
 
-  // 4. Update logo images in header and footer to use /favicon.png?v=6.2
+  // 4. Update logo images in header and footer to use /favicon.png?v=6.3
   // Match both relative and absolute logo images
   const logoImgRegex = /<img[^>]*class="logo-img"[^>]*>/g;
   fileContent = fileContent.replace(logoImgRegex, (match) => {
     // Reconstruct the logo image to be perfectly absolute, cache-busted, and robust
     // Ensure height/width 32 are set for desktop & responsive layout
-    return '<img src="/favicon.png?v=6.2" alt="Fancy Text Logo" class="logo-img" width="32" height="32" style="border-radius:8px;">';
+    return '<img src="/favicon.png?v=6.3" alt="Fancy Text Logo" class="logo-img" width="32" height="32" style="border-radius:8px;">';
   });
 
   // 5. Update any fallback logo img tags that might not have class="logo-img" but point to favicon.png
