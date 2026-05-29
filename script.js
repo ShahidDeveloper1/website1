@@ -797,7 +797,39 @@ const LanguageManager = {
 
     if (this.currentLang !== 'en') {
       this.loadTranslations();
+      this.initGoogleTranslate();
     }
+  },
+
+  initGoogleTranslate() {
+    // Set cookies to instruct Google Translate
+    document.cookie = `googtrans=/en/${this.currentLang}; path=/;`;
+    document.cookie = `googtrans=/en/${this.currentLang}; path=/; domain=${window.location.hostname};`;
+
+    window.googleTranslateElementInit = () => {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      });
+    };
+
+    // Append Google Translate API script
+    const script = document.createElement('script');
+    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    script.async = true;
+    document.body.appendChild(script);
+
+    // Hide Google Translate widgets, banners, tooltips, and bar to keep premium branding
+    const style = document.createElement('style');
+    style.innerHTML = `
+      .goog-te-banner-frame, .goog-te-balloon-frame, .goog-te-preview-frame, .goog-te-menu-frame { display: none !important; }
+      body { top: 0 !important; }
+      .goog-te-menu-value, .goog-te-gadget { display: none !important; }
+      #goog-gt-tt, #google_translate_element { display: none !important; visibility: hidden !important; }
+      .goog-text-highlight { background-color: transparent !important; box-shadow: none !important; }
+    `;
+    document.head.appendChild(style);
   },
 
   loadTranslations() {
@@ -825,25 +857,40 @@ const LanguageManager = {
     // 2. Navigation Header Links
     const navLinks = document.querySelectorAll('.header-nav a');
     if (navLinks.length >= 5) {
-      if (data.nav_home) navLinks[0].childNodes[navLinks[0].childNodes.length - 1].textContent = ' ' + data.nav_home;
-      if (data.nav_all_symbols) navLinks[1].childNodes[navLinks[1].childNodes.length - 1].textContent = ' ' + data.nav_all_symbols;
-      if (data.nav_preppy_fonts) navLinks[2].childNodes[navLinks[2].childNodes.length - 1].textContent = ' ' + data.nav_preppy_fonts;
-      if (data.nav_cute_fonts) navLinks[3].childNodes[navLinks[3].childNodes.length - 1].textContent = ' ' + data.nav_cute_fonts;
-      if (data.nav_aesthetic_fonts) navLinks[4].childNodes[navLinks[4].childNodes.length - 1].textContent = ' ' + data.nav_aesthetic_fonts;
-      if (navLinks[5] && data.nav_lenny_faces) navLinks[5].textContent = data.nav_lenny_faces;
+      if (data.nav_home && navLinks[0] && navLinks[0].childNodes.length > 0) {
+        navLinks[0].childNodes[navLinks[0].childNodes.length - 1].textContent = ' ' + data.nav_home;
+      }
+      if (data.nav_all_symbols && navLinks[1] && navLinks[1].childNodes.length > 0) {
+        navLinks[1].childNodes[navLinks[1].childNodes.length - 1].textContent = ' ' + data.nav_all_symbols;
+      }
+      if (data.nav_preppy_fonts && navLinks[2] && navLinks[2].childNodes.length > 0) {
+        navLinks[2].childNodes[navLinks[2].childNodes.length - 1].textContent = ' ' + data.nav_preppy_fonts;
+      }
+      if (data.nav_cute_fonts && navLinks[3] && navLinks[3].childNodes.length > 0) {
+        navLinks[3].childNodes[navLinks[3].childNodes.length - 1].textContent = ' ' + data.nav_cute_fonts;
+      }
+      if (data.nav_aesthetic_fonts && navLinks[4] && navLinks[4].childNodes.length > 0) {
+        navLinks[4].childNodes[navLinks[4].childNodes.length - 1].textContent = ' ' + data.nav_aesthetic_fonts;
+      }
+      if (navLinks[5] && data.nav_lenny_faces) {
+        navLinks[5].textContent = data.nav_lenny_faces;
+      }
     }
 
     // 3. Sidebar Navigation Links
     const sidebarLinks = document.querySelectorAll('.sidebar-links a');
     sidebarLinks.forEach(link => {
       const text = link.textContent.trim();
-      if (text.includes('Home') && data.nav_home) link.childNodes[link.childNodes.length - 1].textContent = ' ' + data.nav_home;
-      else if (text.includes('All Symbols') && data.nav_all_symbols) link.childNodes[link.childNodes.length - 1].textContent = ' ' + data.nav_all_symbols;
-      else if (text.includes('Cute Fonts') && data.nav_cute_fonts) link.childNodes[link.childNodes.length - 1].textContent = ' ' + data.nav_cute_fonts;
-      else if (text.includes('Aesthetic Fonts') && data.nav_aesthetic_fonts) link.childNodes[link.childNodes.length - 1].textContent = ' ' + data.nav_aesthetic_fonts;
-      else if (text.includes('Preppy Font Generator') && data.nav_preppy_fonts) link.childNodes[link.childNodes.length - 1].textContent = ' ' + data.nav_preppy_fonts;
-      else if (text.includes('Fancy Text Generator') && data.nav_fancy_text) link.childNodes[link.childNodes.length - 1].textContent = ' ' + data.nav_fancy_text;
-      else if (text.includes('Lenny Faces') && data.nav_lenny_faces) link.childNodes[link.childNodes.length - 1].textContent = ' ' + data.nav_lenny_faces;
+      if (link.childNodes.length > 0) {
+        const lastChild = link.childNodes[link.childNodes.length - 1];
+        if (text.includes('Home') && data.nav_home) lastChild.textContent = ' ' + data.nav_home;
+        else if (text.includes('All Symbols') && data.nav_all_symbols) lastChild.textContent = ' ' + data.nav_all_symbols;
+        else if (text.includes('Cute Fonts') && data.nav_cute_fonts) lastChild.textContent = ' ' + data.nav_cute_fonts;
+        else if (text.includes('Aesthetic Fonts') && data.nav_aesthetic_fonts) lastChild.textContent = ' ' + data.nav_aesthetic_fonts;
+        else if (text.includes('Preppy Font Generator') && data.nav_preppy_fonts) lastChild.textContent = ' ' + data.nav_preppy_fonts;
+        else if (text.includes('Fancy Text Generator') && data.nav_fancy_text) lastChild.textContent = ' ' + data.nav_fancy_text;
+        else if (text.includes('Lenny Faces') && data.nav_lenny_faces) lastChild.textContent = ' ' + data.nav_lenny_faces;
+      }
     });
 
     // 4. Hero Content
@@ -872,10 +919,13 @@ const LanguageManager = {
     const sectionTitles = document.querySelectorAll('.section-title');
     sectionTitles.forEach(sec => {
       const text = sec.textContent.trim();
-      if (text.includes('Popular Symbol Categories') && data.section_popular_categories) {
-        sec.childNodes[sec.childNodes.length - 1].textContent = ' ' + data.section_popular_categories;
-      } else if (text.includes('Browse More Symbols') && data.section_browse_more) {
-        sec.childNodes[sec.childNodes.length - 1].textContent = ' ' + data.section_browse_more;
+      if (sec.childNodes.length > 0) {
+        const lastChild = sec.childNodes[sec.childNodes.length - 1];
+        if (text.includes('Popular Symbol Categories') && data.section_popular_categories) {
+          lastChild.textContent = ' ' + data.section_popular_categories;
+        } else if (text.includes('Browse More Symbols') && data.section_browse_more) {
+          lastChild.textContent = ' ' + data.section_browse_more;
+        }
       }
     });
 
