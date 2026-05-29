@@ -6,12 +6,12 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/(hi|es|ru|fr|de|it|pt|bn|ja|ko|ms|pl|id|ar|bg|tr|sv)",
+      "source": "/:lang(hi|es|ru|fr|de|it|pt|bn|ja|ko|ms|pl|id|ar|bg|tr|sv)",
       "destination": "/index.html"
     },
     {
-      "source": "/(hi|es|ru|fr|de|it|pt|bn|ja|ko|ms|pl|id|ar|bg|tr|sv)/:path*",
-      "destination": "/:path*"
+      "source": "/:lang(hi|es|ru|fr|de|it|pt|bn|ja|ko|ms|pl|id|ar|bg|tr|sv)/:path+",
+      "destination": "/:path+"
     }
   ],
   "redirects": [
