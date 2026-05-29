@@ -981,8 +981,8 @@ const LanguageManager = {
   },
 
   renderHeaderDropdown() {
-    const headerNav = document.querySelector('.header-nav');
-    if (!headerNav) return;
+    const headerLangSlot = document.getElementById('headerLangDropdown');
+    if (!headerLangSlot) return;
 
     const currentPath = window.location.pathname;
     const pathParts = currentPath.split('/').filter(Boolean);
@@ -1040,8 +1040,8 @@ const LanguageManager = {
       </div>
     `;
 
-    // Append to headerNav
-    headerNav.appendChild(dropdown);
+    // Append to header lang slot (visible on all devices)
+    headerLangSlot.appendChild(dropdown);
 
     // Toggle behavior
     const btn = dropdown.querySelector('.lang-dropdown-btn');
@@ -1066,6 +1066,28 @@ const LanguageManager = {
   }
 };
 
+// ===== THEME MANAGER (Dark/Light Mode) =====
+const ThemeManager = {
+  init() {
+    // Check for saved preference or system preference
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.body.classList.add('dark-mode');
+    }
+
+    // Bind the toggle button
+    const toggleBtn = document.getElementById('themeToggle');
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => this.toggle());
+    }
+  },
+
+  toggle() {
+    const isDark = document.body.classList.toggle('dark-mode');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  }
+};
+
 // ===== INIT ALL =====
 document.addEventListener('DOMContentLoaded', () => {
   const safeInit = (name, fn) => {
@@ -1076,6 +1098,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  safeInit('ThemeManager', () => ThemeManager.init());
   safeInit('ClipboardManager', () => ClipboardManager.init());
   safeInit('LanguageManager', () => LanguageManager.init());
   safeInit('initSidebar', () => initSidebar());
