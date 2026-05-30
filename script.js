@@ -799,18 +799,51 @@ const LanguageManager = {
     if (this.currentLang !== 'en') {
       this.loadTranslations();
       this.initGoogleTranslate();
+    } else {
+      this.clearGoogleTranslateCookies();
+    }
+  },
+
+  clearGoogleTranslateCookies() {
+    const host = window.location.hostname;
+    const expires = 'expires=Thu, 01 Jan 1970 00:00:00 UTC';
+    
+    // Clear cookie on exact host
+    document.cookie = `googtrans=; ${expires}; path=/;`;
+    document.cookie = `googtrans=; ${expires}; path=/; domain=${host};`;
+    document.cookie = `googtrans=; ${expires}; path=/; domain=.${host};`;
+    
+    // Clear cookie on base domain if on a subdomain
+    if (host.includes('.')) {
+      const domainParts = host.split('.');
+      if (domainParts.length > 2) {
+        const baseDomain = domainParts.slice(-2).join('.');
+        document.cookie = `googtrans=; ${expires}; path=/; domain=.${baseDomain};`;
+      }
     }
   },
 
   initGoogleTranslate() {
     // Set cookies to instruct Google Translate
+    const host = window.location.hostname;
     document.cookie = `googtrans=/en/${this.currentLang}; path=/;`;
-    document.cookie = `googtrans=/en/${this.currentLang}; path=/; domain=${window.location.hostname};`;
+    
+    // Only set domain cookies on valid domains containing dots
+    if (host.includes('.')) {
+      document.cookie = `googtrans=/en/${this.currentLang}; path=/; domain=${host};`;
+      document.cookie = `googtrans=/en/${this.currentLang}; path=/; domain=.${host};`;
+      
+      const domainParts = host.split('.');
+      if (domainParts.length > 2) {
+        const baseDomain = domainParts.slice(-2).join('.');
+        document.cookie = `googtrans=/en/${this.currentLang}; path=/; domain=.${baseDomain};`;
+      }
+    }
 
-    // Create hidden container for Google Translate widget
+    // Create container for Google Translate widget
+    // DO NOT use display: none, as it prevents Google Translate from initializing!
     const gtEl = document.createElement('div');
     gtEl.id = 'google_translate_element';
-    gtEl.style.display = 'none';
     document.body.appendChild(gtEl);
 
     window.googleTranslateElementInit = () => {
@@ -828,12 +861,23 @@ const LanguageManager = {
     document.body.appendChild(script);
 
     // Hide Google Translate widgets, banners, tooltips, and bar to keep premium branding
+    // We position #google_translate_element off-screen instead of using display: none or visibility: hidden
     const style = document.createElement('style');
     style.innerHTML = `
       .goog-te-banner-frame, .goog-te-balloon-frame, .goog-te-preview-frame, .goog-te-menu-frame { display: none !important; }
       body { top: 0 !important; }
       .goog-te-menu-value, .goog-te-gadget { display: none !important; }
-      #goog-gt-tt, #google_translate_element { display: none !important; visibility: hidden !important; }
+      #goog-gt-tt { display: none !important; visibility: hidden !important; }
+      #google_translate_element {
+        position: absolute !important;
+        top: -9999px !important;
+        left: -9999px !important;
+        width: 1px !important;
+        height: 1px !important;
+        overflow: hidden !important;
+        display: block !important;
+        visibility: visible !important;
+      }
       .goog-text-highlight { background-color: transparent !important; box-shadow: none !important; }
     `;
     document.head.appendChild(style);
