@@ -223,12 +223,14 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .header-lang-slot {
   display: flex;
   align-items: center;
+  order: 2;
 }
 
 /* ===== THEME TOGGLE BUTTON ===== */
 .theme-toggle-btn {
   display: flex;
   align-items: center;
+  order: 1;
   justify-content: center;
   width: 40px;
   height: 40px;
@@ -268,6 +270,7 @@ body.dark-mode .theme-toggle-btn:hover {
   display: none;
   align-items: center;
   justify-content: center;
+  order: 3;
   width: 44px;
   height: 44px;
   flex-shrink: 0;
