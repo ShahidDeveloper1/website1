@@ -20,6 +20,11 @@
       "statusCode": 301
     },
     {
+      "source": "/pages/:path*",
+      "destination": "/:path*",
+      "statusCode": 301
+    },
+    {
       "source": "/names/symbols/:path*",
       "destination": "/symbols/:path*",
       "permanent": true
