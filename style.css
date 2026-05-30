@@ -2015,3 +2015,39 @@ body.dark-mode ::-webkit-scrollbar-track { background: #0f172a; }
 body.dark-mode ::-webkit-scrollbar-thumb { background: #334155; }
 body.dark-mode ::-webkit-scrollbar-thumb:hover { background: #475569; }
 body.dark-mode { scrollbar-color: #334155 #0f172a; }
+
+/* Back to Top Button */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #a855f7;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 999;
+  box-shadow: 0 4px 14px rgba(168, 85, 247, 0.4);
+}
+
+.back-to-top-btn:hover {
+  background: #9333ea;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.6);
+}
+
+.back-to-top-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+

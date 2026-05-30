@@ -1088,6 +1088,36 @@ const ThemeManager = {
   }
 };
 
+// ===== BACK TO TOP BUTTON =====
+function initBackToTop() {
+  const btn = document.createElement('button');
+  btn.id = 'backToTop';
+  btn.className = 'back-to-top-btn';
+  btn.setAttribute('aria-label', 'Back to Top');
+  btn.setAttribute('title', 'Back to Top');
+  btn.innerHTML = `
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  `;
+  document.body.appendChild(btn);
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  });
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+}
+
 // ===== INIT ALL =====
 document.addEventListener('DOMContentLoaded', () => {
   const safeInit = (name, fn) => {
@@ -1108,4 +1138,5 @@ document.addEventListener('DOMContentLoaded', () => {
   safeInit('initRotatingLogo', () => initRotatingLogo());
   safeInit('initScrollReveal', () => initScrollReveal());
   safeInit('initFaqAccordion', () => initFaqAccordion());
+  safeInit('initBackToTop', () => initBackToTop());
 });

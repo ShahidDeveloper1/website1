@@ -305,10 +305,10 @@
       <p class="hero-subtitle">
         1000+ cool fonts, aesthetic symbols, fancy letters & Lenny faces. Type or click to copy instantly!
       </p>
-      <div class="search-container">
+      <form class="search-container" action="#" method="get" onsubmit="event.preventDefault();">
         <span class="search-icon">🔍</span>
-        <input type="text" class="search-box" id="searchBox" placeholder="Search symbols, categories...">
-      </div>
+        <input type="search" class="search-box" id="searchBox" name="q" placeholder="Search symbols, categories..." aria-label="Search">
+      </form>
       <div class="hero-tags">
         <span class="tags-label">Quick Links:</span>
         <a href="/symbols/zodiac" class="hero-tag"><span>♈</span> Zodiac</a>
