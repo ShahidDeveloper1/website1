@@ -286,8 +286,8 @@ function renderSidebar() {
   <div class="sidebar-section">
     <div class="sidebar-title">SITE INFO</div>
     <div class="sidebar-links">
-      <a href="${root}pages/privacy"><span class="link-icon">🛡️</span> Privacy Policy</a>
-      <a href="${root}pages/terms"><span class="link-icon">📄</span> Terms of Service</a>
+      <a href="${root}privacy"><span class="link-icon">🛡️</span> Privacy Policy</a>
+      <a href="${root}terms"><span class="link-icon">📄</span> Terms of Service</a>
     </div>
   </div>
   `;
@@ -887,6 +887,7 @@ const LanguageManager = {
       else if (text === 'TEXT TOOLS' && data.title_text_tools) el.textContent = data.title_text_tools;
       else if (text === 'TRENDING NOW' && data.title_trending_now) el.textContent = data.title_trending_now;
       else if (text === 'ALL CATEGORIES' && data.title_all_categories) el.textContent = data.title_all_categories;
+      else if (text === 'SITE INFO' && data.title_site_info) el.textContent = data.title_site_info;
     });
 
     const sidebarLinks = document.querySelectorAll('.sidebar-links a');
@@ -924,6 +925,13 @@ const LanguageManager = {
         else if (text.includes('Vaporwave Text') && data.link_vaporwave_text) lastChild.textContent = ' ' + data.link_vaporwave_text;
         else if (text.includes('Bubble Text') && data.link_bubble_text) lastChild.textContent = ' ' + data.link_bubble_text;
         else if (text.includes('Gothic Text') && data.link_gothic_text) lastChild.textContent = ' ' + data.link_gothic_text;
+        else if (text.includes('Privacy Policy') && data.link_privacy_policy) lastChild.textContent = ' ' + data.link_privacy_policy;
+        else if (text.includes('Terms of Service') && data.link_terms_of_service) lastChild.textContent = ' ' + data.link_terms_of_service;
+        else {
+          // Translate sidebar category names using cat_* keys
+          const catKey = 'cat_' + text;
+          if (data[catKey]) lastChild.textContent = ' ' + data[catKey];
+        }
       }
     });
 
@@ -1009,6 +1017,25 @@ const LanguageManager = {
       else if (text === 'Privacy Policy' && data.link_privacy_policy) link.textContent = data.link_privacy_policy;
       else if (text === 'Terms of Service' && data.link_terms_of_service) link.textContent = data.link_terms_of_service;
     });
+
+    // 10. Category Cards on homepage
+    const catNames = document.querySelectorAll('.category-name');
+    catNames.forEach(el => {
+      const text = el.textContent.trim();
+      // Extract the base name: "Heart Symbols" -> "Heart", "Crown & Diamond" -> "Crown"
+      const base = text.replace(/ Symbols?$/, '').replace(/ Signs?$/, '').replace(/ & .*$/, '').replace(/ Alphabet$/, '').replace(/ Font$/, '').replace(/ Text$/, '').replace(/ Numerals$/, '').trim();
+      const catKey = 'cat_' + base;
+      if (data[catKey]) el.textContent = data[catKey];
+    });
+
+    // 11. Category count labels ("60+ symbols" -> translated)
+    if (data.cat_symbols_label) {
+      const catCounts = document.querySelectorAll('.category-count');
+      catCounts.forEach(el => {
+        const match = el.textContent.match(/(\d+\+?)/);
+        if (match) el.textContent = match[1] + ' ' + data.cat_symbols_label;
+      });
+    }
   },
 
   renderSwitcher() {
@@ -1203,8 +1230,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   safeInit('ThemeManager', () => ThemeManager.init());
   safeInit('ClipboardManager', () => ClipboardManager.init());
-  safeInit('LanguageManager', () => LanguageManager.init());
   safeInit('initSidebar', () => initSidebar());
+  safeInit('LanguageManager', () => LanguageManager.init());
   safeInit('initCopyable', () => initCopyable());
   safeInit('initSearch', () => initSearch());
   safeInit('initFontGenerator', () => initFontGenerator());
