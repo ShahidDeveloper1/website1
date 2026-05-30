@@ -6,7 +6,7 @@
   "rewrites": [
     {
       "source": "/:lang(hi|es|ru|fr|de|it|pt|bn|ja|ko|ms|pl|id|ar|bg|tr|sv)",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/:lang(hi|es|ru|fr|de|it|pt|bn|ja|ko|ms|pl|id|ar|bg|tr|sv)/:path+",
