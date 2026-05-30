@@ -807,12 +807,18 @@ const LanguageManager = {
     document.cookie = `googtrans=/en/${this.currentLang}; path=/;`;
     document.cookie = `googtrans=/en/${this.currentLang}; path=/; domain=${window.location.hostname};`;
 
+    // Create hidden container for Google Translate widget
+    const gtEl = document.createElement('div');
+    gtEl.id = 'google_translate_element';
+    gtEl.style.display = 'none';
+    document.body.appendChild(gtEl);
+
     window.googleTranslateElementInit = () => {
       new google.translate.TranslateElement({
         pageLanguage: 'en',
         layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
         autoDisplay: false
-      });
+      }, 'google_translate_element');
     };
 
     // Append Google Translate API script
@@ -929,7 +935,8 @@ const LanguageManager = {
         else if (text.includes('Terms of Service') && data.link_terms_of_service) lastChild.textContent = ' ' + data.link_terms_of_service;
         else {
           // Translate sidebar category names using cat_* keys
-          const catKey = 'cat_' + text;
+          const nameOnly = lastChild.textContent.trim();
+          const catKey = 'cat_' + nameOnly;
           if (data[catKey]) lastChild.textContent = ' ' + data[catKey];
         }
       }
