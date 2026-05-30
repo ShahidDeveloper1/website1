@@ -119,8 +119,8 @@ ${links}
 
 // ── Build preload hints ──
 function buildPreloadHints() {
-  return `  <link rel="preload" href="/style.css?v=5.2" as="style">
-  <link rel="preload" href="/script.js?v=5.2" as="script">
+  return `  <link rel="preload" href="/style.css?v=8.0" as="style">
+  <link rel="preload" href="/script.js?v=8.0" as="script">
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">`;
 }
