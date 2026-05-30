@@ -1785,7 +1785,7 @@ body.dark-mode .theme-toggle-btn:hover {
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: 'Outfit', sans-serif;
 }
-.theme-light .lang-dropdown-btn {
+body:not(.dark-mode) .lang-dropdown-btn {
   color: #1e293b;
   background: rgba(15, 23, 42, 0.03);
   border-color: rgba(15, 23, 42, 0.08);
@@ -1827,7 +1827,7 @@ body.dark-mode .theme-toggle-btn:hover {
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1000;
 }
-.theme-light .lang-dropdown-menu {
+body:not(.dark-mode) .lang-dropdown-menu {
   background: rgba(255, 255, 255, 0.98);
   border-color: rgba(15, 23, 42, 0.08);
   box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08), 0 4px 10px rgba(15, 23, 42, 0.04);
@@ -1854,14 +1854,14 @@ body.dark-mode .theme-toggle-btn:hover {
   box-sizing: border-box !important;
   transition: all 0.15s ease !important;
 }
-.theme-light .lang-dropdown .lang-dropdown-menu a.lang-dropdown-item {
+body:not(.dark-mode) .lang-dropdown .lang-dropdown-menu a.lang-dropdown-item {
   color: #475569 !important;
 }
 .lang-dropdown .lang-dropdown-menu a.lang-dropdown-item:hover {
   background: rgba(255, 255, 255, 0.06) !important;
   color: #3b82f6 !important;
 }
-.theme-light .lang-dropdown .lang-dropdown-menu a.lang-dropdown-item:hover {
+body:not(.dark-mode) .lang-dropdown .lang-dropdown-menu a.lang-dropdown-item:hover {
   background: rgba(15, 23, 42, 0.04) !important;
   color: #3b82f6 !important;
 }
@@ -1870,7 +1870,7 @@ body.dark-mode .theme-toggle-btn:hover {
   color: #3b82f6 !important;
   font-weight: 600 !important;
 }
-.theme-light .lang-dropdown .lang-dropdown-menu a.lang-dropdown-item.active {
+body:not(.dark-mode) .lang-dropdown .lang-dropdown-menu a.lang-dropdown-item.active {
   background: rgba(59, 130, 246, 0.08) !important;
   color: #3b82f6 !important;
 }
@@ -1897,13 +1897,13 @@ body.dark-mode .theme-toggle-btn:hover {
   background: rgba(255, 255, 255, 0.15);
   border-radius: 10px;
 }
-.theme-light .lang-dropdown-menu::-webkit-scrollbar-thumb {
+body:not(.dark-mode) .lang-dropdown-menu::-webkit-scrollbar-thumb {
   background: rgba(15, 23, 42, 0.15);
 }
 .lang-dropdown-menu::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.25);
 }
-.theme-light .lang-dropdown-menu::-webkit-scrollbar-thumb:hover {
+body:not(.dark-mode) .lang-dropdown-menu::-webkit-scrollbar-thumb:hover {
   background: rgba(15, 23, 42, 0.25);
 }
 
@@ -2050,4 +2050,336 @@ body.dark-mode { scrollbar-color: #334155 #0f172a; }
   visibility: visible;
   transform: translateY(0);
 }
+
+
+/* ===== SITEPAGE HIGH-CONTRAST OVERRIDES ===== */
+
+/* LIGHT MODE OVERRIDES: White background (#ffffff), Black text (#000000) */
+body:not(.dark-mode) {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+body:not(.dark-mode) .header {
+  background: #ffffff !important;
+  border-bottom: 1px solid #000000 !important;
+  box-shadow: none !important;
+}
+
+body:not(.dark-mode) .logo,
+body:not(.dark-mode) .logo-text,
+body:not(.dark-mode) .header-nav a,
+body:not(.dark-mode) .sidebar-title,
+body:not(.dark-mode) .sidebar-links a,
+body:not(.dark-mode) p,
+body:not(.dark-mode) h1,
+body:not(.dark-mode) h2,
+body:not(.dark-mode) h3,
+body:not(.dark-mode) h4,
+body:not(.dark-mode) h5,
+body:not(.dark-mode) h6,
+body:not(.dark-mode) .hero-subtitle,
+body:not(.dark-mode) .tags-label,
+body:not(.dark-mode) .section-title,
+body:not(.dark-mode) .symbol-item,
+body:not(.dark-mode) .combo-text,
+body:not(.dark-mode) .category-card h3,
+body:not(.dark-mode) .category-card p,
+body:not(.dark-mode) .category-pill,
+body:not(.dark-mode) .content-article h2,
+body:not(.dark-mode) .content-article h3,
+body:not(.dark-mode) .content-article p,
+body:not(.dark-mode) .content-article li,
+body:not(.dark-mode) .font-input,
+body:not(.dark-mode) .quick-link-btn,
+body:not(.dark-mode) .footer-saas-desc,
+body:not(.dark-mode) .footer-saas-title,
+body:not(.dark-mode) .footer-saas-links a,
+body:not(.dark-mode) .footer-saas-copy,
+body:not(.dark-mode) .page-header,
+body:not(.dark-mode) .page-header p,
+body:not(.dark-mode) .faq-question,
+body:not(.dark-mode) .faq-answer,
+body:not(.dark-mode) .menu-toggle,
+body:not(.dark-mode) .lang-switcher-title,
+body:not(.dark-mode) .lang-btn {
+  color: #000000 !important;
+}
+
+/* Light mode backgrounds to pure white */
+body:not(.dark-mode) .sidebar,
+body:not(.dark-mode) .search-box,
+body:not(.dark-mode) .hero-tag,
+body:not(.dark-mode) .symbol-item,
+body:not(.dark-mode) .combo-item,
+body:not(.dark-mode) .category-card,
+body:not(.dark-mode) .category-pill,
+body:not(.dark-mode) .content-article,
+body:not(.dark-mode) .lenny-item,
+body:not(.dark-mode) .font-input,
+body:not(.dark-mode) .font-result-item,
+body:not(.dark-mode) .quick-link-btn,
+body:not(.dark-mode) .footer-saas,
+body:not(.dark-mode) .faq-question,
+body:not(.dark-mode) .faq-answer,
+body:not(.dark-mode) .menu-toggle,
+body:not(.dark-mode) .lang-btn {
+  background: #ffffff !important;
+  border-color: #000000 !important;
+}
+
+/* Light mode placeholder contrast */
+body:not(.dark-mode) input::placeholder,
+body:not(.dark-mode) textarea::placeholder {
+  color: #555555 !important;
+  opacity: 1 !important;
+}
+
+/* Light mode interactive states */
+body:not(.dark-mode) .header-nav a:hover,
+body:not(.dark-mode) .header-nav a.active,
+body:not(.dark-mode) .sidebar-links a:hover,
+body:not(.dark-mode) .sidebar-links a.active,
+body:not(.dark-mode) .hero-tag:hover,
+body:not(.dark-mode) .symbol-item:hover,
+body:not(.dark-mode) .combo-item:hover,
+body:not(.dark-mode) .category-card:hover,
+body:not(.dark-mode) .category-pill:hover,
+body:not(.dark-mode) .lenny-item:hover,
+body:not(.dark-mode) .font-result-item:hover,
+body:not(.dark-mode) .quick-link-btn:hover,
+body:not(.dark-mode) .faq-question:hover,
+body:not(.dark-mode) .menu-toggle:hover,
+body:not(.dark-mode) .lang-btn:hover,
+body:not(.dark-mode) .lang-btn.active {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-color: #000000 !important;
+}
+
+body:not(.dark-mode) .header-nav a.nav-cta {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #000000 !important;
+}
+body:not(.dark-mode) .header-nav a.nav-cta:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Override webkit gradient text clipping so text is solid black */
+body:not(.dark-mode) .gradient-text,
+body:not(.dark-mode) .logo-text,
+body:not(.dark-mode) .highlight {
+  -webkit-text-fill-color: #000000 !important;
+  color: #000000 !important;
+  background: none !important;
+}
+
+/* Scrollbars for light mode */
+body:not(.dark-mode) ::-webkit-scrollbar-track { background: #ffffff !important; }
+body:not(.dark-mode) ::-webkit-scrollbar-thumb { background: #000000 !important; border-radius: 4px; }
+body:not(.dark-mode) ::-webkit-scrollbar-thumb:hover { background: #333333 !important; }
+body:not(.dark-mode) { scrollbar-color: #000000 #ffffff !important; }
+
+
+/* DARK MODE OVERRIDES: Black background (#000000), White text (#ffffff) */
+body.dark-mode {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode .header {
+  background: #000000 !important;
+  border-bottom: 1px solid #ffffff !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode .logo,
+body.dark-mode .logo-text,
+body.dark-mode .header-nav a,
+body.dark-mode .sidebar-title,
+body.dark-mode .sidebar-links a,
+body.dark-mode p,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode .hero-subtitle,
+body.dark-mode .tags-label,
+body.dark-mode .section-title,
+body.dark-mode .symbol-item,
+body.dark-mode .combo-text,
+body.dark-mode .category-card h3,
+body.dark-mode .category-card p,
+body.dark-mode .category-pill,
+body.dark-mode .content-article h2,
+body.dark-mode .content-article h3,
+body.dark-mode .content-article p,
+body.dark-mode .content-article li,
+body.dark-mode .font-input,
+body.dark-mode .quick-link-btn,
+body.dark-mode .footer-saas-desc,
+body.dark-mode .footer-saas-title,
+body.dark-mode .footer-saas-links a,
+body.dark-mode .footer-saas-copy,
+body.dark-mode .page-header,
+body.dark-mode .page-header p,
+body.dark-mode .faq-question,
+body.dark-mode .faq-answer,
+body.dark-mode .menu-toggle,
+body.dark-mode .lang-switcher-title,
+body.dark-mode .lang-btn {
+  color: #ffffff !important;
+}
+
+/* Dark mode backgrounds to pure black */
+body.dark-mode .sidebar,
+body.dark-mode .search-box,
+body.dark-mode .hero-tag,
+body.dark-mode .symbol-item,
+body.dark-mode .combo-item,
+body.dark-mode .category-card,
+body.dark-mode .category-pill,
+body.dark-mode .content-article,
+body.dark-mode .lenny-item,
+body.dark-mode .font-input,
+body.dark-mode .font-result-item,
+body.dark-mode .quick-link-btn,
+body.dark-mode .footer-saas,
+body.dark-mode .faq-question,
+body.dark-mode .faq-answer,
+body.dark-mode .menu-toggle,
+body.dark-mode .lang-btn {
+  background: #000000 !important;
+  border-color: #ffffff !important;
+}
+
+/* Dark mode placeholder contrast */
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: #aaaaaa !important;
+  opacity: 1 !important;
+}
+
+/* Dark mode interactive states */
+body.dark-mode .header-nav a:hover,
+body.dark-mode .header-nav a.active,
+body.dark-mode .sidebar-links a:hover,
+body.dark-mode .sidebar-links a.active,
+body.dark-mode .hero-tag:hover,
+body.dark-mode .symbol-item:hover,
+body.dark-mode .combo-item:hover,
+body.dark-mode .category-card:hover,
+body.dark-mode .category-pill:hover,
+body.dark-mode .lenny-item:hover,
+body.dark-mode .font-result-item:hover,
+body.dark-mode .quick-link-btn:hover,
+body.dark-mode .faq-question:hover,
+body.dark-mode .menu-toggle:hover,
+body.dark-mode .lang-btn:hover,
+body.dark-mode .lang-btn.active {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+}
+
+body.dark-mode .header-nav a.nav-cta {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #ffffff !important;
+}
+body.dark-mode .header-nav a.nav-cta:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Override webkit gradient text clipping so text is solid white */
+body.dark-mode .gradient-text,
+body.dark-mode .logo-text,
+body.dark-mode .highlight {
+  -webkit-text-fill-color: #ffffff !important;
+  color: #ffffff !important;
+  background: none !important;
+}
+
+/* Scrollbars for dark mode */
+body.dark-mode ::-webkit-scrollbar-track { background: #000000 !important; }
+body.dark-mode ::-webkit-scrollbar-thumb { background: #ffffff !important; border-radius: 4px; }
+body.dark-mode ::-webkit-scrollbar-thumb:hover { background: #cccccc !important; }
+body.dark-mode { scrollbar-color: #ffffff #000000 !important; }
+
+
+/* ===== LANGUAGE DROPDOWN CONTRAST OVERRIDES ===== */
+
+/* Light Mode Dropdown Selector */
+body:not(.dark-mode) .lang-dropdown-btn {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #000000 !important;
+}
+
+body:not(.dark-mode) .lang-dropdown-btn:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-color: #000000 !important;
+}
+
+body:not(.dark-mode) .lang-dropdown-menu {
+  background: #ffffff !important;
+  border: 1px solid #000000 !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+body:not(.dark-mode) .lang-dropdown .lang-dropdown-menu a.lang-dropdown-item {
+  color: #000000 !important;
+  background: transparent !important;
+}
+
+body:not(.dark-mode) .lang-dropdown .lang-dropdown-menu a.lang-dropdown-item:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+body:not(.dark-mode) .lang-dropdown .lang-dropdown-menu a.lang-dropdown-item.active {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Dark Mode Dropdown Selector */
+body.dark-mode .lang-dropdown-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
+}
+
+body.dark-mode .lang-dropdown-btn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+}
+
+body.dark-mode .lang-dropdown-menu {
+  background: #000000 !important;
+  border: 1px solid #ffffff !important;
+  box-shadow: 0 12px 30px rgba(255, 255, 255, 0.15) !important;
+}
+
+body.dark-mode .lang-dropdown .lang-dropdown-menu a.lang-dropdown-item {
+  color: #ffffff !important;
+  background: transparent !important;
+}
+
+body.dark-mode .lang-dropdown .lang-dropdown-menu a.lang-dropdown-item:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+body.dark-mode .lang-dropdown .lang-dropdown-menu a.lang-dropdown-item.active {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
 
