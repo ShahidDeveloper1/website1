@@ -878,7 +878,17 @@ const LanguageManager = {
       }
     }
 
-    // 3. Sidebar Navigation Links
+    // 3. Sidebar Navigation Links & Titles
+    const sidebarTitles = document.querySelectorAll('.sidebar-title');
+    sidebarTitles.forEach(el => {
+      const text = el.textContent.trim();
+      if (text === 'NAVIGATION' && data.title_navigation) el.textContent = data.title_navigation;
+      else if (text === 'SYMBOLS FOR' && data.title_symbols_for) el.textContent = data.title_symbols_for;
+      else if (text === 'TEXT TOOLS' && data.title_text_tools) el.textContent = data.title_text_tools;
+      else if (text === 'TRENDING NOW' && data.title_trending_now) el.textContent = data.title_trending_now;
+      else if (text === 'ALL CATEGORIES' && data.title_all_categories) el.textContent = data.title_all_categories;
+    });
+
     const sidebarLinks = document.querySelectorAll('.sidebar-links a');
     sidebarLinks.forEach(link => {
       const text = link.textContent.trim();
@@ -891,6 +901,29 @@ const LanguageManager = {
         else if (text.includes('Preppy Font Generator') && data.nav_preppy_fonts) lastChild.textContent = ' ' + data.nav_preppy_fonts;
         else if (text.includes('Fancy Text Generator') && data.nav_fancy_text) lastChild.textContent = ' ' + data.nav_fancy_text;
         else if (text.includes('Lenny Faces') && data.nav_lenny_faces) lastChild.textContent = ' ' + data.nav_lenny_faces;
+        else if (text.includes('Instagram Symbols') && data.link_instagram_symbols) lastChild.textContent = ' ' + data.link_instagram_symbols;
+        else if (text.includes('Discord Symbols') && data.link_discord_symbols) lastChild.textContent = ' ' + data.link_discord_symbols;
+        else if (text.includes('TikTok Symbols') && data.link_tiktok_symbols) lastChild.textContent = ' ' + data.link_tiktok_symbols;
+        else if (text.includes('Roblox Symbols') && data.link_roblox_symbols) lastChild.textContent = ' ' + data.link_roblox_symbols;
+        else if (text.includes('Bio Generator') && data.link_bio_generator) lastChild.textContent = ' ' + data.link_bio_generator;
+        else if (text.includes('Username Generator') && data.link_username_generator) lastChild.textContent = ' ' + data.link_username_generator;
+        else if (text.includes('Character Counter') && data.link_character_counter) lastChild.textContent = ' ' + data.link_character_counter;
+        else if (text.includes('Strikethrough Text') && data.link_strikethrough_text) lastChild.textContent = ' ' + data.link_strikethrough_text;
+        else if (text.includes('Emoticons & Kaomoji') && data.link_emoticons) lastChild.textContent = ' ' + data.link_emoticons;
+        else if (text.includes('Invisible Character') && data.link_invisible_character) lastChild.textContent = ' ' + data.link_invisible_character;
+        else if (text.includes('Blank Space') && data.link_blank_space) lastChild.textContent = ' ' + data.link_blank_space;
+        else if (text.includes('Bullet Points') && data.link_bullet_points) lastChild.textContent = ' ' + data.link_bullet_points;
+        else if (text.includes('Free Fire Names') && data.link_free_fire_names) lastChild.textContent = ' ' + data.link_free_fire_names;
+        else if (text.includes('Zalgo Text') && data.link_zalgo_text) lastChild.textContent = ' ' + data.link_zalgo_text;
+        else if (text.includes('Text Repeater') && data.link_text_repeater) lastChild.textContent = ' ' + data.link_text_repeater;
+        else if (text.includes('Small Text') && data.link_small_text) lastChild.textContent = ' ' + data.link_small_text;
+        else if (text.includes('Bold Text') && data.link_bold_text) lastChild.textContent = ' ' + data.link_bold_text;
+        else if (text.includes('Morse Code') && data.link_morse_code) lastChild.textContent = ' ' + data.link_morse_code;
+        else if (text.includes('Cursive Text') && data.link_cursive_text) lastChild.textContent = ' ' + data.link_cursive_text;
+        else if (text.includes('Upside Down Text') && data.link_upside_down_text) lastChild.textContent = ' ' + data.link_upside_down_text;
+        else if (text.includes('Vaporwave Text') && data.link_vaporwave_text) lastChild.textContent = ' ' + data.link_vaporwave_text;
+        else if (text.includes('Bubble Text') && data.link_bubble_text) lastChild.textContent = ' ' + data.link_bubble_text;
+        else if (text.includes('Gothic Text') && data.link_gothic_text) lastChild.textContent = ' ' + data.link_gothic_text;
       }
     });
 
@@ -936,6 +969,46 @@ const LanguageManager = {
 
     const footerCopy = document.querySelector('.footer-saas-copy');
     if (footerCopy && data.footer_copy) footerCopy.textContent = data.footer_copy;
+
+    // 9. Footer Column Titles & Links
+    const footerTitles = document.querySelectorAll('.footer-saas-title');
+    footerTitles.forEach(el => {
+      const text = el.textContent.trim();
+      if (text === 'Generators' && data.title_generators) el.textContent = data.title_generators;
+      else if (text === 'Top Categories' && data.title_top_categories) el.textContent = data.title_top_categories;
+      else if (text === 'Discover' && data.title_discover) el.textContent = data.title_discover;
+      else if (text === 'Company' && data.title_company) el.textContent = data.title_company;
+    });
+
+    const footerLinks = document.querySelectorAll('.footer-saas-col a');
+    footerLinks.forEach(link => {
+      const text = link.textContent.trim();
+      if (text === 'All Symbols' && data.nav_all_symbols) link.textContent = data.nav_all_symbols;
+      else if (text === 'Aesthetic Fonts' && data.nav_aesthetic_fonts) link.textContent = data.nav_aesthetic_fonts;
+      else if (text === 'Preppy Fonts' && data.nav_preppy_fonts) link.textContent = data.nav_preppy_fonts;
+      else if (text === 'Cute Fonts' && data.nav_cute_fonts) link.textContent = data.nav_cute_fonts;
+      else if (text === 'Fancy Text' && data.nav_fancy_text) link.textContent = data.nav_fancy_text;
+      else if (text === 'Lenny Faces' && data.nav_lenny_faces) link.textContent = data.nav_lenny_faces;
+      else if (text === 'Heart Symbols' && data.link_heart_symbols) link.textContent = data.link_heart_symbols;
+      else if (text === 'Star Symbols' && data.link_star_symbols) link.textContent = data.link_star_symbols;
+      else if (text === 'Aesthetic Symbols' && data.link_aesthetic_symbols) link.textContent = data.link_aesthetic_symbols;
+      else if (text === 'Arrow Symbols' && data.link_arrow_symbols) link.textContent = data.link_arrow_symbols;
+      else if (text === 'Flower Symbols' && data.link_flower_symbols) link.textContent = data.link_flower_symbols;
+      else if (text === 'Check Marks' && data.link_check_marks) link.textContent = data.link_check_marks;
+      else if (text === 'Emoji Faces' && data.link_emoji_faces) link.textContent = data.link_emoji_faces;
+      else if (text === 'Math Symbols' && data.link_math_symbols) link.textContent = data.link_math_symbols;
+      else if (text === 'Japanese Symbols' && data.link_japanese_symbols) link.textContent = data.link_japanese_symbols;
+      else if (text === 'Korean Symbols' && data.link_korean_symbols) link.textContent = data.link_korean_symbols;
+      else if (text === 'Music Symbols' && data.link_music_symbols) link.textContent = data.link_music_symbols;
+      else if (text === 'Cross Symbols' && data.link_cross_symbols) link.textContent = data.link_cross_symbols;
+      else if (text === 'About Us' && data.link_about_us) link.textContent = data.link_about_us;
+      else if (text === 'Contact Us' && data.link_contact_us) link.textContent = data.link_contact_us;
+      else if (text === 'Authors & Team' && data.link_authors_team) link.textContent = data.link_authors_team;
+      else if (text === 'Editorial Guidelines' && data.link_editorial_guidelines) link.textContent = data.link_editorial_guidelines;
+      else if (text === 'Sitemap' && data.link_sitemap) link.textContent = data.link_sitemap;
+      else if (text === 'Privacy Policy' && data.link_privacy_policy) link.textContent = data.link_privacy_policy;
+      else if (text === 'Terms of Service' && data.link_terms_of_service) link.textContent = data.link_terms_of_service;
+    });
   },
 
   renderSwitcher() {
