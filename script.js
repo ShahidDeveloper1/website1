@@ -799,6 +799,7 @@ const LanguageManager = {
     if (this.currentLang !== 'en') {
       this.loadTranslations();
       this.initGoogleTranslate();
+      this.initLinkInterceptor();
     } else {
       this.clearGoogleTranslateCookies();
     }
@@ -823,22 +824,67 @@ const LanguageManager = {
     }
   },
 
-  initGoogleTranslate() {
-    // Set cookies to instruct Google Translate
-    const host = window.location.hostname;
-    document.cookie = `googtrans=/en/${this.currentLang}; path=/;`;
-    
-    // Only set domain cookies on valid domains containing dots
-    if (host.includes('.')) {
-      document.cookie = `googtrans=/en/${this.currentLang}; path=/; domain=${host};`;
-      document.cookie = `googtrans=/en/${this.currentLang}; path=/; domain=.${host};`;
+  initLinkInterceptor() {
+    // Intercept all clicks on internal links to rewrite them on the fly
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href]');
+      if (!link) return;
+
+      const href = link.getAttribute('href');
       
-      const domainParts = host.split('.');
-      if (domainParts.length > 2) {
-        const baseDomain = domainParts.slice(-2).join('.');
-        document.cookie = `googtrans=/en/${this.currentLang}; path=/; domain=.${baseDomain};`;
+      // Skip external, anchors, mailto, phone, javascript, or empty links
+      if (!href || href.startsWith('http') || href.startsWith('//') || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) {
+        return;
       }
-    }
+      
+      // Skip if already has prefix
+      if (href.startsWith(`/${this.currentLang}/`) || href === `/${this.currentLang}`) {
+        return;
+      }
+      
+      // Skip language switcher buttons or dropdown items
+      if (link.classList.contains('lang-btn') || link.classList.contains('lang-dropdown-item')) {
+        return;
+      }
+
+      // Prevent standard browser navigation
+      e.preventDefault();
+
+      // Determine depth to resolve correct target path relative to root
+      const pathParts = window.location.pathname.split('/').filter(Boolean);
+      const depth = Math.max(0, pathParts.length - 1);
+      const rootPrefix = depth > 0 ? '../'.repeat(depth) : './';
+
+      let targetPath = href;
+      if (href === '/') {
+        targetPath = `/${this.currentLang}`;
+      } else if (href.startsWith('/')) {
+        targetPath = `/${this.currentLang}${href}`;
+      } else {
+        let cleanHref = href;
+        if (rootPrefix && rootPrefix !== './' && href.startsWith(rootPrefix)) {
+          cleanHref = href.substring(rootPrefix.length);
+        } else if (href.startsWith('./')) {
+          cleanHref = href.substring(2);
+        }
+        
+        if (!cleanHref.startsWith('/')) {
+          cleanHref = '/' + cleanHref;
+        }
+        targetPath = `/${this.currentLang}${cleanHref}`;
+      }
+
+      // Navigate to the correct translated URL
+      window.location.href = targetPath;
+    });
+  },
+
+  initGoogleTranslate() {
+    // 1. Clear any existing conflicting cookies on all domains first
+    this.clearGoogleTranslateCookies();
+
+    // 2. Set only one clean host-only cookie to avoid domain shadowing conflicts
+    document.cookie = `googtrans=/en/${this.currentLang}; path=/;`;
 
     // Create container for Google Translate widget
     // DO NOT use display: none, as it prevents Google Translate from initializing!
