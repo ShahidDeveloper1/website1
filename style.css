@@ -691,10 +691,10 @@ body.dark-mode .theme-toggle-btn:hover {
     justify-content: space-between !important;
   }
   .header-actions {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    gap: 6px;
+    position: relative;
+    left: auto;
+    transform: none;
+    gap: 12px;
   }
 }
 @media (max-width: 480px) {
@@ -705,6 +705,14 @@ body.dark-mode .theme-toggle-btn:hover {
   .category-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .theme-toggle-btn { width: 34px; height: 34px; }
   .menu-toggle { width: 38px !important; height: 38px !important; }
+}
+@media (max-width: 360px) {
+  .header { padding: 0 0.5rem !important; }
+  .logo { font-size: 1.1rem !important; gap: 0.35rem !important; }
+  .header-actions { gap: 8px !important; }
+  .theme-toggle-btn { width: 32px !important; height: 32px !important; }
+  .menu-toggle { width: 34px !important; height: 34px !important; }
+  .lang-dropdown-btn { height: 30px !important; padding: 0 5px !important; gap: 3px !important; font-size: 0.7rem !important; }
 }
 
 /* ===== HERO QUICK LINKS ===== */
