@@ -3,7 +3,6 @@
   "buildCommand": "npm run build",
   "outputDirectory": ".",
   "cleanUrls": true,
-  "trailingSlash": false,
   "rewrites": [
     {
       "source": "/:lang(hi|es|ru|fr|de|it|pt|bn|ja|ko|ms|pl|id|ar|bg|tr|sv)",
@@ -15,6 +14,11 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path",
+      "statusCode": 301
+    },
     {
       "source": "/names/symbols/:path*",
       "destination": "/symbols/:path*",
