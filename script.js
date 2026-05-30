@@ -1087,6 +1087,53 @@ const LanguageManager = {
         if (match) el.textContent = match[1] + ' ' + data.cat_symbols_label;
       });
     }
+
+    // 12. Retain translation language when clicking links
+    if (this.currentLang !== 'en') {
+      const pathParts = window.location.pathname.split('/').filter(Boolean);
+      const depth = Math.max(0, pathParts.length - 1);
+      const rootPrefix = depth > 0 ? '../'.repeat(depth) : './';
+
+      const allLinks = document.querySelectorAll('a[href]');
+      allLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        
+        // Skip external, anchors, or empty links
+        if (!href || href.startsWith('http') || href.startsWith('//') || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) {
+          return;
+        }
+        
+        // Skip if already has prefix
+        if (href.startsWith(`/${this.currentLang}/`) || href === `/${this.currentLang}`) {
+          return;
+        }
+        
+        // Skip language selector buttons
+        if (link.classList.contains('lang-btn') || link.classList.contains('lang-dropdown-item')) {
+          return;
+        }
+
+        // Adjust link
+        if (href === '/') {
+          link.setAttribute('href', `/${this.currentLang}`);
+        } else if (href.startsWith('/')) {
+          link.setAttribute('href', `/${this.currentLang}${href}`);
+        } else {
+          let cleanHref = href;
+          // Strip rootPrefix (e.g. '../' or './')
+          if (rootPrefix && rootPrefix !== './' && href.startsWith(rootPrefix)) {
+            cleanHref = href.substring(rootPrefix.length);
+          } else if (href.startsWith('./')) {
+            cleanHref = href.substring(2);
+          }
+          
+          if (!cleanHref.startsWith('/')) {
+            cleanHref = '/' + cleanHref;
+          }
+          link.setAttribute('href', `/${this.currentLang}${cleanHref}`);
+        }
+      });
+    }
   },
 
   renderSwitcher() {
