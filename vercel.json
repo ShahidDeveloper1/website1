@@ -4,16 +4,7 @@
   "outputDirectory": ".",
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
-    {
-      "source": "/:lang(hi|es|ru|fr|de|it|pt|bn|ja|ko|ms|pl|id|ar|bg|tr|sv)",
-      "destination": "/"
-    },
-    {
-      "source": "/:lang(hi|es|ru|fr|de|it|pt|bn|ja|ko|ms|pl|id|ar|bg|tr|sv)/:path+",
-      "destination": "/:path+"
-    }
-  ],
+  "rewrites": [],
   "redirects": [
     {
       "source": "/:path+/",
