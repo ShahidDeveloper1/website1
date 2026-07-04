@@ -7,8 +7,9 @@ Disallow: *?p=*
 Disallow: *&p=*
 Disallow: *&preview=*
 
-# Sitemap Link
+# Sitemap Links
 Sitemap: https://www.fancysymbols.com/sitemap.xml
+Sitemap: https://www.fancysymbols.com/sitemap-index.xml
 
 # Block Ahrefs Crawler
 User-agent: AhrefsBot

@@ -51,3 +51,7 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 /bg
 /tr
 /sv
+
+# Generated sitemaps (built at deploy time)
+/sitemap-*.xml
+/sitemap-index.xml
