@@ -32,3 +32,22 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 
 # Finder (MacOS) folder config
 .DS_Store
+
+# Localized folders (generated at build time)
+/hi
+/es
+/ru
+/fr
+/de
+/it
+/pt
+/bn
+/ja
+/ko
+/ms
+/pl
+/id
+/ar
+/bg
+/tr
+/sv

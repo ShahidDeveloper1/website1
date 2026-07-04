@@ -12,7 +12,8 @@ const EXCLUDED_FILES = new Set([
 
 // Directories to skip entirely
 const EXCLUDED_DIRS = new Set([
-    '.git', 'node_modules', 'dist', '.vscode', 'images', 'es', 'fr'
+    '.git', 'node_modules', 'dist', '.vscode', 'images',
+    'hi', 'es', 'ru', 'fr', 'de', 'it', 'pt', 'bn', 'ja', 'ko', 'ms', 'pl', 'id', 'ar', 'bg', 'tr', 'sv'
 ]);
 
 function generateSitemap() {
