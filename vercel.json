@@ -27,6 +27,21 @@
       "permanent": true
     },
     {
+      "source": "/names/blank-space",
+      "destination": "/blank-space",
+      "permanent": true
+    },
+    {
+      "source": "/names/gothic-text",
+      "destination": "/gothic-text",
+      "permanent": true
+    },
+    {
+      "source": "/old_small_text",
+      "destination": "/small-text",
+      "permanent": true
+    },
+    {
       "source": "/letters/symbols/:path*",
       "destination": "/symbols/:path*",
       "permanent": true
